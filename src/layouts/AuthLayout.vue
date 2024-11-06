@@ -1,11 +1,6 @@
 <template>
-    <div class="antialiased bg-slate-200 dark:bg-gray-900">
-        <Header />
-        <Sidebar />
-        <Login />
-        <main class="p-4 md:ml-64 min-h-screen h-auto pt-20 ">
-            <slot />
-        </main>
+    <div class="antialiased bg-slate-200 dark:bg-gray-900 flex items-center justify-center min-h-screen">
+        <slot />
     </div>
 </template>
 <script>
