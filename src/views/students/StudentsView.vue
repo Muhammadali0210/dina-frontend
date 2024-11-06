@@ -1,12 +1,12 @@
 <template>
-        <Dashboard />
+        <Students />
 </template>
 <script>
-import Dashboard from '@/components/dashboard/Dashboard.vue'
+import Students from '@/components/students/Students.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 export default {
     components: {
-        Dashboard,
+        Students,
         DefaultLayout
     }
 }

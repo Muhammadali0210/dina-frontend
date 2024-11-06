@@ -41,7 +41,7 @@
             class="cursor-pointer flex items-center p-2 text-base font-medium bg-green-500 border rounded-lg group"
             v-for="(item, index) in sidebarData" :key="index"
             :class="[currentPage == index ? 'bg-opacity-100 text-white border-green-500' : 'bg-opacity-15 border-green-500 text-gray-600 rounded-lg dark:text-white hover:bg-opacity-25 dark:hover:bg-opacity-25']"
-            @click="changePage(index)"
+            @click="changePage(index, item.path)"
           >
             <span v-html="getSvgIcon(item.icon, currentPage === index)"></span>
             
@@ -309,7 +309,7 @@ export default {
         sidebarData: [
           {
             path: '/',
-            title: "Dashboard",
+            title: "Bosh sahifa",
             icon: `
               <svg
                 aria-hidden="true"
@@ -324,8 +324,8 @@ export default {
             `
           },
           {
-            path: '/',
-            title: "Home",
+            path: '/teachers',
+            title: "O'qituvchilar",
             icon: `
               <svg
                 aria-hidden="true"
@@ -340,8 +340,8 @@ export default {
             `
           },
           {
-            path: '/',
-            title: "Dashboard",
+            path: '/students',
+            title: "O'quvchilar",
             icon: `
               <svg
                 aria-hidden="true"
@@ -356,8 +356,24 @@ export default {
             `
           },
           {
-            path: '/',
-            title: "Home",
+            path: '/admin',
+            title: "Admin",
+            icon: `
+              <svg
+                aria-hidden="true"
+                class="w-6 h-6 text-gray-700 transition duration-75"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+              </svg>
+            `
+          },
+          {
+            path: '/books',
+            title: "Kitoblar",
             icon: `
               <svg
                 aria-hidden="true"
@@ -380,8 +396,9 @@ export default {
       
     },
     methods: {  
-      changePage(index) {
-        this.currentPage = index
+      changePage(index, path) {
+        this.currentPage = index;
+        this.$router.push(path);
       },
       getSvgIcon(icon, isActive) {
         const activeClass = isActive ? 'text-white dark:text-white  group-hover:text-white' : 'dark:text-white group-hover:text-gray-700 dark:group-hover:text-white';
