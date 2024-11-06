@@ -1,13 +1,11 @@
 <template>
-        <Dashboard />
+    <Dashboard />
 </template>
 <script>
 import Dashboard from '@/components/dashboard/Dashboard.vue'
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 export default {
     components: {
-        Dashboard,
-        DefaultLayout
+        Dashboard
     }
 }
 </script>
