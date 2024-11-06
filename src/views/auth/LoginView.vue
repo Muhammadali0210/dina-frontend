@@ -1,7 +1,5 @@
 <template>
-    <AuthLayout>
         <Login />
-    </AuthLayout>
 </template>
 <script>
 import AuthLayout from '@/layouts/AuthLayout.vue';
