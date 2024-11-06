@@ -10,6 +10,7 @@ import ProfileView from '@/views/profile/ProfileView.vue';
 import BooksView from '@/views/books/BooksView.vue';
 import AdminView from '@/views/admin/AdminView.vue';
 import PaymentView from '@/views/payment/PaymentView.vue';
+import AttendanceView from '@/views/attendance/AttendanceView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -60,6 +61,12 @@ const router = createRouter({
       path: '/payment',
       name: 'payment',
       component: PaymentView,
+      meta: { layout: MainLayout }
+    },
+    {
+      path: '/attendance',
+      name: 'attendance',
+      component: AttendanceView,
       meta: { layout: MainLayout }
     }
   ]
