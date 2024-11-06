@@ -1,13 +1,11 @@
 <template>
-        <Login />
+    <Login />
 </template>
 <script>
-import AuthLayout from '@/layouts/AuthLayout.vue';
 import Login from '@/components/auth/Login.vue'
 
 export default {
     components: {
-        AuthLayout,
         Login
     }
 }

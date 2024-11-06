@@ -1,14 +1,15 @@
 <template>
-    <Books />
+    <Payment />
 </template>
 <script>
-import Books from '@/components/books/Books.vue';
+import Payment from '@/components/payment/Payment.vue';
+
 export default {
     components: {
-        Books
+        Payment
     }
 }
 </script>
 <style>
-    
+
 </style>

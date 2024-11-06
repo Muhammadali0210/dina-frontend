@@ -9,6 +9,7 @@ import TeachersView from '@/views/teachers/TeachersView.vue';
 import ProfileView from '@/views/profile/ProfileView.vue';
 import BooksView from '@/views/books/BooksView.vue';
 import AdminView from '@/views/admin/AdminView.vue';
+import PaymentView from '@/views/payment/PaymentView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,12 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: AdminView,
+      meta: { layout: MainLayout }
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: PaymentView,
       meta: { layout: MainLayout }
     }
   ]
