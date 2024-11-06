@@ -1,7 +1,9 @@
 <template>
-    <div class="antialiased bg-slate-200 dark:bg-gray-900 flex items-center justify-center min-h-screen">
+    <div class="  antialiased bg-slate-200 dark:bg-gray-900 flex items-center justify-center min-h-screen">
         <slot />
+
     </div>
+
 </template>
 <script>
 import Sidebar from '../components/sidebar/Sidebar.vue';
@@ -12,7 +14,9 @@ export default {
         Sidebar,
         Header,
 
-    }
+    },
+
+
 }
 </script>
-<style></style>
+<style scoped></style>

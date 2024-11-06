@@ -1,7 +1,7 @@
 <template>
 
     <a href="#"
-        class=" w-[25%] block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        class=" w-[360px] my-[30px] block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <a href="#" class="flex justify-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             <img class="w-8 h-8 mr-2" src="../../assets/icons/logo.png" alt="logo">
             DinaKorean
@@ -65,7 +65,8 @@ export default {
                 this.errorMessages = "Login yoki parol xato";
             }
         }
-    }
+    },
+
 }
 </script>
 <style></style>
