@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .login-page {
-    background-image: url('../../assets/icons/logo.png');
+    background-image: url('../../assets/image/marwan-XJVxilpjmjY-unsplash.jpg');
     background-size: cover;
     background-position: center;
     width: 100vw;
@@ -28,8 +28,8 @@ export default {
     align-items: center;
     justify-content: center;
     position: relative;
-    opacity: 0.7;
-    z-index: -1;
+    opacity: 0.9;
+    z-index: 11;
 }
 
 .login-form {
