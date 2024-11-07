@@ -11,13 +11,14 @@
 import Sidebar from '../components/sidebar/Sidebar.vue';
 import Header from '../components/header/Header.vue';
 import { RouterView } from 'vue-router';
+import { useUserStore } from '../stores/userStore';
 
 export default {
     components: {
         Sidebar,
         Header,
-
-    }
+    },
+    
 }
 </script>
 <style></style>
