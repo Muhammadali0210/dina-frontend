@@ -2,10 +2,8 @@
     <button
         v-if="token"
         type="button"
+        @click="isOpenMenue = !isOpenMenue"
         class="flex mx-3 text-sm border border-spacing-2 bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-        id="user-menu-button"
-        aria-expanded="false"
-        data-dropdown-toggle="dropdown"
     >
         <img
             class="w-8 h-8 rounded-full"
@@ -13,12 +11,12 @@
             alt="user photo"
         />
     </button>
-    <button @click="$router.push('/login')" v-else type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Kirish</button>
+    <button @click="$router.push('/login')" v-else type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2 me-2 mb-0 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Kirish</button>
         
     <!-- user menue -->
     <div
-        class="hidden z-50 my-4 w-56  text-base list-none bg-white  divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
-        id="dropdown"
+        v-if="isOpenMenue && token"
+        class="absolute top-[60px] right-[10px] z-50 my-4 w-56  text-base list-none bg-white  divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
     >
         <div class="py-3 px-4">
             <span
@@ -92,25 +90,40 @@
         </ul>
         <ul
             class="py-1 text-gray-700 dark:text-gray-300"
-            aria-labelledby="dropdown"
         >
-            <li>
-            <a
-                href="#"
-                class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Sign out</a
-            >
+            <li @click="logOut()" class="cursor-pointer">
+                <div
+                    
+                    class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Chiqish</div
+                >
             </li>
         </ul>
     </div>
 </template>
 <script>
 export default {
+    
     data() {
         return {
             token: localStorage.getItem('token'),
+            isOpenMenue: false
         }
-    }
+    },
+    methods:{
+        logOut() {
+            localStorage.removeItem('token', '');
+            localStorage.removeItem('role');
+            this.token = null;
+            // this.$router.push('/');
+            this.isOpenMenue = false
+        }
+    },
+    // watch(){
+    //     localStorage.getItem('token').(newToken, oldToken) {
+    //         this.token = newToken
+    //     }
+    // }
 }
 </script>
 <style>
