@@ -1,11 +1,11 @@
 <template>
-    <Dashboard />
+    <Students />
 </template>
 <script>
-import Dashboard from '@/components/dashboard/Dashboard.vue'
+import Students from '@/components/students/Students.vue';
 export default {
     components: {
-        Dashboard
+        Students
     }
 }
 </script>

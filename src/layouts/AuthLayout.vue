@@ -1,19 +1,12 @@
 <template>
-    <div class=" bg-slate-200 dark:bg-gray-900 flex items-center justify-center min-h-screen">
-        <slot />
+    <div class="antialiased bg-slate-200 dark:bg-gray-900 flex items-center justify-center min-h-screen">
+        <RouterView />
     </div>
-
 </template>
 <script>
-import Sidebar from '../components/sidebar/Sidebar.vue';
-import Header from '../components/header/Header.vue'
-
+import { RouterView } from 'vue-router';
 export default {
-    components: {
-        Sidebar,
-        Header,
-
-    }
+   
 }
 </script>
-<style scoped></style>
+<style></style>

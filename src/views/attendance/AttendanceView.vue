@@ -1,11 +1,11 @@
 <template>
-    <Dashboard />
+    <Attendance />
 </template>
 <script>
-import Dashboard from '@/components/dashboard/Dashboard.vue'
+import Attendance from '@/components/attendance/Attendance.vue';
 export default {
     components: {
-        Dashboard
+        Attendance
     }
 }
 </script>

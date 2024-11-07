@@ -1,11 +1,11 @@
 <template>
-    <Dashboard />
+    <Books />
 </template>
 <script>
-import Dashboard from '@/components/dashboard/Dashboard.vue'
+import Books from '@/components/books/Books.vue';
 export default {
     components: {
-        Dashboard
+        Books
     }
 }
 </script>

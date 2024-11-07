@@ -1,11 +1,11 @@
 <template>
-    <Dashboard />
+    <Admin />
 </template>
 <script>
-import Dashboard from '@/components/dashboard/Dashboard.vue'
+import Admin from '@/components/admin/Admin.vue';
 export default {
     components: {
-        Dashboard
+        Admin
     }
 }
 </script>

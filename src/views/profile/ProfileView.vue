@@ -1,11 +1,11 @@
 <template>
-    <Dashboard />
+    <Profile />
 </template>
 <script>
-import Dashboard from '@/components/dashboard/Dashboard.vue'
+import Profile from '@/components/profile/Profile.vue';
 export default {
     components: {
-        Dashboard
+        Profile
     }
 }
 </script>
