@@ -40,7 +40,7 @@
           <li 
             class="cursor-pointer flex items-center p-2 text-base font-medium bg-green-500 border rounded-lg group"
             v-for="(item, index) in sidebarData" :key="index"
-            :class="[currentPage == index ? 'bg-opacity-100 text-white border-green-500' : 'bg-opacity-15 border-green-500 text-green-500 rounded-lg dark:text-white hover:bg-opacity-25 dark:hover:bg-opacity-25']"
+            :class="[currentPage == index ? 'bg-opacity-100 text-white border-green-500' : 'bg-opacity-5 border-green-500 text-green-500 rounded-lg dark:text-white hover:bg-opacity-15 dark:hover:bg-opacity-25']"
             @click="changePage(index, item.path)"
           >
             <span v-html="getSvgIcon(item.icon, currentPage === index)"></span>
@@ -328,6 +328,9 @@ export default {
     }
 }
 </script>
-<style lang="">
-  
+<style setup>
+.my-shadow{
+  box-shadow: 0 0 15px 0 #0000001e;
+  /* box-shadow:  0 0 10px 0 rgba(0, 0, 0, 0.1); */
+}
 </style>
