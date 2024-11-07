@@ -24,6 +24,7 @@ import  Notification from '@/ui/Notification.vue';
 import UserMenue from '@/ui/UserMenue.vue';
 
 export default {
+    
     components: {
       DarkMode,
       Notification,
