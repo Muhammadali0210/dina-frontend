@@ -1,5 +1,5 @@
 <template>
-    <div class="  antialiased bg-slate-200 dark:bg-gray-900 flex items-center justify-center min-h-screen">
+    <div class=" bg-slate-200 dark:bg-gray-900 flex items-center justify-center min-h-screen">
         <slot />
     </div>
 
@@ -13,7 +13,7 @@ export default {
         Sidebar,
         Header,
 
-    },
+    }
 }
 </script>
 <style scoped></style>
