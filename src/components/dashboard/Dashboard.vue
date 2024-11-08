@@ -28,7 +28,7 @@
                         </clipPath>
                      </defs>
                   </svg>
-                  Flowbite Terms & Conditions
+                  서울대 한국어 & 1A
                </span>
                <span class="flex text-xs font-normal text-gray-500 dark:text-gray-400 gap-2">
                   12 Pages 
@@ -84,9 +84,9 @@
 </template>
 <script>
 export default {
-    
+
 }
 </script>
 <style lang="">
-    
+
 </style>
