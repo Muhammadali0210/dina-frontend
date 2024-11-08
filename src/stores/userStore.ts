@@ -1,8 +1,10 @@
+import { set } from "@vueuse/core";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore('userStore', {
     state: () => ({
       count: 2,
+      currentRole: localStorage.getItem('role'),
       userInfo: {
         firstName: '',
         lastName: '',
@@ -12,6 +14,9 @@ export const useUserStore = defineStore('userStore', {
     actions: {
       setUserInfo(data: any) {
         this.userInfo = data
+      },
+      setCurrentRole(role: string) {
+        this.currentRole = role
       }
     },
     getters: {

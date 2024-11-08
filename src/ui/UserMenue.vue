@@ -102,8 +102,14 @@
     </div>
 </template>
 <script>
+import { useUserStore } from '../stores/userStore';
 export default {
-    
+    setup() {
+        const userStore = useUserStore();
+        return {
+            userStore
+        }
+    },
     data() {
         return {
             token: localStorage.getItem('token'),
@@ -113,7 +119,8 @@ export default {
     methods:{
         logOut() {
             localStorage.removeItem('token', '');
-            localStorage.removeItem('role');
+            localStorage.setItem('role', 'general');
+            this.userStore.setCurrentRole('general');
             this.token = null;
             // this.$router.push('/');
             this.isOpenMenue = false
