@@ -1,10 +1,7 @@
 <template>
     <div
         class=" w-[500px] max-md:w-[90%] block p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 ">
-        <a href="#" class="flex justify-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-            <img class="w-8 h-8 mr-2" src="../../assets/icons/logo.png" alt="logo">
-            DinaKorean
-        </a>
+        <MainLogo />
         <form class="space-y-4 md:space-y-6" @submit.prevent="handleSubmit()">
             <ErrorAlert v-if="message" :errorMessage="message" />
             <div>
@@ -50,6 +47,7 @@
 import { ApiService } from '@/services/apiServices.ts';
 import { useUserStore } from '@/stores/userStore.ts';
 import ErrorAlert from '@/ui/ErrorAlert.vue';
+import MainLogo from '@/ui/MainLogo.vue';
 export default {
     data() {
         return {
@@ -62,7 +60,8 @@ export default {
         };
     },
     components: {
-        ErrorAlert
+        ErrorAlert,
+        MainLogo
     },
     methods: {
         handleResult(result) {
@@ -78,14 +77,15 @@ export default {
                     console.log("Tizimga muvaffaqiyatli kirildi");
                 }
                 if(response) {
+                    const userStore = useUserStore();
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('role', response.role);
+                    userStore.currentRole = response.role
                     const userData = {
                         firstName: response.first_name,
                         lastName: response.last_name,
                         role: response.role
                     }
-                    const userStore = useUserStore();
                     userStore.setUserInfo(userData);
                     this.$router.push('/');
                 }

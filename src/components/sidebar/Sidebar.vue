@@ -42,7 +42,7 @@
               class="cursor-pointer flex items-center p-2 text-base font-medium bg-green-500 border rounded-lg group"
               :class="[currentPage == index ? 'bg-opacity-100 text-white border-green-500' : 'bg-opacity-5 border-green-500 text-green-500 rounded-lg dark:text-white hover:bg-opacity-15 dark:hover:bg-opacity-25']"
               @click="changePage(index, item.path)"
-              v-if="item.role.includes(currentRole)"
+              v-if="item.role.includes(userStore.currentRole)"
             >
               <span v-html="getSvgIcon(item.icon, currentPage === index)"></span>
               
@@ -56,7 +56,7 @@
       <div
         class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white dark:bg-gray-800 z-20"
       >
-        <span>Settings</span>
+        <span>Settings </span>
       </div>
     </aside>
 </template>
@@ -65,10 +65,16 @@ import { sidebarData } from '@/constants/index';
 import { useUserStore } from '@/stores/userStore';
 
 export default {
+    setup() {
+        const userStore = useUserStore();
+        return {
+            userStore
+        }
+    },
     data() {
       return {
         token: localStorage.getItem('token'),
-        currentRole: localStorage.getItem('role') || 'general',
+        // currentRole: localStorage.getItem('role') || 'general',
         currentPage: 0,
         sidebarData: sidebarData
       }
