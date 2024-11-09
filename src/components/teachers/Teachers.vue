@@ -30,11 +30,14 @@
         </div>
 
         <div class="w-full max-xl:overflow-x-scroll rounded-lg">
-            <table class="w-full max-xl:min-w-[950px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <template v-if="!users">
+                    <Loader />
+            </template>
+            <table v-else class="w-full max-xl:min-w-[950px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3 ">
-                            Name
+                            O'qtuvchi malumotlari
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Telefon nomer
@@ -51,19 +54,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, index) in 14" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
+                    <tr v-for="(item, index) in users" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
                         <th class="px-6 py-2">
-                            <UserInfo firstName="Muhammadali" lastName="Ne'matjonov" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s" login="muhammadali0210" />
+                            <UserInfo :firstName="item.first_name" :lastName="item.last_name" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s" :login="item.login" />
                         </th>
                         <td class="px-6 py-4 ">
-                            +998 97 123 45 67
+                            {{ item.phone }}
                         </td>
                         <td class="px-6 py-4">
                             12 lorem ipsum dolor sit amet
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
+                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> {{ item.role }}
                             </div>
                         </td>
                         <td class="px-6 py-4 relative">
@@ -77,7 +80,6 @@
                             </div>
                         </td>
                     </tr>
-                    
                 </tbody>
             </table>
         </div>
@@ -96,16 +98,20 @@
 import { initDropdowns } from 'flowbite';
 import DeleteModal from '@/ui/DeleteModal.vue';
 import UserInfo from '@/ui/UserInfo.vue';
+import { ApiService } from '@/services/apiServices';
+import Loader from '@/ui/Loader.vue';
 export default {
     components: {
         DeleteModal,
-        UserInfo
+        UserInfo,
+        Loader
     },
     data() {
         return {
             isModalOpen: false,
             selectedItemId: null,
             url: '/teachers/add',
+            users: null
         }
     },
     methods: {
@@ -126,9 +132,18 @@ export default {
             // currentIdStore.setCurrentId(id);
             this.$router.push('/teachers/add');
         },
+        async getUser() {
+            try {
+                const response = await ApiService.get('/teacher');
+                this.users = response;
+            } catch (error) {
+                console.log(error);
+            }
+        }
     },
     mounted() {
         initDropdowns();
+        this.getUser();
     }
 }
 </script>
