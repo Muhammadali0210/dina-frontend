@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 export const useUserStore = defineStore('userStore', {
     state: () => ({
       count: 2,
-      currentRole: localStorage.getItem('role'),
+      currentRole: localStorage.getItem('role') || 'general',
       userInfo: {
         firstName: '',
         lastName: '',

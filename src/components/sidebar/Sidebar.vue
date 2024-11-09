@@ -74,7 +74,6 @@ export default {
     data() {
       return {
         token: localStorage.getItem('token'),
-        // currentRole: localStorage.getItem('role') || 'general',
         currentPage: 0,
         sidebarData: sidebarData
       }
