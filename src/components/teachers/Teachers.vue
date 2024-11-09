@@ -53,13 +53,7 @@
                 <tbody>
                     <tr v-for="(item, index) in 14" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
                         <th class="px-6 py-2">
-                            <div class="flex items-center text-gray-900  dark:text-white">
-                                <img class="shadow-[0_0_10px_5px] shadow-gray-300 dark:shadow-gray-700 w-10 h-10 rounded-full border-[2px] border-green-500 bg-white" src="../../assets/icons/user-avatar2.png" alt="Jese image">
-                                <div class="ps-3">
-                                    <div class="text-base text-gray-600 dark:text-white font-semibold">Muhammadali Ne'matjonov</div>
-                                    <div class="font-normal text-gray-500 dark:text-slate-100">muhammadali0210</div>
-                                </div>  
-                            </div>
+                            <UserInfo firstName="Muhammadali" lastName="Ne'matjonov" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s" login="muhammadali0210" />
                         </th>
                         <td class="px-6 py-4 ">
                             +998 97 123 45 67
@@ -101,9 +95,11 @@
 <script>
 import { initDropdowns } from 'flowbite';
 import DeleteModal from '@/ui/DeleteModal.vue';
+import UserInfo from '@/ui/UserInfo.vue';
 export default {
     components: {
-        DeleteModal
+        DeleteModal,
+        UserInfo
     },
     data() {
         return {
