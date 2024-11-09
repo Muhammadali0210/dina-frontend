@@ -4,26 +4,28 @@
   </component>
 </template>
 <script>
-import { RouterView } from 'vue-router'
-import router from './router';
+import { RouterView, useRoute } from 'vue-router'
+import { computed } from 'vue';
 import AuthLayout from '@/layouts/AuthLayout.vue'
-import MainLayout from '@/layouts/DefaultLayout.vue'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import { initFlowbite } from 'flowbite';
+
 export default {
-  computed: {
-    layout() {
-      return this.currentLayout === 'AuthLayout' ? AuthLayout : MainLayout
-    }
-  },
-  data() {
-    return {
-     currentLayout: '', 
-    }
+  components: {
+    DefaultLayout,
+    AuthLayout
   },
   watch: {
     '$route'(to) {
-      this.currentLayout = to.meta.layout.__file.split('/').pop().split('.')[0]
+      initFlowbite();
     }
-  }
+  },
+  setup() {
+    const route = useRoute();
+    const layout = computed(() => route.meta.layout || 'MainLayout');
+
+    return { layout };
+  },
 }
 </script>
 <style lang="">
