@@ -31,7 +31,7 @@
                         <div class="w-full">
                             <label for="item-weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Guruhlar</label>
                             
-                            <button id="dropdownCheckboxButton" data-dropdown-toggle="dropdownDefaultCheckbox" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                            <button id="dropdownCheckboxButton" data-dropdown-toggle="dropdownDefaultCheckbox" class="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                                 Guruhni tanlang 
                                 <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                    <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800">
                         <template v-if="isSubmiting">
                             <svg aria-hidden="true" role="status" class="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
@@ -115,7 +115,7 @@ export default {
                 this.userData.password = response.password;
                 this.userData.phone = response.phone;
                 this.userData.telegram_id = response.telegram_id;
-                this.userData.group_ids = response.group_ids;
+                this.userData.group_ids = this.groups
             } catch (error) {
                 console.log(error);
             } finally {
@@ -161,16 +161,16 @@ export default {
 
     },
     created() {
-        this.getGroups();
         initFlowbite();
         initDropdowns();
     },
-    mounted() {
+    async mounted() {
+        this.getGroups();
         if(this.currentId){
             this.getDataById();
         }
-        initFlowbite();
-        initDropdowns();
+        await initFlowbite();
+        await initDropdowns();
     },  
 }
 </script>
