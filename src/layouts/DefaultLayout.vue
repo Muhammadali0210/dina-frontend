@@ -8,7 +8,7 @@
     </div>
 </template>
 <script>
-import {initFlowbite} from 'flowbite'
+import {initFlowbite, initDropdowns } from 'flowbite'
 import Sidebar from '../components/sidebar/Sidebar.vue';
 import Header from '../components/header/Header.vue';
 import { RouterView } from 'vue-router';
@@ -21,10 +21,12 @@ export default {
     },
     created() {
         initFlowbite();
+        initDropdowns();
     },
     mounted() {
         initFlowbite();
-    },
+        initDropdowns();
+    },  
     
 }
 </script>
