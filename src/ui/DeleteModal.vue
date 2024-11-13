@@ -51,25 +51,19 @@ export default {
     id: {
       type: [Number, String],
       required: true,
-    },
-    dmtt_id: {
-      type: [Number, String],
     }
   },
   methods: {
     async confirmDelete() {
       try {
-        // O'chirish so'rovi
-        console.log(this.url + '/' + this.id + '/');
-        
-        // await ApiService.deleteByToken(this.url + '/' + this.id + '/', this.token);
+        const response = await ApiService.deleteByToken(this.url + '/' + this.id, this.token);
 
         // const toastStore = useToastStore();
         // toastStore.showSuccess("Element muvaffaqiyatli o'chirildi");
-        // // O'chirilganidan keyin modalni yopish va boshqa amallar
-        // this.$emit("deleted", this.id);
-        // this.closeModal();
+        this.$emit("deleted", this.id);
+        this.closeModal();
       } catch (error) {
+        console.log(error);
         this.closeModal();
       }
     },
