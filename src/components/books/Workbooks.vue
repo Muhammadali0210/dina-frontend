@@ -4,11 +4,11 @@
             delay: 1800,
             disableOnInteraction: false,
         }">
-        <swiper-slide v-for=" (book, index) in books" :key="index" class="max-h-[400px] max-w-[250px]">
+        <swiper-slide v-for=" book in books" class="max-h-[400px] max-w-[250px]">
             <div
                 class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
-                    <img class="w-[250px] h-[230px] rounded-t-lg" src="../../assets/image/sb2.jpg" :alt="book.title" />
+                    <img class="w-[250px] h-[230px] rounded-t-lg" v-bind:src="book.url" :alt="book.title" />
                 </a>
                 <div class="p-5">
                     <a href="#">
@@ -37,6 +37,8 @@ import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import { FreeMode, Pagination, Autoplay } from 'swiper/modules';
 
+const images = '../../assets/image/sb2.jpg'
+
 export default {
     components: {
         Swiper,
@@ -46,17 +48,20 @@ export default {
         return {
             modules: [FreeMode, Pagination, Autoplay],
             books: [
-                { title: '서울대 한국어 1A', image: '../../assets/image/sb2.jpg' },
-                { title: '서울대 한국어 2A', image: '../../assets/image/sb2.jpg' },
-                { title: '서울대 한국어 3A', image: '../../assets/image/sb2.jpg' },
-                { title: '서울대 한국어 4A', image: '../../assets/image/sb2.jpg' },
-                { title: '서울대 한국어 5A', image: '../../assets/image/sb2.jpg' },
-                { title: '서울대 한국어 5A', image: '../../assets/image/sb2.jpg' },
-                { title: '서울대 한국어 5A', image: '../../assets/image/sb2.jpg' },
-                { title: '서울대 한국어 5A', image: '../../assets/image/sb2.jpg' },
-                { title: '서울대 한국어 6A', image: '../../assets/image/sb2.jpg' },
+                { title: '서울대 한국어 1A', url: images },
+                { title: '서울대 한국어 1A', url: images },
+                { title: '서울대 한국어 1A', url: images },
+                { title: '서울대 한국어 1A', url: images },
+                { title: '서울대 한국어 1A', url: images },
+                { title: '서울대 한국어 1A', url: images },
+                { title: '서울대 한국어 1A', url: images },
+                { title: '서울대 한국어 1A', url: images },
+
+
                 // More book objects as needed
+
             ],
+
         };
     },
 };
