@@ -5,6 +5,7 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import DashboardView from '@/views/dashboard/DashboardView.vue';
 import LoginView from '@/views/auth/LoginView.vue';
 import StudentsView from '@/views/students/StudentsView.vue';
+import AddUpdateStudentView from '@/views/students/Add&UpdateStudentView.vue';
 import TeachersView from '@/views/teachers/TeachersView.vue';
 import AddUpdateTeacherView from '@/views/teachers/Add&UpdateTeacherView.vue';
 import ProfileView from '@/views/profile/ProfileView.vue';
@@ -44,6 +45,12 @@ const router = createRouter({
       path: '/students',
       name: 'students',
       component: StudentsView,
+      meta: { layout: MainLayout }
+    },
+    {
+      path: '/student/add',
+      name: 'add-student',
+      component: AddUpdateStudentView,
       meta: { layout: MainLayout }
     },
     {
