@@ -5,13 +5,15 @@
 </template>
 <script>
 import { RouterView } from 'vue-router';
-import { initFlowbite } from 'flowbite';
+import { initFlowbite, initDropdowns } from 'flowbite';
 export default {
     created() {
         initFlowbite();
+        initDropdowns();
     },
     mounted() {
-        initFlowbite();
+        initFlowbite();     
+        initDropdowns();
     },
 }
 </script>
