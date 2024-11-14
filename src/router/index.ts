@@ -13,6 +13,7 @@ import BooksView from '@/views/books/BooksView.vue';
 import AdminView from '@/views/admin/AdminView.vue';
 import PaymentView from '@/views/payment/PaymentView.vue';
 import AttendanceView from '@/views/attendance/AttendanceView.vue';
+import viewLayout from '@/views/books/viewLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -82,6 +83,12 @@ const router = createRouter({
       name: 'attendance',
       component: AttendanceView,
       meta: { layout: MainLayout }
+    },
+    {
+      path: '/booksview',
+      name: 'viewLayout',
+      component: viewLayout,
+      meta: {layout : MainLayout}
     }
   ]
 })
