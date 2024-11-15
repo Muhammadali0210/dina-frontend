@@ -55,7 +55,7 @@ export default {
 <style scoped>
 .fullscreen-button {
     position: absolute;
-    top: 20px;
+    top: 50px;
     left: 20px;
     background-color: rgba(0, 0, 255, 0.6);
     color: white;
