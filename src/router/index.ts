@@ -11,6 +11,7 @@ import AddUpdateTeacherView from '@/views/teachers/Add&UpdateTeacherView.vue';
 import ProfileView from '@/views/profile/ProfileView.vue';
 import BooksView from '@/views/books/BooksView.vue';
 import AdminView from '@/views/admin/AdminView.vue';
+import AddUpdateAdminView from '@/views/admin/Add&UpdateAdminView.vue';
 import PaymentView from '@/views/payment/PaymentView.vue';
 import AttendanceView from '@/views/attendance/AttendanceView.vue';
 
@@ -69,6 +70,12 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: AdminView,
+      meta: { layout: MainLayout }
+    },
+    {
+      path: '/admin/add',
+      name: 'add-admin',
+      component: AddUpdateAdminView,
       meta: { layout: MainLayout }
     },
     {
