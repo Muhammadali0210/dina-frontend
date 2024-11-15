@@ -2,6 +2,7 @@
     <section class="bg-white dark:bg-gray-800">
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">{{ title }}</h2>
+            <ErrorAlert v-if="errorMessage" :errorMessage="errorMessage" />
             <template v-if="isLoading">
                 <Loader />
             </template>
@@ -49,6 +50,7 @@
 <script>
 import { ApiService } from '@/services/apiServices';
 import { useCurrentIdStore } from '@/stores/currentId';
+import ErrorAlert from '@/ui/ErrorAlert.vue';
 import Loader from '@/ui/Loader.vue';
 export default {
     setup() {
@@ -58,7 +60,8 @@ export default {
         };
     },
     components: {
-        Loader
+        Loader,
+        ErrorAlert
     },
     data(){
         return {
@@ -79,7 +82,8 @@ export default {
             subtitle: this.currentId ? "O'zgartirish" : "Qo'shish",
             isLoading: false,
             isSubmiting: false,
-            url: '/admin'
+            url: '/admin',
+            errorMessage: null
         }
     },
     methods: {
@@ -122,6 +126,7 @@ export default {
                 const response = await ApiService.postByToken(this.url, this.userData, this.token);
                 this.$router.push('/admin')
             } catch (error) {
+                this.errorMessage = error.response.data.message
                 console.log(error);
             } finally {
                 this.isSubmiting = false;
@@ -132,6 +137,7 @@ export default {
                 const response = await ApiService.updateByIdToken(`${this.url}/${this.currentId}`, this.userData, this.token);
                 this.$router.push('/admin')
             } catch (error) {
+                this.errorMessage = error.response.data.message
                 console.log(error);
             } finally {
                 this.isSubmiting = false;

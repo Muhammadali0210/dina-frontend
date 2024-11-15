@@ -2,6 +2,7 @@
     <section class="bg-white dark:bg-gray-800">
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">{{ title }}</h2>
+            <ErrorAlert v-if="errorMessage" :errorMessage="errorMessage" />
             <template v-if="isLoading">
                 <Loader />
             </template>
@@ -73,6 +74,9 @@
 import { ApiService } from '@/services/apiServices';
 import { useCurrentIdStore } from '@/stores/currentId';
 import Loader from '@/ui/Loader.vue';
+import ErrorAlert from '@/ui/ErrorAlert.vue';
+import { errorMessages } from 'vue/compiler-sfc';
+
 export default {
     setup() {
         const currentIdStore = useCurrentIdStore();
@@ -81,7 +85,8 @@ export default {
         };
     },
     components: {
-        Loader
+        Loader,
+        ErrorAlert
     },
     data(){
         return {
@@ -101,7 +106,8 @@ export default {
             title: this.currentId ? "O'qituvchini malumotlarini o'zgartirish" : "Yangi o'qituvchi qo'shish",
             subtitle: this.currentId ? "O'zgartirish" : "Qo'shish",
             isLoading: false,
-            isSubmiting: false
+            isSubmiting: false,
+            errorMessage: null
         }
     },
     methods: {
@@ -143,6 +149,7 @@ export default {
                 const response = await ApiService.postByToken('/teacher', this.userData, this.token);
                 this.$router.push('/teachers')
             } catch (error) {
+                this.errorMessage = error.response.data.message
                 console.log(error);
             } finally {
                 this.isSubmiting = false;
@@ -153,6 +160,7 @@ export default {
                 const response = await ApiService.updateByIdToken(`/teacher/${this.currentId}`, this.userData, this.token);
                 this.$router.push('/teachers')
             } catch (error) {
+                this.errorMessage = error.response.data.message
                 console.log(error);
             } finally {
                 this.isSubmiting = false;
