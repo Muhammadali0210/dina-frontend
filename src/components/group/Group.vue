@@ -33,16 +33,10 @@
                         <thead class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3 ">
-                                    O'qtuvchilar malumotlari
+                                    Guruh nomi
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Telefon nomer
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Guruhral
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Status
+                                    Guruh turi
                                 </th>
                                 <th scope="col" class="px-6 py-3 w-[80px]">
                                     Action
@@ -51,19 +45,11 @@
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in filteredItems" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
-                                <th class="px-6 py-2">
-                                    <UserInfo :firstName="item.first_name" :lastName="item.last_name" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s" :login="item.login" />
-                                </th>
                                 <td class="px-6 py-4 ">
-                                    {{ item.phone }}
+                                    {{ item.name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ item.group_ids }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> {{ item.role }}
-                                    </div>
+                                    {{ item.degree }}
                                 </td>
                                 <td class="px-6 py-4 relative">
                                     <div class="flex gap-3 h-[18px]">
@@ -111,7 +97,7 @@ export default {
             searchQuery: '',
             isModalOpen: false,
             selectedItemId: null,
-            url: '/teacher',
+            url: '/group',
             users: null,
             token: localStorage.getItem("token"),
             isLoading: false
@@ -121,7 +107,7 @@ export default {
         filteredItems() {
             if (this.searchQuery) {
                 return this.users.filter((item) =>
-                    item.first_name.toLowerCase().includes(this.searchQuery.toLowerCase())
+                    item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
                 );
             }
             return this.users;
@@ -131,7 +117,7 @@ export default {
         addHandler() {
             const currentIdStore = useCurrentIdStore();
             currentIdStore.setCurrentId(null);
-            this.$router.push('/teachers/add');
+            this.$router.push('/group/add');
         },
         openDeleteModal(id) {
             this.selectedItemId = id;
@@ -148,7 +134,7 @@ export default {
         updateItem(id) {
             const currentIdStore = useCurrentIdStore();
             currentIdStore.setCurrentId(id);
-            this.$router.push('/teachers/add');
+            this.$router.push('/group/add');
         },
         async getUser() {
             try {
