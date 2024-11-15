@@ -1,5 +1,6 @@
 <template>
-    <div ref="fullscreenPage" class="w-full h-screen">
+    <div ref="fullscreenPage" class="w-full h-screen ">
+        <button @click="backPageButton" class="fullscreen-button">Orqaga</button>
         <div style="">
             <iframe style="
           position: absolute;
@@ -26,11 +27,14 @@ export default {
         };
     },
     mounted() {
-        this.openFullScreen(); // Komponent yuklanganda fullscreen holatiga o'tadi
+        this.openFullScreen();
     },
     methods: {
+        backPageButton() {
+            this.$router.push('/books')
+        },
         openFullScreen() {
-            const element = this.$refs.fullscreenPage; // Sahifani tanlaymiz
+            const element = this.$refs.fullscreenPage;
             if (element.requestFullscreen) {
                 element.requestFullscreen();
             } else if (element.mozRequestFullScreen) {
@@ -48,6 +52,18 @@ export default {
 };
 </script>
 
-<style lang="">
-
+<style scoped>
+.fullscreen-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 255, 0.6);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 9999;
+}
 </style>
