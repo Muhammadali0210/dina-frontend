@@ -35,21 +35,22 @@
                         <div class="w-full">
                             <label for="item-weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Guruhlar</label>
                             
-                            <button id="dropdownCheckboxButton" data-dropdown-toggle="dropdownDefaultCheckbox" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700" type="button">
-                                Guruhni tanlang 
-                                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                </svg>
-                            </button>
-
-                            <!-- Dropdown menu -->
-                            <div id="dropdownDefaultCheckbox" class="z-10 hidden w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-                                <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownCheckboxButton">
-                                    <li v-for="(item, index)  in groups" :key="index">
-                                        <div class="flex items-center">
-                                            <input :id="item._id" v-model="userData.group_ids" :value="item._id" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label :for="item._id" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ item.name }}</label>
-                                        </div>
+                            <div class="dropdown dropdown-bottom w-full">
+                                <div tabindex="0" role="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-0">
+                                    Guruhni tanlang 
+                                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                    </svg>
+                                </div>
+                                <ul tabindex="0" class="dropdown-content menu z-[10] p-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+                                    <li v-if="groups" v-for="(group, index)  in groups" :key="index">
+                                        <a class="cursor-pointer">
+                                            <input :id="group._id" v-model="userData.group_ids" :value="group._id" :checked="userData.group_ids.includes(group._id)" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm">
+                                            <label :for="group._id" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ group.name }}</label>
+                                        </a>
+                                    </li>
+                                    <li v-if="!groups" class="flex justify-center h-10">
+                                        <p>Yuklanmoqda...</p>
                                     </li>
                                 </ul>
                             </div>
@@ -73,7 +74,6 @@
     </section>
 </template>
 <script>
-import { initFlowbite, initDropdowns } from 'flowbite'
 import { ApiService } from '@/services/apiServices';
 import { useCurrentIdStore } from '@/stores/currentId';
 import Loader from '@/ui/Loader.vue';
@@ -131,8 +131,6 @@ export default {
             try {
                 const response = await ApiService.get('/group');
                 this.groups = response;
-                console.log(this.groups);
-                
             } catch (error) {
                 console.log(error);
             }
@@ -172,8 +170,6 @@ export default {
         if(this.currentId){
             this.getDataById();
         }
-        initFlowbite();
-        initDropdowns();
     },  
 }
 </script>

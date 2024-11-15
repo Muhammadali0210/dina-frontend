@@ -93,7 +93,6 @@
     />
 </template>
 <script>
-import { initDropdowns } from 'flowbite';
 import DeleteModal from '@/ui/DeleteModal.vue';
 import UserInfo from '@/ui/UserInfo.vue';
 import NoDataFound from '@/ui/NoDataFound.vue';
@@ -164,7 +163,6 @@ export default {
         }
     },
     mounted() {
-        initDropdowns();
         this.getUser();
     }
 }
