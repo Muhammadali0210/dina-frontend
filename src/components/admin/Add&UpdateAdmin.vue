@@ -29,33 +29,6 @@
                             <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefon nomer</label>
                             <input type="text" v-model="userData.phone" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="+998 xx xxx xx xx" required="">
                         </div>
-                        <div class="w-full">
-                            <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telegram ID</label>
-                            <input type="text" v-model="userData.telegram_id" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Telegram ID" required="">
-                        </div>
-                        <div class="w-full">
-                            <label for="item-weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Guruhlar</label>
-                            
-                            <div class="dropdown dropdown-bottom w-full">
-                                <div tabindex="0" role="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-0">
-                                    Guruhni tanlang 
-                                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                    </svg>
-                                </div>
-                                <ul tabindex="0" class="dropdown-content menu z-[10] p-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <li v-if="groups" v-for="(group, index)  in groups" :key="index">
-                                        <a class="cursor-pointer">
-                                            <input :id="group._id" v-model="userData.group_ids" :value="group._id" :checked="userData.group_ids.includes(group._id)" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm">
-                                            <label :for="group._id" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ group.name }}</label>
-                                        </a>
-                                    </li>
-                                    <li v-if="!groups" class="flex justify-center h-10">
-                                        <p>Yuklanmoqda...</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                     <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800">
                         <template v-if="isSubmiting">
@@ -77,8 +50,8 @@
 <script>
 import { ApiService } from '@/services/apiServices';
 import { useCurrentIdStore } from '@/stores/currentId';
-import Loader from '@/ui/Loader.vue';
 import ErrorAlert from '@/ui/ErrorAlert.vue';
+import Loader from '@/ui/Loader.vue';
 export default {
     setup() {
         const currentIdStore = useCurrentIdStore();
@@ -94,22 +67,22 @@ export default {
         return {
             token: localStorage.getItem('token'),   
             userData: {
-                role: "student",
+                role: "admin",
                 first_name: "",
                 last_name: "",
                 login: "",
                 password: "",
                 phone: "",
                 telegram_id: "",
-                group_ids: []
+                group_ids: []         
             },
-            groups: [],
+            groups: null,
             data: null,
-            title: this.currentId ? "O'quvchini malumotlarini o'zgartirish" : "Yangi o'quvchi qo'shish",
+            title: this.currentId ? "Adminni malumotlarini o'zgartirish" : "Yangi admin qo'shish",
             subtitle: this.currentId ? "O'zgartirish" : "Qo'shish",
             isLoading: false,
             isSubmiting: false,
-            url: '/student',
+            url: '/admin',
             errorMessage: null
         }
     },
@@ -124,7 +97,7 @@ export default {
                 this.userData.password = response.password;
                 this.userData.phone = response.phone;
                 this.userData.telegram_id = response.telegram_id;
-                this.userData.group_ids = response.group_ids
+                this.userData.group_ids = this.groups
             } catch (error) {
                 console.log(error);
             } finally {
@@ -135,6 +108,7 @@ export default {
             try {
                 const response = await ApiService.get('/group');
                 this.groups = response;
+                this.userData.group_ids = response
             } catch (error) {
                 console.log(error);
             }
@@ -150,7 +124,7 @@ export default {
         async handleAdd(){
             try {
                 const response = await ApiService.postByToken(this.url, this.userData, this.token);
-                this.$router.push('/students')
+                this.$router.push('/admin')
             } catch (error) {
                 this.errorMessage = error.response.data.message
                 console.log(error);
@@ -161,7 +135,7 @@ export default {
         async handleUpdate(){
             try {
                 const response = await ApiService.updateByIdToken(`${this.url}/${this.currentId}`, this.userData, this.token);
-                this.$router.push('/students')
+                this.$router.push('/admin')
             } catch (error) {
                 this.errorMessage = error.response.data.message
                 console.log(error);
@@ -171,7 +145,8 @@ export default {
         },
 
     },
-    mounted() {
+    
+    async mounted() {
         this.getGroups();
         if(this.currentId){
             this.getDataById();
