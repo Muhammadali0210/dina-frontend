@@ -7,9 +7,9 @@
           <NavbarSearchInput />
         </div>
 
-        <div class="flex items-center lg:order-2">
+        <div class="flex items-center gap-1 lg:order-2">
           <DarkMode />
-          <Notification />
+
           <UserMenue />
         </div>
       </div>
@@ -20,14 +20,12 @@ import  DarkMode from '@/ui/DarkMode.vue';
 import  Hamburger from '@/ui/Hamburger.vue';
 import  Logo from '@/ui/Logo.vue';
 import NavbarSearchInput from '@/ui/NavbarSearchInput.vue';
-import  Notification from '@/ui/Notification.vue';
 import UserMenue from '@/ui/UserMenue.vue';
 
 export default {
     
     components: {
       DarkMode,
-      Notification,
       Logo,
       Hamburger,
       NavbarSearchInput,
