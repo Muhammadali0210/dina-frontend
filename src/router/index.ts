@@ -13,6 +13,8 @@ import BooksView from '@/views/books/BooksView.vue';
 import AdminView from '@/views/admin/AdminView.vue';
 import AddUpdateAdminView from '@/views/admin/Add&UpdateAdminView.vue';
 import PaymentView from '@/views/payment/PaymentView.vue';
+import GroupView from '@/views/group/GroupView.vue';
+import AddUpdateGroupView from '@/views/group/Add&UpdateGroupView.vue';
 import AttendanceView from '@/views/attendance/AttendanceView.vue';
 import viewLayout from '@/views/books/viewLayout.vue'
 
@@ -83,6 +85,18 @@ const router = createRouter({
       path: '/payment',
       name: 'payment',
       component: PaymentView,
+      meta: { layout: MainLayout }
+    },
+    {
+      path: '/group',
+      name: 'group',
+      component: GroupView,
+      meta: { layout: MainLayout }
+    },
+    {
+      path: '/group/add',
+      name: 'add-group',
+      component: AddUpdateGroupView,
       meta: { layout: MainLayout }
     },
     {
