@@ -1,5 +1,5 @@
 <template>
-    <form action="#" method="GET" class="hidden md:block md:pl-[80px]">
+    <form action="#" method="GET" class="hidden lg:block lg:pl-[80px]">
         <label for="topbar-search" class="sr-only">Search</label>
         <div class="relative md:w-64 lg:w-96">
             <div

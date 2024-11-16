@@ -1,34 +1,63 @@
-<template lang="">
-    <div>
-        <h1 class="text-3xl font-bold text-green-500">Attendance</h1>
-        <div class="dropdown">
-            <div tabindex="0" role="button" class="btn m-1 bg-green-500 dark:bg-gray-600">Click</div>
-            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><a>Item 1</a></li>
-                <li><a>Item 2</a></li>
-            </ul>
-        </div>
-        <div class="card bg-base-100 w-96 shadow-xl">
-        <figure>
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes" />
-        </figure>
-        <div class="card-body">
-            <h2 class="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
+<template>
+    <div class="grid lg:grid-cols-2 xl:grid-cols-3  md:grid-cols-2 max-sm:grid-cols-1 gap-5 w-full">
+        <div
+         v-for="(item, index) in groups" 
+         :key="index" 
+         :class="[
+            {'bg-orange-400': item.degree == 'c1'},
+            {'bg-orange-400': item.degree == 'c2'},
+            {'bg-blue-400': item.degree == 'a1'},
+            {'bg-blue-400': item.degree == 'a2'},
+            {'bg-green-400': item.degree == 'b1'},
+            {'bg-green-400': item.degree == 'b2'},
+         ]"
+         class="my-shadow text-black rounded-xl h-[140px] p-5 relative cursor-pointer md:hover:scale-105 transition-all duration-300 ease-in-out"
+        >
+            <div class="text-[28px] font-bold text-gray-100">
+                {{item.name}}
             </div>
-        </div>
+            <div class="absolute my-shadow2 right-5 top-[50%] translate-y-[-50%] w-[90px] h-[90px] bg-[#3d5a80] rounded-[100%] flex justify-center items-center">
+                <span class="text-[#fca311] text-[50px] items-center" style="line-height: 0; font-weight: 900; text-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 1);">18</span>
+            </div>
+            <h1 class="text-[20px] font-bold text-[#003566]">O'quvchilar soni</h1>
         </div>
     </div>
 </template>
 <script>
+import { ApiService } from '@/services/apiServices';
 export default {
-    
+    data(){
+        return {
+            groups: null,
+            token: localStorage.getItem('token')
+        }
+    },
+    methods: {
+        async getgroups(){
+            try {
+                const response = await ApiService.getByIdToken("/group/teacher", this.token);
+                this.groups = response
+            } catch (error) {
+                console.log(error);
+                
+            }
+        }
+    },
+    mounted(){
+        this.getgroups()
+        console.log("davomat ");
+    }
 }
 </script>
-<style lang="">
-    
+<style>
+.my-shadow{
+    box-shadow: 0px 0px 10px 6px #97979775;
+    /* border: 6px solid #55575856; */
+}
+.dark .my-shadow{
+    box-shadow: 0px 0px 10px 20px #0b172000;
+}
+.my-shadow2{
+    box-shadow: inset 0px 0px 10px 10px #1c2a3b75;
+}
 </style>

@@ -76,12 +76,15 @@ import { useCurrentIdStore } from '@/stores/currentId';
 import Loader from '@/ui/Loader.vue';
 import ErrorAlert from '@/ui/ErrorAlert.vue';
 import { errorMessages } from 'vue/compiler-sfc';
+import { useGroupStore } from '@/stores/groupStore';
 
 export default {
     setup() {
         const currentIdStore = useCurrentIdStore();
+        const groupStore = useGroupStore();
         return {
             currentId: currentIdStore.getCurrentId,
+            groupStore
         };
     },
     components: {
@@ -101,7 +104,7 @@ export default {
                 telegram_id: "",
                 group_ids: []
             },
-            groups: null,
+            groups: this.groupStore.groups,
             data: null,
             title: this.currentId ? "O'qituvchini malumotlarini o'zgartirish" : "Yangi o'qituvchi qo'shish",
             subtitle: this.currentId ? "O'zgartirish" : "Qo'shish",
@@ -126,14 +129,6 @@ export default {
                 console.log(error);
             } finally {
                 this.isLoading = false;
-            }
-        },
-        async getGroups(){
-            try {
-                const response = await ApiService.get('/group');
-                this.groups = response;
-            } catch (error) {
-                console.log(error);
             }
         },
         async handleSubmit(){
@@ -170,7 +165,6 @@ export default {
     },
     
     async mounted() {
-        this.getGroups();
         if(this.currentId){
             this.getDataById();
         }
