@@ -52,11 +52,15 @@ import { ApiService } from '@/services/apiServices';
 import { useCurrentIdStore } from '@/stores/currentId';
 import ErrorAlert from '@/ui/ErrorAlert.vue';
 import Loader from '@/ui/Loader.vue';
+import { useGroupStore } from '@/stores/groupStore';
+
 export default {
     setup() {
         const currentIdStore = useCurrentIdStore();
+        const groupStore = useGroupStore();
         return {
             currentId: currentIdStore.getCurrentId,
+            groupStore
         };
     },
     components: {
@@ -76,7 +80,7 @@ export default {
                 telegram_id: "",
                 group_ids: []         
             },
-            groups: null,
+            groups: this.groupStore.groups,
             data: null,
             title: this.currentId ? "Adminni malumotlarini o'zgartirish" : "Yangi admin qo'shish",
             subtitle: this.currentId ? "O'zgartirish" : "Qo'shish",
@@ -97,20 +101,10 @@ export default {
                 this.userData.password = response.password;
                 this.userData.phone = response.phone;
                 this.userData.telegram_id = response.telegram_id;
-                this.userData.group_ids = this.groups
             } catch (error) {
                 console.log(error);
             } finally {
                 this.isLoading = false;
-            }
-        },
-        async getGroups(){
-            try {
-                const response = await ApiService.get('/group');
-                this.groups = response;
-                this.userData.group_ids = response
-            } catch (error) {
-                console.log(error);
             }
         },
         async handleSubmit(){
@@ -147,7 +141,6 @@ export default {
     },
     
     async mounted() {
-        this.getGroups();
         if(this.currentId){
             this.getDataById();
         }
