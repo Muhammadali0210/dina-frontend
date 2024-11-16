@@ -29,29 +29,29 @@
                     <NoDataFound />
                 </template>
                 <template v-else>
-                    <table class="w-full max-xl:min-w-[950px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <table class="w-full max-xl:min-w-[350px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-6 py-3 ">
+                                <th scope="col" class="pl-4 pr-0 ">
                                     Guruh nomi
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-0 py-3">
                                     Guruh turi
                                 </th>
-                                <th scope="col" class="px-6 py-3 w-[80px]">
+                                <th scope="col" class="px-0 py-3 w-[80px]">
                                     Action
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in filteredItems" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
-                                <td class="px-6 py-4 ">
+                                <td class="pl-4 pr-0 py-4 ">
                                     {{ item.name }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-0 py-4">
                                     {{ item.degree }}
                                 </td>
-                                <td class="px-6 py-4 relative">
+                                <td class="px-0 py-4 relative">
                                     <div class="flex gap-3 h-[18px]">
                                         <span class="cursor-pointer" @click="updateItem(item._id)">
                                             <img src="../../assets/icons/edit.svg" alt="E">
