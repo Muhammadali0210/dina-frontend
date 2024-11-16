@@ -2,8 +2,10 @@
   <div>
     <div class="book-name text-3xl font-bold text-green-500">Boshlang'ich</div>
     <swiper :slides-per-view="'auto'" :space-between="20" :loop="true" :loop-fill-group-with-blank="true"
-      :free-mode="true" :pagination="false" :modules="modules" class="mySwiper"
-      :autoplay="{ delay: 1500, disableOnInteraction: false }">
+      :free-mode="true" :pagination="false" :modules="modules" class="mySwiper" @swiper="onSwiper"
+      @slideChange="onSlideChange" :autoplay="{
+        delay: 1500, disableOnInteraction: false
+      }">
       <swiper-slide v-for="(book, index) in books" :key="index" class="max-h-[400px] max-w-[250px]">
         <div class="max-w-sm shadow-xl border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-700">
           <a href="#">
