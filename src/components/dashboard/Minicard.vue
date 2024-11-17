@@ -1,8 +1,8 @@
 <template>
     <div class="container mx-auto p-4">
-        <div class="flex justify-end gap-4" v-if="isAdmin">
+        <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 " v-if="isAdmin">
             <div v-for="(cardData, index) in cardsData" :key="index"
-                class="bg-base-100 w-full shadow-xl rounded-lg overflow-hidden">
+                class="bg-base-100 w-full shadow-xl rounded-lg overflow-hidden dark:bg-gray-900 dark:border-gray-700 border-gray-200 bg-white">
                 <div class="p-4">
                     <h2 class="text-lg font-semibold mb-2">{{ cardData.title }}</h2>
                     <div class="flex justify-between">
