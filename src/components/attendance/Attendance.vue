@@ -1,5 +1,8 @@
 <template>
-    <div class="grid lg:grid-cols-2 xl:grid-cols-3  md:grid-cols-2 max-sm:grid-cols-1 gap-5 w-full">
+    <template v-if="!groups">
+        <Loader />
+    </template>
+    <div v-else class="grid lg:grid-cols-2 xl:grid-cols-3  md:grid-cols-2 max-sm:grid-cols-1 gap-5 w-full">
         <div
          v-for="(item, index) in groups" 
          :key="index" 
@@ -43,8 +46,6 @@ export default {
             try {
                 const response = await ApiService.getByIdToken("/group/teacher", this.token);
                 this.groups = response
-                console.log(response);
-                
             } catch (error) {
                 console.log(error);
                 
@@ -58,7 +59,6 @@ export default {
     },
     mounted(){
         this.getgroups()
-        console.log("davomat ");
     }
 }
 </script>
