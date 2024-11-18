@@ -1,8 +1,12 @@
 <template>
-    <div class="grid lg:grid-cols-2 xl:grid-cols-3  md:grid-cols-2 max-sm:grid-cols-1 gap-5 w-full">
+    <template v-if="!groups">
+        <Loader />
+    </template>
+    <div v-else class="grid lg:grid-cols-2 xl:grid-cols-3  md:grid-cols-2 max-sm:grid-cols-1 gap-5 w-full">
         <div
          v-for="(item, index) in groups" 
          :key="index" 
+         @click="goToAttendance(item._id)"
          :class="[
             {'bg-orange-400': item.degree == 'c1'},
             {'bg-orange-400': item.degree == 'c2'},
@@ -17,7 +21,7 @@
                 {{item.name}}
             </div>
             <div class="absolute my-shadow2 right-5 top-[50%] translate-y-[-50%] w-[90px] h-[90px] bg-[#3d5a80] rounded-[100%] flex justify-center items-center">
-                <span class="text-[#fca311] text-[50px] items-center" style="line-height: 0; font-weight: 900; text-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 1);">18</span>
+                <span class="text-[#fca311] text-[50px] items-center" style="line-height: 0; font-weight: 900; text-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 1);">{{ item.studentCount }}</span>
             </div>
             <h1 class="text-[20px] font-bold text-[#003566]">O'quvchilar soni</h1>
         </div>
@@ -25,7 +29,12 @@
 </template>
 <script>
 import { ApiService } from '@/services/apiServices';
+import { useCurrentIdStore } from '@/stores/currentId';
+import Loader from '@/ui/Loader.vue';
 export default {
+    components: {
+        Loader
+    },
     data(){
         return {
             groups: null,
@@ -41,11 +50,15 @@ export default {
                 console.log(error);
                 
             }
+        },
+        goToAttendance(id){
+            const currentStore = useCurrentIdStore();
+            currentStore.setCurrentId(id);
+            this.$router.push('/attendance/group');
         }
     },
     mounted(){
         this.getgroups()
-        console.log("davomat ");
     }
 }
 </script>

@@ -16,6 +16,7 @@ import PaymentView from '@/views/payment/PaymentView.vue';
 import GroupView from '@/views/group/GroupView.vue';
 import AddUpdateGroupView from '@/views/group/Add&UpdateGroupView.vue';
 import AttendanceView from '@/views/attendance/AttendanceView.vue';
+import AttendanceGroupView from '@/views/attendance/AttendanceGroupView.vue';
 import viewLayout from '@/views/books/viewLayout.vue'
 
 const router = createRouter({
@@ -103,6 +104,12 @@ const router = createRouter({
       path: '/attendance',
       name: 'attendance',
       component: AttendanceView,
+      meta: { layout: MainLayout }
+    },
+    {
+      path: '/attendance/group',
+      name: 'attendance-group',
+      component: AttendanceGroupView,
       meta: { layout: MainLayout }
     },
     {
