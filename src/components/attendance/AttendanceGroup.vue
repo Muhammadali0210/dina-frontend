@@ -11,10 +11,10 @@
                     </div>
                     <input type="text" id="table-search-users" v-model="searchQuery" class="block max-md:w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 max-sm:w-[100%] bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
                 </div>
-                <div>
-                    
-                </div>  
             </div>
+            
+            <DatePicker2 @dateSelected="handleDate" />  
+            
         </div>
         <div class="w-full max-xl:overflow-x-scroll rounded-lg">
             <template v-if="isLoading">
@@ -25,11 +25,11 @@
                     <NoDataFound />
                 </template>
                 <template v-else>
-                    <form @submit.prevent="handleSubmit()">
-                        <table class="w-full max-xl:min-w-[650px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <form @submit.prevent="handleCreate()">
+                        <table class="w-full max-xl:min-w-[360px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" class="pl-4 pr-0 py-3 ">
+                                    <th scope="col" class="pl-4 max-sm:pl-2 pr-0 py-3 ">
                                         T/R
                                     </th>
                                     <th scope="col" class="px-0 py-3 ">
@@ -45,29 +45,30 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(item, index) in filteredItems" :key="index" class="font-medium bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white">
-                                    <th class="pl-4 pr-0 py-2">
+                                    <th class="pl-4 max-sm:pl-2 pr-0 py-2">
                                         {{ index + 1 }}
                                     </th>
-                                    <th class="px-0 py-2">
-                                        {{ item.first_name }} {{ item.last_name }}
+                                    <th class="px-0 py-2 flex gap-2 max-sm:gap-0 max-sm:flex-col">
+                                        <span>{{ item.first_name }}</span>
+                                        <span>{{ item.last_name }}</span>
                                     </th>
                                     <th class="px-0 py-2">
                                         <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" v-model="item.attendance.status" :checked="item.attendance.status" class="sr-only peer">
+                                            <input type="checkbox" v-model="item.attendance.status" :checked="item.attendance.status" :disabled="isDisabled" class="sr-only peer">
                                             <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
                                         </label>
                                     </th>
-                                    <th class="px-0 py-2">
-                                        <label class="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" v-model="item.attendance.homework" :checked="item.attendance.homework"  class="sr-only peer">
-                                            <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                                    <th class="px-0 py-2 z-10">
+                                        <label class="z-10 inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" v-model="item.attendance.homework" :checked="item.attendance.homework" :disabled="isDisabled"  class="z-1 sr-only peer">
+                                            <div class=" relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
                                         </label>
                                     </th>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="flex justify-end">
-                            <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800">
+                        <div class="flex justify-end items-center mt-4" v-if="filteredItems && isToday">
+                            <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-0 sm:mt-0 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800">
                                 <template v-if="isSubmiting">
                                     <svg aria-hidden="true" role="status" class="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
@@ -84,6 +85,7 @@
                 </template>
             </template>
         </div>
+        <!-- Buttons -->
     </div>
 
 </template>
@@ -92,6 +94,8 @@ import NoDataFound from '@/ui/NoDataFound.vue';
 import { ApiService } from '@/services/apiServices';
 import Loader from '@/ui/Loader.vue';
 import { useCurrentIdStore } from '@/stores/currentId';
+import DatePicker from '@/ui/DatePicker.vue';
+import DatePicker2 from '@/ui/DatePicker2.vue';
 export default {
     setup() {
         const currentIdStore = useCurrentIdStore()
@@ -101,7 +105,9 @@ export default {
     },
     components: {
         Loader,
-        NoDataFound
+        NoDataFound,
+        DatePicker,
+        DatePicker2,
     },
     data() {
         return {
@@ -112,13 +118,15 @@ export default {
             isLoading: false,
             choosenDate: null,
             isActive: false,
+            isDisabled: false,
+            isToday: false,
             currentData: {
-                group_id: this.currentIdStore.currentId,
+                group_id: null,
                 date: null,
             },
             attendanceData:[],
             isSubmiting: false,
-            subtitle: this.isActive ? "O'zgartirish" : "Saqlash"
+            subtitle: ''
         }
     },
     computed: {
@@ -136,18 +144,30 @@ export default {
             try {
                 this.isLoading = true
                 this.currentData.date = this.choosenDate
+                this.currentData.group_id = this.currentIdStore.currentId
                 const res = await ApiService.postByToken(this.url, this.currentData, this.token)
                 this.users = res
-                console.log(res);
-                
                 this.isActive = res[0].attendance.is_active
+                this.isToday = res[0].attendance.date.slice(0, 10) == new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10)
+                // console.log("today: ", this.isToday);
+                if(!this.isToday) {
+                    this.isDisabled = true
+                } else {
+                    this.isDisabled = false
+                }
+                // console.log("disabled: ", this.isDisabled);
+                this.subtitle = this.isActive ? "O'zgartirish" : "Saqlash"
                 this.isLoading = false
             } catch (err) {
                 console.log(err)
                 this.isLoading = false
             }
         },
-        async handleSubmit() {
+        handleDate(date){
+            this.choosenDate = date
+            this.getUsers()
+        },
+        async handleCreate() {
             try {
                 this.isSubmiting = true
                 this.attendanceData = this.users.map((item) => {
@@ -157,15 +177,11 @@ export default {
                         date: this.choosenDate,
                         student_id: item.student_id,
                         group_id: this.currentIdStore.currentId,
-                        is_active: false
+                        is_active: this.isActive ? true : false
                     }
                 })
-                console.log(this.attendanceData);
-                
                 const response = await ApiService.postByToken('/attendance/create', this.attendanceData, this.token);
-                console.log(response);
-                
-                // this.$router.push('/attendance')
+                this.$router.push('/attendance')
             } catch (error) {
                 console.log(error);
             } finally {
@@ -174,9 +190,7 @@ export default {
         }
     },
     mounted() {
-        this.choosenDate = new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10)
-        console.log(this.choosenDate);
-        
+        this.choosenDate = new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10);
         this.getUsers()
     }
 }
