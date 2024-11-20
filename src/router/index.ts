@@ -17,6 +17,7 @@ import GroupView from '@/views/group/GroupView.vue';
 import AddUpdateGroupView from '@/views/group/Add&UpdateGroupView.vue';
 import AttendanceView from '@/views/attendance/AttendanceView.vue';
 import viewLayout from '@/views/books/viewLayout.vue'
+import Results from '@/views/results/Results.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,6 +68,12 @@ const router = createRouter({
       path: '/books',
       name: 'books',
       component: BooksView,
+      meta: { layout: MainLayout }
+    },
+    {
+      path: '/results',
+      name: 'Results',
+      component: Results,
       meta: { layout: MainLayout }
     },
     {
