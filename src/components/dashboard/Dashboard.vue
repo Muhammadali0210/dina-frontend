@@ -1,7 +1,5 @@
 <template lang="">
-<!--Admin uchun card-->
 <Minicard/>
-
        <swiper
     :pagination="true"
     :modules="modules"
@@ -31,9 +29,6 @@
   </swiper>
 
 
-
-   
-    
 </template>
 <script>
 import Minicard from "./Minicard.vue"
