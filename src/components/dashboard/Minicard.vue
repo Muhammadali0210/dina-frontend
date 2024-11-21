@@ -57,6 +57,7 @@ export default {
             cardsData,
         };
     },
+
 };
 </script>
 
