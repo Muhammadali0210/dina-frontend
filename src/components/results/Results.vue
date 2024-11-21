@@ -7,20 +7,23 @@
                     <img :src="result.link" alt="Results Image" class="w-full object-cover h-[450px]" />
                 </figure>
                 <div
-                    class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 flex items-center justify-center transition duration-300">
-                    <div class="text-center">
-                        <h1
-                            class="text-white text-[30px] text-lg font-bold opacity-0 group-hover:opacity-100 transition duration-300">
-                            {{ result.title }}
-                        </h1>
-                        <p class="text-white mt-[20px] text-lg opacity-0 group-hover:opacity-100 transition duration-300">
-                            {{ result.resultInfo }}
-                        </p>
+                    class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 flex items-center justify-center transition duration-300 group">
+                    <div
+                        class="text-center  opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                        <label for="my_modal_7"
+                            class="btn bg-green-500 hover:bg-green-600 text-white text-lg border-none">Ko'rish</label>
                     </div>
                 </div>
-
+                <input type="checkbox" id="my_modal_7" class="modal-toggle " />
+                <div class="modal bg-gray-900 bg-white" role="dialog">
+                    <div class="modal-box m-0 p-0 overflow-hidden">
+                        <img class="" :src=" result.link " alt="">
+                    </div>
+                    <label class="modal-backdrop" for="my_modal_7">Close</label>
+                </div>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -39,11 +42,7 @@ export default {
                     title: 'Dilrabo Hamzayeva',
                     resultInfo: "Eshitish:85 O’qish: 68 Yozish: 89"
                 },
-                {
-                    link: './src/assets/image/results.jpg',
-                    title: 'Dilrabo Hamzayeva',
-                    resultInfo: "Eshitish:85 O’qish: 68 Yozish: 89"
-                },
+
 
 
 
