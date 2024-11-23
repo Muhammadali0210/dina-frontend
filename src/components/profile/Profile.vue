@@ -1,32 +1,75 @@
-<template lang="">
+<template lang="html">
     <div>
         <h1 class="text-3xl font-bold text-green-500">
-          Mening profilim
+            Mening profilim
         </h1>
     </div>
-   
-<div href="#" class=" bg-cyan-500 shadow-lg shadow-cyan-500/30 flex w-[100%] flex-col items-center bg-white  md:flex-row rounded-lg shadow   dark:border-green-500 dark:bg-gray-800 ">
-    <img class="object-cover w-full profil-image rounded-t-lg h-66 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="../../assets/icons/user-avatar2.png" alt="">
-    <div 
-     class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-black dark:text-white">Ism: <span>Abubakir</span> Familya: <span>Sobitov</span></h5>
-        <p class="mb-3 font-normal text-[20px] text-black dark:text-white">Role: <span class="font-bold">Student</span></p>
-        <p class="mb-3 font-normal text-[20px] text-black dark:text-white">Guruh: <span class="font-bold">Student</span></p>
-        <p class="mb-3 font-normal text-[20px] text-black dark:text-white">Telegram ID: <span class="font-bold">Student</span></p>
+
+    <div
+        class="container w-full max-w-[1007px] h-auto rounded-[20px] bg-white dark:bg-gray-800 shadow-lg overflow-hidden relative ">
+        <!-- Banner Section -->
+        <div class="banner w-full h-[140px] rounded-t-[20px] bg-blue-700 relative">
+            <img class="w-full h-full rounded-t-[20px]" src="../../assets/image/Masking.svg" alt="Banner image">
+        </div>
+
+        <!-- Profile Image Section -->
+        <div class=" flex md:items-center md:justify-start justify-center items-center">
+            <img class="absolute w-[164px] h-[164px]  rounded-full border-4 border-white top-[40px] md:left-[30px]"
+                src="../../assets/icons/user-avatar2.png" alt="Profile image">
+
+            <div class="info mt-[80px] ml-[30px] text-left">
+                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Abubakir Sobitov</h1>
+                <h3 class="text-sm text-gray-500 mt-1 dark:text-white">Admin</h3>
+            </div>
+        </div>
+
+        <!-- Contact Info Section -->
+        <div class="flex flex-col w-[95%] m-auto md:flex-row md:justify-start md:items-start gap-4 mb-[20px]">
+            <!-- Phone Section -->
+            <div class="flex items-start gap-2 w-full p-[5px] flex-col text-left">
+                <h1 class="block m-0 dark:text-white">Phone</h1>
+                <div class="flex items-center gap-2">
+                    <img src="../../assets/icons/Phone.svg" alt="Phone Icon" class="w-[40px] h-[40px]">
+                    <p class="text-black text-lg font-bold dark:text-white">+12 345 6789 0</p>
+                </div>
+            </div>
+
+            <!-- Email Section -->
+            <div class="flex items-start gap-2 w-full p-[5px] flex-col text-left">
+                <h1 class="block m-0 dark:text-white">Email</h1>
+                <div class="flex items-center gap-2">
+                    <img src="../../assets/icons/Mail.svg" alt="Mail Icon" class="w-[40px] h-[40px]">
+                    <p class="text-black text-lg font-bold dark:text-white">jordan@mail.com</p>
+                </div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="flex items-start gap-2 w-full p-[5px] flex-col text-left">
+                <h1 class="block m-0 dark:text-white">Address</h1>
+                <div class="flex items-center gap-2">
+                    <img src="../../assets/icons/Location.svg" alt="Location Icon" class="w-[40px] h-[40px]">
+                    <p class="text-black text-lg font-bold dark:text-white">Namangan, Chust</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-2 w-full p-[5px] flex-col text-left">
+                <h1 class="block m-0 dark:text-white">Address</h1>
+                <div class="flex items-center gap-2">
+                    <img src="../../assets/icons/Location.svg" alt="Location Icon" class="w-[40px] h-[40px]">
+                    <p class="text-black text-lg font-bold dark:text-white">Namangan, Chust</p>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div>
-        
-    </div>
-</div>
-
-
-
-    
 </template>
+
 <script>
-
-
+export default {
+    name: "Profile",
+};
 </script>
+
 <style scoped>
 .profil-image {
     background-size: cover;
