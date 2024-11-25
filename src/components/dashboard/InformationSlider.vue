@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="rounded-2xl bg-white shadow-lg h-full p-[15px]">
         information Slider
     </div>
 </template>
