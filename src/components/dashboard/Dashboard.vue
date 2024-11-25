@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <main>
+  <div class="grid grid-cols-3 gap-[25px] w-full border-spacing-2">
+    <main class="col-span-2 grid grid-cols-1 gap-4">
       <Banner />
       <Statistic /> 
       <InformationSlider />
     </main>
     
-    <div>
+    <div class="h-full">
       <UserBanner />
     </div>
   </div>
