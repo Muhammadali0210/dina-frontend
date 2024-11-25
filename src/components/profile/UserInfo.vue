@@ -5,8 +5,9 @@
         <div
             class="banner w-full sm:h-[180px] h-[140px] rounded-t-[20px] bg-slate-400 relative flex sm:justify-start sm:pl-[30px] justify-center">
             <!-- Profil tasviri -->
+            <img src="../../assets/image/banner-bg3.png" class="absolute top-0 left-0 w-full h-full object-cover">
             <img class="absolute w-[164px] h-[164px] rounded-full border-4 border-white bg-gray-700 dark:border-gray-800 bottom-[-82px]"
-                src="../../assets/icons/user-avatar2.png" alt="Profile image">
+                src="../../assets/image/useer-avatar.png" alt="Profile image">
         </div>
 
 
