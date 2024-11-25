@@ -14,7 +14,7 @@
         <a :href="bookLink[0].link" title="Soulte 2A new" target="_blank">
             Soulte 2A new
         </a>
-    </div>
+    </div>z
 </template>
 
 <script>
