@@ -13,7 +13,7 @@ import StudentBooks from './StudentBooks.vue';
 export default {
   components: {
     StudentBooks,
-    PDFFlipBook,
+    
   },
 
   

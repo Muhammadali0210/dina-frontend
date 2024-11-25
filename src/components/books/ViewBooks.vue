@@ -62,7 +62,7 @@ export default {
     position: relative;
     width: 100%;
     height: calc(100% - 60px);
-    /* Sahifa tepasida joy bo'lishi uchun */
+    
 }
 
 iframe {
