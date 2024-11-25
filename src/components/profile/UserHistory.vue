@@ -4,7 +4,7 @@
         <h1 class="text-black m-5 p-[10px] dark:text-white font-bold text-[24px]">To'lov tarixi</h1>
 
         <div v-for="(payment, index) in peymentData" :key="index"
-            class="flex items-center justify-start p-5 m-[10px] gap-4">
+            class="flex items-center justify-start p-5 m-[10px]  gap-4">
             <img class="w-[56px] h-[56px]" src="../../assets/icons/peymet.svg" alt="Payment Icon">
             <div class="flex justify-between w-[90%]">
                 <h1 class="font-bold text-[18px] dark:text-white ">{{ payment.name }}</h1>
@@ -30,13 +30,9 @@ export default {
                 {
                     name: 'Abdulloh Karimov',
                     date: '2022-09-16',
-                    status: 'Complete',
+                    status: 'Tolanmagan',
                 },
-                {
-                    name: 'Abdulloh Karimov',
-                    date: '2022-09-16',
-                    status: 'Pending',
-                },
+               
             ],
         };
     },
