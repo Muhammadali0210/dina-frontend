@@ -1,20 +1,14 @@
 <template>
-    <div ref="fullscreenPage" class="w-full h-screen ">
+    <div ref="fullscreenPage" class="w-full h-screen">
         <button @click="backPageButton" class="fullscreen-button">Orqaga</button>
-        <div style="">
-            <iframe style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        " :src="bookLink[0].link" frameborder="0" allowfullscreen="true" allowtransparency="true"></iframe>
+        <div class="iframe-container">
+            <iframe :src="bookLink[0].link" frameborder="0" allowfullscreen="true" allowtransparency="true">
+            </iframe>
         </div>
-        <br />
         <a :href="bookLink[0].link" title="Soulte 2A new" target="_blank">
             Soulte 2A new
         </a>
-    </div>z
+    </div>
 </template>
 
 <script>
@@ -37,14 +31,11 @@ export default {
             const element = this.$refs.fullscreenPage;
             if (element.requestFullscreen) {
                 element.requestFullscreen();
-            } else if (element.mozRequestFullScreen) {
-
+            } else if (element.mozRequestFullScreen) { // Firefox uchun
                 element.mozRequestFullScreen();
-            } else if (element.webkitRequestFullscreen) {
-
+            } else if (element.webkitRequestFullscreen) { // Safari va Chrome uchun
                 element.webkitRequestFullscreen();
-            } else if (element.msRequestFullscreen) {
-
+            } else if (element.msRequestFullscreen) { // Internet Explorer uchun
                 element.msRequestFullscreen();
             }
         },
@@ -65,5 +56,17 @@ export default {
     border-radius: 5px;
     cursor: pointer;
     z-index: 9999;
+}
+
+.iframe-container {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 60px);
+    /* Sahifa tepasida joy bo'lishi uchun */
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
 }
 </style>
