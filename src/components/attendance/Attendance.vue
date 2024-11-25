@@ -70,8 +70,7 @@ export default {
 .dark .my-shadow{
     /* box-shadow: 0px 0px 10px 20px #0b172000; */
     /* box-shadow: 3px 3px 2px 1px #a4c2dba2, inset -3px -3px 1px 1px #282c30a2; */
-    box-shadow: 4px 3px 1px 1px #bac4cea2;
-    border:1px solid #333538a2;
+    box-shadow: 4px 3px 1px 1px transparent;
 }
 .my-shadow2{
     box-shadow: inset 0px 0px 10px 10px #1c2a3b75;

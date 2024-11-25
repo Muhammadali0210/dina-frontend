@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="book-name text-3xl font-bold text-green-500">Boshlang'ich</div>
+    <div class="book-name text-3xl font-bold text-gray-700 dark:text-white mb-4">Boshlang'ich</div>
     <swiper :slides-per-view="'auto'" :space-between="20" :loop="true" :loop-fill-group-with-blank="true"
       :free-mode="true" :pagination="false" :modules="modules" class="mySwiper" @swiper="onSwiper"
       @slideChange="onSlideChange" :autoplay="{
