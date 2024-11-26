@@ -9,8 +9,8 @@
                     src="../../assets/icons/user.svg" alt="user icon">
             </div>
             <div class="">
-                <p class="font-bold dark:text-gray-300 text-gray-500">O'quvchilar soni</p>
-                <h1 class="text-[40px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">100
+                <p class="font-bold dark:text-gray-300 text-gray-500">O'quvchilar</p>
+                <h1 class="text-[40px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">148
                 </h1>
             </div>
         </div>
@@ -23,8 +23,8 @@
                     src="../../assets/icons/profile-2user.svg" alt="user icon">
             </div>
             <div class="">
-                <p class="font-bold dark:text-gray-300 text-gray-500 ">Guruhlar soni</p>
-                <h1 class="text-[40px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">10
+                <p class="font-bold dark:text-gray-300 text-gray-500 ">Guruhlar</p>
+                <h1 class="text-[40px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">26
                 </h1>
             </div>
         </div>
@@ -38,8 +38,8 @@
                     src="../../assets/icons/medal-star.svg" alt="user icon">
             </div>
             <div class="">
-                <p class="font-bold dark:text-gray-300 text-gray-500">Natijalar soni</p>
-                <h1 class="text-[40px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">10
+                <p class="font-bold dark:text-gray-300 text-gray-500">Natijalar</p>
+                <h1 class="text-[40px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">97
                 </h1>
             </div>
         </div>
