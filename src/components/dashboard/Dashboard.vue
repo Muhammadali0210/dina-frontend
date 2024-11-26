@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 gap-[25px] w-full border-spacing-2">
+  <div class="grid grid-cols-3 gap-[25px] w-full border-spacing-2 max-xl:grid-cols-1">
     <main class="col-span-2 grid grid-cols-1 gap-4">
       <Banner />
       <Statistic /> 
