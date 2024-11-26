@@ -3,10 +3,10 @@
         <div class="flex justify-between mb-[15px]">
             <h1 class="text-[30px] text-gray-800 font-bold dark:text-white">Contunie Watching</h1>
             <div class="gap-3 flex">
-                <button class="bg-white h-[40px] w-[40px] rounded-[50%] relative "><img
+                <button class="bg-white h-[40px] w-[40px] rounded-[50%] relative hover:bg-green-500 "><img
                         class="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%]"
                         src="../../assets/icons/arrow-left.svg" alt=""></button>
-                <button class="bg-white h-[40px] w-[40px] rounded-[50%] relative "><img
+                <button class="bg-white h-[40px] w-[40px] rounded-[50%] relative hover:bg-green-500"><img
                         class="absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%]"
                         src="../../assets/icons/arrow-right.svg" alt=""></button>
             </div>
@@ -14,16 +14,14 @@
 
         <div class="bg-white shadow-lg pl-[28px] py-[28px] pr-0 overflow-hidden rounded-[25px] dark:bg-gray-800">
 
-            <swiper :spaceBetween="0" :slidesPerView="3" :freeMode="true" :loop="true" :centeredSlides="true"
-                :autoplay="{
+            <swiper :spaceBetween="0" :slidesPerView="3" :freeMode="true" :loop="true" :centeredSlides="true" :autoplay="{
                     delay: 2500,
                     disableOnInteraction: false,
                 }" :navigation="false" :modules="modules" class="mySwiper">
                 <swiper-slide class="" v-for="(slideData, index) in informationSlideData" :key="index">
                     <div class="card w-[320px]">
                         <img class="rounded-[25px] w-[320px] h-[180px]" :src="slideData.url" alt="">
-                        <div class="inline-block w-[50%] mt-2 rounded-[35px] bg-[#92d0bc41] px-4 py-[0px]"
-                            :style="{ backgroundColor: getBackgroundColor(slideData.title) }">
+                        <div class="inline-block w-[50%] mt-2 rounded-[35px] bg-[#92d0bc41] px-4 py-[0px]">
                             <h1 class="flex items-center text-sm font-bold text-[#20d199]">
                                 <img class="w-4" src="../../assets/icons/code.svg" alt="Icon">{{ slideData.title }}
                             </h1>
@@ -85,8 +83,7 @@ export default {
             ]
         };
     },
-   
-}
+    
 }
 </script>
 <style>
