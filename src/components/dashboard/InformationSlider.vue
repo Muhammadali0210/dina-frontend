@@ -85,19 +85,7 @@ export default {
             ]
         };
     },
-    methods: {
-        getBackgroundColor(title){
-            switch (title) {
-                case "FRONT-END":
-                    return "#92d0bc41"; 
-                case "UI/UX DESIGN":
-                    return "#e2bbe45b"; 
-                case "JavaScript":
-                    return "#F7DF1E"; 
-                default:
-                    return "#92d0bc41"; 
-        }
-    },
+   
 }
 }
 </script>
