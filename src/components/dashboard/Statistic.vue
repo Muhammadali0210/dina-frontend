@@ -11,8 +11,6 @@
                 <h1 class="text-[40px] text-gray-700 dark:text-white leading-none font-extrabold">100</h1>
             </div>
         </div>
-        
-
 
         <div class="rounded-[35px] bg-white dark:bg-slate-800 shadow-lg p-[15px] flex justify-start gap-4 items-center">
             <div class="w-[65px] h-[65px] bg-[#e2bbe45b] rounded-[45%] relative items-center">
