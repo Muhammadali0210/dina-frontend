@@ -16,7 +16,7 @@
         </div>
 
         <div
-            class="rounded-[35px] bg-white dark:bg-slate-800 shadow-lg p-[15px] max-md:p-[10px] flex justify-start gap-4 items-center">
+            class="rounded-[35px] bg-white dark:bg-slate-800 shadow-lg p-[15px] max-md:p-[10px] max-md:rounded-[20px] flex justify-start gap-4 items-center">
             <div
                 class="w-[65px] h-[65px] max-md:w-[55px] max-md:h-[55px]  bg-[#e2bbe45b] rounded-[45%] relative items-center">
                 <img class=" absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] w-[30px] h-[30px] "
@@ -31,7 +31,7 @@
 
 
         <div
-            class="rounded-[35px] bg-white dark:bg-slate-800 shadow-lg p-[15px] max-md:p-[10px] flex justify-start gap-4 items-center">
+            class="rounded-[35px] bg-white dark:bg-slate-800 shadow-lg max-md:rounded-[20px] p-[15px] max-md:p-[10px] flex justify-start gap-4 items-center">
             <div
                 class="w-[65px] h-[65px] max-md:w-[55px] max-md:h-[55px] bg-[#99d69c5c] rounded-[45%] relative items-center">
                 <img class=" absolute top-[50%] left-[50%] transform -translate-x-[50%] -translate-y-[50%] w-[30px] h-[30px] "
