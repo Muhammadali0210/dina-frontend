@@ -73,6 +73,7 @@ export default {
                 this.message = '';
                 this.isSubmitting = true;
                 const response = await ApiService.post('/auth/login', this.loginData)
+                
                 if(localStorage.getItem('status') === '200') {
                     console.log("Tizimga muvaffaqiyatli kirildi");
                 }
@@ -80,13 +81,8 @@ export default {
                     const userStore = useUserStore();
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('role', response.role);
-                    userStore.currentRole = response.role
-                    const userData = {
-                        firstName: response.first_name,
-                        lastName: response.last_name,
-                        role: response.role
-                    }
-                    userStore.setUserInfo(userData);
+                    userStore.currentRole = response.role;
+                    userStore.setUserInfo(response.data);
                     this.$router.push('/');
                 }
             } catch (error) {
