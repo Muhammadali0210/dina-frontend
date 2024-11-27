@@ -6,9 +6,9 @@
             <input type="radio" name="my-accordion-2" />
             <div class="collapse-title text-xl font-medium">
                 <div>
-                    <div class="  p-4  dark:bg-gray-800 flex justify-between items-center border-b-2">
+                    <div class="    dark:bg-gray-800 flex justify-between items-center  ">
                         <img class="w-[60px] h-[60px] rounded-full" src="../../assets/icons/user-avatar.png"
-                            alt="user avatar">
+                            alt="user avatar"> 
                         <div class="leading-tight">
                             <h1 class="text-gray-700 font-bold text-base">{{ mentorData.name }}</h1>
                             <p class="text-gray-500 text-sm">{{ mentorData.role }}</p>
@@ -17,7 +17,10 @@
                 </div>
             </div>
             <div class="collapse-content">
-                
+                <div>
+                    <h1 class=" text-[15px] text-gray-700 font-bold">Telefon raqam: +998 90 4944935</h1>
+                  
+                </div>
             </div>
         </div>
     </div>
