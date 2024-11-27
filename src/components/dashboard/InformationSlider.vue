@@ -36,9 +36,7 @@
                 </swiper-slide>
             </swiper>
         </div>
-
     </div>
-
 </template>
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
