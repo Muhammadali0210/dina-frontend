@@ -1,5 +1,5 @@
 <template>
-    <div class="antialiased bg-slate-200 dark:bg-gray-900 flex items-center justify-center min-h-screen">
+    <div class="antialiased  flex items-center justify-center min-h-screen login-bg">
         <RouterView />
     </div>
 </template>
@@ -8,4 +8,11 @@ import { RouterView } from 'vue-router';
 export default {
 }
 </script>
-<style></style>
+<style scoped>
+.login-bg{
+    background-image: url(../assets/image/bg2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+</style>

@@ -1,19 +1,19 @@
 <template>
     <div
-        class=" w-[500px] max-md:w-[90%] block p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 ">
-        <MainLogo />
+        class=" w-[500px] max-md:w-[90%] block p-6 blurbg rounded-xl">
+        <MainLogo class="dark:text-gray-900" />
         <form class="space-y-4 md:space-y-6" @submit.prevent="handleSubmit()">
             <ErrorAlert v-if="message" :errorMessage="message" />
             <div>
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Login</label>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Foydalanuvchi nomi</label>
                 <input type="text" v-model="loginData.login" name="email" id="email"
-                    class="bg-gray-50  text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                    placeholder="Loginni kiriting" required>
+                    class="bg-transparent border-green-500 forminput text-gray-900 placeholder-gray-700 rounded-lg focus:ring-green-500 focus:border-gray-600 border-2 block w-full p-2.5"
+                    placeholder="Foydalanuvchi nomini kiriting" required>
             </div>
             <div>
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parol</label>
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Parol</label>
                 <input  type="password" v-model="loginData.password" name="password" id="password" placeholder="Parolni kiriting"
-                    class="bg-gray-50  text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 ,"
+                    class="bg-transparent border-green-500 forminput text-gray-900 placeholder-gray-700 rounded-lg focus:ring-green-500 focus:border-gray-600 border-2 block w-full p-2.5"
                     required>
             </div>
             <div class="flex items-center justify-between">
@@ -98,4 +98,12 @@ export default {
     }
 }
 </script>
-<style></style>
+<style>
+.blurbg{
+    background: rgba(255, 255, 255, 0.527); /* Yalang'och shaffoflik */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.541);
+    backdrop-filter: blur(7px); /* Blur effekt */
+    z-index: 1;
+}
+
+</style>
