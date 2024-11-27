@@ -5,11 +5,7 @@ export const useUserStore = defineStore('userStore', {
     state: () => ({
       count: 2,
       currentRole: localStorage.getItem('role') || 'general',
-      userInfo: {
-        firstName: '',
-        lastName: '',
-        role: '',        
-      }
+      userInfo: null
     }),
     actions: {
       setUserInfo(data: any) {
