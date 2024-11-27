@@ -32,7 +32,7 @@
                     <table class="w-full max-xl:min-w-[350px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="pl-4 pr-0 ">
+                                <th scope="col" class="pl-4 pr-0 md:px-6">
                                     Guruh nomi
                                 </th>
                                 <th scope="col" class="px-0 py-3">
@@ -45,7 +45,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in filteredItems" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
-                                <td class="pl-4 pr-0 py-4 ">
+                                <td class="pl-4 pr-0 py-4 md:px-6">
                                     {{ item.name }}
                                 </td>
                                 <td class="px-0 py-4">
