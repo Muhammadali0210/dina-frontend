@@ -1,13 +1,13 @@
 <template>
     <div
         class=" w-[500px] max-md:w-[90%] block p-6 blurbg rounded-xl">
-        <MainLogo class="dark:text-gray-900" />
+        <MainLogo class="dark:text-gray-900 text-gray-900" />
         <form class="space-y-4 md:space-y-6" @submit.prevent="handleSubmit()">
             <ErrorAlert v-if="message" :errorMessage="message" />
             <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Foydalanuvchi nomi</label>
                 <input type="text" v-model="loginData.login" name="email" id="email"
-                    class="bg-transparent border-green-500 forminput text-gray-900 placeholder-gray-700 rounded-lg focus:ring-green-500 focus:border-gray-600 border-2 block w-full p-2.5"
+                    class="bg-transparent border-green-500 forminput text-gray-900 dark:text-gray-900 placeholder-gray-700 dark:placeholder-gray-700 rounded-lg focus:ring-green-500 focus:border-gray-600 border-2 block w-full p-2.5"
                     placeholder="Foydalanuvchi nomini kiriting" required>
             </div>
             <div>
@@ -24,7 +24,7 @@
             <button 
                 type="submit"
                 :disabled="isSubmitting"
-                class="w-full text-white bg-green-500 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:opacity-80 dark:focus:ring-green-500"
+                class="w-full shadow-lg text-white bg-green-500 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:opacity-80 dark:focus:ring-green-500"
                 :class="isSubmitting ? 'cursor-not-allowed opacity-80' : ''"
             >
                 <template v-if="!isSubmitting">
@@ -69,28 +69,24 @@ export default {
         },
         async handleSubmit() {
             try {
-                localStorage.removeItem('status');
+                localStorage.setItem('status', '');
                 this.message = '';
                 this.isSubmitting = true;
                 const response = await ApiService.post('/auth/login', this.loginData)
                 
-                if(localStorage.getItem('status') === '200') {
+                if(localStorage.getItem('status') == '200') {
                     console.log("Tizimga muvaffaqiyatli kirildi");
                 }
-                if(response) {
+                if(response.token) {
+                    this.$router.push('/');
                     const userStore = useUserStore();
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('role', response.role);
+                    localStorage.setItem('userId', response.id);
                     userStore.currentRole = response.role;
-                    userStore.setUserInfo(response.data);
-                    this.$router.push('/');
                 }
             } catch (error) {
-                if(localStorage.getItem('status')  === '401') {
-                    this.message = "Parol noto'g'ri kiritildi"
-                } else if(localStorage.getItem('status')  === '404') {
-                    this.message = "Bunday foydalanuvchi topilmadi"
-                }
+                    this.message = error.response.data.message
             } finally {
                 this.isSubmitting = false;
             }
@@ -100,7 +96,7 @@ export default {
 </script>
 <style>
 .blurbg{
-    background: rgba(255, 255, 255, 0.527); /* Yalang'och shaffoflik */
+    background: rgba(255, 255, 255, 0.541); /* Yalang'och shaffoflik */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.541);
     backdrop-filter: blur(7px); /* Blur effekt */
     z-index: 1;
