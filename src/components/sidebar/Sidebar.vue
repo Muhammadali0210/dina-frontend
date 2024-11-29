@@ -84,6 +84,9 @@ export default {
         this.currentPage = index;
         this.$router.push(path);
         this.sidebarStore.isOpen = false;
+        if(path == '/profile') {
+          localStorage.setItem('userId', '');
+        }
       },
       getSvgIcon(icon, isActive) {
         const activeClass = isActive ? 'text-white dark:text-white  group-hover:text-white' : 'dark:text-white text-geen-500 group-hover:text-geen-500 dark:group-hover:text-white';

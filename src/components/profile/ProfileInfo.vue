@@ -15,6 +15,7 @@
                 <img class="absolute w-[164px] h-[164px] rounded-full border-4 border-white bg-gray-700 dark:border-gray-800 bottom-[-82px]"
                     src="../../assets/image/useer-avatar.png" alt="Profile image">
                 <button 
+                    v-if="currentUserId == ''"
                     @click="editProfile"
                     type="button" 
                     class="flex gap-1 items-center absolute right-2 top-3 z-50  text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600">
@@ -25,11 +26,7 @@
                         </svg>
                     </span>
                 </button>
-
             </div>
-
-
-
 
             <div class="info mt-[100px]  mb-2 pl-[30px] text-left max-sm:text-center " >
                 <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ userData.data.first_name }} {{ userData.data.last_name }}</h1>
@@ -92,7 +89,8 @@ export default {
         return {
             userData: null,
             userRole: localStorage.getItem('role'),
-            isLoading: false
+            isLoading: false,
+            currentUserId: localStorage.getItem('userId')
         }
     },
     components: {
@@ -103,8 +101,13 @@ export default {
         async getUserInfo() {
             try {
                 this.isLoading = true
-                const res = await ApiService.getByIdToken(`/profile/${localStorage.getItem('userId')}`);
-                this.userData = res
+                if(localStorage.getItem('userId') == '') {
+                    const res = await ApiService.getByIdToken(`/profile/${localStorage.getItem('profileId')}`);
+                    this.userData = res
+                } else {
+                    const res = await ApiService.getByIdToken(`/profile/${localStorage.getItem('userId')}`);
+                    this.userData = res
+                }
             } catch (error) {
                 console.log(error);
             }   finally {
