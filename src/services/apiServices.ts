@@ -62,7 +62,7 @@ export  class ApiService {
                     size: size
                 },
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
              })
             return response.data
@@ -106,7 +106,7 @@ export  class ApiService {
         try {
             const response = await axios.put(BaseUrl + url, data, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
             return response.data
@@ -128,7 +128,7 @@ export  class ApiService {
         try {
             const response = await axios.delete(BaseUrl + url, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
             return response.data
@@ -141,7 +141,7 @@ export  class ApiService {
         try {
             const response = await axios.delete(BaseUrl + url, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 params: {
                     dmtt_id: dmtt_id
