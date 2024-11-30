@@ -20,6 +20,7 @@ import AttendanceGroupView from '@/views/attendance/AttendanceGroupView.vue';
 import viewLayout from '@/views/books/viewLayout.vue'
 import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
+import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,6 +72,12 @@ const router = createRouter({
       name: 'edit-profile',
       component: EditProfileView,
       meta: { layout: MainLayout }
+    },
+    {
+      path: '/userprofile',
+      name: 'userprofile',
+      component: UserProfileView,
+      meta: { layout: MainLayout }    
     },
     {
       path: '/books',

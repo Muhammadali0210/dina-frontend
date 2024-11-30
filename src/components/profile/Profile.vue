@@ -3,7 +3,7 @@
     <UserHistory/>
 </template>
 <script>
-import UserInfo from './UserInfo.vue'
+import UserInfo from './ProfileInfo.vue'
 import UserHistory from './UserHistory.vue'
 export default {
     components: {
