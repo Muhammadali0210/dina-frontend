@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center items-center w-[100%] min-h-[50vh]">
+    <div class="flex flex-col justify-center items-center w-[100%] min-h-[50vh]">
         <div class="loader-container">
             <div class="dot"></div>
             <div class="dot"></div>
@@ -8,6 +8,7 @@
             <div class="dot"></div>
             <div class="dot"></div>
         </div>
+        <h3 class="mt-4 font-medium text-gray-800 dark:text-slate-400">Malumotlar yuklanmoqda...</h3>
     </div>
 </template>
 
