@@ -37,7 +37,7 @@
                             <label for="item-weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Guruhlar</label>
                             
                             <div class="dropdown dropdown-bottom w-full">
-                                <div tabindex="0" role="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border-0">
+                                <div tabindex="0" role="button" class="w-full text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 border-0">
                                     Guruhni tanlang 
                                     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -46,7 +46,7 @@
                                 <ul tabindex="0" class="dropdown-content menu z-[10] p-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
                                     <li v-if="groups" v-for="(group, index)  in groups" :key="index">
                                         <a class="cursor-pointer">
-                                            <input :id="group._id" v-model="userData.group_ids" :value="group._id" :checked="userData.group_ids.includes(group._id)" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm">
+                                            <input :id="group._id" v-model="userData.group_ids" :value="group._id" :checked="userData.group_ids.includes(group._id)" type="checkbox" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded-sm">
                                             <label :for="group._id" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ group.name }}</label>
                                         </a>
                                     </li>
