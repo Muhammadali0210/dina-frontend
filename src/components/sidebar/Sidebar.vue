@@ -38,8 +38,8 @@
         <ul class="space-y-2">
           <template v-for="(item, index) in sidebarData" :key="index">
             <li 
-              class="cursor-pointer flex items-center p-2 text-base font-medium bg-green-500 border rounded-lg group"
-              :class="[currentPage == index ? 'bg-opacity-100 text-white border-green-500' : 'bg-opacity-5 border-green-500 text-green-500 rounded-lg dark:text-white hover:bg-opacity-15 dark:hover:bg-opacity-25']"
+              class="cursor-pointer flex items-center py-2 px-3 text-base font-medium bg-green-500 border-spacing-0 rounded-lg group"
+              :class="[currentPage == index ? 'bg-opacity-100 text-white ' : 'bg-opacity-0  text-green-500 rounded-lg dark:text-white hover:bg-opacity-15 dark:hover:bg-opacity-25']"
               @click="changePage(index, item.path)"
               v-if="item.role.includes(userStore.currentRole)"
             >

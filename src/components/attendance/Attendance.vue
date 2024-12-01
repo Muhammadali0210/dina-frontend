@@ -10,8 +10,8 @@
          :class="[
             {'bg-orange-400': item.degree == 'c1'},
             {'bg-orange-400': item.degree == 'c2'},
-            {'bg-blue-400': item.degree == 'a1'},
-            {'bg-blue-400': item.degree == 'a2'},
+            {'bg-[#60a5fa]': item.degree == 'a1'},
+            {'bg-[#60a5fa]': item.degree == 'a2'},
             {'bg-green-400': item.degree == 'b1'},
             {'bg-green-400': item.degree == 'b2'},
          ]"
