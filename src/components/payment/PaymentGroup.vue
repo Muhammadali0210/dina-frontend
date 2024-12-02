@@ -42,15 +42,15 @@
                                         To'lov statusi
                                     </th>
                                     <th scope="col" class="px-0 py-3 ">
-                                        To'lov turi
+                                        To'lov summasi
                                     </th>
                                     <th scope="col" class="px-0 py-3 ">
-                                        To'lov summasi
+                                        To'lov turi
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in filteredItems" :key="index" @click="openModal(item)"  class="font-medium bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white">
+                                <tr v-for="(item, index) in filteredItems" :key="index" @click="openModal(item)"  class="cursor-pointer font-medium bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white">
                                     <th class="pl-4 max-sm:pl-2 pr-0 py-2">
                                         {{ index + 1 }}
                                     </th>
@@ -68,11 +68,11 @@
                                             {{ item.attendance.status ? "To'langan" : "To'lanmagan"}}
                                         </div>
                                     </th>
-                                    <th class="px-0 py-2">
-                                        Karta
-                                    </th>
                                     <th class="px-0 py-2 z-10">
                                         250 000 So'm
+                                    </th>
+                                    <th class="px-0 py-2">
+                                        Karta
                                     </th>
 
                                 </tr>
