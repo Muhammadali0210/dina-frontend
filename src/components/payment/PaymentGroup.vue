@@ -13,7 +13,7 @@
                 </div>
             </div>
             
-            <DatePicker2 @dateSelected="handleDate" />  
+            <DatePicker @dateSelected="handleDate" />  
             
         </div>
         <div class="w-full max-xl:overflow-x-scroll rounded-lg">
@@ -39,10 +39,10 @@
                                         Oy
                                     </th>
                                     <th scope="col" class="px-0 py-3 ">
-                                        To'lov turi
+                                        To'lov statusi
                                     </th>
                                     <th scope="col" class="px-0 py-3 ">
-                                        To'lov statusi
+                                        To'lov turi
                                     </th>
                                     <th scope="col" class="px-0 py-3 ">
                                         To'lov summasi
@@ -50,7 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in filteredItems" :key="index" @click="showModal(item)" class="font-medium bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white">
+                                <tr v-for="(item, index) in filteredItems" :key="index" @click="openModal(item)"  class="font-medium bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white">
                                     <th class="pl-4 max-sm:pl-2 pr-0 py-2">
                                         {{ index + 1 }}
                                     </th>
@@ -62,14 +62,14 @@
                                         Noyabr 24
                                     </th>
                                     <th class="px-0 py-2">
-                                        Karta
-                                    </th>
-                                    <th class="px-0 py-2">
                                         <div 
                                             class="inline text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 border" 
                                             :class="item.attendance.status ? 'bg-green-100 text-green-800 dark:text-green-400 border-green-400' : 'bg-red-100 text-red-800 dark:text-red-400 border-red-400' ">
                                             {{ item.attendance.status ? "To'langan" : "To'lanmagan"}}
                                         </div>
+                                    </th>
+                                    <th class="px-0 py-2">
+                                        Karta
                                     </th>
                                     <th class="px-0 py-2 z-10">
                                         250 000 So'm
@@ -84,8 +84,7 @@
         </div>
         <!-- Buttons -->
     </div>
-    <PaymentModal :data="userData" />
-
+    <PaymentModal v-if="userData" :data="userData" :paymentmodal="paymentmodal" @closePaymentModal="paymentmodal = false" />
 </template>
 <script>
 import NoDataFound from '@/ui/NoDataFound.vue';
@@ -93,7 +92,6 @@ import { ApiService } from '@/services/apiServices';
 import Loader from '@/ui/Loader.vue';
 import { useCurrentIdStore } from '@/stores/currentId';
 import DatePicker from '@/ui/DatePicker.vue';
-import DatePicker2 from '@/ui/DatePicker2.vue';
 import PaymentModal from '@/ui/PaymentModal.vue';
 export default {
     setup() {
@@ -106,7 +104,7 @@ export default {
         Loader,
         NoDataFound,
         DatePicker,
-        DatePicker2,
+        DatePicker,
         PaymentModal
     },
     data() {
@@ -127,10 +125,11 @@ export default {
             attendanceData:[],
             isSubmiting: false,
             subtitle: '',
-            userData: null
-
+            userData: null,
+            paymentmodal: false
         }
     },
+
     computed: {
         filteredItems() {
             if (this.searchQuery) {
@@ -192,13 +191,12 @@ export default {
         },
 
         // paynment modal 
-        showModal(item) {
-            if(!item.attendance.status) {
-                this.userData = item    
-                document.getElementById('my_modal_1').showModal()
+        openModal(item) {
+            if(!item.attendance.status){
+                this.userData = item
+                this.paymentmodal = true
             }
-            
-        }
+        },
     },
     mounted() {
         this.choosenDate = new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10);
