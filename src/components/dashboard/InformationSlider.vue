@@ -92,8 +92,8 @@ export default {
             slideNext,
             modules: [Autoplay, Pagination, Navigation],
             informationSlideData: [
-                { url: '/src/assets/image/inf.jpg', description: 'Beginner\'s Guide to Becoming a Front-End Developer' },
-                { url: '/src/assets/image/inf3.jpg', description: 'Optimizing User Experience' },
+                { url: '/src/assets/image/han1.jpg', description: 'Beginner\'s Guide to Becoming a Front-End Developer' },
+                { url: '/src/assets/image/han2.jpg', description: 'Optimizing User Experience' },
                 { url: '/src/assets/image/inf.jpg', description: 'Mastering Front-End Skills' },
                 { url: '/src/assets/image/inf3.jpg', description: 'Perfecting the User Journey' },
             ],
