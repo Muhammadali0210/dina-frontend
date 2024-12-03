@@ -31,7 +31,7 @@
                   type="number"
                   name="price"
                   id="price"
-                  v-model="paymentData.amount"
+                  v-model="paymentData.payment.amount"
                   class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                   placeholder="250 000"
                   required
@@ -46,7 +46,7 @@
                 >
                 <div class="relative ">
                   <input type="month" 
-                  v-model="paymentData.month"
+                    
                   required
                   class="block w-full px-3 py-2 text-sm rounded-md shadow-sm border border-gray-300 dark:border-gray-600 
                             bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500
@@ -54,7 +54,7 @@
                   <span class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-blue-500">
                     📅
                   </span>
-                  <input type="hidden" v-model="paymentData.payment_type">
+                  <input type="hidden" v-model="paymentData.payment.payment_type">
                 </div>
               </div>
 
@@ -111,13 +111,14 @@ export default {
   },
   data() {
     return {
+      isSubmiting: false,
       paymentData: {
         status: true,
         amount: 0,
         month: "",
         payment_type: "Naqd",
         student_id: this.data.student_id,
-        group_id: this.data.attendance.group_id
+        group_id: this.data.payment.group_id
       }
     }
   },
