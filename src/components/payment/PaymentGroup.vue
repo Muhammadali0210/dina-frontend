@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div class="">
         <div class="flex items-center max-md:items-start max-lg:gap-2 justify-between flex-col flex-wrap md:flex-row pb-4 bg-transparent dark:bg-gray-900">
             <div class="flex items-center space-x-4 max-md:w-full"> 
@@ -59,20 +59,20 @@
                                         <span>{{ item.last_name }}</span>
                                     </th>
                                     <th class="px-0 py-2">
-                                        Noyabr 24
+                                        {{ item.payment.month }}
                                     </th>
                                     <th class="px-0 py-2">
                                         <div 
                                             class="inline text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 border" 
-                                            :class="item.attendance.status ? 'bg-green-100 text-green-800 dark:text-green-400 border-green-400' : 'bg-red-100 text-red-800 dark:text-red-400 border-red-400' ">
-                                            {{ item.attendance.status ? "To'langan" : "To'lanmagan"}}
+                                            :class="item.payment.status ? 'bg-green-100 text-green-800 dark:text-green-400 border-green-400' : 'bg-red-100 text-red-800 dark:text-red-400 border-red-400' ">
+                                            {{ item.payment.status ? "To'langan" : "To'lanmagan"}}
                                         </div>
                                     </th>
                                     <th class="px-0 py-2 z-10">
-                                        250 000 So'm
+                                        {{ item.payment.amount }} So'm
                                     </th>
                                     <th class="px-0 py-2">
-                                        Karta
+                                        {{ item.payment.payment_type }} 
                                     </th>
 
                                 </tr>
@@ -104,27 +104,23 @@ export default {
         Loader,
         NoDataFound,
         DatePicker,
-        DatePicker,
         PaymentModal
     },
     data() {
         return {
             searchQuery: '',
-            url: '/attendance/group',
+            url: '/payment/group',
             users: null,
             token: localStorage.getItem("token"),
             isLoading: false,
             choosenDate: null,
-            isActive: false,
-            isDisabled: false,
             isToday: false,
             currentData: {
                 group_id: null,
                 date: null,
             },
-            attendanceData:[],
+            paymentData:[],
             isSubmiting: false,
-            subtitle: '',
             userData: null,
             paymentmodal: false
         }
@@ -144,20 +140,11 @@ export default {
         async getUsers() {
             try {
                 this.isLoading = true
-                this.currentData.date = this.choosenDate
+                this.currentData.date = this.choosenDate.slice(0, 7)
                 this.currentData.group_id = this.currentIdStore.currentId
                 const res = await ApiService.postByToken(this.url, this.currentData, this.token)
                 this.users = res
-                this.isActive = res[0].attendance.is_active
-                this.isToday = res[0].attendance.date.slice(0, 10) == new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10)
-                // console.log("today: ", this.isToday);
-                if(!this.isToday) {
-                    this.isDisabled = true
-                } else {
-                    this.isDisabled = false
-                }
-                // console.log("disabled: ", this.isDisabled);
-                this.subtitle = this.isActive ? "O'zgartirish" : "Saqlash"
+                console.log(res);
                 this.isLoading = false
             } catch (err) {
                 console.log(err)
@@ -171,18 +158,17 @@ export default {
         async handleCreate() {
             try {
                 this.isSubmiting = true
-                this.attendanceData = this.users.map((item) => {
+                this.paymentData = this.users.map((item) => {
                     return {
-                        status: item.attendance.status,
-                        homework: item.attendance.homework,
+                        status: item.payment.status,
+                        homework: item.payment.homework,
                         date: this.choosenDate,
                         student_id: item.student_id,
                         group_id: this.currentIdStore.currentId,
-                        is_active: this.isActive ? true : false
                     }
                 })
-                const response = await ApiService.postByToken('/attendance/create', this.attendanceData, this.token);
-                this.$router.push('/attendance')
+                const response = await ApiService.postByToken('/payment/create', this.paymentData, this.token);
+                this.$router.push('/payment')
             } catch (error) {
                 console.log(error);
             } finally {
@@ -192,7 +178,7 @@ export default {
 
         // paynment modal 
         openModal(item) {
-            if(!item.attendance.status){
+            if(!item.payment.status){
                 this.userData = item
                 this.paymentmodal = true
             }
