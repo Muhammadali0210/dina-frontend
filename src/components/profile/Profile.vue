@@ -1,6 +1,8 @@
-<template lang="">
-    <UserInfo/>
-    <UserHistory/>
+<template>
+    <div class="w-full flex flex-col justify-center items-center custom-container">
+        <UserInfo/>
+        <UserHistory/>
+    </div>
 </template>
 <script>
 import UserInfo from './ProfileInfo.vue'
@@ -13,6 +15,6 @@ export default {
     
 }
 </script>
-<style lang="">
-    
+<style>
+
 </style>

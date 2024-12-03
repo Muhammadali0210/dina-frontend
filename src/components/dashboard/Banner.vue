@@ -5,7 +5,7 @@
         <h1 class="text-white text-[36px] w-[70%] text-start font-bold mt-2 max-lg:text-[28px] max-md:w-[100%] max-sm:text-[18px] z-50" >Professional Onlayn kurs bilan mahoratingizni oshiring</h1>
         <button class="bg-[#e97c3d] pr-2 pl-3 py-2 max-sm:p-1 rounded-full flex items-center gap-2 mt-3">
             <div class="text-white font-bold max-sm:text-[16px]">Qo'shilish</div>
-            <div class=" rounded-full p-1 flex justify-center items-center bg-white">
+            <div class=" rounded-full p-1 flex justify-center items-center bg-white bg-[#6b5ff2]">
                 <img  src="../../assets/icons/arrow-right.svg" alt="">
             </div>
         </button>
