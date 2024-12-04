@@ -21,10 +21,8 @@ import viewLayout from '@/views/books/viewLayout.vue'
 import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
-import OnlineCourse from '@/components/onlinecourse/OnlineCourse.vue';
-import test from '@/components/onlinecourse/CourseCard.vue';
-import AboutPage from '@/components/cards/AboutPage.vue'
-// import Reklama from '@/components/cards/Reklama.vue'
+import CourseView from '@/views/onlinecourse/CourseView.vue';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -150,23 +148,12 @@ const router = createRouter({
       meta: {layout : MainLayout}
     },
     {
-      path: '/onlinelesson',
-      name: 'onlinelesson',
-      component: OnlineCourse,
+      path: '/course',
+      name: 'course',
+      component: CourseView,
       meta: {layout : MainLayout}
     },
-    {
-      path: '/onlinevideo',
-      name: 'onlinevideo',
-      component: test,
-      meta: {layout : MainLayout}
-    },
-    {
-       path: '/about', 
-       name: 'about',
-       component: AboutPage,
-      meta: {layout : MainLayout}
-    },
+    
   
   ]
 })

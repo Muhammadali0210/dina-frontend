@@ -30,7 +30,7 @@ export const sidebarData = [
         `
     },
     {
-        path: '/onlinelesson',
+        path: '/course',
         title: "Online Dars",
         role: ['admin', 'teacher','student'],
         icon: `
