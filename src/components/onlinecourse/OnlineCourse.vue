@@ -1,40 +1,70 @@
 <template lang="">
-<div class="navbar w-full m-auto">
-  <div class="flex-1">
-    <a class="btn btn-ghost text-[24px] dark:text-white">Kurslar</a>
-  </div>
-  <div class="flex-none gap-2">
-    <div class="form-control">
-     <div class="relative max-md:w-full">
-                    <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                    </div>
-                    <input type="text" id=""  class="block max-md:w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 max-sm:w-[100%] bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for lesson...">
-                </div>
+    <div class="custom-container">
+        
+    
+    <div class="w-full  grid md:grid-cols-3 gap-4 sm:grid-cols-2 grid-cols-1">
+      <div  v-for="(item , index) in kurData" :key="index" class="border w-full border-gray-400 dark:border-gray-700 dark:bg-slate-800 bg-white">
+        <div class="relative">
+            <img class="h-[180px] w-full object-cover" :src="item.image" alt="">
+            <div class=" grid grid-cols-3 absolute bottom-0">
+                <h3 class="text-[15px] text-white font-bold bg-gray-700 py-[2px] px-[10px]">{{item.name}}</h3>
+                <h3 class="text-[15px] text-black font-bold bg-white py-[2px] px-[10px] border-t border-gray-700">{{item.status}}</h3>
+                <h3 class="text-[15px] text-white font-bold bg-red-800 py-[2px] px-[10px]">{{item.price}}</h3>
+            </div>
+        </div>
+        <div>
+            <h1 class="dark:text-white text-gray-900 text-[20px] font-bold p-[10px]">Topik darslar...</h1>
+        </div>
+      </div>
     </div>
+
     </div>
-</div>
-
-    <div class="w-full  grid grid-cols-3">
-       <div class="card bg-base-100 w-96 ">
-        <figure class="h-[200px]">
-      <img 
-      src="../../assets/image/topik.jpg"
-      alt="Shoes" />
-        </figure>
-         <div class="card-body">
-                 <h2 class="card-title dark:text-white">Shoes!</h2>
-                    
-         </div>
-</div>
-</div>
-
 </template>
 <script>
 export default {
+    data(){
+        return {
+            kurData:[
+                {
+                    id: 1,
+                    name: "Topik 1",
+                    status: "Bepul",
+                    price: 250000,
+                    image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
+                },
+                {
+                    id: 1,
+                    name: "Topik 1",
+                    status: "Bepul",
+                    price: 250000,
+                    image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
+                },
+                {
+                    id: 1,
+                    name: "Topik 1",
+                    status: "Bepul",
+                    price: 250000,
+                    image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
+                },
+                {
+                    id: 1,
+                    name: "Topik 1",
+                    status: "Bepul",
+                    price: 250000,
+                    image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
+                },
+                {
+                    id: 1,
+                    name: "Topik 1",
+                    status: "Bepul",
+                    price: 250000,
+                    image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
+                },
+               
 
+            ]
+        }
+    }
 }
 </script>
 <style lang="">
