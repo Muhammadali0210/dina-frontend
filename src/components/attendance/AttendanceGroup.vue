@@ -144,18 +144,16 @@ export default {
             try {
                 this.isLoading = true
                 this.currentData.date = this.choosenDate
-                this.currentData.group_id = this.currentIdStore.currentId
+                this.currentData.group_id = localStorage.getItem('groupId')
                 const res = await ApiService.postByToken(this.url, this.currentData, this.token)
                 this.users = res
                 this.isActive = res[0].attendance.is_active
                 this.isToday = res[0].attendance.date.slice(0, 10) == new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10)
-                // console.log("today: ", this.isToday);
                 if(!this.isToday) {
                     this.isDisabled = true
                 } else {
                     this.isDisabled = false
                 }
-                // console.log("disabled: ", this.isDisabled);
                 this.subtitle = this.isActive ? "O'zgartirish" : "Saqlash"
                 this.isLoading = false
             } catch (err) {

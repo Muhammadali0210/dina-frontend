@@ -6,7 +6,7 @@
         <div
          v-for="(item, index) in groups" 
          :key="index" 
-         @click="goToAttendance(item._id)"
+         @click="goToPayment(item._id)"
          :class="[
             {'bg-orange-400': item.degree == 'c1'},
             {'bg-orange-400': item.degree == 'c2'},
@@ -51,9 +51,8 @@ export default {
                 
             }
         },
-        goToAttendance(id){
-            const currentStore = useCurrentIdStore();
-            currentStore.setCurrentId(id);
+        goToPayment(id){
+            localStorage.setItem('groupId', id);
             this.$router.push('/payment/group');
         }
     },

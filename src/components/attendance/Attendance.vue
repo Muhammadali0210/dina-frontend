@@ -52,8 +52,7 @@ export default {
             }
         },
         goToAttendance(id){
-            const currentStore = useCurrentIdStore();
-            currentStore.setCurrentId(id);
+            localStorage.setItem('groupId', id);
             this.$router.push('/attendance/group');
         }
     },
