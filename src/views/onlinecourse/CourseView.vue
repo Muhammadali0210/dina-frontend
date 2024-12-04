@@ -1,13 +1,13 @@
 <template lang="">
     <div>
-        <OnlineCourse/>
+        <MainLesson/>
     </div>
 </template>
 <script>
-import OnlineCourse from '@/components/onlinecourse/OnlineCourse.vue'
+import MainLesson from '@/components/onlinecourse/mainlesson/MainLesson.vue'
 export default {
     components:{
-        OnlineCourse
+        MainLesson,
     }
 }
 </script>
