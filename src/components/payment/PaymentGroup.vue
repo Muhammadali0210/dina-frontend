@@ -84,7 +84,7 @@
         </div>
         <!-- Buttons -->
     </div>
-    <PaymentModal v-if="userData" :data="userData" :paymentmodal="paymentmodal" @closePaymentModal="paymentmodal = false" />
+    <PaymentModal v-if="userData" :data="userData" :paymentmodal="paymentmodal" @reLoad="reLoadHanler()" @closePaymentModal="closeModal" />
 </template>
 <script>
 import NoDataFound from '@/ui/NoDataFound.vue';
@@ -117,7 +117,7 @@ export default {
             isToday: false,
             currentData: {
                 group_id: null,
-                date: null,
+                month: null,
             },
             paymentData:[],
             isSubmiting: false,
@@ -140,16 +140,18 @@ export default {
         async getUsers() {
             try {
                 this.isLoading = true
-                this.currentData.date = this.choosenDate.slice(0, 7)
-                this.currentData.group_id = this.currentIdStore.currentId
+                this.currentData.month = this.choosenDate.slice(0, 7)
+                this.currentData.group_id = localStorage.getItem('groupId')
                 const res = await ApiService.postByToken(this.url, this.currentData, this.token)
                 this.users = res
-                console.log(res);
                 this.isLoading = false
             } catch (err) {
                 console.log(err)
                 this.isLoading = false
             }
+        },
+        reLoadHanler() {
+            this.getUsers()
         },
         handleDate(date){
             this.choosenDate = date
@@ -183,6 +185,9 @@ export default {
                 this.paymentmodal = true
             }
         },
+        closeModal() {
+            this.paymentmodal = false
+        }
     },
     mounted() {
         this.choosenDate = new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10);
