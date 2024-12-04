@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="modal"
-    class="fixed z-99999 inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+    class="fixed z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
   >
     <div
       class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300"
