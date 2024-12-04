@@ -22,7 +22,7 @@ import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 import OnlineCourse from '@/components/onlinecourse/OnlineCourse.vue';
-import test from '@/components/onlinecourse/test.vue';
+import test from '@/components/onlinecourse/CourseCard.vue';
 import AboutPage from '@/components/cards/AboutPage.vue'
 // import Reklama from '@/components/cards/Reklama.vue'
 
