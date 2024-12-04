@@ -173,7 +173,7 @@ export default {
   background-color: transparent;
   border-radius: 5px;
   color: white;
-  background-color: #008577;
+  background-color: #003478;
 }
 
 input[type="month"]::-webkit-calendar-picker-indicator {
