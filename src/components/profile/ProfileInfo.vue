@@ -5,7 +5,7 @@
     <template v-else>
         <div
             v-if="userData"
-            class="w-full h-auto rounded-[20px] bg-white dark:bg-gray-800 shadow-lg overflow-hidden relative"
+            class="w-full h-auto rounded-[20px] bg-white/75 backdrop-blur-md dark:bg-gray-800 shadow-lg overflow-hidden relative"
         >
             <!-- Banner Section -->
             
