@@ -22,6 +22,7 @@ import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 import CourseView from '@/views/onlinecourse/CourseView.vue';
+import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
 
 
 const router = createRouter({
@@ -151,6 +152,12 @@ const router = createRouter({
       path: '/course',
       name: 'course',
       component: CourseView,
+      meta: {layout : MainLayout}
+    },
+    {
+      path: '/courseinfo',
+      name: 'courseinfo',
+      component: CourseInfoView,
       meta: {layout : MainLayout}
     },
     

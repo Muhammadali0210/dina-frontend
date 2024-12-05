@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="custom-container">
-        <div class="w-full grid md:grid-cols-3 gap-4 sm:grid-cols-2 grid-cols-1">
+        <div @click="courseHandler" class="w-full grid md:grid-cols-3 gap-4 sm:grid-cols-2 grid-cols-1 ">
             <CourseCard :courseData="courseData" />
         </div>
     </div>
@@ -47,7 +47,12 @@ export default {
                 // boshqa kurslar
             ]
         }
-    }
+    },
+    methods: {
+        courseHandler(){
+            this.$router.push('/courseinfo')
+        }
+    },
 }
 </script>
 
