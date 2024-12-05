@@ -59,7 +59,7 @@
                                         <span>{{ item.last_name }}</span>
                                     </th>
                                     <th class="px-0 py-2">
-                                        {{ item.payment.month }}
+                                        {{ new Date(item.payment.month).toLocaleString('default', { month: 'long', year: 'numeric' }) }}
                                     </th>
                                     <th class="px-0 py-2">
                                         <div 
