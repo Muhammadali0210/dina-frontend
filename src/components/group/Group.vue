@@ -33,6 +33,9 @@
                         <thead class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="pl-4 pr-0 md:px-6">
+                                    T/R
+                                </th>
+                                <th scope="col" class="px-0 py-3">
                                     Guruh nomi
                                 </th>
                                 <th scope="col" class="px-0 py-3">
@@ -46,6 +49,9 @@
                         <tbody>
                             <tr v-for="(item, index) in filteredItems" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
                                 <td class="pl-4 pr-0 py-4 md:px-6">
+                                    {{ index + 1 }}
+                                </td>
+                                <td class="px-0 py-4">
                                     {{ item.name }}
                                 </td>
                                 <td class="px-0 py-4">
