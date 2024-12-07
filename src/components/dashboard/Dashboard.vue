@@ -5,6 +5,8 @@
       <Statistic />
       <InformationSlider />
       <imageKit />
+      <Button>Button</Button>
+      <Alert />
     </main>
 
     <!-- <div class="h-full">
@@ -19,13 +21,18 @@ import Banner from './Banner.vue';
 import InformationSlider from './InformationSlider.vue';    
 import UserBanner from './UserBanner.vue';
 import imageKit from '../imageKit.vue';
+import { Button } from '@/components/ui/button';
+import Alert from './Alert.vue';
+
 export default {
   components: {
+    Button,
     Statistic,
     Banner,
     InformationSlider,
     UserBanner,
-    imageKit
+    imageKit,
+    Alert
   },
 }
 </script>
