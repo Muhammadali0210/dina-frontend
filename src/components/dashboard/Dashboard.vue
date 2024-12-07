@@ -4,6 +4,7 @@
       <Banner />
       <Statistic />
       <InformationSlider />
+      <imageKit />
     </main>
 
     <!-- <div class="h-full">
@@ -17,13 +18,14 @@ import Statistic from './Statistic.vue';
 import Banner from './Banner.vue';
 import InformationSlider from './InformationSlider.vue';    
 import UserBanner from './UserBanner.vue';
-
+import imageKit from '../imageKit.vue';
 export default {
   components: {
     Statistic,
     Banner,
     InformationSlider,
-    UserBanner    
+    UserBanner,
+    imageKit
   },
 }
 </script>

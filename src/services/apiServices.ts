@@ -1,16 +1,16 @@
 import axios from "axios"
 const BaseUrl:string = import.meta.env.VITE_API_URL
 
-axios.interceptors.response.use(
-    response => {
-        localStorage.setItem('status', response.status.toString());
-        return response;
-    },
-    error => {
-        localStorage.setItem('status', error.response.status.toString());
-        return Promise.reject(error);
-    }
-);
+// axios.interceptors.response.use(
+//     response => {
+//         localStorage.setItem('status', response.status.toString());
+//         return response;
+//     },
+//     error => {
+//         localStorage.setItem('status', error.response.status.toString());
+//         return Promise.reject(error);
+//     }
+// );
 
 const handleError = (error:any) => {
     // console.error('API Error:', error.response?.data || error.message);
@@ -84,6 +84,20 @@ export  class ApiService {
         try {
             const response = await axios.post(BaseUrl + url, data, {
                 headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            return response.data
+        } catch (error) {
+            handleError(error);
+        }
+    }
+
+    static async postFileByToken<T>(url: string, data: any) {
+        try {
+            const response = await axios.post(BaseUrl + url, data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
