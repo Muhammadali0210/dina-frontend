@@ -1,78 +1,93 @@
-/** @type {import('tailwindcss').Config} */
-import daisyui from 'daisyui';
+import animate from "tailwindcss-animate"
 
-// import flowbitePlugin from 'flowbite/plugin'
+/** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
+  darkMode: ["class"],
+  safelist: ["dark"],
+  prefix: "",
+  
   content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-    "./node_modules/flowbite/**/*.js"
-  ],
+    './pages/**/*.{ts,tsx,vue}',
+    './components/**/*.{ts,tsx,vue}',
+    './app/**/*.{ts,tsx,vue}',
+    './src/**/*.{ts,tsx,vue}',
+	],
+  
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
-        green:{
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#003478',
-          600: '#007267',
-          700: '#005f56',
-          800: '#004b43',
-          900: '#003d37',
-          950: '#052e16',
-        }
-      }
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        xl: "calc(var(--radius) + 4px)",
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+        "collapsible-down": {
+          from: { height: 0 },
+          to: { height: 'var(--radix-collapsible-content-height)' },
+        },
+        "collapsible-up": {
+          from: { height: 'var(--radix-collapsible-content-height)' },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "collapsible-down": "collapsible-down 0.2s ease-in-out",
+        "collapsible-up": "collapsible-up 0.2s ease-in-out",
+      },
     },
   },
-  plugins: [daisyui],
-  theme: {
-    extend: {
-      colors: {
-        primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#003478","400":"#003478","500":"#003478","600":"#003478","700":"#003478","800":"#003478","900":"#003478"},
-        green: {"50":"#f0fdf4","100":"#dcfce7","200":"#bbf7d0","300":"#86efac","400":"#4ade80","500":"#003478","600":"#003478","700":"#003478","800":"#003478","900":"#003478","950":"#003478"},
-        blue: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#003478","400":"#003478","500":"#003478","600":"#003478","700":"#003478","800":"#003478","900":"#003478"},
-      }
-    },
-    fontFamily: {
-      'body': [
-        'Inter', 
-        'ui-sans-serif', 
-        'system-ui', 
-        '-apple-system', 
-        'system-ui', 
-        'Segoe UI', 
-        'Roboto', 
-        'Helvetica Neue', 
-        'Arial', 
-        'Noto Sans', 
-        'sans-serif', 
-        'Apple Color Emoji', 
-        'Segoe UI Emoji', 
-        'Segoe UI Symbol', 
-        'Noto Color Emoji'
-      ],
-      'sans': [
-        'Inter', 
-        'ui-sans-serif', 
-        'system-ui', 
-        '-apple-system', 
-        'system-ui', 
-        'Segoe UI', 
-        'Roboto', 
-        'Helvetica Neue', 
-        'Arial', 
-        'Noto Sans', 
-        'sans-serif', 
-        'Apple Color Emoji', 
-        'Segoe UI Emoji', 
-        'Segoe UI Symbol', 
-        'Noto Color Emoji'
-      ]
-    }
-  }
+  plugins: [animate],
 }
-
