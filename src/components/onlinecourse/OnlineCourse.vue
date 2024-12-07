@@ -23,27 +23,8 @@ export default {
                     price: 250000,
                     image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
                 },
-                {
-                    id: 2,
-                    name: "Topik 2",
-                    status: "Bepul",
-                    price: 300000,
-                    image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
-                },
-                {
-                    id: 2,
-                    name: "Topik 2",
-                    status: "Bepul",
-                    price: 300000,
-                    image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
-                },
-                {
-                    id: 2,
-                    name: "Topik 2",
-                    status: "Bepul",
-                    price: 300000,
-                    image: "https://www.sammi.ac/_next/image?url=https%3A%2F%2Futfs.io%2Ff%2FmMbSyFqocdYGuy6elWw32ShZLOavzytcQulCmd8ogs7R0e4K&w=1200&q=75"
-                },
+                
+               
                 // boshqa kurslar
             ]
         }

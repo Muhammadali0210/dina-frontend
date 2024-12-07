@@ -8,11 +8,13 @@ import { RouterView, useRoute } from 'vue-router'
 import { computed } from 'vue';
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import CourseLayout from '@/layouts/CourseLayout.vue'
 
 export default {
   components: {
     DefaultLayout,
-    AuthLayout
+    AuthLayout,
+    CourseLayout
   },
   
   setup() {

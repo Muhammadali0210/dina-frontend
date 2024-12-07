@@ -11,7 +11,7 @@
             </div>
         </div>
         <div>
-            <h1 class="dark:text-white text-gray-900 text-[20px] font-bold p-[10px]">Topik darslar...</h1>
+            <h1 class="dark:text-white text-gray-900 text-[20px] font-bold p-[10px]">Kores tilidagi topikgacha bo'lgan video darslar </h1>
         </div>
     </div>
 </template>
