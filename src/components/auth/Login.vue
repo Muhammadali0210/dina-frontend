@@ -74,9 +74,9 @@ export default {
                 this.isSubmitting = true;
                 const response = await ApiService.post('/auth/login', this.loginData)
                 
-                if(localStorage.getItem('status') == '200') {
-                    console.log("Tizimga muvaffaqiyatli kirildi");
-                }
+                // if(localStorage.getItem('status') == '200') {
+                //     console.log("Tizimga muvaffaqiyatli kirildi");
+                // }
                 if(response.token) {
                     this.$router.push('/');
                     const userStore = useUserStore();

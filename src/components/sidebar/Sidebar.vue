@@ -39,7 +39,7 @@
           <template v-for="(item, index) in sidebarData" :key="index">
             <li 
               class="cursor-pointer flex items-center py-2 px-3 text-base font-medium bg-green-500 border-spacing-0 rounded-lg group"
-              :class="[currentPage == index ? 'bg-opacity-100 text-white ' : 'bg-opacity-0  text-green-500 rounded-lg dark:text-white hover:bg-opacity-15 dark:hover:bg-opacity-25']"
+              :class="[currentPage == index ? 'bg-opacity-100 text-white ' : 'bg-opacity-0  text-gray-700 rounded-lg dark:text-white hover:bg-opacity-15 dark:hover:bg-opacity-25']"
               @click="changePage(index, item.path)"
               v-if="item.role.includes(userStore.currentRole)"
             >
@@ -89,8 +89,8 @@ export default {
         }
       },
       getSvgIcon(icon, isActive) {
-        const activeClass = isActive ? 'text-white dark:text-white  group-hover:text-white' : 'dark:text-white text-geen-500 group-hover:text-geen-500 dark:group-hover:text-white';
-        return icon.replace('class="w-6 h-6 text-green-500 transition duration-75"', `class="w-6 h-6 text-green-500 transition duration-75 ${activeClass}"`);
+        const activeClass = isActive ? 'text-white dark:text-white  group-hover:text-white' : 'dark:text-white text-gray-700 group-hover:text-gray-800 dark:group-hover:text-white';
+        return icon.replace('class="w-6 h-6 text-green-500 transition duration-75"', `class="w-6 h-6 text-gray-700 transition duration-75 ${activeClass}"`);
       },
     },
     mounted(){

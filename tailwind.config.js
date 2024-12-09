@@ -1,3 +1,4 @@
+import { Grab } from "lucide-vue-next"
 import animate from "tailwindcss-animate"
 
 /** @type {import('tailwindcss').Config} */
@@ -35,6 +36,19 @@ export default {
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+        },
+        green: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#2563eb',
+          600: '#2563eb',
+          700: '#2563eb',
+          800: '#2563eb',
+          900: '#2563eb',
+          950: '#2563eb',
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
