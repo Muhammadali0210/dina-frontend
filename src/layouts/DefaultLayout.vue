@@ -40,7 +40,7 @@ export default {
         }
     },
     created(){
-        // this.getGroup();
+        this.getGroup();
     }
 }
 </script>
