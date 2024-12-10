@@ -72,6 +72,7 @@ const onSubmit = handleSubmit((values) => {
                         <FormMessage />
                     </FormItem>
                 </FormField>
+
                 <FormField  v-slot="{ field, errors }" name="description" class="h-[200px]"> 
                     <FormItem>
                         <FormLabel>Qisqacha malumot <span class="text-red-500">*</span></FormLabel>
@@ -81,7 +82,8 @@ const onSubmit = handleSubmit((values) => {
                         <FormMessage />
                     </FormItem>
                 </FormField>
-                <div class="grid grid-cols-2 gap-4">
+
+                <div class="grid grid-cols-2 gap-4 max-md:grid-cols-1">
                     <FormField  v-slot="{ field, errors }" name="studentWillLearn">
                         <FormItem>
                             <FormLabel>Sizning kursingizda nimalarni o'rganadi? <span class="text-red-500">*</span></FormLabel>
@@ -103,11 +105,7 @@ const onSubmit = handleSubmit((values) => {
                     </FormField>
                 </div>
 
-                
-
-                <div class="grid grid-cols-3 gap-4">
-                    
-
+                <div class="grid grid-cols-3 gap-4 max-sm:grid-cols-1">
                     <FormField  v-slot="{ field, errors }" name="level">
                         <FormItem>
                             <FormLabel>Darajasi <span class="text-red-500">*</span></FormLabel>
@@ -167,7 +165,7 @@ const onSubmit = handleSubmit((values) => {
                         <FormItem>
                             <FormLabel>Til<span class="text-red-500">*</span></FormLabel>
                             <FormControl>
-                                <Select v-bind="field">
+                                <Select v-bind="field" >
                                     <FormControl>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Tanlang" />
@@ -194,10 +192,36 @@ const onSubmit = handleSubmit((values) => {
                             <FormMessage />
                         </FormItem>
                     </FormField>
-
-                    
                 </div>
                 
+                <div class="grid grid-cols-3 gap-4 max-sm:grid-cols-1">
+                    <FormField  
+                        v-slot="{ field, errors }"    
+                        name="oldPrice"
+                    >
+                        <FormItem>
+                            <FormLabel>Eski narx <span class="text-red-500">*</span></FormLabel>
+                            <FormControl>
+                                <Input type="text" placeholder="Kurs eski narxini kiriting" v-bind="field" />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    </FormField>
+
+                    <FormField  
+                        v-slot="{ field, errors }"    
+                        name="currentPrice"
+                    >
+                        <FormItem>
+                            <FormLabel>Yangi narx <span class="text-red-500">*</span></FormLabel>
+                            <FormControl>
+                                <Input type="text" placeholder="Kurs yangi narxini kiriting" v-bind="field" />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    </FormField>
+                </div>
+
                 <div class="flex gap-4 justify-end">
                     <Button variant="destructive" @click="resetForm">
                         Tozalash
