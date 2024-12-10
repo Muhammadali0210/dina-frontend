@@ -46,8 +46,8 @@ export default {
 </script>
 <style scoped>
 .mybg{
-    /* background-image: url(../assets/image/bg2.png);
-    background-color: #98c6f7;
+    
+    /* background-color: #98c6f7;
     background-image: linear-gradient(135deg, #98c6f7 0%, #ffffff 33%, #b7f3bd 66%); */
 
     position: fixed;
