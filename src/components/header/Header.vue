@@ -10,7 +10,7 @@
         <div class="flex items-center gap-1 lg:order-2">
           <DarkMode />
 
-          <!-- <UserMenue /> -->
+          <UserMenue />
         </div>
       </div>
     </nav>
