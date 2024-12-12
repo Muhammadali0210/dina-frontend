@@ -1,12 +1,12 @@
 <template lang="">
     <div class="">
-        <h1 class="dark:text-white">Lessons</h1>
-        
+       <LessonVideo/>
     </div>
 </template>
 <script>
+import LessonVideo from '@/components/onlinecourse/ui/Progress.vue'
 export default {
-    
+    LessonVideo,
 }
 </script>
 <style lang="">

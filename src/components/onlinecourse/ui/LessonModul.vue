@@ -20,18 +20,10 @@ import {
     <AccordionContent class="cursor-pointer">
      #1 - Dars
     </AccordionContent>
-     <AccordionContent>
-     #2 - Dars
-    </AccordionContent>
-     <AccordionContent>
-     #3 - Dars
-    </AccordionContent>
   </AccordionItem>
 </Accordion>
 
-<!-- <div class="w-full h-[1px] bg-gray-700 dark:bg-gray-400">
-       
-</div> -->
+
 </template>
 
 <style lang="">
