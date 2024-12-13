@@ -24,7 +24,7 @@ import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 import CourseView from '@/views/onlinecourse/CourseView.vue';
 import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
 import CourseLayout from '@/layouts/CourseLayout.vue';
-import CreateCourseView from '@/views/onlinecourse/CreateCourseView.vue';
+import CreateCourseView from '@/views/create-course/CreateCourseView.vue';
 
 
 const router = createRouter({
