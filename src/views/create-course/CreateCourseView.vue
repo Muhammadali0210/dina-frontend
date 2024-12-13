@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup>
-import CreateCourse from '@/components/onlinecourse/CreateCourse.vue';
+import CreateCourse from '@/components/create-course/CreateCourse.vue';
 </script>
 <style>
     
