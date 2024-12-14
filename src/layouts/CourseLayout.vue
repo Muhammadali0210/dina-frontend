@@ -4,7 +4,7 @@
              <CourseHeader/>
              <LessonSaidbar/>
         </div>
-         <main class="p-20 lg:ml-64 min-h-screen h-auto pt-20" @click="sidebarStore.closeSidebar">
+         <main class="p-0  pt-20  lg:ml-80 min-h-screen" @click="sidebarStore.closeSidebar">
               <CourseFullView/>
         </main>
       
