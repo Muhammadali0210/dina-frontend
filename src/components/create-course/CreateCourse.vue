@@ -26,6 +26,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { LoaderIcon } from "lucide-vue-next";
+import { useToast } from '@/components/ui/toast/use-toast'
+const { toast } = useToast()
+import { ref } from "vue";
+import axios from "axios";
 
 const formSchema = toTypedSchema(
   z.object({
@@ -47,26 +61,47 @@ const formSchema = toTypedSchema(
 
 const { handleSubmit, resetForm } = useForm({
   validationSchema: formSchema,
-  defaultValues: {
-    title: "",
-    description: "",
-    learning: "",
-    requirements: "",
-    level: "",
-    language: "",
-    category: "",
-    oldPrice: "",
-    currentPrice: "",
-  },
+  // defaultValues: {
+  //   title: "",
+  //   description: "",
+  //   learning: "",
+  //   requirements: "",
+  //   level: "",
+  //   language: "",
+  //   category: "",
+  //   oldPrice: "",
+  //   currentPrice: "",
+  // },
 });
 
-const handleImageChange = (e: HTMLInputElement) => {
-    if(!e.target?.files) return null;
-    const file = e.target?.files[0];
-    if (file) {
-        console.log(file);
+const uploadedUrl = ref(null);
+
+const handleFileUpload = async (event: any) => {
+    const file = event.target.files[0];
+    if (!file) console.log("rasm yuklanmadi");
+    ;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+        const response = await axios.post("http://localhost:3002/upload/videoimg", formData);
+
+        if (!response) {
+            throw new Error("Rasm yuklashda xato");
+        }
+        
+        toast({
+          title: 'Rasm muvaffaqiyatli yuklandi',
+          description: "Rasm muvaffaqiyatli yuklandi",
+        });
+        uploadedUrl.value = await response.data.url;
+        console.log(response.data.url);
+    } catch (error) {
+        console.error(error);
     }
 };
+
 
 const onSubmit = handleSubmit((values) => {
   console.log("Form submitted!", values);
@@ -228,11 +263,11 @@ const onSubmit = handleSubmit((values) => {
           </FormField>
 
           <div>
-            <Label>Rasm yuklang<span class="text-red-500">*</span></Label>
+            <Label>Rasm yuklang<span class="text-red-500 text-sm mb-6">*</span></Label>
             <Input
                 type="file"
                 placeholder="Kurs yangi narxini kiriting"
-                @change="handleImageChange"
+                @change="handleFileUpload"
             />
           </div>
         </div>
@@ -245,5 +280,33 @@ const onSubmit = handleSubmit((values) => {
         </div>
       </div>
     </form>
+    <Button
+      variant="outline" @click="() => {
+        toast({
+          title: 'Rasm muvaffaqqiyatli yuklandi',
+        });
+      }"
+    >
+      Add to calendar
+    </Button>
   </div>
+
+  <Dialog>
+    <DialogTrigger as-child>
+      <Button variant="outline">
+        Edit Profile
+      </Button>
+    </DialogTrigger>
+    <DialogContent class="sm:max-w-[425px] p-3">
+      <DialogHeader v-if="uploadedUrl">
+        <img :src="uploadedUrl" alt="uploaded url">
+      </DialogHeader>
+      
+      <DialogFooter>
+        <Button type="button" variant="destructive" >
+          Rasmni o'chirish
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
 </template>

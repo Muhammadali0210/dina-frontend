@@ -1,30 +1,4 @@
 <script setup lang="ts">
-// import { useUserStore } from '../stores/userStore';
-// export default {
-//     setup() {
-//         const userStore = useUserStore();
-//         return {
-//             userStore
-//         }
-//     },
-//     data() {
-//         return {
-//             token: localStorage.getItem('token'),
-//             isOpenMenue: false
-//         }
-//     },
-//     methods: {
-//         logOut() {
-//             localStorage.removeItem('token', '');
-//             localStorage.setItem('role', 'general');
-//             this.userStore.setCurrentRole('general');
-//             this.token = null;
-//             this.$router.push('/');
-//             this.isOpenMenue = false
-//         }
-//     }
-// }
-
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
