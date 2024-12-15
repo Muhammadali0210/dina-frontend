@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useForm, FieldArray } from "vee-validate";
+import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 
@@ -35,11 +35,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { LoaderIcon } from "lucide-vue-next";
+import { LoaderIcon, Images } from "lucide-vue-next";
 import { useToast } from '@/components/ui/toast/use-toast'
 const { toast } = useToast()
 import { ref } from "vue";
-import axios from "axios";
+import { ApiService } from "@/services/apiServices";
 
 const formSchema = toTypedSchema(
   z.object({
@@ -54,8 +54,10 @@ const formSchema = toTypedSchema(
     level: z.string(),
     category: z.string(),
     language: z.string(),
-    oldPrice: z.string().min(0),
-    currentPrice: z.string().min(0),
+    oldPrice: z.number().min(0),
+    currentPrice: z.number().min(0),
+    previewImage: z.string(),
+    published: z.boolean(),
   })
 );
 
@@ -74,36 +76,46 @@ const { handleSubmit, resetForm } = useForm({
   // },
 });
 
-const uploadedUrl = ref(null);
+const uploadedUrl = ref('');
+const isOpen = ref(false)
+const isUploaded = ref(false)
+const fileInput = ref<any>(null)
 
-const handleFileUpload = async (event: any) => {
-    const file = event.target.files[0];
-    if (!file) console.log("rasm yuklanmadi");
-    ;
+const onOpenChange = (value: boolean) => {
+  isOpen.value = value
+}
 
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-        const response = await axios.post("http://localhost:3002/upload/videoimg", formData);
-
-        if (!response) {
-            throw new Error("Rasm yuklashda xato");
-        }
-        
-        toast({
-          title: 'Rasm muvaffaqiyatli yuklandi',
-          description: "Rasm muvaffaqiyatli yuklandi",
-        });
-        uploadedUrl.value = await response.data.url;
-        console.log(response.data.url);
-    } catch (error) {
-        console.error(error);
-    }
+const onFileChange = async () => {
+  isUploaded.value = false
+  uploadedUrl.value = URL.createObjectURL(fileInput.value.files[0]);
 };
+
+const  uploadFile = async () => {
+  isUploaded.value = true
+  const formData = new FormData();
+  formData.append("file", fileInput.value.files[0]);
+
+  //   try {
+  //       const response = await ApiService.postFileByToken("/upload/videoimg", formData);
+
+  //       if (!response) {
+  //           throw new Error("Rasm yuklashda xato");
+  //       }
+        
+  //       toast({
+  //         title: 'Rasm muvaffaqiyatli yuklandi',
+  //         description: "Rasm muvaffaqiyatli yuklandi",
+  //       });
+  //       uploadedUrl.value = await response.url;
+  //       console.log(response.url);
+  //   } catch (error) {
+  //       console.error(error);
+  //   }
+}
 
 
 const onSubmit = handleSubmit((values) => {
+  // values.previewImage = uploadedUrl.value
   console.log("Form submitted!", values);
 });
 </script>
@@ -264,10 +276,13 @@ const onSubmit = handleSubmit((values) => {
 
           <div>
             <Label>Rasm yuklang<span class="text-red-500 text-sm mb-6">*</span></Label>
-            <Input
+            <input
                 type="file"
-                placeholder="Kurs yangi narxini kiriting"
-                @change="handleFileUpload"
+                placeholder="Rasm yuklang"
+                accept="image/*"
+                ref="fileInput"
+                @change="onFileChange"
+                class="block w-full mt-2 p-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
             />
           </div>
         </div>
@@ -276,35 +291,32 @@ const onSubmit = handleSubmit((values) => {
 
         <div class="flex gap-4 justify-end">
           <Button variant="destructive" @click="resetForm"> Tozalash </Button>
-          <Button type="submit"> Submit </Button>
+          <Button :disabled="uploadedUrl ? false : true" type="submit"> Saqlash </Button>
+          <Button v-if="uploadedUrl" @click="isOpen = true" variant="outline" type="button"> <Images /> Rasm </Button>
         </div>
       </div>
     </form>
-    <Button
-      variant="outline" @click="() => {
-        toast({
-          title: 'Rasm muvaffaqqiyatli yuklandi',
-        });
-      }"
-    >
-      Add to calendar
-    </Button>
   </div>
 
-  <Dialog>
-    <DialogTrigger as-child>
-      <Button variant="outline">
-        Edit Profile
-      </Button>
-    </DialogTrigger>
+  <Dialog :open="isOpen" @onOpenChange="onOpenChange" >
     <DialogContent class="sm:max-w-[425px] p-3">
       <DialogHeader v-if="uploadedUrl">
-        <img :src="uploadedUrl" alt="uploaded url">
+        <DialogTitle class="hidden">Yuklangan rasm</DialogTitle>
+        <DialogDescription class="hidden">Yuklangan rasm</DialogDescription>
+        <img :src="uploadedUrl" class="w-full max-h-[230px]" style="object-fit: cover;" alt="uploaded url">
       </DialogHeader>
       
       <DialogFooter>
-        <Button type="button" variant="destructive" >
-          Rasmni o'chirish
+        <Button type="button" @click="uploadFile">
+          <template v-if="!isUploaded">
+            Rasmni saqlash
+          </template>
+          <template v-else>
+            <LoaderIcon class="animate-spin" /> Yuborilmoqda...
+          </template>
+        </Button>
+        <Button type="button" variant="outline" @click="isOpen = false">
+          Oynani yopish
         </Button>
       </DialogFooter>
     </DialogContent>
