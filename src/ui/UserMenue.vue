@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -37,6 +36,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter();
 const logOut = () => {
     localStorage.setItem('token', '')
+    localStorage.setItem('role', '')
     router.push('/login');
     console.log("Loged out");
 }

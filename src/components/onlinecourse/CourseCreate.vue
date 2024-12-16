@@ -90,7 +90,6 @@ const  uploadFile = async () => {
       variant: 'success'
     });
     isUploaded.value = false
-    console.log(response?.url);
   } catch (error) {
       isUploaded.value = false
       toast({
@@ -137,7 +136,7 @@ const onSubmit = handleSubmit(async (values) => {
 <template>
   <div class="bg-white dark:bg-gray-800 p-4">
     <div>
-      <h3 class="text-lg font-medium">Kurs yaratish</h3>
+      <h3 class="text-4xl font-extrabold">Kurs yaratish</h3>
       <p class="text-sm text-muted-foreground">
         Kurs yaratish uchun ma'lumotlarni kiriting.
       </p>
@@ -306,7 +305,7 @@ const onSubmit = handleSubmit(async (values) => {
         <div class="flex gap-4 justify-end">
           <Button v-if="uploadedUrl" @click="isOpen = true" variant="outline" type="button"> <Images /> Rasm </Button>
           <Button variant="destructive" type="button" @click="resetForm"> Tozalash </Button>
-          <Button  type="submit">
+          <Button  type="submit" :disabled="!uploadedUrl">
             <template v-if="!isSubmiting">
               Saqlash
             </template>
