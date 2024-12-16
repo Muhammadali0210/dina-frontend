@@ -27,7 +27,7 @@ export  class ApiService {
         }
     }
 
-    static async getByIdToken<T>(url: string, token: string) {
+    static async getByIdToken<T>(url: string) {
         try {
             const response = await axios.get(BaseUrl + url, {
                 headers: {
