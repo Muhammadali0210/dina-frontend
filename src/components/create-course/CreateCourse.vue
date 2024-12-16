@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useForm, FieldArray } from "vee-validate";
+import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 
@@ -26,50 +26,111 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { LoaderIcon, Images } from "lucide-vue-next";
+import { useToast } from '@/components/ui/toast/use-toast'
+const { toast } = useToast()
+import { ref } from "vue";
+import { ApiService } from "@/services/apiServices";
 
 const formSchema = toTypedSchema(
   z.object({
-    title: z
-      .string()
-      .max(50, { message: "Kurs nomi 50 ta belgidan oshmasligi kerak" }),
-    description: z
-      .string()
-      .max(50, { message: "Kurs haqidagi malumot 50 ta belgidan oshmasligi kerak" }),
+    title: z.string().max(50, { message: "Kurs nomi 50 ta belgidan oshmasligi kerak" }),
+    description: z.string().max(50, { message: "Kurs haqidagi malumot 50 ta belgidan oshmasligi kerak" }),
     learning: z.string(),
     requirements: z.string(),
     level: z.string(),
     category: z.string(),
     language: z.string(),
-    oldPrice: z.string().min(0),
-    currentPrice: z.string().min(0),
+    oldPrice: z.number().min(0),
+    currentPrice: z.number().min(0),
   })
 );
 
 const { handleSubmit, resetForm } = useForm({
-  validationSchema: formSchema,
-  defaultValues: {
-    title: "",
-    description: "",
-    learning: "",
-    requirements: "",
-    level: "",
-    language: "",
-    category: "",
-    oldPrice: "",
-    currentPrice: "",
-  },
+  validationSchema: formSchema
 });
 
-const handleImageChange = (e: HTMLInputElement) => {
-    if(!e.target?.files) return null;
-    const file = e.target?.files[0];
-    if (file) {
-        console.log(file);
-    }
+const uploadedUrl = ref('');
+const previewImageUrl = ref('');
+const isOpen = ref(false)
+const isUploaded = ref(false)
+const fileInput = ref<any>(null)
+const isSubmiting = ref(false)
+
+const onOpenChange = (value: boolean) => {
+  isOpen.value = value
+}
+
+const onFileChange = async () => {
+  isUploaded.value = false
+  uploadedUrl.value = URL.createObjectURL(fileInput.value.files[0]);
 };
 
-const onSubmit = handleSubmit((values) => {
-  console.log("Form submitted!", values);
+const  uploadFile = async () => {
+  try {
+    isUploaded.value = true
+    const formData = new FormData();
+    formData.append("file", fileInput.value.files[0]);
+    const response = await ApiService.postFileByToken("/upload/videoimg", formData);
+
+    if (!response) throw new Error("Rasm yuklashda xato")
+    previewImageUrl.value = response.url
+    toast({
+      title: 'Rasm muvaffaqiyatli yuklandi',
+      duration: 2000,
+      variant: 'success'
+    });
+    isUploaded.value = false
+    console.log(response?.url);
+  } catch (error) {
+      isUploaded.value = false
+      toast({
+        variant: 'destructive',
+        title: 'Rasm yuklashda xato',
+        duration: 2000,
+      })
+      console.error(error);
+  }
+}
+
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    isSubmiting.value = true
+    await uploadFile()
+    const previewImage = previewImageUrl.value
+    const data = {
+      ...values,
+      previewImage,
+      published: false
+    }
+    const res = await ApiService.postByToken("/course/create", data)
+    resetForm()
+    if (!res) throw new Error("Kurs yaratishda xato")
+    toast({
+      title: 'Kurs muvaffaqiyatli yaratildi',
+      duration: 2000,
+      variant: 'success'
+    });
+
+    isSubmiting.value = false
+  } catch (error) {
+    isSubmiting.value = false
+    toast({
+      variant: 'destructive',
+      title: 'Kurs yaratishda xato',
+      duration: 2000,
+    })
+    console.log(error);
+  }
 });
 </script>
 
@@ -228,11 +289,14 @@ const onSubmit = handleSubmit((values) => {
           </FormField>
 
           <div>
-            <Label>Rasm yuklang<span class="text-red-500">*</span></Label>
-            <Input
+            <Label>Rasm yuklang<span class="text-red-500 text-sm mb-6">*</span></Label>
+            <input
                 type="file"
-                placeholder="Kurs yangi narxini kiriting"
-                @change="handleImageChange"
+                placeholder="Rasm yuklang"
+                accept="image/*"
+                ref="fileInput"
+                @change="onFileChange"
+                class="block w-full mt-2 p-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
             />
           </div>
         </div>
@@ -240,10 +304,34 @@ const onSubmit = handleSubmit((values) => {
         <div class="grid grid-cols-3 gap-4 max-sm:grid-cols-1"></div>
 
         <div class="flex gap-4 justify-end">
-          <Button variant="destructive" @click="resetForm"> Tozalash </Button>
-          <Button type="submit"> Submit </Button>
+          <Button v-if="uploadedUrl" @click="isOpen = true" variant="outline" type="button"> <Images /> Rasm </Button>
+          <Button variant="destructive" type="button" @click="resetForm"> Tozalash </Button>
+          <Button  type="submit">
+            <template v-if="!isSubmiting">
+              Saqlash
+            </template>
+            <template v-else>
+              <LoaderIcon class="animate-spin" /> Yuborilmoqda...
+            </template>
+          </Button>
         </div>
       </div>
     </form>
   </div>
+
+  <Dialog :open="isOpen" @onOpenChange="onOpenChange" >
+    <DialogContent class="sm:max-w-[425px] p-3">
+      <DialogHeader v-if="uploadedUrl">
+        <DialogTitle class="hidden">Yuklangan rasm</DialogTitle>
+        <DialogDescription class="hidden">Yuklangan rasm</DialogDescription>
+        <img :src="uploadedUrl" class="w-full max-h-[230px]" style="object-fit: cover;" alt="uploaded url">
+      </DialogHeader>
+      
+      <DialogFooter>
+        <Button type="button" variant="outline" @click="isOpen = false">
+          Oynani yopish
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
 </template>

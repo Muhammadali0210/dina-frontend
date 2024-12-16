@@ -1,1 +1,12 @@
 @import './base.css';
+
+
+.shadcn-toast {
+    margin-bottom: 12px;
+}
+
+.shadcn-toast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

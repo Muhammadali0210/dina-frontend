@@ -80,7 +80,7 @@ export  class ApiService {
         }
     }
 
-    static async postByToken<T>(url: string, data: any, token: string) {
+    static async postByToken<T>(url: string, data: any) {
         try {
             const response = await axios.post(BaseUrl + url, data, {
                 headers: {
