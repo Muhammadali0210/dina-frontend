@@ -153,7 +153,7 @@ export default {
         async getUser() {
             try {
                 this.isLoading = true;
-                const response = await ApiService.getByIdToken(this.url, this.token);
+                const response = await ApiService.getByIdToken(this.url);
                 this.users = response;
             } catch (error) {
                 console.log(error);
