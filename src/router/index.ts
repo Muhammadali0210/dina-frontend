@@ -21,10 +21,11 @@ import viewLayout from '@/views/books/viewLayout.vue'
 import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
-import CourseView from '@/views/onlinecourse/CourseView.vue';
-import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
 import CourseLayout from '@/layouts/CourseLayout.vue';
-import CreateCourseView from '@/views/create-course/CreateCourseView.vue';
+import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
+import CourseView from '@/views/onlinecourse/CourseView.vue';
+import CourseCreateView from '@/views/onlinecourse/CourseCreateView.vue';
+import InstructorCourseView from '@/views/onlinecourse/InstructorCoursesView.vue';
 
 
 const router = createRouter({
@@ -171,7 +172,13 @@ const router = createRouter({
     {
       path: '/course/create',
       name: 'create-course',
-      component: CreateCourseView,
+      component: CourseCreateView,
+      meta: {layout : MainLayout}
+    },
+    {
+      path: '/instructor-courses',
+      name: 'instructor-courses',
+      component: InstructorCourseView,
       meta: {layout : MainLayout}
     }
   

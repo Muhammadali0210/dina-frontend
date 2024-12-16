@@ -10,3 +10,39 @@
     flex-direction: column;
     gap: 12px;
 }
+
+/* Custom container uchun CSS */
+.custom-container {
+    width: 100%;
+    max-width: 1200px; /* Maksimal kenglik */
+    margin-left: auto; /* O'ng va chap tomondan markazlash */
+    margin-right: auto;
+    padding-left: 15px; /* Ichki bo'shliq */
+    padding-right: 15px;
+}
+
+/* Moslashuvchan o'lchamlar */
+@media (max-width: 1200px) {
+    .custom-container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 992px) {
+    .custom-container {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-container {
+        max-width: 540px;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
