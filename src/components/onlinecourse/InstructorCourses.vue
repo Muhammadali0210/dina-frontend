@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import CourseContainer from './_components/CourseContainer.vue';
 
 </script>
 
 <template>
-    <div class="custom-container">
-        <div>
-            My course
-        </div>
-    </div>
+    <CourseContainer title="Barcha kurslar" subtitle="Siz yaratgan barcha online darsliglar">
+        <h1>My course</h1>
+    </CourseContainer>
 </template>
