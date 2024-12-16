@@ -43,12 +43,8 @@ import { ApiService } from "@/services/apiServices";
 
 const formSchema = toTypedSchema(
   z.object({
-    title: z
-      .string()
-      .max(50, { message: "Kurs nomi 50 ta belgidan oshmasligi kerak" }),
-    description: z
-      .string()
-      .max(50, { message: "Kurs haqidagi malumot 50 ta belgidan oshmasligi kerak" }),
+    title: z.string().max(50, { message: "Kurs nomi 50 ta belgidan oshmasligi kerak" }),
+    description: z.string().max(50, { message: "Kurs haqidagi malumot 50 ta belgidan oshmasligi kerak" }),
     learning: z.string(),
     requirements: z.string(),
     level: z.string(),
@@ -56,30 +52,19 @@ const formSchema = toTypedSchema(
     language: z.string(),
     oldPrice: z.number().min(0),
     currentPrice: z.number().min(0),
-    previewImage: z.string(),
-    published: z.boolean(),
   })
 );
 
 const { handleSubmit, resetForm } = useForm({
-  validationSchema: formSchema,
-  // defaultValues: {
-  //   title: "",
-  //   description: "",
-  //   learning: "",
-  //   requirements: "",
-  //   level: "",
-  //   language: "",
-  //   category: "",
-  //   oldPrice: "",
-  //   currentPrice: "",
-  // },
+  validationSchema: formSchema
 });
 
 const uploadedUrl = ref('');
+const previewImageUrl = ref('');
 const isOpen = ref(false)
 const isUploaded = ref(false)
 const fileInput = ref<any>(null)
+const isSubmiting = ref(false)
 
 const onOpenChange = (value: boolean) => {
   isOpen.value = value
@@ -91,32 +76,61 @@ const onFileChange = async () => {
 };
 
 const  uploadFile = async () => {
-  isUploaded.value = true
-  const formData = new FormData();
-  formData.append("file", fileInput.value.files[0]);
+  try {
+    isUploaded.value = true
+    const formData = new FormData();
+    formData.append("file", fileInput.value.files[0]);
+    const response = await ApiService.postFileByToken("/upload/videoimg", formData);
 
-  //   try {
-  //       const response = await ApiService.postFileByToken("/upload/videoimg", formData);
-
-  //       if (!response) {
-  //           throw new Error("Rasm yuklashda xato");
-  //       }
-        
-  //       toast({
-  //         title: 'Rasm muvaffaqiyatli yuklandi',
-  //         description: "Rasm muvaffaqiyatli yuklandi",
-  //       });
-  //       uploadedUrl.value = await response.url;
-  //       console.log(response.url);
-  //   } catch (error) {
-  //       console.error(error);
-  //   }
+    if (!response) throw new Error("Rasm yuklashda xato")
+    previewImageUrl.value = response.url
+    toast({
+      title: 'Rasm muvaffaqiyatli yuklandi',
+      duration: 2000,
+      variant: 'success'
+    });
+    isUploaded.value = false
+    console.log(response?.url);
+  } catch (error) {
+      isUploaded.value = false
+      toast({
+        variant: 'destructive',
+        title: 'Rasm yuklashda xato',
+        duration: 2000,
+      })
+      console.error(error);
+  }
 }
 
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    isSubmiting.value = true
+    await uploadFile()
+    const previewImage = previewImageUrl.value
+    const data = {
+      ...values,
+      previewImage,
+      published: false
+    }
+    const res = await ApiService.postByToken("/course/create", data)
+    resetForm()
+    if (!res) throw new Error("Kurs yaratishda xato")
+    toast({
+      title: 'Kurs muvaffaqiyatli yaratildi',
+      duration: 2000,
+      variant: 'success'
+    });
 
-const onSubmit = handleSubmit((values) => {
-  // values.previewImage = uploadedUrl.value
-  console.log("Form submitted!", values);
+    isSubmiting.value = false
+  } catch (error) {
+    isSubmiting.value = false
+    toast({
+      variant: 'destructive',
+      title: 'Kurs yaratishda xato',
+      duration: 2000,
+    })
+    console.log(error);
+  }
 });
 </script>
 
@@ -290,9 +304,16 @@ const onSubmit = handleSubmit((values) => {
         <div class="grid grid-cols-3 gap-4 max-sm:grid-cols-1"></div>
 
         <div class="flex gap-4 justify-end">
-          <Button variant="destructive" @click="resetForm"> Tozalash </Button>
-          <Button :disabled="uploadedUrl ? false : true" type="submit"> Saqlash </Button>
           <Button v-if="uploadedUrl" @click="isOpen = true" variant="outline" type="button"> <Images /> Rasm </Button>
+          <Button variant="destructive" type="button" @click="resetForm"> Tozalash </Button>
+          <Button  type="submit">
+            <template v-if="!isSubmiting">
+              Saqlash
+            </template>
+            <template v-else>
+              <LoaderIcon class="animate-spin" /> Yuborilmoqda...
+            </template>
+          </Button>
         </div>
       </div>
     </form>
@@ -307,14 +328,6 @@ const onSubmit = handleSubmit((values) => {
       </DialogHeader>
       
       <DialogFooter>
-        <Button type="button" @click="uploadFile">
-          <template v-if="!isUploaded">
-            Rasmni saqlash
-          </template>
-          <template v-else>
-            <LoaderIcon class="animate-spin" /> Yuborilmoqda...
-          </template>
-        </Button>
         <Button type="button" variant="outline" @click="isOpen = false">
           Oynani yopish
         </Button>

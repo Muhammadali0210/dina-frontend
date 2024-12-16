@@ -37,7 +37,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter();
 const logOut = () => {
     localStorage.setItem('token', '')
-    router.push('/');
+    router.push('/login');
     console.log("Loged out");
 }
 </script>

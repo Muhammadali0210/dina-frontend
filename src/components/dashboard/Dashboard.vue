@@ -4,8 +4,6 @@
       <Banner />
       <Statistic />
       <InformationSlider />
-      <imageKit />
-      <Alert />
     </main>
   </div>
  
@@ -14,18 +12,12 @@
 import Statistic from './Statistic.vue';
 import Banner from './Banner.vue';
 import InformationSlider from './InformationSlider.vue';    
-// import UserBanner from './UserBanner.vue';
-import imageKit from '../imageKit.vue';
-import Alert from './Alert.vue';
 
 export default {
   components: {
     Statistic,
     Banner,
-    InformationSlider,
-    // UserBanner,
-    imageKit,
-    Alert
+    InformationSlider
   },
 }
 </script>

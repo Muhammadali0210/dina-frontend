@@ -80,7 +80,7 @@ export  class ApiService {
         }
     }
 
-    static async postByToken<T>(url: string, data: any, token: string) {
+    static async postByToken<T>(url: string, data: any) {
         try {
             const response = await axios.post(BaseUrl + url, data, {
                 headers: {
@@ -98,7 +98,7 @@ export  class ApiService {
             const response = await axios.post(BaseUrl + url, data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    // Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })
             return response.data
