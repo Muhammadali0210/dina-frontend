@@ -26,7 +26,6 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
   DialogContent,
@@ -41,6 +40,9 @@ import { useToast } from '@/components/ui/toast/use-toast'
 const { toast } = useToast()
 import { ref } from "vue";
 import { ApiService } from "@/services/apiServices";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const formSchema = toTypedSchema(
   z.object({
@@ -120,7 +122,7 @@ const onSubmit = handleSubmit(async (values) => {
       duration: 2000,
       variant: 'success'
     });
-
+    router.push('/instructor-courses')
     isSubmiting.value = false
   } catch (error) {
     isSubmiting.value = false
@@ -136,8 +138,6 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <CourseContainer title="Yangi kurs yaratish" subtitle="Kurs yaratish uchun ma'lumotlarni kiriting.">
-  
-      <Separator class="my-4" />
       <form @submit.prevent="onSubmit">
         <div class="space-y-3">
           <FormField v-slot="{ field, errors }" name="title">

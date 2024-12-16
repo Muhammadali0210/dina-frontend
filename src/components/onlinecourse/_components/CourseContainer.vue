@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Separator from '@/components/ui/separator/Separator.vue';
 const props = defineProps({
     title: String,
     subtitle: String
@@ -12,6 +13,7 @@ const props = defineProps({
             <p class="text-sm text-muted-foreground">
                 {{ props.subtitle }}
             </p>
+            <Separator class="my-2" />
         </div>
         <div>
             <slot></slot>
