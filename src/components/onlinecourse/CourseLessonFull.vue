@@ -1,14 +1,18 @@
-<template lang="">
-    <div class="">
-       
-    </div>
-</template>
-<script>
+<script setup lang="ts">
+import LessonVocobulary from './ui/LessonVocobulary.vue'
 
-export default {
-  
-}
+
+
+
 </script>
+<template>
+<div class="custom-container">
+  <LessonVocobulary/>
+  <!-- <VideoComponent/>? -->
+</div>
+
+</template>
+
 <style lang="">
     
 </style>

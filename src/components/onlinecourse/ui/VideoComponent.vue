@@ -10,29 +10,27 @@ export default {
   },
   methods: {
     nextVideo() {
-      this.$emit('next-video'); // Emit an event to go to the next video
-    }
+      this.$emit('next-video'); 
   }
-};</script>
+}
+}
+</script>
 
 <template>
-  <div class="w-full ml-6 md:ml-0 m-auto">
-    <div style="padding: 56.25% 0 0 0; position: relative">
-      <iframe
-        :src="videoUrl"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"
-        title="TOPIKGA_TOLOV_AMALGA_OSHIRISH__#dinakorean_#topik_#korean_#koreystili"
-        @ended="nextVideo"
-      ></iframe>
+  <div class="custom-container md:w-full sm:custom-container:hidden">
+    <div style="padding:56.25% 0 0 0;position:relative;">
+      <iframe src="https://player.vimeo.com/video/1038871146?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;" title="TOPIKGA_TOLOV_AMALGA_OSHIRISH">
+      </iframe>
     </div>
-    <div class="flex justify-between mt-3">
-      <Button class="px-[15px] py-[5px] bg-blue-800 rounded-lg" @click="nextVideo">Keyingi Dars</Button>
+    <div class="flex justify-between mt-4">
+      <button class="py-2 px-4 bg-blue-500 text-white rounded-lg">Oldingi dars</button>
+      <button class="py-2 px-4 bg-blue-500 text-white rounded-lg">Keyingi dars</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Styles if needed */
+
 </style>
