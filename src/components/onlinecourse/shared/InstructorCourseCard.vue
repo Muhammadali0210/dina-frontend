@@ -21,7 +21,7 @@ const props = defineProps({
         </CardContent>
         <CardFooter class="flex justify-between p-0 mt-3">
           <CardTitle>{{ data.title }}</CardTitle>
-          <Button :variant="data.published ? 'default' : 'destructive'">{{ data.published ? "Ishga tushirish" : "O'chirish" }}</Button>
+          <Button :variant="data.published ? 'default' : 'destructive'">{{ data.published ? "Ochish" : "Yopish" }}</Button>
         </CardFooter>
     </Card>
 </template>

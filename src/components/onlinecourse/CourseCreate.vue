@@ -2,7 +2,7 @@
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
-import CourseContainer from "./_components/CourseContainer.vue";
+import PageContainer from "@/components/PageContainer.vue";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -137,7 +137,7 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <CourseContainer title="Yangi kurs yaratish" subtitle="Kurs yaratish uchun ma'lumotlarni kiriting.">
+  <PageContainer title="Yangi kurs yaratish" subtitle="Kurs yaratish uchun ma'lumotlarni kiriting.">
       <form @submit.prevent="onSubmit">
         <div class="space-y-3">
           <FormField v-slot="{ field, errors }" name="title">
@@ -328,5 +328,5 @@ const onSubmit = handleSubmit(async (values) => {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  </CourseContainer>
+  </PageContainer>
 </template>
