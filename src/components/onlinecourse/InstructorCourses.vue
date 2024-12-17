@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import CourseContainer from "./_components/CourseContainer.vue";
+import PageContainer from "@/components/PageContainer.vue";
 import Loader from "@/ui/Loader.vue";
 import NoDataFound from '@/ui/NoDataFound.vue';
 import InstructorCourseCard from './shared/InstructorCourseCard.vue'
@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <CourseContainer
+  <PageContainer
     title="Barcha kurslar"
     subtitle="Siz yaratgan barcha online darsliglar"
   >
@@ -40,5 +40,5 @@ onMounted(() => {
 
       <NoDataFound v-else />
     </div>
-  </CourseContainer>
+  </PageContainer>
 </template>

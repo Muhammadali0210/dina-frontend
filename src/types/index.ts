@@ -13,3 +13,11 @@ export interface Course {
     published: Boolean,
     __v?: Number
 }
+
+export interface Group {
+    _id?: Number;
+    name: String,
+    degree: String,
+    studentCount: Number,
+    __v?: Number 
+}
