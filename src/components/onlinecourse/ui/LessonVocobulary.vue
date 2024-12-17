@@ -11,7 +11,7 @@ import {
     TableRow,
 } from '@/components/ui/table'
 
-const data = ref<Object>([
+const data = ref<any>([
   {
     id: 1,
     title:'나라',
@@ -65,7 +65,6 @@ const data = ref<Object>([
         <li>{{ vocabulary.title }} - {{ vocabulary.title1 }}</li>
       </ul>
     </div>
-
   </PageContainer>
 </template>
 <style lang="">
