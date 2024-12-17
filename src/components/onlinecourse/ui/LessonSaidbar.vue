@@ -1,7 +1,8 @@
 <script>
 import LessonModul from '../ui/LessonModul.vue'
 import { useSidebarStore } from '@/stores/sidebarStore';
-import { Progress } from '@/components/ui/progress'
+
+import ProgressBar from './ProgressBar.vue'
 
 
 export default {
@@ -12,14 +13,18 @@ export default {
     methods: {
         changePage() {
             this.sidebarStore.isOpen = false;
+        },
+        setActiveLesson(lessonId){
+            this.activeLesson = lessonId;
         }
     },
     components: {
         LessonModul,
-        Progress
+        ProgressBar
     },
     data(){
         return{
+            activeCourse: null,
              accordionItems: [
                 {
                     value: 'item-1',
@@ -56,8 +61,8 @@ export default {
 </script>
 <template>
     <main :class="{ 'translate-x-0': sidebarStore.isOpen }"
-        class="fixed top-0 left-0 z-40 w-80 h-screen pt-4 transition-transform -translate-x-full  border-r border-gray-200 lg:translate-x-0 dark:bg-gray-800 dark:border-gray-700">
-        <Progress :model-value="43" />
+        class="fixed top-0 left-0 z-40 w-80 h-screen pt-4 transition-transform -translate-x-full bg-white  border-r border-gray-200 lg:translate-x-0 dark:bg-gray-800 dark:border-gray-700">
+        <ProgressBar />
         <LessonModul :data="accordionItems" />
     </main>
 </template>
