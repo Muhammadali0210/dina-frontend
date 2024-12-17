@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PageContainer from "@/components/PageContainer.vue";
+import { ref } from "vue"
 import {
     Table,
     TableBody,
@@ -10,37 +11,61 @@ import {
     TableRow,
 } from '@/components/ui/table'
 
+const data = ref<Object>([
+  {
+    id: 1,
+    title:'나라',
+    title1:'davlat'
+  },
+  {
+    id: 2,
+    title: '중국',
+    title1: 'Xitoy'
+  },
+  {
+    id: 3,
+    title: '일본',
+    title1: 'Yaponiya'
+  },
+  {
+    id: 4,
+    title: '일본',
+    title1: 'Yaponiya'
+  },
+  {
+    id: 5,
+    title: '나라',
+    title1: 'davlat'
+  },
+  {
+    id: 6,
+    title: '중국',
+    title1: 'Xitoy'
+  },
+  {
+    id: 7,
+    title: '일본',
+    title1: 'Yaponiya'
+  },
+  {
+    id: 8,
+    title: '일본',
+    title1: 'Yaponiya'
+  },
+])
+
+
+
 </script>
 <template >
 
-  <PageContainer title="Lug'atlar" subtitle="Har bir mavzu uchun">
-    <Table class="bg-gray-900">
-      <TableCaption></TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead class="w-[100px]">
-            T/R
-          </TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead class="text-right">
-            Amount
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell class="font-medium">
-            1
-          </TableCell>
-          <TableCell>Paid</TableCell>
-          <TableCell>Credit Card</TableCell>
-          <TableCell class="text-right">
-            $250.00
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+  <PageContainer class="mt-4" title="Lug'atlar" subtitle="Har bir mavzu uchun">
+    <div class="grid md:grid-cols-4 gap-10  grid-cols-2">
+      <ul class="" v-for="vocabulary in data" :key="vocabulary.id">
+        <li>{{ vocabulary.title }} - {{ vocabulary.title1 }}</li>
+      </ul>
+    </div>
+
   </PageContainer>
 </template>
 <style lang="">
