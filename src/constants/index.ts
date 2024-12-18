@@ -40,7 +40,7 @@ export const sidebarData = [
         `
     },
     {
-        path: '/instructor-courses',
+        path: '/courses-instructor',
         title: "Kurslar",
         role: ['admin', 'teacher'],
         icon: `

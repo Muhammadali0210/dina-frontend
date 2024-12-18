@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import PageContainer from "@/components/PageContainer.vue";
-import Loader from "@/ui/Loader.vue";
 import NoDataFound from '@/ui/NoDataFound.vue';
-import InstructorCourseCard from './shared/InstructorCourseCard.vue'
-import CourseCardSkleton from "./shared/CourseCardSkleton.vue";
+import CourseInstructorCard from './shared/CourseInstructorCard.vue'
+import CourseInstructorCardSkleton from "./shared/CourseInstructorCardSkleton.vue";
 import { ApiService } from "@/services/apiServices";
 import type { Course } from '@/types/index';
 
-
+const router = useRouter();
 const isLoading = ref<boolean>(false);
 const data = ref<Course[]>([]);
 const getAllCourses = async () => {
@@ -35,9 +35,9 @@ onMounted(() => {
     title="Barcha kurslar"
     subtitle="Siz yaratgan barcha online darsliglar"
   >
-    <CourseCardSkleton v-if="isLoading" />
+    <CourseInstructorCardSkleton v-if="isLoading" />
     <div v-else class="mt-4 grid grid-cols-3 gap-4 w-full max-lg:grid-cols-2 max-md:grid-cols-1">
-      <InstructorCourseCard v-if="data.length > 0" @click="" v-for="(item, index) in data" :key="index" :data="item" />
+      <CourseInstructorCard v-if="data.length > 0" @click="router.push(`/course-instructor/update/${item._id}`)" v-for="(item, index) in data" :key="index" :data="item" />
 
       <NoDataFound v-else />
     </div>
