@@ -21,11 +21,13 @@ import viewLayout from '@/views/books/viewLayout.vue'
 import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
+
 import CourseLayout from '@/layouts/CourseLayout.vue';
 import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
 import CourseView from '@/views/onlinecourse/CourseView.vue';
-import CourseCreateView from '@/views/onlinecourse/CourseCreateView.vue';
-import InstructorCourseView from '@/views/onlinecourse/InstructorCoursesView.vue';
+import CourseCreateView from '@/views/course-create/CourseCreateView.vue';
+import CourseInstructorView from '@/views/course-instructor/CourseInstructorView.vue';
+import CourseInstructorUpdateView from '@/views/course-instructor/CourseInstructorUpdateView.vue';
 
 
 const router = createRouter({
@@ -176,9 +178,15 @@ const router = createRouter({
       meta: {layout : MainLayout}
     },
     {
-      path: '/instructor-courses',
-      name: 'instructor-courses',
-      component: InstructorCourseView,
+      path: '/courses-instructor',
+      name: 'courses-instructor',
+      component: CourseInstructorView,
+      meta: {layout : MainLayout}
+    },
+    {
+      path: '/course-instructor/update/:id',
+      name: 'update-instructor',
+      component: CourseInstructorUpdateView,
       meta: {layout : MainLayout}
     }
   
