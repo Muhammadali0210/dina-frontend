@@ -10,9 +10,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Loader } from "lucide-vue-next";
 import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
-import { ApiService } from "@/services/apiServices";
+import { useUpdateCourseInfo } from "../service";
+
+const { isLoading, data, updateCourseInfo } = useUpdateCourseInfo();
 const props = defineProps({
   state: Boolean,
   course: Object
@@ -34,35 +37,26 @@ const { handleSubmit, resetForm } = useForm({
 });
 
 const emit  = defineEmits<{
-  (e: 'onUpdated'): void;
+  (e: 'onUpdated', data: any): void;
 }>()
-const updateHandler = async (value: any) => {
-  try {
-    if(!props.course) return
-    await ApiService.patchByToken(`/course/${props.course?._id}`, value);
-    emit('onUpdated');
-  } catch (error) {
-    
-  }
-}
-
 
 const onSubmit = handleSubmit(async (values) => {
-  await updateHandler(values);
+  await updateCourseInfo(Number(props.course?._id), values);
+  emit('onUpdated', data);
   resetForm();
 })
 
 </script>
 <template>
     <div v-if="!state">
-      <h1 class="font-bold">Kurs nomi: <span class="font-medium">{{ props.course?.title }}</span></h1>
+      <h1 class="font-normal">{{ props.course?.title }}</h1>
     </div>
     <div v-else>
       <form @submit.prevent="onSubmit">
         <div class="space-y-3">
           <FormField v-slot="{ field, errors }" name="title">
             <FormItem>
-              <FormLabel>Kurs nomi <span class="text-red-500">*</span></FormLabel>
+              <!-- <FormLabel>Kurs nomi <span class="text-red-500">*</span></FormLabel> -->
               <FormControl>
                 <Input type="text" v-model="field.value" placeholder="Kurs nomini kiriting" v-bind="field" />
               </FormControl>
@@ -72,7 +66,12 @@ const onSubmit = handleSubmit(async (values) => {
 
           <div class="flex">
             <Button  type="submit">
+              <template v-if="!isLoading">
                 Saqlash
+              </template>
+              <template v-else>
+                <Loader class="animate-spin" /> Yuborilmoqda...
+              </template>
             </Button>
           </div>
         </div>

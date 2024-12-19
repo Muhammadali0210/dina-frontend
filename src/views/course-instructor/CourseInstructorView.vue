@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CourseInstructor from '@/pages/course-instructor/CourseInstructor.vue';
+import CourseInstructor from '@/pages/course-instructor/intructor-page/CourseInstructor.vue';
 </script>
 <template>
     <div>

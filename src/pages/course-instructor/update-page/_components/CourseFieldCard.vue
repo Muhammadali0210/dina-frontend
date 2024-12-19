@@ -17,8 +17,9 @@ const props = defineProps({
     isUpdated: Boolean
 })
 
+
 watch(() => props.isUpdated, () => {
-    onToggle();
+    state.value = false;
 })
 
 </script>
