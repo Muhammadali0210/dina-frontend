@@ -2,59 +2,80 @@
 import { ref, onMounted } from "vue";
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { useForm } from "vee-validate";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import * as z from "zod";
+import { toTypedSchema } from "@vee-validate/zod";
+import { ApiService } from "@/services/apiServices";
+const props = defineProps({
+  state: Boolean,
+  course: Object
+})
+
+const formSchema = toTypedSchema(
+  z.object({
+    title: z.string().max(30, {
+      message: "Kurs nomi 30 ta belgidan oshmasligi kerak",
+    }),
+  })
+);
+
+const { handleSubmit, resetForm } = useForm({
+  validationSchema: formSchema,
+  initialValues: {
+    title: props.course?.title,
+  },
+});
+
+const emit  = defineEmits<{
+  (e: 'onUpdated'): void;
+}>()
+const updateHandler = async (value: any) => {
+  try {
+    if(!props.course) return
+    await ApiService.patchByToken(`/course/${props.course?._id}`, value);
+    emit('onUpdated');
+  } catch (error) {
+    
+  }
+}
+
+
+const onSubmit = handleSubmit(async (values) => {
+  await updateHandler(values);
+  resetForm();
+})
+
 </script>
 <template>
-    <Card class="w-[350px]">
-    <CardHeader>
-      <CardTitle>Create project</CardTitle>
-      <CardDescription>Deploy your new project in one-click.</CardDescription>
-    </CardHeader>
-    <CardContent>
-      <form>
-        <div class="grid items-center w-full gap-4">
-          <div class="flex flex-col space-y-1.5">
-            <Label for="name">Name</Label>
-            <Input id="name" placeholder="Name of your project" />
-          </div>
-          <div class="flex flex-col space-y-1.5">
-            <Label for="framework">Framework</Label>
-            <Select>
-              <SelectTrigger id="framework">
-                <SelectValue placeholder="Select" />
-              </SelectTrigger>
-              <SelectContent position="popper">
-                <SelectItem value="nuxt">
-                  Nuxt
-                </SelectItem>
-                <SelectItem value="next">
-                  Next.js
-                </SelectItem>
-                <SelectItem value="sveltekit">
-                  SvelteKit
-                </SelectItem>
-                <SelectItem value="astro">
-                  Astro
-                </SelectItem>
-              </SelectContent>
-            </Select>
+    <div v-if="!state">
+      <h1 class="font-bold">Kurs nomi: <span class="font-medium">{{ props.course?.title }}</span></h1>
+    </div>
+    <div v-else>
+      <form @submit.prevent="onSubmit">
+        <div class="space-y-3">
+          <FormField v-slot="{ field, errors }" name="title">
+            <FormItem>
+              <FormLabel>Kurs nomi <span class="text-red-500">*</span></FormLabel>
+              <FormControl>
+                <Input type="text" v-model="field.value" placeholder="Kurs nomini kiriting" v-bind="field" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <div class="flex">
+            <Button  type="submit">
+                Saqlash
+            </Button>
           </div>
         </div>
       </form>
-    </CardContent>
-    <CardFooter class="flex justify-between px-6 pb-6">
-      <Button variant="outline">
-        Cancel
-      </Button>
-      <Button>Deploy</Button>
-    </CardFooter>
-  </Card>
+    </div>
 </template>
