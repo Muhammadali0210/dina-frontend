@@ -107,6 +107,19 @@ export  class ApiService {
         }
     }
 
+    static async patchByToken<T>(url: string, data: any) {
+        try {
+            const res = await axios.patch(BaseUrl + url, data, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            return res.data
+        } catch (error) {
+            handleError(error);
+        }
+    }
+
     static async put<T>(url: string, data: any) {
         try {
             const response = await axios.put(BaseUrl + url, data)
