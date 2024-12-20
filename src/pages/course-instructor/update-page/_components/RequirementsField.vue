@@ -1,20 +1,19 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "vee-validate";
 import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Loader } from "lucide-vue-next";
 import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useUpdateCourseInfo } from "../service";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const { isLoading, data, updateCourseInfo } = useUpdateCourseInfo();
 const props = defineProps({
@@ -24,8 +23,8 @@ const props = defineProps({
 
 const formSchema = toTypedSchema(
   z.object({
-    title: z.string().max(30, {
-      message: "Kurs nomi 30 ta belgidan oshmasligi kerak",
+    requirements: z.string().max(400, {
+      message: "Kurs nomi 400 ta belgidan oshmasligi kerak",
     }),
   })
 );
@@ -33,7 +32,7 @@ const formSchema = toTypedSchema(
 const { handleSubmit, resetForm } = useForm({
   validationSchema: formSchema,
   initialValues: {
-    title: props.course?.title,
+    requirements: props.course?.requirements,
   },
 });
 
@@ -49,18 +48,20 @@ const onSubmit = handleSubmit(async (values) => {
 
 </script>
 <template>
-    <div v-if="!state" class="flex">
-      <Skeleton v-if="isLoading || !course" class="h-[22px] w-[190px]" />
-      <h1 v-else class="font-normal">{{ props.course?.title }}</h1>
+    <div v-if="!state">
+      <div v-if="isLoading || !course">
+        <Skeleton class="h-[22px] w-full mb-2" />
+        <Skeleton class="h-[22px] w-[50%]" />
+      </div>
+      <h1 v-else class="font-normal max-h-[400px] overflow-y-auto">{{ props.course?.requirements }}</h1>
     </div>
     <div v-else>
       <form @submit.prevent="onSubmit">
         <div class="space-y-3">
-          <FormField v-slot="{ field, errors }" name="title">
+          <FormField v-slot="{ field, errors }" name="requirements">
             <FormItem>
-              <!-- <FormLabel>Kurs nomi <span class="text-red-500">*</span></FormLabel> -->
               <FormControl>
-                <Input type="text" v-model="field.value" placeholder="Kurs nomini kiriting" v-bind="field" />
+                <Textarea type="text" v-model="field.value" placeholder="Kurs nomini kiriting" v-bind="field" />
               </FormControl>
               <FormMessage />
             </FormItem>

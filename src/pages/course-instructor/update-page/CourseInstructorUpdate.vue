@@ -5,6 +5,8 @@ import CourseFieldCard from "./_components/CourseFieldCard.vue";
 import { useRoute } from "vue-router";
 import TitleField from "./_components/TitleField.vue";
 import DescriptionField from "./_components/DescriptionField.vue";
+import LearningField from "./_components/LearningField.vue";
+import RequirementsField from "./_components/RequirementsField.vue";
 const router = useRoute();
 import { useGetCourseInfo } from "@/pages/course-instructor/update-page/service";
 
@@ -13,8 +15,9 @@ const courseData = ref();
 const isUpdated = ref(false);
 
 const onUpdate = async (newData: any) => {
-  courseData.value = newData.value;
   isUpdated.value = false;
+  courseData.value = newData.value;
+  isUpdated.value = true;
 };
 
 onMounted( async () => {
@@ -36,6 +39,14 @@ onMounted( async () => {
 
         <CourseFieldCard name="Qisqacha malumot" #default="{ state }" :isUpdated="isUpdated">
           <DescriptionField :state="state" @onUpdated="onUpdate" :course="courseData" />
+        </CourseFieldCard>
+
+        <CourseFieldCard name="Kurs nimalarni o'rgatadi?" #default="{ state }" :isUpdated="isUpdated">
+          <LearningField :state="state" @onUpdated="onUpdate" :course="courseData" />
+        </CourseFieldCard>
+
+        <CourseFieldCard name="Talablar" #default="{ state }" :isUpdated="isUpdated">
+          <RequirementsField :state="state" @onUpdated="onUpdate" :course="courseData" />
         </CourseFieldCard>
       </div>
     </div>
