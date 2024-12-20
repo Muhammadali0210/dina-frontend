@@ -9,6 +9,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Loader } from "lucide-vue-next";
 import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
@@ -22,7 +23,7 @@ const props = defineProps({
 
 const formSchema = toTypedSchema(
   z.object({
-    description: z.string().max(4000, {
+    description: z.string().max(400, {
       message: "Kurs nomi 400 ta belgidan oshmasligi kerak",
     }),
   })
@@ -48,7 +49,11 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 <template>
     <div v-if="!state">
-      <h1 class="font-normal max-h-[400px] overflow-y-auto">{{ props.course?.description }}</h1>
+      <div v-if="isLoading || !course">
+        <Skeleton class="h-[22px] w-full mb-2" />
+        <Skeleton class="h-[22px] w-[50%]" />
+      </div>
+      <h1 v-else class="font-normal max-h-[400px] overflow-y-auto">{{ props.course?.description }}</h1>
     </div>
     <div v-else>
       <form @submit.prevent="onSubmit">
