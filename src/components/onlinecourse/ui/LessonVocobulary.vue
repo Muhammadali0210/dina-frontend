@@ -44,7 +44,7 @@ const data = ref<any>([
   },
   {
     id: 7,
-    title: '일본',
+    title: '인사말',
     title1: 'Yaponiya'
   },
   {
@@ -54,13 +54,10 @@ const data = ref<any>([
   },
 ])
 
-
-
 </script>
 <template >
-
   <PageContainer class="mt-4" title="Lug'atlar" subtitle="Har bir mavzu uchun">
-    <div class="grid md:grid-cols-4 gap-10  grid-cols-2">
+    <div class="grid lg:grid-cols-4 gap-10 md:grid-cols-2  grid-cols-1">
       <ul class="" v-for="vocabulary in data" :key="vocabulary.id">
         <li>{{ vocabulary.title }} - {{ vocabulary.title1 }}</li>
       </ul>

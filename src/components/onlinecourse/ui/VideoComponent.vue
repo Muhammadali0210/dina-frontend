@@ -17,7 +17,7 @@ export default {
 </script>
 
 <template>
-  <div class="custom-container md:w-full sm:custom-container:hidden">
+  <div class="">
     <div style="padding:56.25% 0 0 0;position:relative;">
       <iframe src="https://player.vimeo.com/video/1038871146?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
         frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
