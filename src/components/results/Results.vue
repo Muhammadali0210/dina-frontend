@@ -1,51 +1,44 @@
-<script>
+<script setup lang="ts">
+import { ref } from "vue"
 import {
-  Card,
-  
-} from '@/components/ui/card'
+    Dialog,
+    DialogContent,
+    DialogDescription,
 
-export default {
-    data() {
-        return {
-            results: [
-                {
-                    link: './src/assets/image/results.jpg',
-                    title: 'Dilrabo Hamzayeva',
-                    resultInfo: "Eshitish:85 O’qish: 68 Yozish: 89"
-                },
-                {
-                    link: './src/assets/image/results.jpg',
-                    title: 'Dilrabo Hamzayeva',
-                    resultInfo: "Eshitish:85 O’qish: 68 Yozish: 89"
-                },
-                {
-                    link: './src/assets/image/results.jpg',
-                    title: 'Dilrabo Hamzayeva',
-                    resultInfo: "Eshitish:85 O’qish: 68 Yozish: 89"
-                },
-                {
-                    link: './src/assets/image/results.jpg',
-                    title: 'Dilrabo Hamzayeva',
-                    resultInfo: "Eshitish:85 O’qish: 68 Yozish: 89"
-                },
-            ]
-        };
-    }
-};
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog'
+import Results from '@/views/results/Results.vue';
+import PageContainer from "../PageContainer.vue";
+import { resultData }  from './ResultData'
+
+const data = ref<any>([]);
+data.value = resultData
 </script>
+
 <template>
-    <Card>
-        <div class="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 px-4 max-md:px-0">
-            <div v-for="(result, index) in results" :key="index"
-                class="group relative rounded-xl overflow-hidden card w-full shadow-xl dark:bg-gray-900 dark:border-gray-700 border-gray-200 bg-white">
-                <img src="../../assets/image/results.jpg" alt="">
+    <PageContainer title="Natijalar" subtitle="Bizning o'quvchilarimiz olgan natijalari">
+        <div class="grid max-sm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+            <div v-for="(result, index) in data" :key="index"
+                class="h-[350px] max-sm:h-[300px] group relative rounded-xl overflow-hidden card w-full ">
+                <img :src="result.link" alt="">
+                <Dialog class="p-0">
+                    <DialogTrigger
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-sm px-5 py-3 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Ko'rish
+                    </DialogTrigger>
+                    <DialogContent class="p-0">
+                        <DialogTitle class="sr-only">Rasmni ko'rish</DialogTitle>
+                        <DialogDescription class="sr-only">
+                        </DialogDescription>
+                        <img class="p-0" :src="result.link" alt="">
+                    </DialogContent>
+                </Dialog>
             </div>
         </div>
-
-    </Card>
+    </PageContainer>
 </template>
 
-
 <style>
-/* Maxsus CSS talab qilinmaydi, Tailwind ishlatilmoqda */
+/* CSS styles here */
 </style>
