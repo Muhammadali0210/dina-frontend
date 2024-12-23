@@ -142,7 +142,7 @@ const router = createRouter({
       meta: { layout: MainLayout }
     },
     {
-      path: '/attendance/group',
+      path: '/attendance/group/:id',
       name: 'attendance-group',
       component: AttendanceGroupView,
       meta: { layout: MainLayout }
