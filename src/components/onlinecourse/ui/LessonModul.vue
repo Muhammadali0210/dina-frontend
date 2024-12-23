@@ -7,21 +7,18 @@ import {
        AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Checkbox } from '@/components/ui/checkbox'
+import {lessonData} from '@/constants/LessonData'
+import {ref} from "vue"
 
-defineProps({
-  data: {
-    type: Object,
-    required: true,
-  },
-});
-
+const data = ref<any>([])
+data.value = lessonData
 </script>
 <template>
   <Accordion type="single" collapsible>
     <Accordion type="single" class="w-full" collapsible>
       <AccordionItem class="border-b border-gray-400 dark:border-gray-700" v-for="item in data" :key="item.value" :value="item.value">
         <AccordionTrigger
-          class="px-4 dark:data-[state=open]:bg-gray-900/30 data-[state=open]:bg-slate-200 data-[state=open]:border-b data-[state=open]:border-gray-400 dark:data-[state=open]:border-gray-800 hover:no-underline">{{ item.title
+          class="px-4 dark:data-[state=open]:bg-gray-900/30 data-[state=open]:bg-slate-200 data-[state=open]:border-b data-[state=open]:border-gray-400 dark:data-[state=open]:border-gray-800 hover:no-underline">{{ item.modul
           }}
         </AccordionTrigger>
         <AccordionContent

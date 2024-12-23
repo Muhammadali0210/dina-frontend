@@ -25,7 +25,7 @@ export default {
         }
     },
     methods: {
-        // Narxni formatlash (so'm yoki dollar formatida)
+
         formatPrice(price) {
             return price.toLocaleString('uz-UZ', { style: 'currency', currency: 'UZS' });
         }
