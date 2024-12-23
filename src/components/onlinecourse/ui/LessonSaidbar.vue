@@ -22,41 +22,6 @@ export default {
         LessonModul,
         ProgressBar
     },
-    data(){
-        return{
-            activeCourse: null,
-             accordionItems: [
-                {
-                    value: 'item-1',
-                    title: '1 - Modul',
-                    lessonData: [
-                        { id: '1', title: '#1 - Dars' },
-                        { id: '2', title: '#2 - Dars' },
-                       
-                    ],
-                },
-                {
-                    value: 'item-2',
-                    title: '2 - Modul',
-                    lessonData: [
-                        { id: '4', title: '#4 - Dars' },
-                       
-                    ],
-                },
-                {
-                    value: 'item-3',
-                    title: '3 - Modul',
-                    lessonData: [
-                        { id: '7', title: '#7 - Dars' },
-                        { id: '8', title: '#8 - Dars' },
-                        { id: '9', title: '#9 - Dars' },
-                        { id: '9', title: '#9 - Dars' },
-                    ],
-                },
-            ]
-
-        }
-    }
 }
 </script>
 <template>
