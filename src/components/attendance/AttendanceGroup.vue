@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div class="">
         <div class="flex items-center max-md:items-start max-lg:gap-2 justify-between flex-col flex-wrap md:flex-row pb-4 bg-transparent dark:bg-gray-900">
             <div class="flex items-center space-x-4 max-md:w-full"> 
@@ -55,13 +55,13 @@
                                     <th class="px-0 py-2">
                                         <label class="inline-flex items-center me-5 cursor-pointer">
                                             <input type="checkbox" v-model="item.attendance.status" :checked="item.attendance.status" :disabled="isDisabled" class="sr-only peer">
-                                            <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                                            <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
                                         </label>
                                     </th>
                                     <th class="px-0 py-2 z-10">
                                         <label class="z-10 inline-flex items-center me-5 cursor-pointer">
                                             <input type="checkbox" v-model="item.attendance.homework" :checked="item.attendance.homework" :disabled="isDisabled"  class="z-1 sr-only peer">
-                                            <div class=" relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                                            <div class=" relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
                                         </label>
                                     </th>
                                 </tr>
@@ -96,11 +96,18 @@ import Loader from '@/ui/Loader.vue';
 import { useCurrentIdStore } from '@/stores/currentId';
 import DatePicker from '@/ui/DatePicker.vue';
 import DatePicker2 from '@/ui/DatePicker2.vue';
+import { useRoute } from 'vue-router';
+import { useToast } from '@/components/ui/toast/use-toast';
+
 export default {
     setup() {
+        const router = useRoute()
         const currentIdStore = useCurrentIdStore()
+        const { toast } = useToast()
         return {
-            currentIdStore
+            currentIdStore,
+            router,
+            toast
         }
     },
     components: {
@@ -144,7 +151,8 @@ export default {
             try {
                 this.isLoading = true
                 this.currentData.date = this.choosenDate
-                this.currentData.group_id = localStorage.getItem('groupId')
+                this.currentData.group_id = parseInt(this.router.params.id)
+                
                 const res = await ApiService.postByToken(this.url, this.currentData, this.token)
                 this.users = res
                 this.isActive = res[0].attendance.is_active
@@ -174,10 +182,11 @@ export default {
                         homework: item.attendance.homework,
                         date: this.choosenDate,
                         student_id: item.student_id,
-                        group_id: this.currentIdStore.currentId,
+                        group_id: parseInt(this.router.params.id),
                         is_active: this.isActive ? true : false
                     }
                 })
+
                 const response = await ApiService.postByToken('/attendance/create', this.attendanceData, this.token);
                 this.$router.push('/attendance')
             } catch (error) {
@@ -188,7 +197,7 @@ export default {
         }
     },
     mounted() {
-        this.choosenDate = new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10);
+        this.choosenDate = (new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10));
         this.getUsers()
     }
 }
