@@ -23,8 +23,7 @@ const getgroups = async () => {
 };
 
 const goToPayment = (id: number) => {
-  localStorage.setItem("groupId", id.toString());
-  router.push("/payment/group");
+  router.push(`/payment/group/${id}`);
 };
 onMounted(() => {
   getgroups();
