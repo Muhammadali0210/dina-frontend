@@ -118,7 +118,7 @@ const router = createRouter({
       meta: { layout: MainLayout }
     },
     {
-      path: '/payment/group',
+      path: '/payment/group/:id',
       name: 'payment-group',
       component: PaymentGroupView,
       meta: { layout: MainLayout }
