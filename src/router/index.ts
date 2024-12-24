@@ -28,6 +28,7 @@ import CourseView from '@/views/onlinecourse/CourseView.vue';
 import CourseCreateView from '@/views/course-create/CourseCreateView.vue';
 import CourseInstructorView from '@/views/course-instructor/CourseInstructorView.vue';
 import CourseInstructorUpdateView from '@/views/course-instructor/CourseInstructorUpdateView.vue';
+import LessonTask from '@/views/onlinecourse/LessonTask.vue'
 
 
 const router = createRouter({
@@ -165,10 +166,17 @@ const router = createRouter({
       component: CourseInfoView,
       meta: {layout : MainLayout}
     },
+    
     {
       path: '/course-full',
       name: 'course-ful',
       component: CourseLayout,
+      meta: {layout : CourseLayout}
+    },
+    {
+      path: '/task',
+      name: 'lessonTask',
+      component: LessonTask,
       meta: {layout : CourseLayout}
     },
     {

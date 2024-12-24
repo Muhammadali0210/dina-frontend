@@ -15,7 +15,16 @@ import CourseHeader from '@/components/onlinecourse/ui/CourseHeader.vue'
 import LessonSaidbar from '@/components/onlinecourse/ui/LessonSaidbar.vue'
 import CourseFullView from '@/views/onlinecourse/CourseFullView.vue'
 import { RouterView } from 'vue-router';
+import { useSidebarStore } from '../stores/sidebarStore';
+
 export default {
+    setup(){
+        const sidebarStore = useSidebarStore();
+        return {
+            sidebarStore,
+          
+        }
+    },
     components:{
         CourseFullView,
         CourseHeader,

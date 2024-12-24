@@ -1,19 +1,19 @@
-<script>
-import { Button } from '@/components/ui/button'
+<script setup lang="ts">
+import LessonTask  from '../ui/LessonTask.vue'
+import { useRouter } from 'vue-router' // Vue Routerni import qilish
+import { defineProps } from 'vue'
 
-export default {
-  props: {
-    videoUrl: {
-      type: String,
-      required: true
-    }
-  },
-  methods: {
-    nextVideo() {
-      this.$emit('next-video'); 
+// const props = defineProps({
+//   videoUrl: {
+//     type: String,
+//     required: true
+//   }
+// })
+
+const router = useRouter()
+  const nextPage = () => {
+    router.push('/task')
   }
-}
-}
 </script>
 
 <template>
@@ -25,7 +25,7 @@ export default {
       </iframe>
     </div>
     <div class="flex justify-between mt-4">
-      <button class="py-2 px-4 bg-blue-500 text-white rounded-lg">Oldingi dars</button>
+      <button @click="nextPage" class="py-2 px-4 bg-blue-500 text-white rounded-lg">Oldingi dars</button>
       <button class="py-2 px-4 bg-blue-500 text-white rounded-lg">Keyingi dars</button>
     </div>
   </div>
