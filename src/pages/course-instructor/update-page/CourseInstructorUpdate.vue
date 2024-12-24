@@ -5,8 +5,7 @@ import CourseFieldCard from "./_components/CourseFieldCard.vue";
 import { useRoute } from "vue-router";
 import TitleField from "./_components/TitleField.vue";
 import DescriptionField from "./_components/DescriptionField.vue";
-import LearningField from "./_components/LearningField.vue";
-import RequirementsField from "./_components/RequirementsField.vue";
+import InformationField from "./_components/InformationField.vue";
 const router = useRoute();
 import { useGetCourseInfo } from "@/pages/course-instructor/update-page/service";
 
@@ -42,11 +41,7 @@ onMounted( async () => {
         </CourseFieldCard>
 
         <CourseFieldCard name="Kurs nimalarni o'rgatadi?" #default="{ state }" :isUpdated="isUpdated">
-          <LearningField :state="state" @onUpdated="onUpdate" :course="courseData" />
-        </CourseFieldCard>
-
-        <CourseFieldCard name="Talablar" #default="{ state }" :isUpdated="isUpdated">
-          <RequirementsField :state="state" @onUpdated="onUpdate" :course="courseData" />
+          <InformationField :state="state" @onUpdated="onUpdate" :course="courseData" />
         </CourseFieldCard>
       </div>
     </div>
