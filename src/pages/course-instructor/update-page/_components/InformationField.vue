@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
+  FormLabel
 } from "@/components/ui/form";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader } from "lucide-vue-next";
@@ -23,16 +24,20 @@ const props = defineProps({
 
 const formSchema = toTypedSchema(
   z.object({
-    requirements: z.string().max(400, {
+    learning: z.string().max(400, {
       message: "Kurs nomi 400 ta belgidan oshmasligi kerak",
     }),
+    requirements: z.string().max(400, {
+      message: "Kurs nomi 400 ta belgidan oshmasligi kerak",
+    })
   })
 );
 
 const { handleSubmit, resetForm } = useForm({
   validationSchema: formSchema,
   initialValues: {
-    requirements: props.course?.requirements,
+    learning: props.course?.learning,
+    // requirements: props.course?.requirements
   },
 });
 
@@ -53,15 +58,25 @@ const onSubmit = handleSubmit(async (values) => {
         <Skeleton class="h-[22px] w-full mb-2" />
         <Skeleton class="h-[22px] w-[50%]" />
       </div>
-      <h1 v-else class="font-normal max-h-[400px] overflow-y-auto">{{ props.course?.requirements }}</h1>
+      <h1 v-else class="font-normal max-h-[400px] overflow-y-auto">{{ props.course?.learning }}</h1>
     </div>
     <div v-else>
       <form @submit.prevent="onSubmit">
         <div class="space-y-3">
-          <FormField v-slot="{ field, errors }" name="requirements">
+          <FormField v-slot="{ field, errors }" name="learning">
             <FormItem>
               <FormControl>
                 <Textarea type="text" v-model="field.value" placeholder="Kurs nomini kiriting" v-bind="field" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <FormField v-slot="{ field, errors }" name="requirements">
+            <FormItem>
+              <FormControl>
+                <!-- <FormLabel>Kurs nomi <span class="text-red-500">*</span></FormLabel> -->
+                <Textarea type="text" v-model="field.value" v-bind="field" />
               </FormControl>
               <FormMessage />
             </FormItem>

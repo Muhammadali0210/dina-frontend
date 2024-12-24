@@ -4,7 +4,7 @@
         <div class="flex justify-start items-center">
           <Hamburger />
           <Logo />
-          <NavbarSearchInput />
+          <!-- <NavbarSearchInput /> -->
         </div>
 
         <div class="flex items-center gap-1 lg:order-2">
