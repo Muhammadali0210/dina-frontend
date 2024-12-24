@@ -52,7 +52,7 @@ onMounted( async () => {
           <SelectFields :state="state" @onUpdated="onUpdate" :course="courseData" />
         </CourseFieldCard>
       </div>
-      <div class="space-y-3">
+      <!-- <div class="space-y-3">
         <CourseFieldCard name="Bo'limlar" #default="{ state }" :isUpdated="isUpdated">
           <SectionsField :state="state" @onUpdated="onUpdate" :course="courseData" />
         </CourseFieldCard>
@@ -64,7 +64,7 @@ onMounted( async () => {
         <CourseFieldCard name="Rasm" #default="{ state }" :isUpdated="isUpdated">
           <ImagesField :state="state" @onUpdated="onUpdate" :course="courseData" />
         </CourseFieldCard>
-      </div>
+      </div> -->
     </div>
   </PageContainer>
 </template>
