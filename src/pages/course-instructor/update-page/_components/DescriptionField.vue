@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
+  FormLabel
 } from "@/components/ui/form";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader } from "lucide-vue-next";
@@ -23,8 +24,8 @@ const props = defineProps({
 
 const formSchema = toTypedSchema(
   z.object({
-    description: z.string().max(400, {
-      message: "Kurs nomi 400 ta belgidan oshmasligi kerak",
+    description: z.string().max(500, {
+      message: "Kurs haqidagi malumot 500 ta belgidan oshmasligi kerak",
     }),
   })
 );
@@ -49,11 +50,15 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 <template>
     <div v-if="!state">
-      <div v-if="isLoading || !course">
-        <Skeleton class="h-[22px] w-full mb-2" />
-        <Skeleton class="h-[22px] w-[50%]" />
+      <div v-if="isLoading || !course" class="space-y-2"> 
+        <Skeleton class="h-[22px] w-full" />
+        <Skeleton class="h-[22px] w-[70%]" />
+        <Skeleton class="h-[22px] w-[80%]" />
       </div>
-      <h1 v-else class="font-normal max-h-[400px] overflow-y-auto">{{ props.course?.description }}</h1>
+      <div v-else>
+        <h1 class="font-semibold">Qisqacha malumot:</h1>
+        <p class="font-normal dark:text-gray-400 max-h-[400px] overflow-y-auto mb-2">{{ props.course?.description }}</p>
+      </div>
     </div>
     <div v-else>
       <form @submit.prevent="onSubmit">
@@ -61,7 +66,8 @@ const onSubmit = handleSubmit(async (values) => {
           <FormField v-slot="{ field, errors }" name="description">
             <FormItem>
               <FormControl>
-                <Textarea type="text" v-model="field.value" placeholder="Kurs nomini kiriting" v-bind="field" />
+                <FormLabel>Qisqacha malumot <span class="text-red-500">*</span></FormLabel>
+                <Textarea type="text" :default-value="props.course?.description" v-model="field.value" v-bind="field" />
               </FormControl>
               <FormMessage />
             </FormItem>

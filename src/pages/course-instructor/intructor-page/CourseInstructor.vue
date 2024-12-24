@@ -6,10 +6,9 @@ import NoDataFound from '@/ui/NoDataFound.vue';
 import CourseInstructorCard from './shared/CourseInstructorCard.vue'
 import CourseInstructorCardSkleton from "./shared/CourseInstructorCardSkleton.vue";
 import useGetAllCourse from "./servise";
+const router = useRouter();
 
 const { isLoading, data, getAllCourse } = useGetAllCourse();
-
-const router = useRouter();
 
 onMounted( async () => {
   await getAllCourse();
