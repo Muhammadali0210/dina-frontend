@@ -1,4 +1,3 @@
-<!-- Main Component (Swiper) -->
 <template>
     <div class="h-full p-[0px]">
         <div class="flex card justify-between mb-[15px]">
@@ -94,10 +93,10 @@ export default {
             slideNext,
             modules: [Autoplay, Pagination, Navigation],
             informationSlideData: [
-                { url: '/src/assets/image/han1.jpg', description: 'Beginner\'s Guide to Becoming a Front-End Developer' },
-                { url: '/src/assets/image/han2.jpg', description: 'Optimizing User Experience' },
-                { url: '/src/assets/image/inf.jpg', description: 'Mastering Front-End Skills' },
-                { url: '/src/assets/image/inf3.jpg', description: 'Perfecting the User Journey' },
+                { url: 'https://ik.imagekit.io/njtthrpue/han1.jpg?updatedAt=1735069983803', description: 'Beginner\'s Guide to Becoming a Front-End Developer' },
+                { url: 'https://ik.imagekit.io/njtthrpue/han1.jpg?updatedAt=1735069983803', description: 'Optimizing User Experience' },
+                { url: 'https://ik.imagekit.io/njtthrpue/han1.jpg?updatedAt=1735069983803', description: 'Mastering Front-End Skills' },
+                { url: 'https://ik.imagekit.io/njtthrpue/han1.jpg?updatedAt=1735069983803', description: 'Perfecting the User Journey' },
             ],
             goToPage,
         };
