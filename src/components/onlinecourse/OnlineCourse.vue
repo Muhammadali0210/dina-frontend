@@ -1,21 +1,25 @@
 <template lang="html">
     <div class="custom-container">
-        <div @click="courseHandler" class="w-full grid md:grid-cols-3 gap-4 sm:grid-cols-2 grid-cols-1">
-            <CourseInfoSkeleton v-if="!isTime" />
-            <CourseCard v-if="isTime" :courseData="courseData" />
-            <CourseInfoSkeleton v-if="!isTime" />
-        </div>
+        <PageContainer title="Mavjud kurslar">
+            <div @click="courseHandler" class="w-full grid md:grid-cols-3 gap-4 sm:grid-cols-2 grid-cols-1">
+                <CourseInfoSkeleton v-if="!isTime" />
+                <CourseCard v-if="isTime" :courseData="courseData" />
+                <CourseInfoSkeleton v-if="!isTime" />
+            </div>
+        </PageContainer>
     </div>
 </template>
 
 <script>
 import CourseCard from '@/components/onlinecourse/ui/CourseCard.vue';
 import CourseInfoSkeleton from '@/components/onlinecourse/_shared/CourseInfoSkeleton.vue';
+import PageContainer from '@/components/PageContainer.vue'
 
 export default {
     components: {
         CourseCard,
-        CourseInfoSkeleton
+        CourseInfoSkeleton,
+        PageContainer
     },
     data() {
         return {
@@ -46,11 +50,11 @@ export default {
     mounted() {
         setTimeout(() => {
             this.isTime = true;
-        }, 1000);
+        }, 1500);
     }
 };
 </script>
 
 <style lang="css">
-/* Kerakli uslublar */
+
 </style>
