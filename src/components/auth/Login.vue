@@ -1,7 +1,7 @@
 <template>
     <div
-        class=" w-[500px] max-md:w-[90%] block p-6 blurbg rounded-xl">
-        <MainLogo class="dark:text-gray-900 text-gray-900" />
+        class=" w-[500px] max-md:w-[90%] block p-6 bg-slate-200 rounded-xl">
+        <MainLogo class="dark:text-gray-900 text-gray-900" style="color: #111827;" />
         <form class="space-y-4 md:space-y-6" @submit.prevent="handleSubmit()">
             <ErrorAlert v-if="message" :errorMessage="message" />
             <div>

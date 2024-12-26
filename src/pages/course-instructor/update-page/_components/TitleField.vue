@@ -31,10 +31,7 @@ const formSchema = toTypedSchema(
 );
 
 const { handleSubmit, resetForm } = useForm({
-  validationSchema: formSchema,
-  initialValues: {
-    title: props.course?.title,
-  },
+  validationSchema: formSchema
 });
 
 const emit  = defineEmits<{
@@ -58,9 +55,9 @@ const onSubmit = handleSubmit(async (values) => {
         <div class="space-y-3">
           <FormField v-slot="{ field, errors }" name="title">
             <FormItem>
-              <!-- <FormLabel>Kurs nomi <span class="text-red-500">*</span></FormLabel> -->
+              <FormLabel>Kurs nomi <span class="text-red-500">*</span></FormLabel>
               <FormControl>
-                <Input type="text" v-model="field.value" placeholder="Kurs nomini kiriting" v-bind="field" />
+                <Input type="text" :default-value="props.course?.title" v-model="field.value" v-bind="field" />
               </FormControl>
               <FormMessage />
             </FormItem>

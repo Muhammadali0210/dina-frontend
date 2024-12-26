@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { Button } from '@/components/ui/button'
+import SubmitButton from "../shared/SubmitButton.vue";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "vee-validate";
 import {
@@ -11,7 +10,6 @@ import {
   FormLabel
 } from "@/components/ui/form";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Loader } from "lucide-vue-next";
 import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useUpdateCourseInfo } from "../service";
@@ -29,16 +27,15 @@ const formSchema = toTypedSchema(
     }),
     requirements: z.string().max(400, {
       message: "Kurs nomi 400 ta belgidan oshmasligi kerak",
-    })
+    }),
+    tags: z.string().max(400, {
+      message: "Kurs teglari 400 ta belgidan oshmasligi kerak",
+    }),
   })
 );
 
 const { handleSubmit, resetForm } = useForm({
-  validationSchema: formSchema,
-  initialValues: {
-    learning: props.course?.learning,
-    // requirements: props.course?.requirements
-  },
+  validationSchema: formSchema
 });
 
 const emit  = defineEmits<{
@@ -50,15 +47,23 @@ const onSubmit = handleSubmit(async (values) => {
   emit('onUpdated', data);
   resetForm();
 })
-
 </script>
 <template>
     <div v-if="!state">
       <div v-if="isLoading || !course">
         <Skeleton class="h-[22px] w-full mb-2" />
-        <Skeleton class="h-[22px] w-[50%]" />
+        <Skeleton class="h-[22px] w-[50%] mb-3" />
+        <Skeleton class="h-[22px] w-full mb-2" />
+        <Skeleton class="h-[22px] w-[40%]" />
       </div>
-      <h1 v-else class="font-normal max-h-[400px] overflow-y-auto">{{ props.course?.learning }}</h1>
+      <div v-else>
+        <h1 class="font-semibold">Nimalarni o'rgatadi:</h1>
+        <p class="font-normal dark:text-gray-400 max-h-[400px] overflow-y-auto mb-2">{{ props.course?.learning }}</p>
+        <h1 class="font-semibold">Talablar:</h1>
+        <p class="font-normal dark:text-gray-400 max-h-[400px] overflow-y-auto">{{ props.course?.requirements }}</p>
+        <h1 class="font-semibold">Teglar:</h1>
+        <p class="font-normal dark:text-gray-400 max-h-[400px] overflow-y-auto">{{ props.course?.tags }}</p>
+      </div>
     </div>
     <div v-else>
       <form @submit.prevent="onSubmit">
@@ -66,7 +71,8 @@ const onSubmit = handleSubmit(async (values) => {
           <FormField v-slot="{ field, errors }" name="learning">
             <FormItem>
               <FormControl>
-                <Textarea type="text" v-model="field.value" placeholder="Kurs nomini kiriting" v-bind="field" />
+                <FormLabel>Nimalarni o'rgatadi <span class="text-red-500">*</span></FormLabel>
+                <Textarea type="text" :default-value="props.course?.learning" v-model="field.value" v-bind="field" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,22 +81,25 @@ const onSubmit = handleSubmit(async (values) => {
           <FormField v-slot="{ field, errors }" name="requirements">
             <FormItem>
               <FormControl>
-                <!-- <FormLabel>Kurs nomi <span class="text-red-500">*</span></FormLabel> -->
-                <Textarea type="text" v-model="field.value" v-bind="field" />
+                <FormLabel>Talablar <span class="text-red-500">*</span></FormLabel>
+                <Textarea type="text" :default-value="props.course?.requirements" v-model="field.value" v-bind="field" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <FormField v-slot="{ field, errors }" name="tags">
+            <FormItem>
+              <FormControl>
+                <FormLabel>Teglar <span class="text-red-500">*</span></FormLabel>
+                <Textarea type="text" :default-value="props.course?.tags" v-model="field.value" v-bind="field" />
               </FormControl>
               <FormMessage />
             </FormItem>
           </FormField>
 
           <div class="flex">
-            <Button  type="submit">
-              <template v-if="!isLoading">
-                Saqlash
-              </template>
-              <template v-else>
-                <Loader class="animate-spin" /> Yuborilmoqda...
-              </template>
-            </Button>
+            <SubmitButton :is-loading="isLoading" />
           </div>
         </div>
       </form>
