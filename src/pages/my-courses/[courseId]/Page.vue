@@ -11,7 +11,7 @@ import SectionsField from "./_components/SectionsField.vue";
 import ImagesField from "./_components/ImagesField.vue";
 import PriceField from "./_components/PriceField.vue";
 const router = useRoute();
-import { useGetCourseInfo } from "@/pages/course-instructor/update-page/service";
+import { useGetCourseInfo } from "./service";
 
 const { isLoading, data, getCourseInfo } = useGetCourseInfo();
 const courseData = ref();
