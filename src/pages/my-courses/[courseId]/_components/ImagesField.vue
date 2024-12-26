@@ -73,7 +73,6 @@ const uploadFile = async () => {
 
 onMounted(async () => {
   await nextTick();
-  console.log(fileInput.value); // Fayl input DOM element mavjudligini tekshirish
 });
 </script>
 

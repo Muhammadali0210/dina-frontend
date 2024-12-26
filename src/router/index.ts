@@ -29,7 +29,7 @@ import CourseView from '@/views/onlinecourse/CourseView.vue';
 import CreateCourse from '@/pages/create-course/Page.vue';
 import MyCourses from '@/pages/my-courses/Page.vue';
 import CourseId from "@/pages/my-courses/[courseId]/Page.vue"
-// import SectionDetailView from '@/views/course-instructor/SectionDetailView.vue';
+import SectionId from '@/pages/my-courses/[courseId]/[sectionId]/Page.vue';
 import LessonTask from '@/views/onlinecourse/LessonTask.vue'
 
 
@@ -198,18 +198,20 @@ const router = createRouter({
       path: '/my-courses/:id',
       name: 'CourseId',
       component: CourseId,
-      meta: {layout : MainLayout}
+      meta: { layout: MainLayout },
+      props: true,
     },
-    // {
-    //   path: '/course-instructor/update/section-detail/:id',
-    //   name: 'section-detail',
-    //   component: SectionDetailView,
-    //   meta: {layout : MainLayout},
-    //   props: (route) => ({
-    //     id: route.params.id,
-    //     type: route.query.type,
-    //   }),
-    // }
+    {
+      path: '/my-courses/:id/:sectionId',
+      name: 'SectionId',
+      component: SectionId,
+      meta: { layout: MainLayout },
+      props: (route) => ({
+        courseId: Number(route.params.id),
+        sectionId: Number(route.params.sectionId),
+        type: route.query.type,
+      }),
+    },
   
   ]
 })
