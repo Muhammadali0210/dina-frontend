@@ -36,4 +36,41 @@ function useUpdateCourseInfo() {
     return { isLoading, data, updateCourseInfo }
 }
 
-export { useGetCourseInfo, useUpdateCourseInfo }; 
+function useCreateSection() {
+  const sectionLoading = ref<boolean>(false);
+  const sectionData = ref();
+
+  const getSection = async () => {
+    try {
+      sectionLoading.value = true;
+      const res = await ApiService.getByIdToken(`/section`);
+      sectionData.value = res;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      sectionLoading.value = false;
+    }
+  }
+
+  const createSection = async (id: number, title: string) => {
+    try {
+      sectionLoading.value = true;
+      const data = {
+        courseId: id,
+        title: title
+      }
+      console.log(data);
+      
+      const res = await ApiService.postByToken(`/section`, data);
+      sectionData.value = res;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      sectionLoading.value = false;
+    }
+  }
+
+  return { sectionLoading, sectionData, getSection, createSection }
+}
+
+export { useGetCourseInfo, useUpdateCourseInfo, useCreateSection }; 

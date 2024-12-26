@@ -25,9 +25,11 @@ import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 import CourseLayout from '@/layouts/CourseLayout.vue';
 import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
 import CourseView from '@/views/onlinecourse/CourseView.vue';
-import CourseCreateView from '@/views/course-create/CourseCreateView.vue';
-import CourseInstructorView from '@/views/course-instructor/CourseInstructorView.vue';
-import CourseInstructorUpdateView from '@/views/course-instructor/CourseInstructorUpdateView.vue';
+
+import CreateCourse from '@/pages/create-course/Page.vue';
+import MyCourses from '@/pages/my-courses/Page.vue';
+import CourseId from "@/pages/my-courses/[courseId]/Page.vue"
+// import SectionDetailView from '@/views/course-instructor/SectionDetailView.vue';
 import LessonTask from '@/views/onlinecourse/LessonTask.vue'
 
 
@@ -179,24 +181,35 @@ const router = createRouter({
       component: LessonTask,
       meta: {layout : CourseLayout}
     },
+
     {
-      path: '/course/create',
-      name: 'create-course',
-      component: CourseCreateView,
+      path: '/create-course',
+      name: 'CreateCourse',
+      component: CreateCourse,
       meta: {layout : MainLayout}
     },
     {
-      path: '/courses-instructor',
-      name: 'courses-instructor',
-      component: CourseInstructorView,
+      path: '/my-courses',
+      name: 'MyCourses',
+      component: MyCourses,
       meta: {layout : MainLayout}
     },
     {
-      path: '/course-instructor/update/:id',
-      name: 'update-instructor',
-      component: CourseInstructorUpdateView,
+      path: '/my-courses/:id',
+      name: 'CourseId',
+      component: CourseId,
       meta: {layout : MainLayout}
-    }
+    },
+    // {
+    //   path: '/course-instructor/update/section-detail/:id',
+    //   name: 'section-detail',
+    //   component: SectionDetailView,
+    //   meta: {layout : MainLayout},
+    //   props: (route) => ({
+    //     id: route.params.id,
+    //     type: route.query.type,
+    //   }),
+    // }
   
   ]
 })

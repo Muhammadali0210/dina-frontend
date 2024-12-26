@@ -1,22 +1,27 @@
 <script setup lang="ts">
 import { defineProps, ref } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
 import { Grip, Pencil, Trash2 } from "lucide-vue-next";
 import draggable from "vuedraggable";
 
+const router = useRoute()
+
 const props = defineProps({
     sections: {
-        type: Array,
-        default: () => null
+      type: Array,
+      default: () => null
     }
 })
+
+const sections = ref(props.sections)
 
 const drag = ref(false)
 </script>
 
 <template>
-  <div v-if="props.sections !== null">
+  <div v-if="sections !== null">
     <draggable
-      v-model="props.sections"
+      v-model="sections"
       group="people"
       @start="drag = true"
       @end="drag = false"
@@ -30,13 +35,12 @@ const drag = ref(false)
             <div class="bg-slate-100 dark:bg-gray-700 p-2">
               <Grip class="size-5" />
             </div>
-            <h1 class="dark:text-white text-gray-700">{{ element.path }}</h1>
+            <h1 class="dark:text-white text-gray-700">{{ element.title }}</h1>
           </div>
 
-          <div class="flex items-center gap-2 p-2">
+          <RouterLink :to="{ name: 'section-detail', params: { id: element._id }, query: { courseId: router.params.id } }" :sections="sections" class="p-2">
             <Pencil class="size-4 cursor-pointer" />
-            <Trash2 class="size-4 cursor-pointer" />
-          </div>
+          </RouterLink>
         </div>
       </template>
     </draggable>

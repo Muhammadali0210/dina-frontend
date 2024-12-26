@@ -151,7 +151,7 @@ export  class ApiService {
         }
     }
 
-    static async deleteByToken<T>(url: string, token: string) {
+    static async deleteByToken<T>(url: string) {
         try {
             const response = await axios.delete(BaseUrl + url, {
                 headers: {
