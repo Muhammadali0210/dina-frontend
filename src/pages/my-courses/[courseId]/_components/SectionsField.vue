@@ -20,6 +20,9 @@ import useToggleEdit from "@/hooks/use-toggle-edit";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SectionList from "./SectionList.vue";
 import { useCreateSection } from "../service";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const { state, onToggle } = useToggleEdit();
 
@@ -52,9 +55,8 @@ const onSubmit = handleSubmit(async (values) => {
 });
 
 onMounted(async () => {
-  await getSection();
+  await getSection(Number(route.params.id));
   sections.value = sectionData.value;
-  console.log(sections.value);
 });
 </script>
 <template>

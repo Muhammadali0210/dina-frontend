@@ -40,10 +40,10 @@ function useCreateSection() {
   const sectionLoading = ref<boolean>(false);
   const sectionData = ref();
 
-  const getSection = async () => {
+  const getSection = async (id: number) => {
     try {
       sectionLoading.value = true;
-      const res = await ApiService.getByIdToken(`/section`);
+      const res = await ApiService.getByIdToken(`/section/all/${id}`);
       sectionData.value = res;
     } catch (error) {
       console.log(error);

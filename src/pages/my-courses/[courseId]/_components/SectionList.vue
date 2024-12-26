@@ -38,9 +38,9 @@ const drag = ref(false)
             <h1 class="dark:text-white text-gray-700">{{ element.title }}</h1>
           </div>
 
-          <RouterLink :to="{ name: 'section-detail', params: { id: element._id }, query: { courseId: router.params.id } }" :sections="sections" class="p-2">
+          <RouterLink :to="{ name: 'SectionId', params: { id: router.params.id, sectionId: element._id } }" class="p-2">
             <Pencil class="size-4 cursor-pointer" />
-          </RouterLink>
+        </RouterLink>
         </div>
       </template>
     </draggable>
