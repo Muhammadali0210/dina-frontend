@@ -22,7 +22,6 @@ data.value = resultData
             class="h-[350px] max-sm:h-[300px] border border-border group relative rounded-xl overflow-hidden card w-full ">
                 <img :src="result.link" alt="result image" class="w-full h-full object-cover" >
 
-
                 <Dialog class="p-0">
                     <DialogTrigger
                         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-sm px-5 py-3 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -39,7 +38,3 @@ data.value = resultData
         </div>
     </PageContainer>
 </template>
-
-<style>
-/* CSS styles here */
-</style>

@@ -31,7 +31,10 @@ const formSchema = toTypedSchema(
 );
 
 const { handleSubmit, resetForm } = useForm({
-  validationSchema: formSchema
+  validationSchema: formSchema,
+  initialValues: {
+    title:  props.course?.title,
+  },
 });
 
 const emit  = defineEmits<{
