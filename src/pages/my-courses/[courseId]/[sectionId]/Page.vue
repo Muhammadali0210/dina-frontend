@@ -7,6 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import Actions from "./_components/Actions.vue"
 import { useGetSectionInfo } from "./service";
+import SectionField from "./_components/SectionField.vue";
+import Lessons from "./_components/Lessons.vue";
 
 const router = useRoute()
 
@@ -38,8 +40,9 @@ onMounted(() => {
             </div>
             <Separator class="my-2" />
         </div>
-        <div v-if="!isLoading">
-            <!-- {{ data.title }} -->
+        <div class="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+            <Lessons />
+            <SectionField :section="data" :data-loading="isLoading" />
         </div>
     </div>
 </template>

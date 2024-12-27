@@ -13,8 +13,8 @@ import {
 import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { Skeleton } from "@/components/ui/skeleton";
-import SubmitButton from "../shared/SubmitButton.vue";
-import { ref, onMounted } from "vue";
+import SubmitButton from "@/ui/SubmitButton.vue";  
+import { ref, onMounted, defineProps, defineEmits } from "vue";
 import { X, BadgePlus } from "lucide-vue-next";
 import useToggleEdit from "@/hooks/use-toggle-edit";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,12 +23,8 @@ import { useCreateSection } from "../service";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-
 const { state, onToggle } = useToggleEdit();
 
-const sections = ref([]);
-
-// const { isLoading, data, updateCourseInfo } = useUpdateCourseInfo();
 const { sectionLoading, sectionData, getSection, createSection } = useCreateSection()
 const props = defineProps({
   course: Object,
@@ -49,14 +45,12 @@ const { handleSubmit, resetForm } = useForm({
 const onSubmit = handleSubmit(async (values) => {
   console.log(values.title);
   await createSection(Number(props.course?._id), values.title);
-  sections.value = sectionData.value
   onToggle();
   resetForm();
 });
 
 onMounted(async () => {
   await getSection(Number(route.params.id));
-  sections.value = sectionData.value;
 });
 </script>
 <template>
@@ -73,8 +67,7 @@ onMounted(async () => {
     <CardContent>
       <Separator class="mb-2" />
       <div v-if="!state">
-        <Skeleton v-if="sectionLoading" class="w-full h-[30px]" />
-        <SectionList v-else :sections="sections" />
+        <SectionList :sections="sectionData" :is-loading="sectionLoading" />   
       </div>
       <div v-else>
         <form @submit.prevent="onSubmit">
