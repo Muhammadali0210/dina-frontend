@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useRoute, useRouter } from "vue-router";
 import { useDeleteSection } from "../services/service";
 import { Loader, Trash2 } from "lucide-vue-next";
-import ConfirmDeleteModal from "@/components/ConfirmDeleteModal.vue";
+import ConfirmDeleteModal from "@/components/modals/ConfirmDeleteModal.vue";
 
 const { isLoading, deleteSection } = useDeleteSection();
 const router = useRoute();

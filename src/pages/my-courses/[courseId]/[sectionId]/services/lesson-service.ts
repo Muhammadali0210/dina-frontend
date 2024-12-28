@@ -54,20 +54,21 @@ function useUpdateLesson() {
 }
 
 function useDeleteLesson() {
-  const isLoading = ref<boolean>(false);
+  const lessonStore = useLessonStore()
+  const isDeleting = ref<boolean>(false);
   const deleteLesson = async (id: number) => {
     try {
-      isLoading.value = true;
-      await ApiService.deleteByToken(`/lesson/${id}`);
+      isDeleting.value = true;
+      const res: any = await ApiService.deleteByToken(`/lesson/${id}`);
       console.log("lesson o'chirildi");
-      
+      lessonStore.setLesson(res);
     } catch (error) {
       console.log(error);
     } finally {
-      isLoading.value = false;
+      isDeleting.value = false;
     }
   }
-  return { isLoading, deleteLesson }
+  return { isDeleting, deleteLesson }
 }
 
 export { 
