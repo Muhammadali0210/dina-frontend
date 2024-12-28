@@ -1,22 +1,38 @@
 <script setup lang="ts">
-import { defineProps, ref, onMounted, nextTick, watch } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
-import { Grip, Pencil } from "lucide-vue-next";
+import { defineProps, ref, onMounted, nextTick, watch } from "vue";
+import { RouterLink, useRoute } from "vue-router";
+import { Grip, Pencil, Trash2 } from "lucide-vue-next";
 import draggable from "vuedraggable";
-import { Skeleton } from '@/components/ui/skeleton';
-import { useLessonStore } from '../stores/lesson-store';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { Skeleton } from "@/components/ui/skeleton";
+import { useLessonStore } from "../stores/lesson-store";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import DeleteModal from "@/components/modals/DeleteModal.vue";
+import { useDeleteLesson } from "../services/lesson-service";
 
+const { isDeleting, deleteLesson } = useDeleteLesson();
 const lessonStore = useLessonStore();
-
-const router = useRoute()
-
+const router = useRoute();
 const props = defineProps({
-  isLoading: Boolean
-})
-const lessons = ref([])
+  isLoading: Boolean,
+});
+const lessons = ref([]);
+const drag = ref(false);
+const isOpenModal = ref(false);
+const currentId = ref<number>();
 
-const drag = ref(false)
+const onDelete = async () => {
+  console.log("on confirm", currentId.value);
+  
+  if (currentId.value) {
+    await deleteLesson(currentId.value);
+  }
+  isOpenModal.value = false;
+};
+
+const deleteHandler = async (id: number) => {
+  currentId.value = id;
+  isOpenModal.value = true;
+}
 
 watch(
   () => lessonStore.getLesson,
@@ -29,14 +45,16 @@ watch(
 
 onMounted(async () => {
   lessons.value = lessonStore.getLesson;
-})
+});
 </script>
 
 <template>
-    <Skeleton v-if="isLoading" class="w-full h-[30px]" />
+  <DeleteModal @onOpenChange="isOpenModal = false" @on-confirm="onDelete" :is-open="isOpenModal" :is-loading="isDeleting"  />
+
+  <Skeleton v-if="isLoading" class="w-full h-[30px]" />
   <template v-else>
-    <ScrollArea 
-      v-if="lessons.length !== 0" 
+    <ScrollArea
+      v-if="lessons.length !== 0"
       :class="lessons.length <= 6 ? 'h-auto' : 'h-[300px] pr-3'"
     >
       <draggable
@@ -57,16 +75,14 @@ onMounted(async () => {
               <h1 class="dark:text-white text-gray-700">{{ element.title }}</h1>
             </div>
 
-            <div class="p-2">
+            <div class="flex gap-3 p-2">
               <Pencil class="size-4 cursor-pointer" />
+              <Trash2 class="size-4 cursor-pointer" @click="deleteHandler(element._id)" />
             </div>
-            
           </div>
         </template>
       </draggable>
     </ScrollArea>
-    <div v-else class="text-gray-500 dark:text-gray-400">
-      Bo'lim mavjus emas
-    </div>
+    <div v-else class="text-gray-500 dark:text-gray-400">Bo'lim mavjus emas</div>
   </template>
 </template>

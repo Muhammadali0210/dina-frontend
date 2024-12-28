@@ -39,7 +39,7 @@ const formSchema = toTypedSchema(
     title: z.string().max(30, {
       message: "Kurs nomi 30 ta belgidan oshmasligi kerak",
     }),
-    videoUrl: z.string(),
+    videoUrl: z.string().url(),
     hours: z.number(),
     minutes: z.number(),
     seconds: z.number(),
