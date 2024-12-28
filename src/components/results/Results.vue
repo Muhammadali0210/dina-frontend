@@ -17,12 +17,7 @@ data.value = resultData
     <PageContainer title="Natijalar" subtitle="Bizning o'quvchilarimiz olgan natijalari">
         <div class="grid  max-sm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
             <div v-for="(result, index) in data" :key="index"
-
                 class="h-[350px]  max-sm:h-[240px]  group relative rounded-xl overflow-hidden card w-full ">
-                <img class="" :src="result.link" alt="">
-                class="h-[350px] max-sm:h-[300px] border border-border group relative rounded-xl overflow-hidden card w-full ">
-
-            class="h-[350px] max-sm:h-[300px] border border-border group relative rounded-xl overflow-hidden card w-full ">
 
                 <img :src="result.link" alt="result image" class="w-full h-full object-cover" >
                 <Dialog class="p-0">

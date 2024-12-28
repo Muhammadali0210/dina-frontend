@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SubmitButton from "../shared/SubmitButton.vue";
+import SubmitButton from "@/ui/SubmitButton.vue";
 import { useForm } from "vee-validate";
 import {
   FormControl,
@@ -20,6 +20,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useUpdateCourseInfo } from "../service";
+import { defineProps, defineEmits } from "vue";
 
 const { isLoading, data, updateCourseInfo } = useUpdateCourseInfo();
 const props = defineProps({

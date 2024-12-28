@@ -12,7 +12,8 @@ import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { useUpdateCourseInfo } from "../service";
 import { Skeleton } from "@/components/ui/skeleton";
-import SubmitButton from "../shared/SubmitButton.vue";
+import SubmitButton from "@/ui/SubmitButton.vue";
+import {defineProps} from "vue"
 
 const { isLoading, data, updateCourseInfo } = useUpdateCourseInfo();
 const props = defineProps({

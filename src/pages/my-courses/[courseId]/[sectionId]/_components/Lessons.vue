@@ -7,7 +7,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import * as z from "zod";
@@ -18,14 +17,19 @@ import { ref, onMounted, defineProps, defineEmits } from "vue";
 import { X, BadgePlus } from "lucide-vue-next";
 import useToggleEdit from "@/hooks/use-toggle-edit";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SectionList from "./SectionList.vue";
-// import { useCreateSection } from "../service";
 import { useRoute } from "vue-router";
+import { useCreateLesson } from "../services/lesson-service";
+import { useGetLessonInfo } from "../services/lesson-service";
+import { useLessonStore } from "../stores/lesson-store";
+import LessonList from "./LessonList.vue";
 
 const route = useRoute();
+const lessonStore = useLessonStore();
 const { state, onToggle } = useToggleEdit();
 
-// const { sectionLoading, sectionData, getSection, createSection } = useCreateSection()
+const { createLoading, createLesson } = useCreateLesson();
+const { getLoading, getLessonInfo } = useGetLessonInfo();
+
 const props = defineProps({
   course: Object,
 });
@@ -38,8 +42,8 @@ const formSchema = toTypedSchema(
     videoUrl: z.string(),
     hours: z.number(),
     minutes: z.number(),
-    seconds: z.number()
-  })
+    seconds: z.number(),
+  }),
 );
 
 const { handleSubmit, resetForm } = useForm({
@@ -47,16 +51,31 @@ const { handleSubmit, resetForm } = useForm({
 });
 
 const onSubmit = handleSubmit(async (values) => {
-  console.log(values.title);
-  console.log(values);
-
-  //   await createSection(Number(props.course?._id), values.title);
+  const newData = {
+    title: values.title,
+    videoUrl: values.videoUrl,
+    duration: {
+      hours: values.hours,
+      minutes: values.minutes,
+      seconds: values.seconds,
+    },
+    sectionId: Number(route.params.sectionId),
+  };
+  await createLesson(`/lesson`, newData);
   onToggle();
   resetForm();
 });
 
+const lessons = ref([]);
+
 onMounted(async () => {
-  //   await getSection(Number(route.params.id));
+  lessons.value = await lessonStore.getLesson;
+  // if(lessons.value.length > 0 && route.params.sectionId != lessons.value[0]?.sectionId) {
+  //   await getLessonInfo(Number(route.params.sectionId));
+  // } else {
+  //   await getLessonInfo(Number(route.params.sectionId));
+  // }
+  await getLessonInfo(Number(route.params.sectionId));
 });
 </script>
 <template>
@@ -73,8 +92,7 @@ onMounted(async () => {
     <CardContent>
       <Separator class="mb-2" />
       <div v-if="!state">
-        Lessons
-        <!-- <SectionList :sections="sectionData" :is-loading="sectionLoading" />    -->
+        <LessonList :is-loading="getLoading" />
       </div>
       <div v-else>
         <form @submit.prevent="onSubmit">
@@ -152,7 +170,7 @@ onMounted(async () => {
             </div>
 
             <div class="flex">
-              <SubmitButton />
+              <SubmitButton :isLoading="createLoading" />
             </div>
           </div>
         </form>

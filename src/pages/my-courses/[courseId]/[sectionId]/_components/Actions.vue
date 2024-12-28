@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
 import { useRoute, useRouter } from "vue-router";
-import { useDeleteSection } from "../service";
+import { useDeleteSection } from "../services/service";
 import { Loader, Trash2 } from "lucide-vue-next";
 import ConfirmDeleteModal from "@/components/ConfirmDeleteModal.vue";
 
