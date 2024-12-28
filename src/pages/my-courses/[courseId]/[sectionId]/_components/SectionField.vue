@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Edit2, X, Loader } from "lucide-vue-next";
 import useToggleEdit from "@/hooks/use-toggle-edit";
 const { state, onToggle } = useToggleEdit();
-import { useUpdateSectionInfo } from "../service";
+import { useUpdateSectionInfo } from "../services/service";
 import * as z from "zod";
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";

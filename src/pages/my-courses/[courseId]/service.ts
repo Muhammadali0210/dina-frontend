@@ -59,8 +59,6 @@ function useCreateSection() {
         courseId: id,
         title: title
       }
-      console.log(data);
-      
       const res = await ApiService.postByToken(`/section`, data);
       sectionData.value = res;
     } catch (error) {

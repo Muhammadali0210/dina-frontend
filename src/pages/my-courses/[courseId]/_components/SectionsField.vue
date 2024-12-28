@@ -43,7 +43,6 @@ const { handleSubmit, resetForm } = useForm({
 });
 
 const onSubmit = handleSubmit(async (values) => {
-  console.log(values.title);
   await createSection(Number(props.course?._id), values.title);
   onToggle();
   resetForm();
