@@ -161,7 +161,7 @@ onMounted(async () => {
                       type="number"
                       v-model="field.value"
                       v-bind="field"
-                      placeholder="Secund"
+                      placeholder="Sekund"
                     />
                   </FormControl>
                   <FormMessage />

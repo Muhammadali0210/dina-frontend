@@ -25,7 +25,7 @@ const drag = ref(false)
 <template>
     <Skeleton v-if="isLoading" class="w-full h-[30px]" />
   <template v-else>
-    <div v-if="props.sections">
+    <div v-if="props.sections?.length > 0" >
       <draggable
         v-model="props.sections"
         group="people"
@@ -52,7 +52,7 @@ const drag = ref(false)
       </draggable>
     </div>
     <div v-else class="text-gray-500 dark:text-gray-400">
-      Bo'lim mavjus emas
+      Modul mavjud emas
     </div>
   </template>
 </template>

@@ -19,22 +19,27 @@ onMounted(() => {
 })
 </script>
 <template>
+
     <div class="bg-white dark:bg-gray-800 p-4 rounded-md max-w-[1400px] mx-auto">
         <div>
-            <div class="flex items-center gap-3">
-                <RouterLink :to="`/my-courses/${router.params.id}`">
-                    <Button size="icon" variant="outline">
-                        <ChevronLeftCircle />
-                    </Button>
-                </RouterLink>
-                <div>
-                    <Skeleton v-if="isLoading" class="h-[31px] max-w-[400px] w-[250px] mb-2" />
-                    <h3 v-else class="text-4xl font-extrabold text-gray-700 dark:text-white">{{ data ? data.title : "Malumot yuklanmadi" }}</h3>
+            <div class="grid grid-cols-6 md:grid-cols-12 gap-3 items-center">
+                <div class="order-1 md:order-1 col-span-3 md:col-span-1">
+                    <RouterLink :to="`/my-courses/${router.params.id}`">
+                        <Button size="icon" variant="outline">
+                            <ChevronLeftCircle />
+                        </Button>
+                    </RouterLink>
+                </div>
+                
+                <div class="order-3 md:order-2 col-span-6 md:col-span-8">
+                    <Skeleton v-if="isLoading" class="h-[31px] w-[250px] max-sm:w-[150px] mb-2" />
+                    <h3 v-else class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white">{{ data ? data.title : "Malumot yuklanmadi" }}</h3>
                     <p class="text-sm text-muted-foreground">
-                        Bo'limlar haqida malumot
+                        Modul haqida malumot
                     </p>
                 </div>
-                <div class="ml-auto">
+                
+                <div class="order-2 md:order-3 col-span-3 md:col-span-3 flex justify-end">
                     <Actions />
                 </div>
             </div>

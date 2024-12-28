@@ -21,8 +21,6 @@ const isOpenModal = ref(false);
 const currentId = ref<number>();
 
 const onDelete = async () => {
-  console.log("on confirm", currentId.value);
-  
   if (currentId.value) {
     await deleteLesson(currentId.value);
   }
@@ -83,6 +81,6 @@ onMounted(async () => {
         </template>
       </draggable>
     </ScrollArea>
-    <div v-else class="text-gray-500 dark:text-gray-400">Bo'lim mavjus emas</div>
+    <div v-else class="text-gray-500 dark:text-gray-400">Darslik mavjus emas</div>
   </template>
 </template>
