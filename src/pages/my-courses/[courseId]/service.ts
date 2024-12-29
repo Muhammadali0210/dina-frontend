@@ -36,6 +36,23 @@ function useUpdateCourseInfo() {
     return { isLoading, data, updateCourseInfo }
 }
 
+function useDeleteCourse() {
+    const isDeleting = ref<boolean>(false);
+    const data = ref();
+    const deleteCourse = async (id: number) => {
+      try {
+        isDeleting.value = true;
+        const res = await ApiService.deleteByToken(`/course/${id}`);
+        data.value = res;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        isDeleting.value = false;
+      }
+    }
+    return { isDeleting, data, deleteCourse }
+}
+
 function useCreateSection() {
   const sectionLoading = ref<boolean>(false);
   const sectionData = ref();
@@ -71,4 +88,4 @@ function useCreateSection() {
   return { sectionLoading, sectionData, getSection, createSection }
 }
 
-export { useGetCourseInfo, useUpdateCourseInfo, useCreateSection }; 
+export { useGetCourseInfo, useUpdateCourseInfo, useDeleteCourse, useCreateSection }; 
