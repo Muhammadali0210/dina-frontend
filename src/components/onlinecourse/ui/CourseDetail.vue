@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="w-full bg-white dark:bg-gray-700 md:p-[30px] p-[20px]">
+    <div class="w-full bg-white dark:bg-gray-800 md:p-[30px] p-[20px]">
         <h1 class="dark:text-white text-gray-900 font-bold text-[24px]">Nimalarni o'rganasiz</h1>
         <div class="grid md:grid-cols-2 grid-cols-1">
            <div>
