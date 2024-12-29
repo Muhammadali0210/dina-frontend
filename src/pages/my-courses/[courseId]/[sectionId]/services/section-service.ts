@@ -18,21 +18,21 @@ function useGetSectionInfo() {
   return { isLoading, data, getSectionInfo }
 }
 
-function useUpdateSectionInfo() {
-  const isLoading = ref<boolean>(false);
+function useUpdateSectionTitle() {
+  const isUpdating = ref<boolean>(false);
   const data = ref();
-  const updateSectionInfo = async (url: string, data: any)  => {
+  const updateSectionTitle = async (url: string, data: any) => {
     try {
-      isLoading.value = true;
+      isUpdating.value = true;
       const res: any = await ApiService.updateByIdToken(url, data);
       data.value = res;
     } catch (error) {
       console.log(error);
     } finally {
-      isLoading.value = false;
+      isUpdating.value = false;
     }
   }
-  return { isLoading, data, updateSectionInfo }
+  return { isUpdating, data, updateSectionTitle }
 }
 
 function useDeleteSection() {
@@ -52,4 +52,4 @@ function useDeleteSection() {
     return { isLoading, deleteSection }
 }
 
-export { useGetSectionInfo, useUpdateSectionInfo, useDeleteSection }
+export { useGetSectionInfo, useUpdateSectionTitle, useDeleteSection }

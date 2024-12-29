@@ -6,16 +6,21 @@ import { RouterLink, useRoute } from "vue-router"
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import Actions from "./_components/Actions.vue"
-import { useGetSectionInfo } from "./services/service";
+import { useGetSectionInfo } from "./services/section-service";
 import SectionField from "./_components/SectionField.vue";
 import Lessons from "./_components/Lessons.vue";
+const { isLoading, data, getSectionInfo } = useGetSectionInfo();
 
 const router = useRoute()
+const sectionData = ref();
+const updateHandler = (newData) => {
+    sectionData.value = newData.value;
+    
+}
 
-const { isLoading, data, getSectionInfo } = useGetSectionInfo()
-
-onMounted(() => {
-    getSectionInfo(Number(router.params.sectionId))
+onMounted(async() => {
+    await getSectionInfo(Number(router.params.sectionId))
+    sectionData.value = data.value;
 })
 </script>
 <template>
@@ -33,7 +38,7 @@ onMounted(() => {
                 
                 <div class="order-3 md:order-2 col-span-6 md:col-span-8">
                     <Skeleton v-if="isLoading" class="h-[31px] w-[250px] max-sm:w-[150px] mb-2" />
-                    <h3 v-else class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white">{{ data ? data.title : "Malumot yuklanmadi" }}</h3>
+                    <h3 v-else class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white">{{ sectionData ? sectionData.title : "Malumot yuklanmadi" }}</h3>
                     <p class="text-sm text-muted-foreground">
                         Modul haqida malumot
                     </p>
@@ -48,7 +53,7 @@ onMounted(() => {
         <div class="grid grid-cols-2 gap-4 max-md:grid-cols-1">
             <Lessons />
             <div>
-                <SectionField :section="data" :data-loading="isLoading" />
+                <SectionField :section="sectionData" :data-loading="isLoading" @onUpdated="updateHandler" />
             </div>
         </div>
     </div>
