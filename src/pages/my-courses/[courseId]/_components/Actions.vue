@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-// import { useDeleteSection } from "../services/service";
 import ConfirmDeleteModal from "@/components/modals/ConfirmDeleteModal.vue";
+import { useDeleteCourse } from "../service.ts";
 
-// const { isLoading, deleteSection } = useDeleteSection();
-const router = useRoute();
-const route = useRouter();
+const { isDeleting, data, deleteCourse } = useDeleteCourse();
+const route = useRoute();
+const router = useRouter();
 const deletehandler = async () => {
-    // await deleteSection(Number(router.params.sectionId));
-    route.push(`/my-courses/${router.params.id}`);
+    await deleteCourse(Number(route.params.id));
+    router.push('/my-courses');
 }
 </script>
 <template>
-    <ConfirmDeleteModal @onConfirm="deletehandler" :is-loading="false" />
+    <ConfirmDeleteModal @onConfirm="deletehandler" :is-loading="isDeleting" />
 </template>
