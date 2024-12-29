@@ -8,8 +8,8 @@ import LessonTask from './ui/LessonTask.vue'
 </script>
 <template>
   <div class="custom-container pb-10 ">
-    <!-- <VideoComponent />
-    <LessonVocobulary /> -->
+    <VideoComponent />
+    <LessonVocobulary />
     <LessonTask/>
   </div>
 

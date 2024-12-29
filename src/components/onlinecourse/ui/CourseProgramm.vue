@@ -15,7 +15,7 @@ const lessonModuleCount = lessonData.length;
 
 
 <template>
-    <div class="w-full bg-white dark:bg-gray-700 p-[30px]">
+    <div class="w-full bg-white dark:bg-gray-800 p-[30px]">
         <h1 class="dark:text-white text-gray-900 font-bold text-[24px]">Dastur</h1>
         <div class="gridT grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
 

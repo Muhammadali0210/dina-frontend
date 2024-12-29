@@ -1,6 +1,6 @@
 <template lang="html">
     <div v-for="item in courseData" :key="item.id"
-        class="border w-full border-gray-400 dark:border-gray-700 dark:bg-slate-800 bg-white cursor-pointer">
+        class="border w-full border-gray-400  dark:bg-slate-800 bg-white cursor-pointer">
         <div class="relative">
             <img class="h-[180px] w-full object-cover" :src="item.image" alt="course image">
             <div class="grid grid-cols-3 absolute bottom-0">
