@@ -53,7 +53,7 @@ onMounted(async () => {
             v-else
             class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white"
           >
-            {{ data ? data.title : "Malumot yuklanmadi" }}
+            {{ courseData ? courseData.title : "Malumot yuklanmadi" }}
           </h3>
           <p class="text-sm text-muted-foreground">Modul haqida malumot</p>
         </div>

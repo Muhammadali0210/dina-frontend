@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Edit2, X, Loader } from "lucide-vue-next";
 import useToggleEdit from "@/hooks/use-toggle-edit";
 const { state, onToggle } = useToggleEdit();
-import { useUpdateSectionInfo } from "../services/service";
+import { useUpdateSectionTitle } from "../services/section-service";
 import * as z from "zod";
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
@@ -19,8 +19,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRoute } from "vue-router";
+import SubmitButton from "@/ui/SubmitButton.vue";
 
-const { isLoading, data, updateSectionInfo } = useUpdateSectionInfo();
+const { isUpdating, data, updateSectionTitle } = useUpdateSectionTitle();
+
+const route = useRoute();
 
 const props = defineProps({
   state: Boolean,
@@ -64,9 +68,10 @@ watch(
 );
 
 const onSubmit = handleSubmit(async (values: any) => {
-  await updateSectionInfo(`/sections/${20}`, values);
-  emit("onUpdated", data);
+  await updateSectionTitle(`/section-title/${route.params.sectionId}`, values);
+  emit("onUpdated", values);
   resetForm();
+  onToggle();
 });
 </script>
 
@@ -84,7 +89,7 @@ const onSubmit = handleSubmit(async (values: any) => {
     <CardContent>
       <Separator class="mb-2" />
       <div v-if="!state" class="flex">
-        <Skeleton v-if="dataLoading || !section" class="h-[22px] w-[190px]" />
+        <Skeleton v-if="dataLoading || !props.section" class="h-[22px] w-[190px]" />
         <h1 v-else class="font-normal">{{ props.section?.title }}</h1>
       </div>
       <div v-else>
@@ -105,12 +110,7 @@ const onSubmit = handleSubmit(async (values: any) => {
             </FormField>
 
             <div class="flex">
-              <Button type="submit">
-                <template v-if="!isLoading"> Saqlash </template>
-                <template v-else>
-                  <Loader class="animate-spin" /> Yuborilmoqda...
-                </template>
-              </Button>
+              <SubmitButton :isLoading="isUpdating" />
             </div>
           </div>
         </form>
