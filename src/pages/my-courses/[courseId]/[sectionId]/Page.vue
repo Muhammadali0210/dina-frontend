@@ -13,7 +13,7 @@ const { isLoading, data, getSectionInfo } = useGetSectionInfo();
 
 const router = useRoute()
 const sectionData = ref();
-const updateHandler = (newData) => {
+const updateHandler = (newData: any) => {
     sectionData.value = newData.value;
     
 }
