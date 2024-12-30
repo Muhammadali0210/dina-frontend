@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, onMounted, nextTick, watch } from "vue";
+import { defineProps, defineEmits, ref, onMounted, nextTick, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import { Grip, Pencil, Trash2 } from "lucide-vue-next";
 import draggable from "vuedraggable";
@@ -31,6 +31,10 @@ const deleteHandler = async (id: number) => {
   currentId.value = id;
   isOpenModal.value = true;
 }
+
+const emit = defineEmits<{
+  (e: 'onEdit', element: any): void;
+}>();
 
 watch(
   () => lessonStore.getLesson,
@@ -74,7 +78,7 @@ onMounted(async () => {
             </div>
 
             <div class="flex gap-3 p-2">
-              <Pencil class="size-4 cursor-pointer" />
+              <Pencil class="size-4 cursor-pointer" @click="emit('onEdit', element)" />
               <Trash2 class="size-4 cursor-pointer" @click="deleteHandler(element._id)" />
             </div>
           </div>

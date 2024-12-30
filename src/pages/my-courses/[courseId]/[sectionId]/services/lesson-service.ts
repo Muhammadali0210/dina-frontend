@@ -37,20 +37,20 @@ function useCreateLesson() {
 }
 
 function useUpdateLesson() {
-  const isLoading = ref<boolean>(false);
-  const data = ref();
+  const lessonStore = useLessonStore()
+  const updateLoading = ref<boolean>(false);
   const updateLesson = async (url: string, data: any) => {
     try {
-      isLoading.value = true;
+      updateLoading.value = true;
       const res: any = await ApiService.updateByIdToken(url, data);
-      data.value = res;
+      lessonStore.setLesson(res);
     } catch (error) {
       console.log(error);
     } finally {
-      isLoading.value = false;
+      updateLoading.value = false;
     }
   }
-  return { isLoading, data, updateLesson }
+  return { updateLoading, updateLesson }
 }
 
 function useDeleteLesson() {
