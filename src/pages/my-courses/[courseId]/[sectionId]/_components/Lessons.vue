@@ -69,7 +69,19 @@ const onSubmit = handleSubmit(async (values) => {
   resetForm();
 });
 
-const lessons = ref([]);
+interface ILesson {
+  _id?: number;
+  title: string;
+  videoUrl: string;
+  duration: {
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+  sectionId: number;
+}
+
+const lessons = ref<ILesson[]>([]);
 const isUpdate = ref<boolean>(false);
 const updateId = ref<number>();
 
@@ -98,14 +110,16 @@ const closeEdit = () => {
   updateId.value =  0;
 }
 
+
 onMounted(async () => {
   lessons.value = await lessonStore.getLesson;
-  // if(lessons.value.length > 0 && route.params.sectionId != lessons.value[0]?.sectionId) {
-  //   await getLessonInfo(Number(route.params.sectionId));
-  // } else {
-  //   await getLessonInfo(Number(route.params.sectionId));
-  // }
-  await getLessonInfo(Number(route.params.sectionId));
+  if (lessons.value.length > 0 && String(route.params.sectionId) !== String(lessons.value[0].sectionId)) {
+    await getLessonInfo(Number(route.params.sectionId));
+  } else if (lessons.value.length === 0) {
+    await getLessonInfo(Number(route.params.sectionId));
+  } else if(lessons.value.length > 0 && String(route.params.sectionId) === String(lessons.value[0].sectionId)) {
+    return;
+  }
 });
 </script>
 <template>
