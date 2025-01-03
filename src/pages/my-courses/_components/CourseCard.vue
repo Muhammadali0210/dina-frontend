@@ -6,6 +6,8 @@ import {
   CardFooter,
   CardTitle
 } from "@/components/ui/card";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const props = defineProps({
     data: {
@@ -21,7 +23,7 @@ const props = defineProps({
         </CardContent>
         <CardFooter class="flex justify-between p-0 mt-3">
           <CardTitle>{{ data.title }}</CardTitle>
-          <Button>{{ data.published ? "Ochish" : "Yopish" }}</Button>
+          <Button @click="router.push(`/my-courses/${data._id}`)">Batafsil</Button>
         </CardFooter>
     </Card>
 </template>

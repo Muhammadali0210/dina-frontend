@@ -3,20 +3,20 @@ import type { Course } from '@/types/index'
 import { ApiService } from '@/services/apiServices';
 
 function useGetCourseInfo() {
-    const isLoading = ref<boolean>(false);
-    const data = ref();
+    const getLoading = ref<boolean>(false);
+    const courseInfo = ref();
     const getCourseInfo = async (id: number) => {
         try {
-          isLoading.value = true;
+          getLoading.value = true;
           const res: Course = await ApiService.getByIdToken(`/course/${id}`);
-          data.value = res;
+          courseInfo.value = res;
         } catch (error) {
           console.log(error);
         } finally {
-          isLoading.value = false;
+          getLoading.value = false;
         }
     }
-    return { isLoading, data, getCourseInfo }
+    return { getLoading, courseInfo, getCourseInfo }
 }
 
 function useUpdateCourseInfo() {

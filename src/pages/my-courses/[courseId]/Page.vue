@@ -10,18 +10,21 @@ import SelectFields from "./_components/SelectFields.vue";
 import SectionsField from "./_components/SectionsField.vue";
 import ImagesField from "./_components/ImagesField.vue";
 import PriceField from "./_components/PriceField.vue";
-import { useGetCourseInfo } from "./service";
+import { useGetCourseInfo, useUpdateCourseInfo } from "./service";
 import { RouterLink } from "vue-router";
 import { Separator } from "radix-vue";
-import { ChevronLeftCircle } from "lucide-vue-next";
+import { ChevronLeftCircle, Loader } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import Actions from "./_components/Actions.vue";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const router = useRoute();
-const { isLoading, data, getCourseInfo } = useGetCourseInfo();
+const { getLoading, courseInfo, getCourseInfo } = useGetCourseInfo();
+const { isLoading, data, updateCourseInfo } = useUpdateCourseInfo();
+
 const courseData = ref();
 const isUpdated = ref(false);
+const isPublished = ref<boolean>(false);
 
 const onUpdate = async (newData: any) => {
   isUpdated.value = false;
@@ -29,14 +32,21 @@ const onUpdate = async (newData: any) => {
   isUpdated.value = true;
 };
 
+const onPublish = async () => {
+ isPublished.value = !isPublished.value
+ await updateCourseInfo(Number(router.params.id), {published: isPublished.value});
+}
+
 onMounted(async () => {
   await getCourseInfo(Number(router.params.id));
-  courseData.value = data?.value;
+  courseData.value = courseInfo?.value;
+  isPublished.value = courseInfo?.value.published;
+
 });
 </script>
 
 <template>
-  <div class="bg-white dark:bg-gray-800 p-4 rounded-md max-w-[1400px] mx-auto">
+  <div class="bg-white dark:bg-gray-800 p-4 rounded-md mx-auto custom-container">
     <div>
       <div class="grid grid-cols-6 md:grid-cols-12 gap-3 items-center">
         <div class="order-1 md:order-1 col-span-3 md:col-span-1">
@@ -48,7 +58,7 @@ onMounted(async () => {
         </div>
 
         <div class="order-3 md:order-2 col-span-6 md:col-span-8">
-          <Skeleton v-if="isLoading" class="h-[31px] w-[250px] max-sm:w-[150px] mb-2" />
+          <Skeleton v-if="getLoading" class="h-[31px] w-[250px] max-sm:w-[150px] mb-2" />
           <h3
             v-else
             class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white"
@@ -58,7 +68,14 @@ onMounted(async () => {
           <p class="text-sm text-muted-foreground">Modul haqida malumot</p>
         </div>
 
-        <div class="order-2 md:order-3 col-span-3 md:col-span-3 flex justify-end">
+        <div class="order-2 md:order-3 col-span-3 md:col-span-3 flex gap-2 justify-end">
+          <Button @click="onPublish">
+            <template v-if="isLoading"><Loader class="animate-spin" /></template>
+            <template v-else>
+              <template v-if="!isPublished">Ochish</template>
+              <template v-else>Yopish</template>
+            </template>
+          </Button>
           <Actions />
         </div>
       </div>

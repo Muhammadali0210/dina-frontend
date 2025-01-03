@@ -22,16 +22,22 @@ import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 
+import LessonTask from '@/views/onlinecourse/LessonTask.vue'
 import CourseLayout from '@/layouts/CourseLayout.vue';
 import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
 import CourseView from '@/views/onlinecourse/CourseView.vue';
 
-import CreateCourse from '@/pages/create-course/Page.vue';
+// Online Courses pages
+import OnlineCourses from '@/pages/online-courses/Page.vue';
+import OnlineCourseId from '@/pages/online-courses/[onlineCourseId]/Page.vue';
+
+// My Courses Pages
 import MyCourses from '@/pages/my-courses/Page.vue';
 import CourseId from "@/pages/my-courses/[courseId]/Page.vue"
 import SectionId from '@/pages/my-courses/[courseId]/[sectionId]/Page.vue';
-import LessonTask from '@/views/onlinecourse/LessonTask.vue'
 
+// Create Course Pages
+import CreateCourse from '@/pages/create-course/Page.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -187,6 +193,19 @@ const router = createRouter({
       name: 'CreateCourse',
       component: CreateCourse,
       meta: {layout : MainLayout}
+    },
+    {
+      path: '/online-courses',
+      name: 'OnlineCourses',
+      component: OnlineCourses,
+      meta: {layout : MainLayout}
+    },
+    {
+      path: '/online-courses/:id',
+      name: 'OnlineCourseId',
+      component: OnlineCourseId,
+      meta: { layout: MainLayout },
+      props: true,
     },
     {
       path: '/my-courses',

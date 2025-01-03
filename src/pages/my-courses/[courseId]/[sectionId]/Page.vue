@@ -25,7 +25,7 @@ onMounted(async() => {
 </script>
 <template>
 
-    <div class="bg-white dark:bg-gray-800 p-4 rounded-md max-w-[1400px] mx-auto">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-md mx-auto custom-container">
         <div>
             <div class="grid grid-cols-6 md:grid-cols-12 gap-3 items-center">
                 <div class="order-1 md:order-1 col-span-3 md:col-span-1">

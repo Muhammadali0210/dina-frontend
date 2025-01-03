@@ -1,13 +1,11 @@
 <template lang="html">
-    <div class="custom-container">
-        <PageContainer title="Mavjud kurslar">
-            <div @click="courseHandler" class="w-full grid md:grid-cols-3 gap-4 sm:grid-cols-2 grid-cols-1">
-                <CourseInfoSkeleton v-if="!isTime" />
-                <CourseCard v-if="isTime" :courseData="courseData" />
-                <CourseInfoSkeleton v-if="!isTime" />
-            </div>
-        </PageContainer>
-    </div>
+    <PageContainer title="Mavjud kurslar">
+        <div @click="courseHandler" class="w-full grid md:grid-cols-3 gap-4 sm:grid-cols-2 grid-cols-1">
+            <CourseInfoSkeleton v-if="!isTime" />
+            <CourseCard v-if="isTime" :courseData="courseData" />
+            <CourseInfoSkeleton v-if="!isTime" />
+        </div>
+    </PageContainer>
 </template>
 
 <script>
