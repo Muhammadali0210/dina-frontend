@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Edit2, X, Loader } from "lucide-vue-next";
+import useToggleEdit from "@/hooks/use-toggle-edit";
+const { state, onToggle } = useToggleEdit();
+import { useUpdateSectionTitle } from "../services/section-service";
+import * as z from "zod";
 import { useForm } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/zod";
+import { defineProps, ref, watch, onMounted } from "vue";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   FormControl,
   FormField,
@@ -10,40 +18,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import * as z from "zod";
-import { toTypedSchema } from "@vee-validate/zod";
-import { useUpdateCourseInfo } from "../service";
-import { Skeleton } from "@/components/ui/skeleton";
-import SubmitButton from "../shared/SubmitButton.vue";
-import { ref } from "vue";
-import { X, BadgePlus } from "lucide-vue-next";
-import useToggleEdit from "@/hooks/use-toggle-edit";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SectionList from "../shared/SectionList.vue";
-const { state, onToggle } = useToggleEdit();
+import { Input } from "@/components/ui/input";
+import { useRoute } from "vue-router";
+import SubmitButton from "@/ui/SubmitButton.vue";
 
-const sections = ref([
-  {
-    path: "1-Module",
-  },
-  {
-    path: "2-Module",
-  },
-  {
-    path: "3-Module",
-  },
-  {
-    path: "4-Module",
-  },
-  {
-    path: "5-Module",
-  },
-]);
+const { isUpdating, data, updateSectionTitle } = useUpdateSectionTitle();
 
-const { isLoading, data, updateCourseInfo } = useUpdateCourseInfo();
+const route = useRoute();
+
 const props = defineProps({
   state: Boolean,
-  course: Object,
+  section: Object,
+  dataLoading: Boolean,
 });
 
 const formSchema = toTypedSchema(
@@ -54,38 +40,57 @@ const formSchema = toTypedSchema(
   })
 );
 
-const { handleSubmit, resetForm } = useForm({
+const { handleSubmit, resetForm, setValues } = useForm({
   validationSchema: formSchema,
+  initialValues: {
+    title: "", // Dastlab bo'sh
+  },
 });
 
 const emit = defineEmits<{
   (e: "onUpdated", data: any): void;
 }>();
 
-const onSubmit = handleSubmit(async (values) => {
-  await updateCourseInfo(Number(props.course?._id), values);
-  emit("onUpdated", data);
+// Form qiymatini `props.section?.title` ga ulash
+onMounted(() => {
+  if (props.section?.title) {
+    setValues({ title: props.section.title });
+  }
+});
+
+watch(
+  () => props.section?.title,
+  (newTitle) => {
+    if (newTitle) {
+      setValues({ title: newTitle });
+    }
+  }
+);
+
+const onSubmit = handleSubmit(async (values: any) => {
+  await updateSectionTitle(`/section-title/${route.params.sectionId}`, values);
+  emit("onUpdated", values);
   resetForm();
+  onToggle();
 });
 </script>
+
 <template>
   <Card>
     <CardHeader class="pb-2">
       <div class="flex items-center justify-between">
-        <CardTitle>Bo'limlar</CardTitle>
+        <CardTitle>Bo'lim nomi</CardTitle>
         <Button variant="ghost" @click="onToggle()">
           <X v-if="state" />
-          <BadgePlus v-else />
+          <Edit2 v-else />
         </Button>
       </div>
     </CardHeader>
     <CardContent>
       <Separator class="mb-2" />
       <div v-if="!state" class="flex">
-        <Skeleton v-if="isLoading || !course" class="h-[22px] w-[190px]" />
-        <div v-else class="w-full">
-          <SectionList :sections="sections" />
-        </div>
+        <Skeleton v-if="dataLoading || !props.section" class="h-[22px] w-[190px]" />
+        <h1 v-else class="font-normal">{{ props.section?.title }}</h1>
       </div>
       <div v-else>
         <form @submit.prevent="onSubmit">
@@ -96,7 +101,6 @@ const onSubmit = handleSubmit(async (values) => {
                 <FormControl>
                   <Input
                     type="text"
-                    :default-value="props.course?.title"
                     v-model="field.value"
                     v-bind="field"
                   />
@@ -106,7 +110,7 @@ const onSubmit = handleSubmit(async (values) => {
             </FormField>
 
             <div class="flex">
-              <SubmitButton :is-loading="isLoading" />
+              <SubmitButton :isLoading="isUpdating" />
             </div>
           </div>
         </form>

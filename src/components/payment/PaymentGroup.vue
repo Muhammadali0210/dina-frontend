@@ -93,11 +93,14 @@ import Loader from '@/ui/Loader.vue';
 import { useCurrentIdStore } from '@/stores/currentId';
 import DatePicker from '@/ui/DatePicker.vue';
 import PaymentModal from '@/ui/PaymentModal.vue';
+import { useRoute } from "vue-router"
 export default {
     setup() {
         const currentIdStore = useCurrentIdStore()
+        const router = useRoute()
         return {
-            currentIdStore
+            currentIdStore,
+            router
         }
     },
     components: {
@@ -141,7 +144,7 @@ export default {
             try {
                 this.isLoading = true
                 this.currentData.month = this.choosenDate.slice(0, 7)
-                this.currentData.group_id = localStorage.getItem('groupId')
+                this.currentData.group_id = this.router.params.id
                 const res = await ApiService.postByToken(this.url, this.currentData, this.token)
                 this.users = res
                 this.isLoading = false

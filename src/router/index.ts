@@ -25,9 +25,11 @@ import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 import CourseLayout from '@/layouts/CourseLayout.vue';
 import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
 import CourseView from '@/views/onlinecourse/CourseView.vue';
-import CourseCreateView from '@/views/course-create/CourseCreateView.vue';
-import CourseInstructorView from '@/views/course-instructor/CourseInstructorView.vue';
-import CourseInstructorUpdateView from '@/views/course-instructor/CourseInstructorUpdateView.vue';
+
+import CreateCourse from '@/pages/create-course/Page.vue';
+import MyCourses from '@/pages/my-courses/Page.vue';
+import CourseId from "@/pages/my-courses/[courseId]/Page.vue"
+import SectionId from '@/pages/my-courses/[courseId]/[sectionId]/Page.vue';
 import LessonTask from '@/views/onlinecourse/LessonTask.vue'
 
 
@@ -179,24 +181,37 @@ const router = createRouter({
       component: LessonTask,
       meta: {layout : CourseLayout}
     },
+
     {
-      path: '/course/create',
-      name: 'create-course',
-      component: CourseCreateView,
+      path: '/create-course',
+      name: 'CreateCourse',
+      component: CreateCourse,
       meta: {layout : MainLayout}
     },
     {
-      path: '/courses-instructor',
-      name: 'courses-instructor',
-      component: CourseInstructorView,
+      path: '/my-courses',
+      name: 'MyCourses',
+      component: MyCourses,
       meta: {layout : MainLayout}
     },
     {
-      path: '/course-instructor/update/:id',
-      name: 'update-instructor',
-      component: CourseInstructorUpdateView,
-      meta: {layout : MainLayout}
-    }
+      path: '/my-courses/:id',
+      name: 'CourseId',
+      component: CourseId,
+      meta: { layout: MainLayout },
+      props: true,
+    },
+    {
+      path: '/my-courses/:id/:sectionId',
+      name: 'SectionId',
+      component: SectionId,
+      meta: { layout: MainLayout },
+      props: (route) => ({
+        courseId: Number(route.params.id),
+        sectionId: Number(route.params.sectionId),
+        type: route.query.type,
+      }),
+    },
   
   ]
 })

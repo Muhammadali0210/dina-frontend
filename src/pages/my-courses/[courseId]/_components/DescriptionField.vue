@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, defineProps, defineEmits } from "vue";
 import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "vee-validate";

@@ -35,3 +35,28 @@
         max-width: 100%;
     }
 }
+
+
+body::-webkit-scrollbar {
+    width: 10px;
+    /* Scrollbar kengligi */
+}
+
+body::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    /* Scrollbar trekining fon rangi */
+    border-radius: 10px;
+    /* Scrollbar trekining burchak radiusi */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Scrollbar thumbning rangi */
+    border-radius: 10px;
+    /* Scrollbar thumbning burchak radiusi */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Hover qilinganida scrollbar thumbning rangi */
+}

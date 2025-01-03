@@ -129,7 +129,7 @@ export  class ApiService {
         }
     }
 
-    static async updateByIdToken<T>(url: string, data: any, token: string) {
+    static async updateByIdToken<T>(url: string, data: any) {
         try {
             const response = await axios.put(BaseUrl + url, data, {
                 headers: {
@@ -151,7 +151,7 @@ export  class ApiService {
         }
     }
 
-    static async deleteByToken<T>(url: string, token: string) {
+    static async deleteByToken<T>(url: string) {
         try {
             const response = await axios.delete(BaseUrl + url, {
                 headers: {

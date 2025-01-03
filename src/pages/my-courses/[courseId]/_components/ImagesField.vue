@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from "vue";
+import { nextTick, onMounted, ref, defineProps, defineEmits } from "vue";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Loader } from "lucide-vue-next";
@@ -73,7 +73,6 @@ const uploadFile = async () => {
 
 onMounted(async () => {
   await nextTick();
-  console.log(fileInput.value); // Fayl input DOM element mavjudligini tekshirish
 });
 </script>
 

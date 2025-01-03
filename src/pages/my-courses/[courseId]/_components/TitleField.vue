@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, defineProps, defineEmits } from "vue";
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useForm } from "vee-validate";
@@ -31,7 +31,10 @@ const formSchema = toTypedSchema(
 );
 
 const { handleSubmit, resetForm } = useForm({
-  validationSchema: formSchema
+  validationSchema: formSchema,
+  initialValues: {
+    title:  props.course?.title,
+  },
 });
 
 const emit  = defineEmits<{

@@ -9,7 +9,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { Edit2, X } from "lucide-vue-next";
 import useToggleEdit from '@/hooks/use-toggle-edit';
-import { watch } from 'vue';
+import { watch, defineProps, defineEmits } from 'vue';
 const {state, onToggle} = useToggleEdit();
 
 const props = defineProps({
