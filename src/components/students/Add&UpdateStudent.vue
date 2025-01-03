@@ -54,7 +54,9 @@
                         </div>
                         <div class="w-full">
                             <label for="item-weight"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Guruhlar</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Guruhlar
+                            </label>
 
                             <DropdownMenu class="dropdown dropdown-bottom w-full">
                                 <DropdownMenuTrigger tabindex="0" role="button"
@@ -66,27 +68,28 @@
                                             stroke-width="2" d="m1 1 4 4 4-4" />
                                     </svg>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent>
-                                    <div tabindex="0"
-                                        class="dropdown-content menu z-[10] p-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-                                        <DropdownMenuItem>
-                                            <li v-if="groups" v-for="(group, index)  in groups" :key="index">
-                                                <a class="cursor-pointer">
+
+                                <DropdownMenuContent tabindex="1"
+                                    class="menu z-[10] p-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">  
+                                        <ul class="space-y-1">
+                                            <DropdownMenuItem v-if="groups" v-for="(group, index) in groups" :key="index"
+                                                class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                                                <a class="flex items-center gap-3 w-full cursor-pointer">
                                                     <input :id="group._id" v-model="userData.group_ids"
                                                         :value="group._id"
                                                         :checked="userData.group_ids.includes(group._id)"
                                                         type="checkbox"
-                                                        class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded-sm">
+                                                        class="w-5 h-5 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2" />
                                                     <label :for="group._id"
-                                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{
-                                                        group.name }}</label>
+                                                        class="text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        {{ group.name }}
+                                                    </label>
                                                 </a>
+                                            </DropdownMenuItem>
+                                            <li v-if="!groups" class="flex justify-center items-center h-10">
+                                                <p class="text-gray-500 dark:text-gray-400">Yuklanmoqda...</p>
                                             </li>
-                                            <li v-if="!groups" class="flex justify-center h-10">
-                                                <p>Yuklanmoqda...</p>
-                                            </li>
-                                            </DropdownMenuItem >
-                                             </div>
+                                        </ul>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
@@ -139,11 +142,17 @@ export default {
     },
     components: {
         Loader,
-        ErrorAlert
+        ErrorAlert,
+        DropdownMenu,
+        DropdownMenuContent,
+        DropdownMenuItem,
+        DropdownMenuLabel,
+        DropdownMenuSeparator,
+        DropdownMenuTrigger,
     },
-    data(){
+    data() {
         return {
-            token: localStorage.getItem('token'),   
+            token: localStorage.getItem('token'),
             userData: {
                 role: "student",
                 first_name: "",
@@ -165,7 +174,7 @@ export default {
         }
     },
     methods: {
-        async getDataById(){
+        async getDataById() {
             try {
                 this.isLoading = true;
                 const response = await ApiService.getByIdToken(`${this.url}/${this.currentId}`, this.currentId, this.token);
@@ -182,15 +191,15 @@ export default {
                 this.isLoading = false;
             }
         },
-        async handleSubmit(){
+        async handleSubmit() {
             this.isSubmiting = true;
-            if(this.currentId){
+            if (this.currentId) {
                 this.handleUpdate();
             } else {
                 this.handleAdd();
             }
         },
-        async handleAdd(){
+        async handleAdd() {
             try {
                 const response = await ApiService.postByToken(this.url, this.userData, this.token);
                 this.$router.push('/students')
@@ -201,7 +210,7 @@ export default {
                 this.isSubmiting = false;
             }
         },
-        async handleUpdate(){
+        async handleUpdate() {
             try {
                 const response = await ApiService.updateByIdToken(`${this.url}/${this.currentId}`, this.userData, this.token);
                 this.$router.push('/students')
@@ -215,12 +224,10 @@ export default {
 
     },
     mounted() {
-        if(this.currentId){
+        if (this.currentId) {
             this.getDataById();
         }
-    },  
+    },
 }
 </script>
-<style>
-    
-</style>
+<style></style>
