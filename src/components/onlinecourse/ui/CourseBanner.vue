@@ -1,5 +1,5 @@
 <template lang="">
-   <div class="w-full bg-white/55 backdrop-blur-md dark:bg-gray-700 md:p-[30px] p-[20px] grid lg:grid-cols-2 grid-cols-1">
+   <div class="w-full bg-white/55 backdrop-blur-md dark:bg-gray-800 md:p-[30px] p-[20px] grid lg:grid-cols-2 grid-cols-1">
 
     <div class="order-2 lg:order-1 ">
         <h1 class="dark:text-white  text-gray-900 text-[30px] font-bold">VueJS & VueX</h1>

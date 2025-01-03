@@ -19,6 +19,12 @@ data.value = resultData
             <div v-for="(result, index) in data" :key="index"
                 class="h-[350px]  max-sm:h-[240px]  group relative rounded-xl overflow-hidden card w-full ">
 
+                <img class="" :src="result.link" alt="">
+                class="h-[350px] max-sm:h-[300px] border border-border group relative rounded-xl overflow-hidden card w-full ">
+                
+            class="h-[350px] max-sm:h-[300px] border border-border group relative rounded-xl overflow-hidden card w-full ">
+
+
                 <img :src="result.link" alt="result image" class="w-full h-full object-cover" >
                 <Dialog class="p-0">
                     <DialogTrigger
