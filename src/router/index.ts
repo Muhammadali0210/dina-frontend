@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from '@/layouts/DefaultLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
+
 import DashboardView from '@/views/dashboard/DashboardView.vue';
 import LoginView from '@/views/auth/LoginView.vue';
 import StudentsView from '@/views/students/StudentsView.vue';
@@ -30,6 +31,9 @@ import CourseView from '@/views/onlinecourse/CourseView.vue';
 // Online course
 import OnlineCourse from '@/pages/online-courses/Page.vue';
 import OnlineCourseId from '@/pages/online-courses/[courseId]/Page.vue'
+// lesson dashboard
+import LessonDashboardLayout from '@/pages/(lesson-dashboard)/Layout.vue';
+import LessonId from '@/pages/(lesson-dashboard)/[lessonId]/Page.vue';
 
 // My courses
 import MyCourses from '@/pages/my-courses/Page.vue';
@@ -229,6 +233,14 @@ const router = createRouter({
         sectionId: Number(route.params.sectionId),
         type: route.query.type,
       }),
+    },
+
+    {
+      path: '/lesson-dashboard/:id',
+      name: 'LessonDashboard',
+      component: LessonId,
+      meta: { layout: LessonDashboardLayout },
+      props: true,
     },
   
   ]
