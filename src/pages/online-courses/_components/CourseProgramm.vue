@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CourseItemList from '../ui/CourseItemList.vue'
+import CourseItemList from '../_components/CourseItemList.vue'
 import { ref } from "vue"
 import { lessonData } from '@/constants/LessonData'
 
@@ -15,7 +15,7 @@ const lessonModuleCount = lessonData.length;
 
 
 <template>
-    <div class="w-full bg-white dark:bg-gray-800 p-[30px]">
+    <div class="w-full bg-white dark:bg-gray-900 p-[30px]">
         <h1 class="dark:text-white text-gray-900 font-bold text-[24px]">Dastur</h1>
         <div class="gridT grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
 
@@ -26,7 +26,7 @@ const lessonModuleCount = lessonData.length;
                         d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
                 </svg>
                 <h3 class="dark:text-white text-gray-700 text-[16px]">Modullar Soni</h3>
-                <h1 class="dark:text-white text-gray-700 text-[24px]">{{ lessonModuleCount  }} Ta</h1>
+                <h1 class="dark:text-white text-gray-700 text-[24px]">{{ lessonModuleCount }} Ta</h1>
             </div>
 
             <div class="text-left">
@@ -36,7 +36,7 @@ const lessonModuleCount = lessonData.length;
                         d="M19 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1Zm0 0-4 4m5 0H4m1 0 4-4m1 4 4-4m-4 7v6l4-3-4-3Z" />
                 </svg>
                 <h3 class="dark:text-white text-gray-700 text-[16px]">Darslar Soni</h3>
-                
+
                 <h1 class="dark:text-white text-gray-700 text-[24px]">{{ lessonCounter }} Ta</h1>
             </div>
 
@@ -51,8 +51,8 @@ const lessonModuleCount = lessonData.length;
             </div>
 
         </div>
-        <CourseItemList/>
-         </div>
+        <CourseItemList />
+    </div>
 </template>
 
 

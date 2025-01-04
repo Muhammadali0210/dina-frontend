@@ -30,7 +30,7 @@ export const sidebarData = [
         `
     },
     {
-        path: '/course',
+        path: '/online-courses',
         title: "Online Darslar",
         role: ['admin', 'teacher','student'],
         icon: `
