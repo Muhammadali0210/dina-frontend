@@ -41,7 +41,7 @@ export const sidebarData = [
     },
     {
         path: '/my-courses',
-        title: "Kurslar",
+        title: "Barcha Kurslar",
         role: ['admin', 'teacher'],
         icon: `
         <svg class="w-6 h-6 text-green-500 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
