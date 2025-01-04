@@ -25,7 +25,6 @@ import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 import LessonTask from '@/views/onlinecourse/LessonTask.vue'
 import CourseLayout from '@/layouts/CourseLayout.vue';
 import CourseInfoView from '@/views/onlinecourse/CourseInfoView.vue';
-import CourseView from '@/views/onlinecourse/CourseView.vue';
 
 // Online Courses pages
 import OnlineCourses from '@/pages/online-courses/Page.vue';
@@ -160,12 +159,6 @@ const router = createRouter({
       path: '/booksview',
       name: 'viewLayout',
       component: viewLayout,
-      meta: {layout : MainLayout}
-    },
-    {
-      path: '/course',
-      name: 'course',
-      component: CourseView,
       meta: {layout : MainLayout}
     },
     {
