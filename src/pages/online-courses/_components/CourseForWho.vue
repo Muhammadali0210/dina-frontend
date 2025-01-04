@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="w-full bg-white dark:bg-gray-800 p-[20px] mt-4">
+    <div class="w-full bg-white dark:bg-gray-900 p-[20px] mt-4">
         <h1>Course for who</h1>
     </div>
 </template>
