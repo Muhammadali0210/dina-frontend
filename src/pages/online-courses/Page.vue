@@ -1,13 +1,14 @@
-<template lang="">
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter();
+</script>
+<template>
     <div>
-        Online courses
+        Publish qilingan kurslar
+        <div @click="router.push('/online-courses/1')">
+            Button
+        </div>
     </div>
 </template>
-<script>
-export default {
-    
-}
-</script>
-<style lang="">
-    
-</style>
