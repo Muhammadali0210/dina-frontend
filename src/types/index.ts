@@ -21,3 +21,14 @@ export interface Group {
     studentCount: Number,
     __v?: Number 
 }
+
+export interface ISection {
+    _id?: number,
+    title: string,
+    lessonId?: [
+        {
+            _id?: number,
+            title: String
+        }
+    ]
+}
