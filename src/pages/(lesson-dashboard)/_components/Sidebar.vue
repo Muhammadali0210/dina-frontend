@@ -8,16 +8,26 @@ import { useGetDashboardCourse } from '../service';
 import Loading from './Loading.vue';
 import { Button } from "@/components/ui/button";
 import { Download } from 'lucide-vue-next';
+import { useDashboardCourseStore } from '../store';
+import { ref, watch } from 'vue';
 
 const sidebarStore = useSidebarStore();
 const route = useRoute();
-const { isLoading, course, getDashboardCourse } = useGetDashboardCourse();
+const { isLoading, getDashboardCourse } = useGetDashboardCourse();
 
+const courseStore = useDashboardCourseStore();
+const course = ref<any>();
+
+watch(() => courseStore.getAll, () => {
+    course.value = courseStore.getAll
+})
 const reload = async() => {
     await getDashboardCourse(Number(route.params.id));
+    course.value = courseStore.getAll
 }
 onMounted(async() => {
     await getDashboardCourse(Number(route.params.id));
+    course.value = courseStore.getAll
 })
 </script>
 <template>
@@ -27,8 +37,8 @@ onMounted(async() => {
         <template v-else>
             <template v-if="course">
                 <div class="px-2 py-1 space-y-1  border-b border-gray-300 dark:border-gray-600">
-                    <h1 class="font-bold">{{ course?.course.title }}</h1>
-                    <Progress class="rounded-none bg-gray-200 dark:bg-gray-700" :model-value="course?.progressPercentage" /> 
+                    <h1 class="font-bold">{{ course?.course?.title || 'Kurs nomi' }}</h1>
+                    <Progress class=" bg-gray-200 dark:bg-gray-700" :model-value="course?.progressPercentage" /> 
                     <h1 class=" text-sm font-medium">{{course?.progressPercentage}}% Tugadi</h1>
                 </div>
                 <Section :sections="course?.sections" />

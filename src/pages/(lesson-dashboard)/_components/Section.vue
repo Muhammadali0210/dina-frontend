@@ -6,6 +6,9 @@ import { useRoute, useRouter } from "vue-router"
 import { Checkbox } from '@/components/ui/checkbox';
 import { PlayCircle } from 'lucide-vue-next';
 import type { ISection } from '@/types';
+import { useCheckboxClick } from '../service';
+
+const { isLoading, completeLesson, unCompeteLesson } = useCheckboxClick();
 const props = defineProps<{
     sections: ISection[]
 }>();
@@ -24,6 +27,14 @@ const onPressed = (l: number, s: number) => {
     LId.value = l;
     SId.value = s;
 }
+
+const onCheck = async (checked: boolean, id: number) => {
+    if(checked){
+        await completeLesson(id, { courseId: Number(route.params.id)});
+    } else {
+        await unCompeteLesson(id, { courseId: Number(route.params.id)});
+    }
+}
 </script>
 <template>
     <Accordion v-if="props.sections" type="single" :collapsible="true">
@@ -36,10 +47,10 @@ const onPressed = (l: number, s: number) => {
                     class="border border-gray-300 dark:border-gray-700 transition-all duration-300 dark:hover:bg-gray-700 mx-auto my-1 flex h-12 w-[calc(100%-10px)] items-center justify-between gap-x-2 rounded-none p-0 px-2 text-sm"
                     variant="ghost"
                     @click="onPressed(lesson._id as number, section._id as number)"
-                    :class="{'bg-slate-300 dark:bg-gray-700': LId == lesson._id && SId == section._id}"
+                    :class="{'bg-slate-200 dark:bg-gray-700': LId == lesson._id && SId == section._id}"
                 >
                     <div
-                        class='flex size-full justify-start px-3'
+                        class='flex size-full justify-start px-0'
                     >
                         <div class='flex max-w-[90%] items-center justify-start gap-x-2'>
                             <div class='flex-1'>
@@ -51,7 +62,12 @@ const onPressed = (l: number, s: number) => {
                         </div>
                     </div>
                     <div class='w-[10%]'>
-                        <Checkbox />
+                        <Checkbox 
+                            :checked="lesson?.userProgress.map(item => item.lessonId).includes(lesson._id as number)"
+                            @update:checked="onCheck($event, lesson._id as number)" 
+                            :disabled="isLoading" 
+                            :class="[{'cursor-not-allowed opacity-15': isLoading}, {'cursor-pointer': !isLoading}]" 
+                        />
                     </div>
                 </Button>
 			</AccordionContent>
