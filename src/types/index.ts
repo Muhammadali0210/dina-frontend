@@ -28,7 +28,13 @@ export interface ISection {
     lessonId?: [
         {
             _id?: number,
-            title: String
+            title: String,
+            userProgress: [
+                {
+                    _id?: number,
+                    lessonId: number,
+                }
+            ]
         }
     ]
 }
