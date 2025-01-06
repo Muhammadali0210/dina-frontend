@@ -10,6 +10,7 @@ export function useGetLesson(){
           isLoading.value = true;
           const res: any = await ApiService.getByIdToken(`/lesson/${id}`);
           lessonStore.setLesson(res);
+          isLoading.value = false;
         } catch (error) {
           console.log(error);
         } finally {
