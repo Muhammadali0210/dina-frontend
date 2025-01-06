@@ -38,7 +38,7 @@ const formSchema = toTypedSchema(
     title: z.string().max(30, {
       message: "Kurs nomi 30 ta belgidan oshmasligi kerak",
     }),
-    videoUrl: z.string().url(),
+    videoUrl: z.string(),
     hours: z.number(),
     minutes: z.number(),
     seconds: z.number(),
@@ -163,7 +163,7 @@ onMounted(async () => {
                     type="text"
                     v-model="field.value"
                     v-bind="field"
-                    placeholder="Video URL"
+                    placeholder="Video Id"
                   />
                 </FormControl>
                 <FormMessage />

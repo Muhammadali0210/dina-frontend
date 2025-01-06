@@ -12,10 +12,12 @@
     }
   ],
   "compilerOptions": {
-    "types": ["vue-vimeo-player"],
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
   }
 }
+
