@@ -8,15 +8,14 @@ const sidebarStore = useSidebarStore();
 </script>
 
 <template>
-    <div class="antialiased bg-slate-200 dark:bg-gray-900 ">
+    <div class="bg-slate-200 dark:bg-gray-900 ">
         <div class="grid grid-cols-2">
             <Navbar/>
             <Sidebar/>
         </div>
-        <main class=" p-0  pt-20  lg:ml-80 min-h-screen" @click="sidebarStore.closeSidebar">
-            <h1>Video Player</h1>
-            <!-- <RouterView /> -->
-        </main>
+        <div class="p-0  md:pt-16 max-md:pt-16 lg:ml-80 min-h-screen" @click="sidebarStore.closeSidebar">
+            <RouterView />
+        </div>
     </div>
 </template>
 

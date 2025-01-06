@@ -12,6 +12,7 @@
     }
   ],
   "compilerOptions": {
+    "types": ["vue-vimeo-player"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
