@@ -7,6 +7,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { PlayCircle } from 'lucide-vue-next';
 import type { ISection } from '@/types';
 import { useCheckboxClick } from '../service';
+import { useLessonStore } from '../[lessonId]/store';
+
 
 const { isLoading, completeLesson, unCompeteLesson } = useCheckboxClick();
 const props = defineProps<{
@@ -19,6 +21,8 @@ const router = useRouter()
 const LId = ref<number>(0);
 const SId = ref<number>(0);
 const onPressed = (l: number, s: number) => {
+    const lessonStore = useLessonStore();
+    lessonStore.lessonLoading = true;
     router.push({
         name: 'LessonDashboard',
         params: { id: route.params.id },
