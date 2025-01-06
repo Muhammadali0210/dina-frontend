@@ -11,20 +11,18 @@ const courseStore = useOnlineCourseStore();
 
 const { isLoading, getAllCourse } = useGetAllCourse();
 const data = ref();
-const steklon = ref(0);
+
 
 onMounted( async () => {
     await getAllCourse();
     data.value = courseStore.getAll
-    steklon.value = Object.keys(data).length;
-    console.log();
     
 })
 </script>
 <template>
     <PageContainer title="Publish qilingan kurslar" subtitle="Siz yaratgan barcha online darsliglar">
         <div v-if="isLoading" class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-            <CourseInfoSkeleton v-for="index in steklon" :key="index" />
+            <CourseInfoSkeleton v-for="index in 2" :key="index" />
         </div>
         <div v-else class="mt-4 grid xl:grid-cols-3 md:grid-cols-2  grid-cols-1 gap-4 w-full">
             <OnlineCourseCard v-if="data" v-for="(item, index) in data" :key="index" :item="item"
