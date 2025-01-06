@@ -19,6 +19,7 @@ watch(
     if (newLessonId !== oldLessonId) {
       await getLesson(Number(newLessonId));
       lesson.value = lessonStore.getLesson;
+      lessonStore.lessonLoading = false;
     }
   }
 );
@@ -26,13 +27,13 @@ watch(
 onMounted(async () => {
   await getLesson(Number(route.query.lessonid));
   lesson.value = lessonStore.getLesson;
-  console.log(1, lesson.value);
+  lessonStore.lessonLoading = false;
 });
 </script>
 <template>
   <div class="p-2 md:p-5 max-w-[1000px] mx-auto">
-    <div
-      v-if="isLoading"
+    <!-- <div
+      v-if="getLoading"
       class="relative h-[36vh] w-full rounded-md bg-secondary sm:h-[30] md:h-[50vh] lg:h-[75vh]"
     >
       <Skeleton
@@ -43,10 +44,8 @@ onMounted(async () => {
       >
         <Loader2 class="w-[100px] h-[100px] animate-spin text-primary" />
       </div>
-    </div>
+    </div> -->
     <VideoLesson
-      v-if="!isLoading"
-      :get-loading="isLoading"
       :class="{ hidden: isLoading }"
       :lesson="lesson"
     />
