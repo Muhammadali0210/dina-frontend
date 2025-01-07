@@ -20,7 +20,7 @@ const props = defineProps({
 </script>
 
 <template lang="">
-    <div class="w-full bg-white dark:bg-gray-900 md:p-[20px] p-[10px] md:static  fixed bottom-0 left-0 grid md:grid-cols-1 grid-cols-2 ">
+    <div class="w-full bg-white dark:bg-gray-800 md:p-[20px] p-[10px] md:static  fixed bottom-0 left-0 grid md:grid-cols-1 grid-cols-2 ">
         <div class="">
             <h1 class="dark:text-white text-gray-700 text-[24px] font-bold" >Kurs narxi</h1>
              <h1 class="dark:text-white text-gray-700 text-[24px] font-bold">Pullik <span class="font-normal text-[20px]">{{courseDetail.currentPrice}} UZS</span></h1>

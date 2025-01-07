@@ -13,7 +13,7 @@ onMounted(() => {
 });
 </script>
 <template lang="">
-   <div class="w-full bg-white/55 backdrop-blur-md dark:bg-gray-900 md:p-[30px] p-[20px] grid lg:grid-cols-2 grid-cols-1 gap-4">
+   <div class="w-full bg-white/55 backdrop-blur-md dark:bg-gray-800 md:p-[30px] p-[20px] grid lg:grid-cols-2 grid-cols-1 gap-4">
 
     <div class="order-2 lg:order-1 p-2 ">
         <h1 class="dark:text-white  text-gray-900 text-[30px] font-bold">{{courseDetail.category}}</h1>
@@ -31,7 +31,7 @@ onMounted(() => {
     </div>
     
     <div class="order-1 lg:order-2 p-2">
-        <img class="bg-cover w-full  h-[300px] " :src="courseDetail.previewImage" alt="previewImage">
+        <img class="bg-cover w-full  h-[250px] " :src="courseDetail.previewImage" alt="previewImage">
     </div>
 </div>
 
