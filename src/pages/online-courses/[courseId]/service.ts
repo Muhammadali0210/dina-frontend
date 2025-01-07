@@ -9,9 +9,11 @@ export function useGetDashboardCourse(){
     const getDashboardCourse = async (id: number) => {
         try {
           isLoading.value = true;
+          courseStore.detailLoader = true;
           const res: any = await ApiService.getByIdToken(`/course/${id}`);
           data.value = res;
           courseStore.setCourseDetail(res);
+          courseStore.detailLoader = false;
         } catch (error) {
           console.log(error);
         } finally {

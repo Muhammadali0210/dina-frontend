@@ -6,13 +6,13 @@ import {
   Infinity,
   Languages,
   MonitorPlay,
-  Cable,
-  Loader,
-  CandyIcon,
-  User
+  Cable
 } from 'lucide-vue-next';
-import { ref, computed, defineProps } from 'vue'
+import { ref, defineProps } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { Skeleton } from '@/components/ui/skeleton';
+import { useOnlineCourseStore } from '../../store'
+const courseStore = useOnlineCourseStore();
 
 defineProps({
   course: Object
@@ -32,8 +32,17 @@ const goToDashboard = () => {
 </script>
 <template>
   <div class="rounded-md border bg-secondary/50 p-4 shadow-lg dark:shadow-white/20 lg:sticky lg:top-16 lg:p-6">
-    <div class="flex items-center justify-between font-space-grotesk">
+    <div v-if="courseStore.detailLoader" class="flex items-center justify-between">
+      <div class="text-2xl font-bold flex gap-2">
+        <Skeleton class="w-[80px] h-6" /> UZS 
+      </div>
+      <div class="font-bold flex gap-2">
+        <Skeleton class="w-[80px] h-6" /> UZS
+      </div>
+    </div>
+    <div v-else class="flex items-center justify-between">
       <div class="text-2xl font-bold">
+        
         {{ course?.currentPrice }} UZS 
       </div>
       <div class="font-bold line-through">
@@ -67,7 +76,8 @@ const goToDashboard = () => {
         <MonitorPlay class='size-5' />
         <span class='font-bold'>Darslar</span>
       </div>
-      <p class='text-muted-foreground'>{{ course?.totalLessons }}</p>
+      <Skeleton v-if="courseStore.detailLoader" class="w-[50px] h-4" />
+      <p v-else class='text-muted-foreground'>{{ course?.totalLessons }}</p>
     </div>
 
     <div class='mt-2 flex items-center justify-between border-b pb-2'>
@@ -75,7 +85,8 @@ const goToDashboard = () => {
         <Clock class='size-5' />
         <span class='font-bold'>Davomiyligi</span>
       </div>
-      <p class='text-muted-foreground'>
+      <Skeleton v-if="courseStore.detailLoader" class="w-[50px] h-4" />
+      <p v-else class='text-muted-foreground'>
         {{ course?.totalDuration.split('.')[0] }}:{{ course?.totalDuration.split('.')[1] }}
       </p>
     </div>
@@ -85,7 +96,8 @@ const goToDashboard = () => {
         <BarChart2 class='size-5' />
         <span class='font-bold'>Darajasi</span>
       </div>
-      <p class='capitalize text-muted-foreground'>{{ course?.level }}</p>
+      <Skeleton v-if="courseStore.detailLoader" class="w-[50px] h-4" />
+      <p v-else class='capitalize text-muted-foreground'>{{ course?.level }}</p>
     </div>
 
     <div class='mt-2 flex items-center justify-between border-b pb-2'>
@@ -93,7 +105,8 @@ const goToDashboard = () => {
         <Languages class='size-5' />
         <span class='font-bold'>Til</span>
       </div>
-      <p class='capitalize text-muted-foreground'>{{ course?.language }}</p>
+      <Skeleton v-if="courseStore.detailLoader" class="w-[50px] h-4" />
+      <p v-else class='capitalize text-muted-foreground'>{{ course?.language }}</p>
     </div>
 
     <div class='mt-2 flex items-center justify-between border-b pb-2'>
@@ -101,7 +114,8 @@ const goToDashboard = () => {
         <Cable class='size-5' />
         <span class='font-bold'>Kategoriya</span>
       </div>
-      <p class='capitalize text-muted-foreground'>{{ course?.category }}</p>
+      <Skeleton v-if="courseStore.detailLoader" class="w-[50px] h-4" />
+      <p v-else class='capitalize text-muted-foreground'>{{ course?.category }}</p>
     </div>
 
     <div class='mt-2 flex items-center justify-between border-b pb-2'>
