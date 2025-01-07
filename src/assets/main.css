@@ -57,3 +57,7 @@ body::-webkit-scrollbar-thumb:hover {
     background: #242838;
     /* Hover qilinganida scrollbar thumbning rangi */
 }
+
+.accordion-course > svg {
+	@apply hidden;
+}

@@ -19,6 +19,7 @@
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "embla-carousel-vue": "^8.5.1",
     "imagekit": "^6.0.0",
     "imagekit-javascript": "^3.0.2",
     "lucide-react": "^0.468.0",

@@ -28,10 +28,7 @@ const formSchema = toTypedSchema(
     }),
     requirements: z.string().max(400, {
       message: "Kurs nomi 400 ta belgidan oshmasligi kerak",
-    }),
-    tags: z.string().max(400, {
-      message: "Kurs teglari 400 ta belgidan oshmasligi kerak",
-    }),
+    })
   })
 );
 
@@ -89,15 +86,6 @@ const onSubmit = handleSubmit(async (values) => {
             </FormItem>
           </FormField>
 
-          <FormField v-slot="{ field, errors }" name="tags">
-            <FormItem>
-              <FormControl>
-                <FormLabel>Teglar <span class="text-red-500">*</span></FormLabel>
-                <Textarea type="text" :default-value="props.course?.tags" v-model="field.value" v-bind="field" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
 
           <div class="flex">
             <SubmitButton :is-loading="isLoading" />
