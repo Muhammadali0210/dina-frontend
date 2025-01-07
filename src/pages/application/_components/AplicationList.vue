@@ -5,34 +5,30 @@ import {
     AlertDialogContent
 } from '@/components/ui/alert-dialog'
 import AplicationModal from '../_components/AplicationModal.vue'
+import { Menu } from 'lucide-vue-next';
 </script>
 
 <template>
     <div class="w-full overflow-x-auto hide-scrollbar">
         <div class="bg-slate-900 p-3 rounded-md my-1 grid grid-cols-1 min-w-max">
             <div class="flex flex-wrap gap-4 justify-between items-center min-w-max">
-                <span class="text-sm text-gray-300">T/R: 1</span>
-
-                <!-- Personal Info Section -->
-                <div class="grid grid-cols-1 gap-2 m:grid-cols-2 min-w-max">
-                    <span class="text-sm text-gray-300">Ism: Abubakir Sobitov</span>
-                    <span class="text-sm text-gray-300">Familya: Sobitov</span>
+                <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-2 m:grid-cols-2 min-w-max">
+                    <span class="text-sm text-gray-300">Abubakir Sobitov</span>
+                    <span class="text-sm text-gray-300">+998933708598</span>
                 </div>
 
                 <!-- Contact Info Section -->
                 <div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-w-max">
-                    <span class="text-sm text-gray-300">Telefon raqam: +998933708598</span>
-                    <span class="text-sm text-gray-300">Ta'rif turi: Gold</span>
+                    <span class="text-sm text-gray-300">Gold</span>
+                    <span class="text-sm text-gray-300">2025.01.05</span>
                 </div>
 
                 <!-- Date and Time Section -->
                 <div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-w-max">
-                    <span class="text-sm text-gray-300">Sana: 2025-01-05 Gold</span>
-                    <span class="text-sm text-gray-300">Vaqt: 22:39:44</span>
+                    <Menu/>
                 </div>
 
-                <!-- Action Buttons Section -->
-                <div class="flex gap-4 items-center min-w-max">
+                <div class="max-sm:hidden flex gap-4 items-center min-w-max">
                     <AlertDialog>
                         <AlertDialogTrigger>
                             <button type="button" class="p-2 text-white">
