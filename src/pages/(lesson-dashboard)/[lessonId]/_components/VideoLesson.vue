@@ -41,10 +41,10 @@ watch(
 </script>
 
 <template>
-  <div class="w-full h-auto">
+  <div class="w-full min-h-[20vh] sm:min-h-[36vh] md:min-h-[50vh] lg:min-h-[50vh]">
     <div
-      v-if="lessonStore.lessonLoading || isLoading || lessonLoading"
-      class="relative h-[36vh] w-full rounded-md bg-secondary sm:h-[30] md:h-[50vh] lg:h-[75vh]"
+      v-if="lessonStore.lessonLoading || !videoId"
+      class="relative w-full rounded-md bg-secondary h-[30vh] sm:h-[36vh] md:h-[50vh] lg:h-[75vh]"
     >
       <Skeleton
         class="absolute right-0 top-0 flex size-full items-center justify-center rounded-md bg-slate-500/80"
@@ -56,10 +56,10 @@ watch(
       </div>
     </div>
     <vueVimeoPlayer
-      v-if="!isLoading && videoId && !lessonStore.lessonLoading"
+      v-if="videoId && !lessonStore.lessonLoading"
       :video-id="videoId"
       :options="playerOptions"
-      @ready="isLoading = false"
+      @ready="lessonStore.lessonLoading = false"
       class="w-full h-full"
     />
   </div>
