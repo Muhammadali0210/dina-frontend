@@ -25,7 +25,7 @@ onMounted(async () => {
 
 </script>
 <template>
-    <div class='mx-auto max-w-6xl'>
+    <div class='mx-auto max-w-6xl max-md:px-3 max-md:pt-4'>
         <div class='grid grid-cols-3 gap-4 pt-0'>
             <div class='col-span-2 max-lg:col-span-3 space-y-4'>
                 <Hero :course="courseDetail" />

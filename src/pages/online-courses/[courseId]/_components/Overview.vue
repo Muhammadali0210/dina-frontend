@@ -67,7 +67,7 @@ const props = defineProps({
 			<div class="mt-2">
 				<div class="mt-1 flex items-center" v-for="item in course?.requirements.split(', ')" :key="item">
 					<Dot />
-					<p class="flex-1 text-slate-400">{{ item }}</p>
+					<p class="flex-1 dark:text-slate-400">{{ item }}</p>
 				</div>
 			</div>
 		</div>

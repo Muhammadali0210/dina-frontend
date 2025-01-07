@@ -12,19 +12,22 @@ import {
   User
 } from 'lucide-vue-next';
 import { ref, computed, defineProps } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 defineProps({
   course: Object
 })
+
+const router = useRouter();
+const route = useRoute();
 const isLoading = ref(false);
 
 const onCart = () => {
   console.log("Savatchaga qo'shish");
 }
 
-const onAdd = () => {
-  console.log("Xohlaganlarga qo'shish");
+const goToDashboard = () => {
+  router.push(`/lesson-dashboard/${route.params.id}`);
 }
 </script>
 <template>
@@ -49,7 +52,7 @@ const onAdd = () => {
     <Button
       size="lg"
       class="relative mt-2 w-full font-bold"
-      @click="onCart"
+      @click="goToDashboard"
       :disabled="isLoading"
     >
       Kursni ko'rish

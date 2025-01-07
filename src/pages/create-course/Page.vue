@@ -44,8 +44,8 @@ const router = useRouter();
 
 const formSchema = toTypedSchema(
   z.object({
-    title: z.string().max(50, { message: "Kurs nomi 50 ta belgidan oshmasligi kerak" }),
-    description: z.string().max(50, { message: "Kurs haqidagi malumot 50 ta belgidan oshmasligi kerak" }),
+    title: z.string().max(30, { message: "Kurs nomi 30 ta belgidan oshmasligi kerak" }),
+    description: z.string().max(1000, { message: "Kurs haqidagi malumot 250 ta belgidan oshmasligi kerak" }),
     learning: z.string(),
     requirements: z.string(),
     level: z.string(),
@@ -120,7 +120,7 @@ const onSubmit = handleSubmit(async (values) => {
       duration: 2000,
       variant: 'success'
     });
-    router.push('/instructor-courses')
+    router.push('/my-courses')
     isSubmiting.value = false
   } catch (error) {
     isSubmiting.value = false
