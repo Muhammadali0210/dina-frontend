@@ -8,6 +8,7 @@ export function useGetLesson(){
     const getLesson = async (id: number) => {
         try {
           isLoading.value = true;
+          lessonStore.lessonLoading = true;
           const res: any = await ApiService.getByIdToken(`/lesson/${id}`);
           lessonStore.setLesson(res);
           isLoading.value = false;
