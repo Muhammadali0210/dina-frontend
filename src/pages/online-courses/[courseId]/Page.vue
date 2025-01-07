@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { ref, onMounted } from 'vue';
-import useGetAllCourse from '../service';
-import CourseBanner from '../_components/CourseBanner.vue'
-import CourseDetail from '../_components/CourseDetail.vue'
-import CoursePrice from '../_components/CoursePrice.vue'
-import CourseProgramm from '../_components/CourseProgramm.vue'
+import { Separator } from '@/components/ui/separator';
+import { Card, CardContent } from '@/components/ui/card'
+import Description from './_components/Description.vue';
+import Overview from './_components/Overview.vue';
+import Hero from './_components/Hero.vue';
+import {useGetDashboardCourse} from './service';
+import { useOnlineCourseStore } from '../store'
+const { isLoading, data, getDashboardCourse } = useGetDashboardCourse();
+import CourseSlider from './_components/CourseSlider.vue';
 const route = useRoute();
 const courseStore = useOnlineCourseStore();
 const courseDetail = ref<any>();
@@ -21,28 +25,14 @@ onMounted(async () => {
 
 </script>
 <template>
-
-    <div>
-        <div v-if="isLoading">Loading...</div>
-        <div v-else class="custom-container">
-            <div>
-                <div class=" grid grid-cols-1 gap-4">
-                    <CourseBanner v-if="courseDetail" :courseDetail=courseDetail />
-                    <div class="grid md:grid-cols-12 gap-4 grid-cols-1">
-                        <div class="md:col-span-8 col-span-6">
-                            <CourseDetail />
-                        </div>
-                        <div class="md:col-span-4 col-span-6">
-                            <CoursePrice v-if="courseDetail" :courseDetail=courseDetail />
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="md:col-span-8 col-span-12 ">
-                            <CourseProgramm />
-                            <CourseForWho />
-                        </div>
-                    </div>
-                </div>
+    <div class='mx-auto max-w-6xl'>
+        <div class='grid grid-cols-3 gap-4 pt-0'>
+            <div class='col-span-2 max-lg:col-span-3 space-y-4'>
+                <Hero :course="courseDetail" />
+                <Overview :course="courseDetail" />
+            </div>
+            <div class='col-span-1 max-lg:col-span-3'>
+                <Description :course="courseDetail" />
             </div>
         </div>
         <Separator class='my-6' />
