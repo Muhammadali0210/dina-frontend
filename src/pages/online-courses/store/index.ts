@@ -3,7 +3,8 @@ import { defineStore } from "pinia";
 export const useOnlineCourseStore = defineStore('online-course', {
     state: () => ({
         onlineCourses: [],
-        courseDetail: null
+        courseDetail: null,
+        detailLoader: false
     }),
     actions: {
         setCourse(data: any) {

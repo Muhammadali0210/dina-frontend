@@ -20,7 +20,6 @@ onMounted(async () => {
     await getDashboardCourse(Number(route.params.id)); 
     courseDetail.value = courseStore.getCourseDetail;
     courses.value = courseStore.getAll;
-    console.log(courseDetail.value);
 })
 
 </script>
