@@ -41,6 +41,10 @@ import SectionId from '@/pages/my-courses/[courseId]/[sectionId]/Page.vue';
 // Create course
 import CreateCourse from '@/pages/create-course/Page.vue';
 
+// Aplication
+import Application from '@/pages/application/Page.vue';
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -216,6 +220,12 @@ const router = createRouter({
       meta: { layout: LessonDashboardLayout },
       props: true,
     },
+    {
+      path: '/applications',
+      name: 'Applications',
+      component: Application,
+      meta: { layout: MainLayout }
+    }
   
   ]
 })
