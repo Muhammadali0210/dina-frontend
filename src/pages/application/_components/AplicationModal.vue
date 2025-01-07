@@ -13,9 +13,14 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover'
 import { useGroupStore } from '@/stores/groupStore'
+interface IGroup {
+    id?: number,
+    name: string,
+    degree: string
+}
 
 const groupStore = useGroupStore();
-const groups = groupStore.groups;
+const groups: IGroup[] = groupStore.groups;
 console.log(groups);
 
 </script>
@@ -25,14 +30,6 @@ console.log(groups);
         <AlertDialogTitle>Qo'shish</AlertDialogTitle>
         <AlertDialogDescription>
             <form class="grid gap-4 mt-4">
-                <!-- T/R -->
-                <div>
-                    <label for="tr"
-                        class="block text-sm text-start font-medium text-gray-700 dark:text-gray-300">T/R</label>
-                    <input id="tr" type="text" value="1"
-                        class="block w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
-                </div>
-                <!-- Ism familya -->
                 <div>
                     <label for="name"
                         class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Ism</label>
@@ -69,7 +66,7 @@ console.log(groups);
                             </svg>
                         </PopoverTrigger>
 
-                        <PopoverContent class="w-full rounded-lg">
+                        <PopoverContent class="min-w-80 w-full rounded-lg">
                             <ul class="space-y-2">
                                 <div v-if="groups.length" v-for="(group, index) in groups" :key="index"
                                     class="flex items-center p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-200 ease-in-out">
@@ -77,7 +74,7 @@ console.log(groups);
                                         <input type="checkbox"
                                             class="w-5 h-5 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2 transition duration-200 ease-in-out" />
                                         <label class="text-sm font-medium text-gray-900 dark:text-gray-300">
-                                            {{ group }}
+                                            {{ group?.name }}
                                         </label>
                                     </a>
                                 </div>
