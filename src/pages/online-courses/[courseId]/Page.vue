@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { useOnlineCourseStore } from '../store';
 import { ref, onMounted } from 'vue';
 import useGetAllCourse from '../service';
 import CourseBanner from '../_components/CourseBanner.vue'
@@ -9,21 +8,20 @@ import CoursePrice from '../_components/CoursePrice.vue'
 import CourseProgramm from '../_components/CourseProgramm.vue'
 const route = useRoute();
 const courseStore = useOnlineCourseStore();
-const { isLoading, getAllCourse } = useGetAllCourse();
-
 const courseDetail = ref<any>();
+const courses = ref();
 
 
 onMounted(async () => {
-    const count = courseStore.getAll
-    if(count.length == 0) await getAllCourse();
-
-    const allData = await courseStore.getAll
-    courseDetail.value = allData.find((item: any) => item._id == route.params.id);
+    await getDashboardCourse(Number(route.params.id)); 
+    courseDetail.value = courseStore.getCourseDetail;
+    courses.value = courseStore.getAll;
+    console.log(courseDetail.value);
 })
 
 </script>
 <template>
+
     <div>
         <div v-if="isLoading">Loading...</div>
         <div v-else class="custom-container">
@@ -46,7 +44,9 @@ onMounted(async () => {
                     </div>
                 </div>
             </div>
-
         </div>
+        <Separator class='my-6' />
+
+        <CourseSlider />
     </div>
 </template>

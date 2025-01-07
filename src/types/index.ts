@@ -9,7 +9,7 @@ export interface Course {
     category: String,
     oldPrice: Number,
     currentPrice: Number,
-    previewImage?: String | null,
+    previewImage: String | null,
     published: Boolean,
     __v?: Number
 }
@@ -37,4 +37,25 @@ export interface ISection {
             ]
         }
     ]
+}
+
+export interface ILesson {
+    _id: string
+	title: string
+	position: number
+	videoUrl: string
+	content: string
+	free: boolean
+	duration: {
+		hours: number
+		minutes: number
+		seconds: number
+	}
+	userProgress: IUserProgress
+}
+
+export interface IUserProgress {
+	userId: string
+	lessonId: string
+	isCompleted: string
 }
