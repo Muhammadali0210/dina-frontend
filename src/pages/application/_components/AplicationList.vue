@@ -1,11 +1,13 @@
 <script setup lang="ts">
+
 import {
-    AlertDialog,
-    AlertDialogTrigger,
-    AlertDialogContent
-} from '@/components/ui/alert-dialog'
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover'
 import AplicationModal from '../_components/AplicationModal.vue'
-import { Menu } from 'lucide-vue-next';
+import AplicationAdd from '../_components/AplicationAdd.vue'
+
 </script>
 
 <template>
@@ -24,30 +26,27 @@ import { Menu } from 'lucide-vue-next';
                 </div>
 
                 <!-- Date and Time Section -->
-                <div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-w-max">
-                    <Menu/>
+                <div class="grid grid-cols-1 gap-2 md:grid-cols-2 sm:hidden">
+                    <Popover>
+                        <PopoverTrigger>
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    d="M12 6h.01M12 12h.01M12 18h.01" />
+                            </svg>
+                        </PopoverTrigger>
+                        <PopoverContent class="w-[180px] bg-slate-900 mr-2 px-1 py-2">
+                            <div class="flex justify-center">
+                                <AplicationAdd />
+                            </div>
+                        </PopoverContent>
+                    </Popover>
                 </div>
 
+
                 <div class="max-sm:hidden flex gap-4 items-center min-w-max">
-                    <AlertDialog>
-                        <AlertDialogTrigger>
-                            <button type="button" class="p-2 text-white">
-                                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                            </button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent class="bg-slate-900">
-                            <AplicationModal />
-                        </AlertDialogContent>
-                    </AlertDialog>
-                    <button type="button"
-                        class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
-                        O'chirish
-                    </button>
+                    <AplicationAdd />
                 </div>
             </div>
         </div>
