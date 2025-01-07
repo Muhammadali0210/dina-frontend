@@ -16,7 +16,7 @@ const data = ref<any>(lessonData)
         <AccordionItem class="border-b  border-gray-400 dark:border-gray-700" v-for="item in data" :key="item.value"
             :value="item.value">
             <AccordionTrigger
-                class="px-4 flex justify-between items-center dark:bg-gray-800 dark:data-[state=open]:bg-gray-800 data-[state=open]:bg-slate-200 data-[state=open]:border-b data-[state=open]:border-gray-400 dark:data-[state=open]:border-gray-800 hover:no-underline">
+                class="px-4 flex justify-between items-center dark:bg-gray-900 dark:data-[state=open]:bg-gray-900 data-[state=open]:bg-slate-200 data-[state=open]:border-b data-[state=open]:border-gray-600 dark:data-[state=open]:border-gray-800 hover:no-underline">
                 <div class="flex w-full justify-between">
                     <h1>{{ item.modul }}</h1>
                     <p>{{ item.lessonTime }}</p>

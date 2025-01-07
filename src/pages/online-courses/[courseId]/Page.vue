@@ -7,8 +7,6 @@ import CourseBanner from '../_components/CourseBanner.vue'
 import CourseDetail from '../_components/CourseDetail.vue'
 import CoursePrice from '../_components/CoursePrice.vue'
 import CourseProgramm from '../_components/CourseProgramm.vue'
-import CourseForWho from '../_components/CourseForWho.vue'
-import PageContainer from '@/components/PageContainer.vue'
 const route = useRoute();
 const courseStore = useOnlineCourseStore();
 const { isLoading, getAllCourse } = useGetAllCourse();
@@ -28,8 +26,8 @@ onMounted(async () => {
 <template>
     <div>
         <div v-if="isLoading">Loading...</div>
-        <div v-else>
-            <PageContainer title="Kurslar haqida">
+        <div v-else class="custom-container">
+            <div>
                 <div class=" grid grid-cols-1 gap-4">
                     <CourseBanner v-if="courseDetail" :courseDetail=courseDetail />
                     <div class="grid md:grid-cols-12 gap-4 grid-cols-1">
@@ -47,7 +45,8 @@ onMounted(async () => {
                         </div>
                     </div>
                 </div>
-            </PageContainer>
+            </div>
+
         </div>
     </div>
 </template>

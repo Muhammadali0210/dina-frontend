@@ -49,8 +49,9 @@
                             <label for="item-weight"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Guruhlar</label>
 
-                            <DropdownMenu class="dropdown dropdown-bottom w-full">
-                                <DropdownMenuTrigger tabindex="0" role="button"
+
+                            <Popover class="dropdown dropdown-bottom w-full">
+                                <PopoverTrigger tabindex="0" role="button"
                                     class="w-full text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 border-0">
                                     Guruhni tanlang
                                     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -58,12 +59,12 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="m1 1 4 4 4-4" />
                                     </svg>
-                                </DropdownMenuTrigger>
+                                </PopoverTrigger>
 
-                                <DropdownMenuContent tabindex="1"
+                                <PopoverContent tabindex="1"
                                     class="menu z-[10] p-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
                                     <ul class="space-y-1">
-                                        <DropdownMenuItem v-if="groups" v-for="(group, index) in groups" :key="index"
+                                        <div v-if="groups" v-for="(group, index) in groups" :key="index"
                                             class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
                                             <a class="flex items-center gap-3 w-full cursor-pointer">
                                                 <input :id="group._id" v-model="userData.group_ids" :value="group._id"
@@ -74,13 +75,13 @@
                                                     {{ group.name }}
                                                 </label>
                                             </a>
-                                        </DropdownMenuItem>
+                                        </div>
                                         <li v-if="!groups" class="flex justify-center items-center h-10">
                                             <p class="text-gray-500 dark:text-gray-400">Yuklanmoqda...</p>
                                         </li>
                                     </ul>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                                </PopoverContent>
+                            </Popover>
                         </div>
                     </div>
                     <button type="submit"
@@ -111,16 +112,14 @@ import { ApiService } from '@/services/apiServices';
 import { useCurrentIdStore } from '@/stores/currentId';
 import Loader from '@/ui/Loader.vue';
 import ErrorAlert from '@/ui/ErrorAlert.vue';
-import { errorMessages } from 'vue/compiler-sfc';
 import { useGroupStore } from '@/stores/groupStore';
+
+
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover'
 export default {
     setup() {
         const currentIdStore = useCurrentIdStore();
@@ -133,12 +132,9 @@ export default {
     components: {
         Loader,
         ErrorAlert,
-        DropdownMenu,
-        DropdownMenuContent,
-        DropdownMenuItem,
-        DropdownMenuLabel,
-        DropdownMenuSeparator,
-        DropdownMenuTrigger,
+        Popover,
+        PopoverContent,
+        PopoverTrigger,
     },
     data(){
         return {

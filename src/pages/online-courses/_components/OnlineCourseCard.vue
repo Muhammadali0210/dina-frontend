@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div v-if="item" class="border w-full border-gray-400  dark:bg-slate-900 bg-white cursor-pointer">
+    <div v-if="item" class="border w-full border-gray-400  dark:bg-slate-800 bg-white cursor-pointer">
         <div class="relative">
             <img class="h-[180px] w-full object-cover" :src="item.previewImage" alt="course image">
             <div class="grid grid-cols-3 absolute bottom-0">
