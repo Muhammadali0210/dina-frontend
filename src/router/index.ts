@@ -22,10 +22,9 @@ import viewLayout from '@/views/books/viewLayout.vue'
 import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
-import LessonTask from '@/views/onlinecourse/LessonTask.vue'
 
-import CourseLayout from '@/layouts/CourseLayout.vue';
-import CourseView from '@/views/onlinecourse/CourseView.vue';
+
+
 
 // Online course
 import OnlineCourse from '@/pages/online-courses/Page.vue';
@@ -41,6 +40,10 @@ import SectionId from '@/pages/my-courses/[courseId]/[sectionId]/Page.vue';
 
 // Create course
 import CreateCourse from '@/pages/create-course/Page.vue';
+
+// Aplication
+import Application from '@/pages/application/Page.vue';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -165,26 +168,7 @@ const router = createRouter({
       component: viewLayout,
       meta: {layout : MainLayout}
     },
-    {
-      path: '/course',
-      name: 'course',
-      component: CourseView,
-      meta: {layout : MainLayout}
-    },
     
-    
-    {
-      path: '/course-full',
-      name: 'course-ful',
-      component: CourseLayout,
-      meta: {layout : CourseLayout}
-    },
-    {
-      path: '/task',
-      name: 'lessonTask',
-      component: LessonTask,
-      meta: {layout : CourseLayout}
-    },
     {
       path: '/create-course',
       name: 'CreateCourse',
@@ -236,6 +220,12 @@ const router = createRouter({
       meta: { layout: LessonDashboardLayout },
       props: true,
     },
+    {
+      path: '/applications',
+      name: 'Applications',
+      component: Application,
+      meta: { layout: MainLayout }
+    }
   
   ]
 })
