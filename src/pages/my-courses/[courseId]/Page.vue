@@ -13,7 +13,7 @@ import PriceField from "./_components/PriceField.vue";
 import { useGetCourseInfo } from "./service";
 import { RouterLink } from "vue-router";
 import { Separator } from "radix-vue";
-import { ChevronLeftCircle } from "lucide-vue-next";
+import { ChevronLeftCircle, CircleCheck } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import Actions from "./_components/Actions.vue";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -49,17 +49,19 @@ onMounted(async () => {
 
         <div class="order-3 md:order-2 col-span-6 md:col-span-8">
           <Skeleton v-if="isLoading" class="h-[31px] w-[250px] max-sm:w-[150px] mb-2" />
-          <h3
-            v-else
-            class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white"
-          >
-            {{ courseData ? courseData.title : "Malumot yuklanmadi" }}
-          </h3>
+          <div v-else class="flex items-center gap-2">
+            <h3
+              class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white"
+            >
+              {{ courseData ? courseData.title : "Malumot yuklanmadi" }}
+            </h3>
+            <CircleCheck v-if="courseData?.published" class="h-5 w-5 text-green-400" />
+          </div>
           <p class="text-sm text-muted-foreground">Modul haqida malumot</p>
         </div>
 
         <div class="order-2 md:order-3 col-span-3 md:col-span-3 flex justify-end">
-          <Actions />
+          <Actions :course="courseData" @onUpdated="onUpdate" />
         </div>
       </div>
       <Separator class="my-2" />

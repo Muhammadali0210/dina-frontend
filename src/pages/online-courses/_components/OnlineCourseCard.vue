@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { defineProps, onMounted } from 'vue';
+import { defineProps } from 'vue';
 
 const props = defineProps({
     item: {
         type: Object
     }
-})
-
-onMounted(() => {
-    console.log(props.item?.value);
-})
+});
 </script>
 
 <template>

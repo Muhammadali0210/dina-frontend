@@ -42,15 +42,14 @@ function useDeleteCourse() {
     const deleteCourse = async (id: number) => {
       try {
         isDeleting.value = true;
-        const res = await ApiService.deleteByToken(`/course/${id}`);
-        data.value = res;
+        await ApiService.deleteByToken(`/course/${id}`);
       } catch (error) {
         console.log(error);
       } finally {
         isDeleting.value = false;
       }
     }
-    return { isDeleting, data, deleteCourse }
+    return { isDeleting, deleteCourse }
 }
 
 function useCreateSection() {
