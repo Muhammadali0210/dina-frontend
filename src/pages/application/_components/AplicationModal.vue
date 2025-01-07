@@ -27,31 +27,36 @@ console.log(groups);
             <form class="grid gap-4 mt-4">
                 <!-- T/R -->
                 <div>
-                    <label for="tr" class="block text-sm font-medium text-gray-700 dark:text-gray-300">T/R</label>
+                    <label for="tr"
+                        class="block text-sm text-start font-medium text-gray-700 dark:text-gray-300">T/R</label>
                     <input id="tr" type="text" value="1"
                         class="block w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                 </div>
                 <!-- Ism familya -->
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Ism</label>
+                    <label for="name"
+                        class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Ism</label>
                     <input id="name" type="text" value="Abubakir"
                         class="block w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                 </div>
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Familya</label>
+                    <label for="name"
+                        class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Familya</label>
                     <input id="name" type="text" value="Sobitov"
                         class="block w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                 </div>
                 <!-- Telefon raqam -->
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Telefon
+                    <label for="phone"
+                        class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Telefon
                         raqam</label>
                     <input id="phone" type="text" value="+998933708598"
                         class="block w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                 </div>
                 <!-- Ta'rif turi -->
                 <div>
-                    <label for="tariff" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Ta'rif
+                    <label for="tariff"
+                        class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Ta'rif
                         turi</label>
                     <Popover class="dropdown dropdown-bottom w-full">
                         <PopoverTrigger tabindex="0" role="button"
@@ -76,7 +81,7 @@ console.log(groups);
                                         </label>
                                     </a>
                                 </div>
-                               
+
                                 <li v-if="!groups.length" class="flex justify-center items-center h-10">
                                     <p class="text-gray-500 dark:text-gray-400">Yuklanmoqda...</p>
                                 </li>
@@ -89,13 +94,14 @@ console.log(groups);
     </AlertDialogHeader>
 
     <AlertDialogFooter class="mt-6 flex justify-end gap-4">
-        <AlertDialogCancel type="button"
+        <AlertDialogCancel 
             class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
             Bekor qilish
         </AlertDialogCancel>
-        <AlertDialogAction type="submit"
+        <AlertDialogAction 
             class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700">
             Saqlash
         </AlertDialogAction>
     </AlertDialogFooter>
+
 </template>
