@@ -16,19 +16,20 @@ import PaymentView from '@/views/payment/PaymentView.vue';
 import PaymentGroupView from '@/views/payment/PaymentGroupView.vue';
 import GroupView from '@/views/group/GroupView.vue';
 import AddUpdateGroupView from '@/views/group/Add&UpdateGroupView.vue';
-import AttendanceView from '@/views/attendance/AttendanceView.vue';
-import AttendanceGroupView from '@/views/attendance/AttendanceGroupView.vue';
 import viewLayout from '@/views/books/viewLayout.vue'
 import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 
-
+// attendance
+import Attendance from '@/pages/attendance/Page.vue';
+import AttendanceId from '@/pages/attendance/[attendanceId]/Page.vue';
 
 
 // Online course
 import OnlineCourse from '@/pages/online-courses/Page.vue';
 import OnlineCourseId from '@/pages/online-courses/[courseId]/Page.vue'
+
 // lesson dashboard
 import LessonDashboardLayout from '@/pages/(lesson-dashboard)/Layout.vue';
 import LessonId from '@/pages/(lesson-dashboard)/[lessonId]/Page.vue';
@@ -150,31 +151,34 @@ const router = createRouter({
       component: AddUpdateGroupView,
       meta: { layout: MainLayout }
     },
+    // attendance - davomat
     {
       path: '/attendance',
       name: 'attendance',
-      component: AttendanceView,
+      component: Attendance,
       meta: { layout: MainLayout }
     },
     {
-      path: '/attendance/group/:id',
-      name: 'attendance-group',
-      component: AttendanceGroupView,
+      path: '/attendance/:id',
+      name: 'attendanceId',
+      component: AttendanceId,
       meta: { layout: MainLayout }
     },
+    // books - kitoblar
     {
       path: '/booksview',
       name: 'viewLayout',
       component: viewLayout,
       meta: {layout : MainLayout}
     },
-    
+    // create course - kurs yaratuvchi bo'lim
     {
       path: '/create-course',
       name: 'CreateCourse',
       component: CreateCourse,
       meta: {layout : MainLayout}
     },
+    // online-courses  - o'quvchilar uchun barcha ochiq darslar
     {
       path: '/online-courses',
       name: 'OnlineCourses',
@@ -188,6 +192,7 @@ const router = createRouter({
       meta: {layout : MainLayout},
       props: true,
     },
+    // admin yaratgan darslar
     {
       path: '/my-courses',
       name: 'MyCourses',
@@ -212,7 +217,7 @@ const router = createRouter({
         type: route.query.type,
       }),
     },
-
+    // lesson dashboard - video drsliglarni ko'rish uchun page
     {
       path: '/lesson-dashboard/:id',
       name: 'LessonDashboard',

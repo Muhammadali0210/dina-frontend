@@ -1,8 +1,101 @@
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+import NoDataFound from '@/ui/NoDataFound.vue';
+import { ApiService } from '@/services/apiServices';
+import CustomLoader from '@/ui/Loader.vue';
+import DataPicker from '@/components/data-picker/DataPicker.vue';
+import { useRoute, useRouter } from 'vue-router';
+import { Loader } from 'lucide-vue-next';
+
+const route = useRoute();
+const router = useRouter();
+interface CurrentData {
+    group_id: number | null;
+    date: string | null;
+}
+
+const searchQuery = ref('');
+const url = '/attendance/group';
+const users = ref<any[] | null>(null);
+const isLoading = ref(false);
+const choosenDate = ref<string | null>(null);
+const isActive = ref(false);
+const isDisabled = ref(false);
+const isToday = ref(false);
+const currentData = ref<CurrentData>({
+    group_id: null,
+    date: null,
+});
+const attendanceData = ref<any[]>([]);
+const isSubmiting = ref(false);
+const subtitle = ref('');
+
+const filteredItems = computed(() => {
+    if (searchQuery.value) {
+        return users.value?.filter((item) =>
+            item.first_name.toLowerCase().includes(searchQuery.value.toLowerCase())
+        );
+    }
+    return users.value;
+});
+
+async function getUsers() {
+    try {
+        isLoading.value = true;
+        currentData.value.date = choosenDate.value;
+        currentData.value.group_id = parseInt(route.params.id as string);
+
+        const res = await ApiService.postByToken(url, currentData.value);
+        users.value = res;
+        isActive.value = res[0].attendance.is_active;
+        isToday.value = res[0].attendance.date.slice(0, 10) == new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10);
+        isDisabled.value = !isToday.value;
+        subtitle.value = isActive.value ? "O'zgartirish" : "Saqlash";
+        isLoading.value = false;
+    } catch (err) {
+        console.log(err);
+        isLoading.value = false;
+    }
+}
+
+function handleDate(date: string) {
+    choosenDate.value = date;
+    getUsers();
+    console.log(date);
+    
+}
+
+async function handleCreate() {
+    try {
+        isSubmiting.value = true;
+        attendanceData.value = users.value?.map((item) => ({
+            status: item.attendance.status,
+            homework: item.attendance.homework,
+            date: choosenDate.value,
+            student_id: item.student_id,
+            group_id: parseInt(route.params.id as string),
+            is_active: isActive.value
+        })) || [];
+
+        await ApiService.postByToken('/attendance/create', attendanceData.value);
+        router.push('/attendance');
+    } catch (error) {
+        console.log(error);
+    } finally {
+        isSubmiting.value = false;
+    }
+}
+
+onMounted(() => {
+    choosenDate.value = (new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10));
+    getUsers();
+});
+</script>
+
 <template>
     <div class="">
         <div class="flex items-center max-md:items-start max-lg:gap-2 justify-between flex-col flex-wrap md:flex-row pb-4 bg-transparent dark:bg-gray-900">
             <div class="flex items-center space-x-4 max-md:w-full"> 
-
                 <div class="relative max-md:w-full">
                     <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -13,7 +106,7 @@
                 </div>
             </div>
             
-            <DatePicker2 @dateSelected="handleDate" />  
+            <DataPicker @onDatePicked="handleDate" />
             
         </div>
         <div class="w-full max-xl:overflow-x-scroll rounded-lg">
@@ -82,125 +175,5 @@
                 </template>
             </template>
         </div>
-        <!-- Buttons -->
     </div>
-
 </template>
-<script>
-import NoDataFound from '@/ui/NoDataFound.vue';
-import { ApiService } from '@/services/apiServices';
-import CustomLoader from '@/ui/Loader.vue';
-import { useCurrentIdStore } from '@/stores/currentId';
-import DatePicker from '@/ui/DatePicker.vue';
-import DatePicker2 from '@/ui/DatePicker2.vue';
-import { useRoute } from 'vue-router';
-import { useToast } from '@/components/ui/toast/use-toast';
-import { Loader } from 'lucide-vue-next';
-
-export default {
-    setup() {
-        const router = useRoute()
-        const currentIdStore = useCurrentIdStore()
-        const { toast } = useToast()
-        return {
-            currentIdStore,
-            router,
-            toast
-        }
-    },
-    components: {
-        CustomLoader,
-        NoDataFound,
-        DatePicker,
-        DatePicker2,
-        Loader
-    },
-    data() {
-        return {
-            searchQuery: '',
-            url: '/attendance/group',
-            users: null,
-            token: localStorage.getItem("token"),
-            isLoading: false,
-            choosenDate: null,
-            isActive: false,
-            isDisabled: false,
-            isToday: false,
-            currentData: {
-                group_id: null,
-                date: null,
-            },
-            attendanceData:[],
-            isSubmiting: false,
-            subtitle: ''
-        }
-    },
-    computed: {
-        filteredItems() {
-            if (this.searchQuery) {
-                return this.users.filter((item) =>
-                    item.first_name.toLowerCase().includes(this.searchQuery.toLowerCase())
-                );
-            }
-            return this.users;
-        },
-    },
-    methods: {
-        async getUsers() {
-            try {
-                this.isLoading = true
-                this.currentData.date = this.choosenDate
-                this.currentData.group_id = parseInt(this.router.params.id)
-                
-                const res = await ApiService.postByToken(this.url, this.currentData, this.token)
-                this.users = res
-                this.isActive = res[0].attendance.is_active
-                this.isToday = res[0].attendance.date.slice(0, 10) == new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10)
-                if(!this.isToday) {
-                    this.isDisabled = true
-                } else {
-                    this.isDisabled = false
-                }
-                this.subtitle = this.isActive ? "O'zgartirish" : "Saqlash"
-                this.isLoading = false
-            } catch (err) {
-                console.log(err)
-                this.isLoading = false
-            }
-        },
-        handleDate(date){
-            this.choosenDate = date
-            this.getUsers()
-        },
-        async handleCreate() {
-            try {
-                this.isSubmiting = true
-                this.attendanceData = this.users.map((item) => {
-                    return {
-                        status: item.attendance.status,
-                        homework: item.attendance.homework,
-                        date: this.choosenDate,
-                        student_id: item.student_id,
-                        group_id: parseInt(this.router.params.id),
-                        is_active: this.isActive ? true : false
-                    }
-                })
-
-                const response = await ApiService.postByToken('/attendance/create', this.attendanceData, this.token);
-                this.$router.push('/attendance')
-            } catch (error) {
-                console.log(error);
-            } finally {
-                this.isSubmiting = false;
-            }
-        }
-    },
-    mounted() {
-        this.choosenDate = (new Date(new Date().getTime() + 60 * 5 * 60 * 1000).toISOString().slice(0, 10));
-        this.getUsers()
-    }
-}
-</script>
-<style lang="">
-
-</style>

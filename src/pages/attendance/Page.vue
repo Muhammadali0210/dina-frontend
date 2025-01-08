@@ -3,7 +3,7 @@ import { ApiService } from "@/services/apiServices";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import Loader from "@/ui/Loader.vue";
-import PageContainer from "../PageContainer.vue";
+import PageContainer from "@/components/PageContainer.vue";
 import type { Group } from "@/types/index";
 
 const router = useRouter();
@@ -23,10 +23,10 @@ const getgroups = async () => {
 };
 
 const goToPayment = (id: number) => {
-  router.push(`/attendance/group/${id}`);
+  router.push(`/attendance/${id}`);
 };
-onMounted(() => {
-  getgroups();
+onMounted(async() => {
+  await getgroups();
 });
 </script>
 <template>
