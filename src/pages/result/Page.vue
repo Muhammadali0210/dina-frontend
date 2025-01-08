@@ -7,7 +7,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import PageContainer from "../PageContainer.vue";
+import PageContainer from "@/components/PageContainer.vue";
 import { resultData }  from '@/constants/index';
 
 const data = ref<any>([]);
