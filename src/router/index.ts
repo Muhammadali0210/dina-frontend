@@ -17,9 +17,11 @@ import PaymentGroupView from '@/views/payment/PaymentGroupView.vue';
 import GroupView from '@/views/group/GroupView.vue';
 import AddUpdateGroupView from '@/views/group/Add&UpdateGroupView.vue';
 import viewLayout from '@/views/books/viewLayout.vue'
-import Results from '@/views/results/Results.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
+
+// result
+import Results from '@/pages/result/Page.vue';
 
 // attendance
 import Attendance from '@/pages/attendance/Page.vue';
