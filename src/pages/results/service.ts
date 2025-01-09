@@ -1,15 +1,15 @@
 import { ApiService } from "@/services/apiServices";
-import type { Course } from "@/types";
 import { ref } from 'vue'
+import { useResultsStore } from "./store";
 
 function useResult(){
     const isLoading = ref<boolean>(false);
-    const data = ref();
+    const resultStore = useResultsStore()
     const getResults = async () => {
         try {
           isLoading.value = true;
-          const res: Course = await ApiService.getByIdToken(`/result`);
-          data.value = res;
+          const res = await ApiService.getByIdToken(`/result`);
+          resultStore.setResults(res);
         } catch (error) {
           console.log(error);
         } finally {
@@ -19,8 +19,8 @@ function useResult(){
     const postResult = async (newData: any) => {
         try {
           isLoading.value = true;
-          const res: Course = await ApiService.postByToken(`/result`, newData);
-          data.value = res;
+          const res = await ApiService.postByToken(`/result`, newData);
+          resultStore.setResults(res);
         } catch (error) {
           console.log(error);
         } finally {
@@ -31,15 +31,15 @@ function useResult(){
     const deleteResult = async (id: number) => {
         try {
           isLoading.value = true;
-          const res: Course = await ApiService.deleteByToken(`/result/${id}`);
-          data.value = res;
+          const res = await ApiService.deleteByToken(`/result/${id}`);
+          resultStore.setResults(res);
         } catch (error) {
           console.log(error);
         } finally {
           isLoading.value = false;
         }
     }
-    return { isLoading, data, getResults, postResult, deleteResult }
+    return { isLoading, getResults, postResult, deleteResult }
 }
 
 export default useResult;

@@ -7,7 +7,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogClose
 } from "@/components/ui/dialog";
 import { Trash2, Loader } from "lucide-vue-next";
@@ -31,7 +30,7 @@ const emit = defineEmits(["onConfirm", "onOpenChange"])
       </DialogHeader>
 
       <DialogFooter class="sm:justify-start">
-        <DialogClose as-child>
+        <DialogClose as-child >
           <Button type="button" variant="outline" class="bg-slate-300"> Bekor qilish </Button>
           <Button variant="destructive" @click="emit('onConfirm')">       
             <template v-if="isLoading">
