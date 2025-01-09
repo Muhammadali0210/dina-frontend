@@ -21,7 +21,7 @@ import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 
 // result
-import Results from '@/pages/result/Page.vue';
+import Results from '@/pages/results/Page.vue';
 
 // attendance
 import Attendance from '@/pages/attendance/Page.vue';

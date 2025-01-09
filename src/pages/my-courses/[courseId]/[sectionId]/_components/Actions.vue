@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Button } from "@/components/ui/button";
 import { useRoute, useRouter } from "vue-router";
 import { useDeleteSection } from "../services/section-service";
 import { Loader, Trash2 } from "lucide-vue-next";
