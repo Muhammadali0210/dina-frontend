@@ -10,6 +10,7 @@ const { isLoading, data, createApplication } = useCreateApplication();
 
 const createHandler = async (values: any) => {
   await createApplication(values);
+  isOpen.value = false;
 }
 </script>
 <template>
