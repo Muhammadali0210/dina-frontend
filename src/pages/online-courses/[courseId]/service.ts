@@ -10,7 +10,7 @@ export function useGetDashboardCourse(){
         try {
           isLoading.value = true;
           courseStore.detailLoader = true;
-          const res: any = await ApiService.getByIdToken(`/course/${id}`);
+          const res: any = await ApiService.get(`/course/${id}`);
           data.value = res;
           courseStore.setCourseDetail(res);
           courseStore.detailLoader = false;

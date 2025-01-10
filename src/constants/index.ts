@@ -32,7 +32,7 @@ export const sidebarData = [
     {
         path: '/online-courses',
         title: "Online Darslar",
-        role: ['admin', 'teacher','student'],
+        role: ['admin', 'teacher','student', 'general'],
         icon: `
         <svg class="w-6 h-6 text-green-500 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 6H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1Zm7 11-6-2V9l6-2v10Z"/>

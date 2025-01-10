@@ -11,20 +11,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
     Dialog,
     DialogContent,
     DialogDescription,
     DialogTitle,
-    DialogTrigger,
-    DialogFooter,
     DialogClose,
     DialogHeader
 } from '@/components/ui/dialog';
@@ -38,15 +28,16 @@ defineProps({
 })  
 // const emit = defineEmits(["onConfirm", "onOpenChange"])
 const emit = defineEmits<{
-    (e: "onConfirm", values: { img: string; type: string }): void;
+    (e: "onConfirm", values: any): void;
     (e: "onOpenChange", value: boolean): void;
 }>();
 
 
 const formSchema = toTypedSchema(
   z.object({
-    img: z.string().url(),
-    type: z.string(),
+    firstName: z.string(),
+    lastName: z.string(),
+    phone: z.string(),
   })
 );
 
@@ -64,44 +55,42 @@ const onSubmit = handleSubmit((values) => {
   <Dialog @update:open="emit('onOpenChange', $event)" :open="isOpen">
     <DialogContent class="sm:max-w-[425px]">
       <DialogHeader>
-        <DialogTitle>Yangi natija qo'shish</DialogTitle>     
+        <DialogTitle>Malumotlaringizni kiriting</DialogTitle>     
         <DialogDescription>
         </DialogDescription>
       </DialogHeader>
 
       <form @submit.prevent="onSubmit">
         <div class="space-y-3">
-          <FormField v-slot="{ field, errors }" name="img">
+          <FormField v-slot="{ field, errors }" name="firstName">
             <FormItem>
-              <FormLabel>Natija rasmini link sifatida kiriting<span class="text-red-500">*</span></FormLabel>
+              <FormLabel>Ism<span class="text-red-500">*</span></FormLabel>
               <FormControl>
-                <Input type="text" placeholder="Kurs nomini kiriting" v-bind="field" />
+                <Input type="text" placeholder="Ismingizni kiriting" v-bind="field" />
               </FormControl>
               <FormMessage />
             </FormItem>
           </FormField>
 
-          <FormField v-slot="{ field, errors }" name="type">
-              <FormItem>
-                <FormLabel>Darajasi <span class="text-red-500">*</span></FormLabel>
-                <FormControl>
-                  <Select v-bind="field">
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Tanlang" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="Topik">Topik</SelectItem>
-                        <SelectItem value="Ielts">Ielts</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
+          <FormField v-slot="{ field, errors }" name="lastName">
+            <FormItem>
+              <FormLabel>Familiya<span class="text-red-500">*</span></FormLabel>
+              <FormControl>
+                <Input type="text" placeholder="Familiyangizni kiriting" v-bind="field" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+
+          <FormField v-slot="{ field, errors }" name="phone">
+            <FormItem>
+              <FormLabel>Telefon nomer<span class="text-red-500">*</span></FormLabel>
+              <FormControl>
+                <Input type="text" placeholder="+998 xx xxx xx xx"  v-bind="field" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          </FormField>
 
             <div class="flex">
                 <DialogClose as-child>
@@ -111,7 +100,7 @@ const onSubmit = handleSubmit((values) => {
                     <template v-if="isLoading">
                         <Loader class="size-4 animate-spin" /> Yuklanmoqda...
                     </template>
-                    <template v-else>Qo'shish</template>
+                    <template v-else>Yuborish</template>
                 </Button>
             </div>
         </div>

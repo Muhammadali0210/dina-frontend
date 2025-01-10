@@ -9,7 +9,7 @@ function useGetAllCourse(){
     const getAllCourse = async () => {
         try {
           isLoading.value = true;
-          const res: Course = await ApiService.getByIdToken('/online-courses');
+          const res: Course = await ApiService.get('/online-courses');
           courseStore.setCourse(res);
         } catch (error) {
           console.log(error);
