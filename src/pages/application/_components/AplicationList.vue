@@ -1,35 +1,43 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed,  } from "vue";
+import { defineProps } from 'vue';
+import dayjs from 'dayjs'; 
+
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
 import AplicationAdd from '../_components/AplicationAdd.vue'
-import ListSeleton from '../_components/ListSeleton.vue'
+const props = defineProps({
+    item: {
+        type: Object
+    }
+});
 
-const isLoading  = ref(true);
 
-setTimeout(() => {
-    isLoading.value = false;
-    console.log("Loading complete:", isLoading.value);
-}, 2000);
+const formattedDate = computed(() => {
+  return props.item ? dayjs(props.item.updatedAt).format('DD-MM-YYYY HH:mm') : '';
+});
+
+
 </script>
 
+
 <template>
-    <ListSeleton v-if="isLoading" />
-    <div v-else class="w-full overflow-x-auto hide-scrollbar">
-        <div class="dark:bg-slate-900 bg-slate-100 p-3 rounded-md my-1 grid grid-cols-1 min-w-max">
+
+    <div class="w-full overflow-x-auto hide-scrollbar">
+        <div v-if="props.item" class="dark:bg-slate-900 bg-slate-100 p-3 rounded-md my-1 grid grid-cols-1 min-w-max">
             <div class="flex flex-wrap gap-4 justify-between items-center min-w-max">
                 <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-2 m:grid-cols-2 min-w-max">
-                    <span class="text-sm dark:text-gray-300">Abubakir Sobitov</span>
-                    <span class="text-sm dark:text-gray-300">+998933708598</span>
+                    <span class="text-sm dark:text-gray-300">{{props.item?.firstName}} {{ props.item?.lastName}}</span>
+                    <span class="text-sm dark:text-gray-300">{{ props.item?.phone}}</span>
                 </div>
 
                 <!-- Contact Info Section -->
                 <div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-w-max">
-                    <span class="text-sm dark:text-gray-300">Gold</span>
-                    <span class="text-sm dark:text-gray-300">2025.01.05</span>
+                    <span class="text-sm dark:text-gray-300">{{props.item?.variant}}</span>
+                    <span class="text-sm dark:text-gray-300">10-01-2025</span>
                 </div>
 
                 <!-- Date and Time Section -->

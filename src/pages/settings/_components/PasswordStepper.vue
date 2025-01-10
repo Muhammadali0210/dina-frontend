@@ -69,9 +69,9 @@ function onSubmit(values: any) {
 </script>
 
 <template>
-    <Card class="w-[100%] sm:w-[50%] ">
+    <Card class="w-[100%] sm:w-[70%] ">
         <CardContent class="pt-5 min-h-[40vh] relative">
-            <div class=" h-12 right-0 w-[60%]  absolute z-40">
+            <div class=" h-12 right-0 w-[100%]  absolute z-40">
 
             </div>
             <Form v-slot="{ meta, values, validate }" as="" keep-values
@@ -133,7 +133,7 @@ function onSubmit(values: any) {
                                     <FormItem>
                                         <FormLabel>Parol</FormLabel>
                                         <FormControl>
-                                            <Input type="email " v-bind="componentField" />
+                                            <Input type="password " v-bind="componentField" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
