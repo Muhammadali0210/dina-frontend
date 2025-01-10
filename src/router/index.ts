@@ -47,7 +47,8 @@ import CreateCourse from '@/pages/create-course/Page.vue';
 // Aplication
 import Application from '@/pages/application/Page.vue';
 
-
+//Settings
+import Settings from '@/pages/settings/Page.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -231,6 +232,12 @@ const router = createRouter({
       path: '/applications',
       name: 'Applications',
       component: Application,
+      meta: { layout: MainLayout }
+    },
+     {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings,
       meta: { layout: MainLayout }
     }
   

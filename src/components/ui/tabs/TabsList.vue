@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { AlertDialogCancel, type AlertDialogCancelProps } from 'radix-vue'
+import { TabsList, type TabsListProps } from 'radix-vue'
 import { computed, type HTMLAttributes } from 'vue'
 
-const props = defineProps<AlertDialogCancelProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<TabsListProps & { class?: HTMLAttributes['class'] }>()
 
 const delegatedProps = computed(() => {
   const { class: _, ...delegated } = props
@@ -14,13 +13,13 @@ const delegatedProps = computed(() => {
 </script>
 
 <template>
-  <AlertDialogCancel
+  <TabsList
     v-bind="delegatedProps"
     :class="cn(
-      'mt-2 sm:mt-0',
+      'inline-flex items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',
       props.class,
     )"
   >
     <slot />
-  </AlertDialogCancel>
+  </TabsList>
 </template>

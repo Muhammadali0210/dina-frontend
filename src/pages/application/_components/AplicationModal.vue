@@ -26,7 +26,7 @@ console.log(groups);
 </script>
 
 <template>
-    <AlertDialogHeader>
+    <AlertDialogHeader class="dark:bg-gray-800 bg-white">
         <AlertDialogTitle>Qo'shish</AlertDialogTitle>
         <AlertDialogDescription>
             <form class="grid gap-4 mt-4">
@@ -91,14 +91,13 @@ console.log(groups);
     </AlertDialogHeader>
 
     <AlertDialogFooter class="mt-6 flex justify-end gap-4">
-        <AlertDialogCancel 
+        <AlertDialogCancel
             class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
             Bekor qilish
         </AlertDialogCancel>
-        <AlertDialogAction 
-            class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700">
+        <AlertDialogAction class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700">
             Saqlash
         </AlertDialogAction>
     </AlertDialogFooter>
-
 </template>
+
