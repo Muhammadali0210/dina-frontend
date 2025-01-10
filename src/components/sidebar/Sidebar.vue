@@ -37,7 +37,7 @@ const getSvgIcon = (icon: string, isActive: boolean) => {
       class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 lg:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
       :class="{ 'translate-x-0': sidebarStore.isOpen }"
     >
-      <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
+      <div class="overflow-y-auto my-scroll-0 py-5 px-3 h-full bg-white dark:bg-gray-800">
         <!-- search input -->
         <form action="#" method="GET" class="md:hidden mb-2">
           <label for="sidebar-search" class="sr-only">Search</label>
@@ -69,7 +69,7 @@ const getSvgIcon = (icon: string, isActive: boolean) => {
         </form>
 
         <!-- menu -->
-        <ul class="space-y-2">
+        <ul class="space-y-2 pb-[100px]">
           <template v-for="(item, index) in filteredSidebarData" :key="index">
             <li 
               class="cursor-pointer flex items-center py-2 px-3 text-base font-medium border-spacing-0 rounded-lg group"
