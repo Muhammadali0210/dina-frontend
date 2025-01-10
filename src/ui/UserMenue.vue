@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,42 +13,49 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
   LifeBuoy,
   LogOut,
   Mail,
   MessageSquare,
-  Plus,
   PlusCircle,
   Settings,
   User,
   UserPlus,
   Users,
-} from 'lucide-vue-next'
-
-import { useRouter } from 'vue-router'
+} from "lucide-vue-next";
+import { Button } from "@/components/ui/button";
+import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 
 const router = useRouter();
+const userStore = useUserStore();
+
+const token = ref<string>(localStorage.getItem("token") || "");
 const logOut = () => {
-    localStorage.setItem('token', '')
-    localStorage.setItem('role', '')
-    router.push('/login');
-    console.log("Loged out");
-}
+  router.push("/");
+  token.value = "";
+  localStorage.setItem("token", "");
+  localStorage.setItem("role", "");
+  userStore.currentRole = "general";
+  console.log("Loged out");
+};
 </script>
 <template>
-    <DropdownMenu>
-    <DropdownMenuTrigger as-child class="ml-3">
-        <Avatar>
-            <AvatarImage src="https://github.com/radix-vue.png" alt="@radix-vue" />
-            <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+  <DropdownMenu>
+    <DropdownMenuTrigger as-child class="ml-3" v-if="token.length > 0" >
+      <Avatar>
+        <AvatarImage src="https://github.com/radix-vue.png" alt="@radix-vue" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
     </DropdownMenuTrigger>
+
+    <Button v-else class="ml-3 rounded-[100px] cursor-pointer bg-transparent dark:bg-transparent border-gray-300 dark:border-gray-600" @click="router.push('/login')" variant="outline">
+      <span class="mr-2">Kirish</span>
+    </Button>
+
     <DropdownMenuContent class="w-56 mr-3">
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
@@ -99,7 +106,7 @@ const logOut = () => {
         <LifeBuoy class="mr-2 h-4 w-4" />
         <span>Support</span>
       </DropdownMenuItem>
-      
+
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="logOut">
         <LogOut class="mr-2 h-4 w-4" />
@@ -107,6 +114,6 @@ const logOut = () => {
         <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
       </DropdownMenuItem>
     </DropdownMenuContent>
-  </DropdownMenu>    
+  </DropdownMenu>
 </template>
 <style></style>

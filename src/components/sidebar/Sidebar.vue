@@ -1,3 +1,37 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { sidebarData } from '@/constants/index';
+import { useUserStore } from '@/stores/userStore';
+import { useSidebarStore } from '@/stores/sidebarStore';
+import { useRouter } from 'vue-router';
+import { Button } from '../ui/button';
+import Application from './_components/Application.vue';
+
+const userStore = useUserStore();
+const sidebarStore = useSidebarStore();
+const router = useRouter();
+
+const role = ref<string>(localStorage.getItem('role') || '');
+const currentPage = ref<number>(0);
+
+const filteredSidebarData = computed(() => {
+  return sidebarData.filter(item => item.role.includes(userStore.currentRole));
+});
+
+const changePage = (index: number, path: string) => {
+  currentPage.value = index;
+  sidebarStore.isOpen = false;
+  if (path == '/profile') {
+    localStorage.setItem('userId', '');
+  }
+  router.push(path);
+};
+
+const getSvgIcon = (icon: string, isActive: boolean) => {
+  const activeClass = isActive ? 'text-white dark:text-white  group-hover:text-white' : 'dark:text-white text-gray-700 group-hover:text-gray-800 dark:group-hover:text-white';
+  return icon.replace('class="w-6 h-6 text-green-500 transition duration-75"', `class="w-6 h-6 text-gray-700 transition duration-75 ${activeClass}"`);
+};
+</script>
 <template >
     <aside
       class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 lg:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
@@ -36,12 +70,11 @@
 
         <!-- menu -->
         <ul class="space-y-2">
-          <template v-for="(item, index) in sidebarData" :key="index">
+          <template v-for="(item, index) in filteredSidebarData" :key="index">
             <li 
               class="cursor-pointer flex items-center py-2 px-3 text-base font-medium border-spacing-0 rounded-lg group"
               :class="[currentPage == index ? 'bg-opacity-100 text-white bg-green-500' : 'bg-opacity-0  text-gray-700 rounded-lg dark:text-white hover:bg-opacity-15 dark:hover:bg-opacity-25']"
               @click="changePage(index, item.path)"
-              v-if="item.role.includes(userStore.currentRole)"
             >
               <span v-html="getSvgIcon(item.icon, currentPage === index)"></span>
               
@@ -51,56 +84,12 @@
         </ul>
       </div>
 
-      <!-- bottom 3 buttons  -->
       <div
-        class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-white dark:bg-gray-800 z-20"
+        class="absolute bottom-0 left-0 z-20"
       >
-        <span>Settings </span>
+        <Application />
       </div>
+          <!-- bottom 3 buttons  -->
     </aside>
+
 </template>
-<script>
-import { sidebarData } from '@/constants/index';
-import { useUserStore } from '@/stores/userStore';
-import { useSidebarStore } from '@/stores/sidebarStore';
-export default {
-    setup() {
-        const userStore = useUserStore();
-        const sidebarStore = useSidebarStore();
-        return {
-            userStore,
-            sidebarStore
-        }
-    },
-    data() {
-      return {
-        token: localStorage.getItem('token'),
-        currentPage: 0,
-        sidebarData: sidebarData
-      }
-    },
-    methods: {  
-      changePage(index, path) {
-        this.currentPage = index;
-        this.$router.push(path);
-        this.sidebarStore.isOpen = false;
-        if(path == '/profile') {
-          localStorage.setItem('userId', '');
-        }
-      },
-      getSvgIcon(icon, isActive) {
-        const activeClass = isActive ? 'text-white dark:text-white  group-hover:text-white' : 'dark:text-white text-gray-700 group-hover:text-gray-800 dark:group-hover:text-white';
-        return icon.replace('class="w-6 h-6 text-green-500 transition duration-75"', `class="w-6 h-6 text-gray-700 transition duration-75 ${activeClass}"`);
-      },
-    },
-    mounted(){
-         
-    }
-}
-</script>
-<style setup>
-.my-shadow{
-  box-shadow: 0 0 15px 0 #0000001e;
-  /* box-shadow:  0 0 10px 0 rgba(0, 0, 0, 0.1); */
-}
-</style>
