@@ -33,19 +33,6 @@ onMounted(async () => {
 </script>
 <template>
   <div class="p-2 md:p-5 max-w-[1000px] mx-auto">
-    <!-- <div
-      v-if="getLoading"
-      class="relative h-[36vh] w-full rounded-md bg-secondary sm:h-[30] md:h-[50vh] lg:h-[75vh]"
-    >
-      <Skeleton
-        class="absolute right-0 top-0 flex size-full items-center justify-center rounded-md bg-slate-500/80"
-      />
-      <div
-        class="absolute right-0 top-0 h-full w-full flex size-full items-center justify-center"
-      >
-        <Loader2 class="w-[100px] h-[100px] animate-spin text-primary" />
-      </div>
-    </div> -->
     <VideoLesson
       :lesson="lesson"
     />

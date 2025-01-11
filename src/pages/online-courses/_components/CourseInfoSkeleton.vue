@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 </script>
 
 <template>
-    <div class=" w-full border-gray-400 dark:bg-slate-900 bg-white cursor-pointer">
+    <div class=" w-full border-gray-400 dark:bg-transparent bg-white cursor-pointer">
 
         <div class="relative">
             <Skeleton class="h-[180px] dark:bg-gray-900 w-full object-cover" />

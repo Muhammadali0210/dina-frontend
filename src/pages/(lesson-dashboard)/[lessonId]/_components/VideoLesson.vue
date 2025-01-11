@@ -14,9 +14,7 @@ const props = defineProps({
 });
 
 const lessonStore = useLessonStore();
-
 const isLoading = ref<boolean>(true);
-const lessonLoading = ref<boolean>(lessonStore.lessonLoading);
 const videoId = ref<string | null>(null);
 
 const playerOptions = {
