@@ -9,6 +9,7 @@ export function useCreateApplication() {
             isLoading.value = true;
             const res: any = await ApiService.postByToken(`/order`, values);
             data.value = res;
+            
         } catch (error) {
             console.log(error);
         } finally {
