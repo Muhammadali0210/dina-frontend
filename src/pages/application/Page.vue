@@ -11,18 +11,19 @@ const { isLoading, getAllOrder } = usegetAllOrder();
 const orderStore = useOrderStore();
 const data = ref<any[]>([]);
 
-const dataType = ref('/order-video')
-const getOrder = async(type:string ) =>{
-    dataType.value = type
+const dataType = ref('/order');
+const getOrder = async (type: string) => {
+    dataType.value = type;
     await getAllOrder(dataType.value as string);
     data.value = orderStore.getAll;
-}
-onMounted(async () => {
-    await getAllOrder(dataType.value as string);  
-    data.value = orderStore.getAll; 
-});
+};
 
+onMounted(async () => {
+    await getOrder('/order-video');  // Set initial value to '/order-video'
+    console.log();
+});
 </script>
+
 
 <template>
     <PageContainer title="Murojatlar" subtitle="Kursga yozilmoqchi bo'lganlarning ro'yxati">
@@ -41,7 +42,7 @@ onMounted(async () => {
                 <ListSeleton v-if="isLoading" />
 
                 <div v-else>
-                    <AplicationList v-for="(item, index) in data" :key="index" :item="item" />
+                    <AplicationList v-for="(item, index) in data" :key="index" :item="item" :isLoading="isLoading" />
                 </div>
             </TabsContent>
 
@@ -49,7 +50,7 @@ onMounted(async () => {
             <TabsContent value="password">
                 <ListSeleton v-if="isLoading" />
                 <div v-else>
-                    <AplicationList v-for="(item, index) in data" :key="index" :item="item" />
+                    <AplicationList v-for="(item, index) in data" :key="index" :item="item" :isLoading="isLoading" />
                 </div>
             </TabsContent>
         </Tabs>

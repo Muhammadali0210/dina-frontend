@@ -13,7 +13,8 @@ export const useOrderStore = defineStore('order', {
         },
         setCategory(category: string) {
             this.category = category; 
-        }
+        },
+        
     },
     getters: {
         getAll(state) {
