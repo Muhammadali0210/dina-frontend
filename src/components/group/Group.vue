@@ -1,109 +1,137 @@
-<template lang="">
-    <div class="">
-        <div class="flex items-center max-md:items-start max-lg:gap-2 justify-between flex-col flex-wrap md:flex-row pb-4 bg-transparent dark:bg-gray-900">
-            <div class="flex items-center space-x-4 max-md:w-full"> 
-                <button @click="addHandler" type="button" class="px-5 py-[6px] text-sm font-medium text-white inline-flex items-center bg-green-500 hover:opacity-80 focus:ring-4 focus:outline-none  rounded-lg text-center dark:bg-green-500 dark:hover:opacity-80 ">
-                    <svg class="w-6 h-6 text-gray-100 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                    </svg>
-                    Qo'shish
-                </button>
-
-                <div class="relative max-md:w-full">
-                    <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                    </div>
-                    <input type="text" id="table-search-users" v-model="searchQuery" class="block max-md:w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 max-sm:w-[100%] bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+<template>
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-md max-w-[1400px] mx-auto">
+        <div class="flex justify-between border-b border-gray-600 mb-4">
+            <div class="order-3 md:order-2 col-span-6 md:col-span-8">
+                <Skeleton class="h-[31px] w-[250px] max-sm:w-[150px] mb-2" />
+                <div class="flex items-center gap-2">
+                    <h3 class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white">
+                        Guruhlar
+                    </h3>
+                    <CircleCheck class="h-5 w-5 text-green-400" />
                 </div>
+                <p class="text-sm text-muted-foreground">Barcha guruhlar</p>
             </div>
+
+            <AlertDialog>
+                <AlertDialogTrigger>
+                    <span @click="updateItem(item_id)"
+                        class="cursor-pointer text-sm flex gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14m-7 7V5" />
+                        </svg>
+                        <span>Qo'shish</span>
+                    </span>
+                </AlertDialogTrigger>
+            </AlertDialog>
         </div>
 
-        <div class="w-full max-xl:overflow-x-scroll rounded-lg">
-            <template v-if="isLoading">
-                    <Loader />
-            </template>
-            <template v-else>
-                <template v-if="!users">
-                    <NoDataFound />
-                </template>
-                <template v-else>
-                    <table class="w-full max-xl:min-w-[350px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="pl-4 pr-0 md:px-6">
-                                    T/R
-                                </th>
-                                <th scope="col" class="px-0 py-3">
-                                    Guruh nomi
-                                </th>
-                                <th scope="col" class="px-0 py-3">
-                                    Guruh turi
-                                </th>
-                                <th scope="col" class="px-0 py-3 w-[80px]">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item, index) in filteredItems" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
-                                <td class="pl-4 pr-0 py-4 md:px-6">
-                                    {{ index + 1 }}
-                                </td>
-                                <td class="px-0 py-4">
-                                    {{ item.name }}
-                                </td>
-                                <td class="px-0 py-4">
-                                    {{ item.degree }}
-                                </td>
-                                <td class="px-0 py-4 relative">
-                                    <div class="flex gap-3 h-[18px]">
-                                        <span class="cursor-pointer" @click="updateItem(item._id)">
-                                            <img src="../../assets/icons/edit.svg" alt="E">
-                                        </span>
-                                        <span class="cursor-pointer" @click="openDeleteModal(item._id)">
-                                            <img src="../../assets/icons/trash.svg" alt="E">
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </template>
-            </template>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <GroupSkalation v-if="isLoading" v-for="n in 5" :key="n" />
+            <Card v-else v-for="(item, index) in filteredItems" :key="index" @click="updateItem(item._id)"
+                class="p-4 flex relative items-center gap-4 cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg">
+                <div>
+                    <svg class="w-10 h-10 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                            d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-lg font-semibold text-gray-800 dark:text-white">{{ item.name }}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">{{ item.studentCount }}</p>
+                </div>
+                <div class="absolute top-2 right-2">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    d="M12 6h.01M12 12h.01M12 18h.01" />
+                            </svg>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <AlertDialog>
+                                <AlertDialogTrigger>
+                                    <span @click="updateItem(item._id)" class="cursor-pointer flex gap-2 px-2">
+                                        <img src="../../assets/icons/edit.svg" alt="E" />
+                                        <span>Tahrirlash</span>
+                                    </span>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent class="max-w-4xl w-full">
+                                    <AddUpdateGroup :item-id="selectedItemId" />
+                                    <AlertDialogAction @click="refreshData"
+                                        class="ml-2 text-white absolute bottom-2 right-2">Saqlash</AlertDialogAction>
+                                </AlertDialogContent>
+                            </AlertDialog>
+                            <DropdownMenuItem>
+                                <div class="cursor-pointer flex justify-between gap-2"
+                                    @click="openDeleteModal(item._id)">
+                                    <img src="../../assets/icons/trash.svg" alt="E" />
+                                    <span>O'chirish</span>
+                                </div>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
+                <div class="absolute bottom-2 right-2">
+                    <!-- <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ item.degree }}</p> -->
+                </div>
+            </Card>
         </div>
     </div>
 
-    <DeleteModal
-      v-if="isModalOpen"
-      :modal="isModalOpen"
-      :url="url"
-      :id="selectedItemId"
-      @close="closeDeleteModal"
-      @deleted="handleDelete"
-    />
+    <DeleteModal v-if="isModalOpen" :modal="isModalOpen" :url="url" :id="selectedItemId" @close="closeDeleteModal"
+        @deleted="handleDelete" />
 </template>
+
 <script>
 import DeleteModal from '@/ui/DeleteModal.vue';
-import UserInfo from '@/ui/UserInfo.vue';
-import NoDataFound from '@/ui/NoDataFound.vue';
+import GroupSkalation from './components/GroupSkalation.vue'
+import AddUpdateGroup from './Add&UpdateGroup.vue';
 import { ApiService } from '@/services/apiServices';
-import Loader from '@/ui/Loader.vue';
 import { useCurrentIdStore } from '@/stores/currentId';
+import {
+    Card,
+} from '@/components/ui/card'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogTrigger,
+    AlertDialogAction,
+    AlertDialogCancel
+} from '@/components/ui/alert-dialog'
+
 export default {
     components: {
         DeleteModal,
-        UserInfo,
-        Loader,
-        NoDataFound
+        AddUpdateGroup,
+        GroupSkalation,
+        Card,
+        DropdownMenu,
+        DropdownMenuContent,
+        DropdownMenuItem,
+        DropdownMenuTrigger,
+        AlertDialog,
+        AlertDialogContent,
+        AlertDialogTrigger,
+        AlertDialogAction,
+        AlertDialogCancel
     },
     data() {
         return {
             searchQuery: '',
             isModalOpen: false,
             selectedItemId: null,
-            url: '/group',
+            url: '/groups',
             users: null,
             token: localStorage.getItem("token"),
             isLoading: false
@@ -111,19 +139,22 @@ export default {
     },
     computed: {
         filteredItems() {
-            if (this.searchQuery) {
-                return this.users.filter((item) =>
-                    item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-                );
-            }
-            return this.users;
+            return this.searchQuery
+                ? this.users.filter((item) => item.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
+                : this.users;
         },
     },
     methods: {
-        addHandler() {
-            const currentIdStore = useCurrentIdStore();
-            currentIdStore.setCurrentId(null);
-            this.$router.push('/group/add');
+        async refreshData() {
+            try {
+                this.isLoading = true;
+                const response = await ApiService.getByIdToken(this.url, this.token);
+                this.users = response;
+            } catch (error) {
+                console.error("Bazadan ma'lumot olishda xatolik:", error);
+            } finally {
+                this.isLoading = false;
+            }
         },
         openDeleteModal(id) {
             this.selectedItemId = id;
@@ -131,34 +162,22 @@ export default {
         },
         closeDeleteModal() {
             this.isModalOpen = false;
-            this.selectedItemId = null; // O'chirilayotgan IDni tozalash
+            this.selectedItemId = null;
         },
         handleDelete() {
-            this.getUser();
+            this.refreshData();
             this.closeDeleteModal();
         },
         updateItem(id) {
             const currentIdStore = useCurrentIdStore();
             currentIdStore.setCurrentId(id);
-            this.$router.push('/group/add');
+            this.$router.push({ path: '/group/student', query: { id } });
         },
-        async getUser() {
-            try {
-                this.isLoading = true;
-                const response = await ApiService.getByIdToken(this.url, this.token);
-                this.users = response;
-            } catch (error) {
-                console.log(error);
-            } finally {
-                this.isLoading = false;
-            }
-        }
     },
     mounted() {
-        this.getUser();
+        this.refreshData();
     }
 }
 </script>
-<style lang="">
 
-</style>
+<style lang=""></style>

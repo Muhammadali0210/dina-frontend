@@ -32,7 +32,7 @@
                                     </svg>
                                 </PopoverTrigger>
                                 <PopoverContent tabindex="0"
-                                    class="dropdown-content menu z-[10] p-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-800 dark:divide-gray-600">
+                                    class="dropdown-content menu z-50 p-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-800 dark:divide-gray-600">
                                     <ul class="space-y-1">
                                         <li v-for="(group, index) in groupsDegres" :key="index"
                                             class="flex items-center gap-1 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-gray-700 transition-colors duration-200">
@@ -68,8 +68,11 @@
                         </template>
                         <template v-else>
                             {{ subtitle }}
+                            
                         </template>
+                        
                     </button>
+                    
                 </form>
             </template>
         </div>
@@ -81,6 +84,9 @@ import { useCurrentIdStore } from '@/stores/currentId';
 import Loader from '@/ui/Loader.vue';
 import ErrorAlert from '@/ui/ErrorAlert.vue';
 import { errorMessages } from 'vue/compiler-sfc';
+import {
+    AlertDialogAction
+} from '@/components/ui/alert-dialog'
 import {
     Popover,
     PopoverContent,
@@ -99,6 +105,7 @@ export default {
         Popover,
         PopoverContent,
         PopoverTrigger,
+        
     },
     data(){
         return {

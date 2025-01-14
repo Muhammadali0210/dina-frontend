@@ -15,10 +15,10 @@ import AddUpdateAdminView from '@/views/admin/Add&UpdateAdminView.vue';
 import PaymentView from '@/views/payment/PaymentView.vue';
 import PaymentGroupView from '@/views/payment/PaymentGroupView.vue';
 import GroupView from '@/views/group/GroupView.vue';
-import AddUpdateGroupView from '@/views/group/Add&UpdateGroupView.vue';
 import viewLayout from '@/views/books/viewLayout.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
+
 
 // result
 import Results from '@/pages/results/Page.vue';
@@ -77,7 +77,7 @@ const router = createRouter({
       meta: { layout: MainLayout }
     },
     {
-      path: '/students',
+      path: '/group/student',
       name: 'students',
       component: StudentsView,
       meta: { layout: MainLayout }
@@ -146,12 +146,6 @@ const router = createRouter({
       path: '/group',
       name: 'group',
       component: GroupView,
-      meta: { layout: MainLayout }
-    },
-    {
-      path: '/group/add',
-      name: 'add-group',
-      component: AddUpdateGroupView,
       meta: { layout: MainLayout }
     },
     // attendance - davomat
