@@ -196,7 +196,7 @@ export default {
         async handleAdd() {
             try {
                 const response = await ApiService.postByToken(this.url, this.userData, this.token);
-                this.$router.push('/students')
+                this.$router.push('/group')
             } catch (error) {
                 this.errorMessage = error.response.data.message
                 console.log(error);
@@ -207,7 +207,7 @@ export default {
         async handleUpdate() {
             try {
                 const response = await ApiService.updateByIdToken(`${this.url}/${this.currentId}`, this.userData, this.token);
-                this.$router.push('/students')
+                this.$router.push('/group')
             } catch (error) {
                 this.errorMessage = error.response.data.message
                 console.log(error);

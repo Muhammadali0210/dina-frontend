@@ -62,6 +62,7 @@ const handleDelete = async (id: number) => {
                         </PopoverTrigger>
                         <PopoverContent class="max-w-[210px] bg-slate-100 dark:bg-gray-900 px-1 py-2">
                             <div class="flex gap-4 items-center justify-center">
+                            
                                 <button type="button"
                                     class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg">Qo'shish</button>
                                 <template v-if="!isLoading">
