@@ -48,7 +48,7 @@ const { handleSubmit, resetForm } = useForm({
 const onSubmit = handleSubmit((values) => {
   const data = {
     ...values,
-    type: 'video',
+    type: 'lesson',
     variant: 'lesson',
     time: new Intl.DateTimeFormat('en-GB', { hour: 'numeric', minute: 'numeric' }).format(new Date())
   }
