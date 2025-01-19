@@ -96,8 +96,14 @@
 
             </Card>
         </div>
-        <DeleteModal v-if="isModalOpen" :modal="isModalOpen" :url="url" :id="selectedItemId" @close="closeDeleteModal"
-            @deleted="handleDelete" />
+        <DeleteModal 
+            v-if="isModalOpen" 
+            :modal="isModalOpen" 
+            :url="deleteUrl" 
+            :id="selectedItemId" 
+            @close="closeDeleteModal"
+            @deleted="handleDelete"
+        />
     </div>
 
 
@@ -149,6 +155,7 @@ export default {
             isModalOpen: false,
             selectedItemId: null,
             url: '/groups',
+            deleteUrl: '/group',
             users: null,
             token: localStorage.getItem("token"),
             isLoading: false
@@ -159,7 +166,10 @@ export default {
             return this.searchQuery
                 ? this.users.filter((item) => item.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
                 : this.users;
+
         },
+
+
 
 
     },
@@ -167,9 +177,10 @@ export default {
         async refreshData() {
             try {
                 this.isLoading = true;
-                const response = await ApiService.getByIdToken(this.url, this.token);
+                const response = await ApiService.getByIdToken(this.url);
                 this.users = response;
-                
+
+
             } catch (error) {
                 console.error("Bazadan ma'lumot olishda xatolik:", error);
             } finally {
@@ -204,8 +215,6 @@ export default {
     },
     mounted() {
         this.refreshData();
-
-
     }
 }
 </script>

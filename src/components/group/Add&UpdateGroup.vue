@@ -105,7 +105,6 @@ export default {
     },
     data() {
         return {
-            token: localStorage.getItem('token'),
             userData: {
                 name: "",
                 degree: null,
@@ -124,7 +123,7 @@ export default {
         async getDataById() {
             try {
                 this.isLoading = true;
-                const response = await ApiService.getByIdToken(`${this.url}/${this.currentId}`, this.currentId, this.token);
+                const response = await ApiService.getByIdToken(`${this.url}/${this.currentId}`, this.currentId);
                 this.userData.name = response.name;
                 this.userData.degree = response.degree;
             } catch (error) {

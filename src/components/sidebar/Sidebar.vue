@@ -69,7 +69,7 @@ const getSvgIcon = (icon: string, isActive: boolean) => {
         </form>
 
         <!-- menu -->
-        <ul class="space-y-2 pb-[100px]">
+        <ul class="space-y-2 pb-[140px]">
           <template v-for="(item, index) in filteredSidebarData" :key="index">
             <li 
               class="cursor-pointer flex items-center py-2 px-3 text-base font-medium border-spacing-0 rounded-lg group"
