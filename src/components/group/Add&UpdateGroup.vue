@@ -3,9 +3,9 @@
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">{{ title }}</h2>
             <ErrorAlert v-if="errorMessage" :errorMessage="errorMessage" />
-            <template v-if="isLoading">
+            <!-- <template v-if="isLoading">
                 <Loader />
-            </template>
+            </template> -->
             <template v-else>
                 <form @submit.prevent="handleSubmit()">
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">

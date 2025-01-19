@@ -6,19 +6,21 @@
                 <div class="flex gap-5 items-center">
                     <div class="order-1 md:order-1 col-span-3 md:col-span-1">
                         <RouterLink :to="`/group`">
-                            <Button size="icon" variant="outline">
-                                <ChevronLeftCircle />
-                            </Button>
                         </RouterLink>
                     </div>
 
                     <div class="order-3 md:order-2 col-span-6 md:col-span-8">
                         <div class="flex items-center gap-2">
-                            <h3 class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white">
-                                O'quvchilar
-                            </h3>
+                            <template v-if="isLoading">
+                                <!-- <Skeleton class="w-[200px] h-5 rounded-lg" /> -->
+                            </template>
+                            <template v-else>
+                                <h3 class="text-4xl max-md:text-2xl font-extrabold text-gray-700 dark:text-white">
+                                    {{ data }}
+                                </h3>
+                            </template>
                         </div>
-                        <p class="text-sm text-muted-foreground">Modul haqida malumot</p>
+                        <p class="text-sm text-muted-foreground">O'quvchilar soni: {{ teacher }}</p>
                     </div>
                 </div>
 
@@ -57,8 +59,8 @@
             <div class="">
 
                 <div class="w-full max-xl:overflow-x-scroll rounded-lg">
-                    <template v-if="isLoading">
-                        <Loader />
+                    <template v-if=" isLoading">
+                        <StudentsSkaleton />
                     </template>
                     <template v-else>
                         <template v-if="!users">
@@ -68,7 +70,7 @@
                             <table
                                 class="w-full max-xl:min-w-[550px] text-sm shadow-md sm:rounded-lg overflow-hidden text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead
-                                    class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
+                                    class="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-900 border-b border-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="px-2 py-3 md:px-6">
                                             O'quvchilar malumotlari
@@ -89,7 +91,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(item, index) in filteredItems" :key="index"
-                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
+                                        class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
                                         <th class="px-2 py-2 md:px-6">
                                             <UserInfo :id="item._id" :firstName="item.first_name"
                                                 :lastName="item.last_name"
@@ -129,10 +131,10 @@
 
 
         </div>
-        <DeleteModal v-if="isModalOpen" :modal="isModalOpen" :url="url" :id="selectedItemId" @close="closeDeleteModal"
-            @deleted="handleDelete" />
+        
     </div>
-
+    <DeleteModal v-if="isModalOpen" :modal="isModalOpen" :url="url" :id="selectedItemId" @close="closeDeleteModal"
+        @deleted="handleDelete" />
 
 </template>
 <script>
@@ -140,29 +142,29 @@ import DeleteModal from '@/ui/DeleteModal.vue';
 import UserInfo from '@/ui/UserInfo.vue';
 import NoDataFound from '@/ui/NoDataFound.vue';
 import { ApiService } from '@/services/apiServices';
-import Loader from '@/ui/Loader.vue';
+import StudentsSkaleton from './components/StudentsSkaleton.vue'
 import { useCurrentIdStore } from '@/stores/currentId';
 import { RouterLink } from "vue-router";
-import { Button } from "@/components/ui/button";
-import { ChevronLeftCircle, } from "lucide-vue-next";
+// import { Skeleton } from '@/components/ui/skeleton'
+
 
 export default {
     components: {
         UserInfo,
         DeleteModal,
-        Loader,
+        StudentsSkaleton,
         NoDataFound,
-        Button,
         RouterLink,
-        ChevronLeftCircle
     },
     data() {
         return {
+            data:null,
             searchQuery: '',
             isModalOpen: false,
             selectedItemId: null,
-            url: '/student',
+            url: '/students/by-group/3',
             users: null,
+            teacher:null,
             token: localStorage.getItem("token"),
             isLoading: false,
             id: null, // ID uchun o'zgaruvchi
@@ -184,8 +186,8 @@ export default {
             currentIdStore.setCurrentId(null);
             this.$router.push('/student/add');
         },
-        openDeleteModal(id) {
-            this.selectedItemId = id;
+        openDeleteModal(_id) {
+            this.selectedItemId = item._id
             this.isModalOpen = true;
         },
         closeDeleteModal() {
@@ -204,13 +206,13 @@ export default {
         async getUser() {
             try {
                 this.isLoading = true;
-                const response = await ApiService.getByIdToken(this.url);
-                const groupId = this.$route.query.id;
-                if (groupId) {
-                    this.users = response.filter(user => user.group_ids.includes(Number(groupId)));
-                } else {
-                    this.users = response;
-                }
+                const response = await ApiService.getByIdToken(`/students/by-group/${this.$route.query.id}`);
+                
+                this.data = response.name;
+                this.teacher = response.studentCount;
+                this.users = response.students;
+                
+                
             } catch (error) {
                 console.log(error);
             } finally {
@@ -221,7 +223,6 @@ export default {
     mounted() {
         const id = this.$route.query.id;
         this.id = id;
-        console.log(this.id);
         this.getUser();
     }
 }

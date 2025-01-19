@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { defineProps } from "vue";
 import dayjs from "dayjs";
 import usegetAllOrder from "../servise";
 import { Loader } from 'lucide-vue-next';
 const { deleteOrder, isLoading, getAllOrder } = usegetAllOrder();
+
 
 import {
     Popover,
@@ -25,15 +26,29 @@ const formattedDate = computed(() => {
         : "";
 });
 
+const dataType = ref('/order');
 const handleDelete = async (id: number) => {
     try {
         await deleteOrder(id);
         console.log(`Order with ID ${id} deleted successfully`);
-        await getAllOrder('/order-video');
+        await getAllOrder(dataType.value as string);
     } catch (error) {
         console.error(`Failed to delete order with ID ${id}:`, error);
     }
 };
+
+
+const fetchOrders = async () => {
+    try {
+        await getAllOrder(dataType.value as string); 
+    } catch (error) {
+        console.error("Failed to fetch orders:", error);
+    }
+};
+
+
+
+
 </script>
 
 <template>

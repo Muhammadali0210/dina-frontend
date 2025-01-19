@@ -58,8 +58,8 @@ export default {
       try {
         const response = await ApiService.deleteByToken(this.url + '/' + this.id, this.token);
 
-        // const toastStore = useToastStore();
-        // toastStore.showSuccess("Element muvaffaqiyatli o'chirildi");
+        const toastStore = useToastStore();
+        toastStore.showSuccess("Element muvaffaqiyatli o'chirildi");
         this.$emit("deleted", this.id);
         this.closeModal();
       } catch (error) {
