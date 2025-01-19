@@ -14,12 +14,12 @@
             <AlertDialog>
                 <AlertDialogTrigger>
                     <span class="cursor-pointer text-sm flex gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg">
-                        <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5  text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 12h14m-7 7V5" />
                         </svg>
-                        <span>Qo'shish</span>
+                        <span class="text-white ">Qo'shish</span>
                     </span>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
@@ -63,15 +63,17 @@
                                     d="M12 6h.01M12 12h.01M12 18h.01" />
                             </svg>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent>
+                        <DropdownMenuContent class="dark:bg-gray-900 bg-white">
                             <AlertDialog>
-                                <AlertDialogTrigger @click="updateItem(item._id)">
-                                    <span class="cursor-pointer flex gap-2 px-2">
+                                <AlertDialogTrigger @click="updateItem(item._id)"
+                                    class="hover:bg-gray-100 dark:hover:bg-slate-800 rounded-[4px] transition-colors duration-200">
+                                    <span class="cursor-pointer flex gap-2 px-2.5 pt-1 py-1">
                                         <img src="../../assets/icons/edit.svg" alt="E" />
                                         <span>Tahrirlash</span>
                                     </span>
                                 </AlertDialogTrigger>
-                                <AlertDialogContent class="max-w-4xl w-full">
+
+                                <AlertDialogContent class="max-w-4xl w-full bg-white dark:bg-gray-800">
                                     <AddUpdateGroup :item-id="selectedItemId" />
                                     <AlertDialogAction @click="refreshData"
                                         class="ml-2 text-white absolute bottom-2 right-2">Saqlash
@@ -106,7 +108,6 @@
 
 
 </template>
-
 <script>
 import DeleteModal from '@/ui/DeleteModal.vue';
 import GroupSkalation from './components/GroupSkalation.vue'
@@ -165,7 +166,12 @@ export default {
             return this.searchQuery
                 ? this.users.filter((item) => item.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
                 : this.users;
-        }
+
+        },
+
+
+
+
     },
     methods: {
         async refreshData() {
@@ -173,7 +179,8 @@ export default {
                 this.isLoading = true;
                 const response = await ApiService.getByIdToken(this.url);
                 this.users = response;
-                // currentIdStore.setCurrentId();
+
+
             } catch (error) {
                 console.error("Bazadan ma'lumot olishda xatolik:", error);
             } finally {
@@ -195,7 +202,6 @@ export default {
         updateItem(id) {
             const currentIdStore = useCurrentIdStore();
             currentIdStore.setCurrentId(id);
-           
         },
         nextPage(id) {
             const currentIdStore = useCurrentIdStore();
@@ -214,3 +220,5 @@ export default {
 </script>
 
 <style lang=""></style>
+
+

@@ -68,11 +68,11 @@
                         </template>
                         <template v-else>
                             {{ subtitle }}
-                            
+
                         </template>
-                        
+
                     </button>
-                    
+
                 </form>
             </template>
         </div>
@@ -83,10 +83,6 @@ import { ApiService } from '@/services/apiServices';
 import { useCurrentIdStore } from '@/stores/currentId';
 import Loader from '@/ui/Loader.vue';
 import ErrorAlert from '@/ui/ErrorAlert.vue';
-import { errorMessages } from 'vue/compiler-sfc';
-import {
-    AlertDialogAction
-} from '@/components/ui/alert-dialog'
 import {
     Popover,
     PopoverContent,
@@ -105,9 +101,9 @@ export default {
         Popover,
         PopoverContent,
         PopoverTrigger,
-        
+
     },
-    data(){
+    data() {
         return {
             userData: {
                 name: "",
@@ -124,7 +120,7 @@ export default {
         }
     },
     methods: {
-        async getDataById(){
+        async getDataById() {
             try {
                 this.isLoading = true;
                 const response = await ApiService.getByIdToken(`${this.url}/${this.currentId}`, this.currentId);
@@ -136,15 +132,15 @@ export default {
                 this.isLoading = false;
             }
         },
-        async handleSubmit(){
+        async handleSubmit() {
             this.isSubmiting = true;
-            if(this.currentId){
+            if (this.currentId) {
                 this.handleUpdate();
             } else {
                 this.handleAdd();
             }
         },
-        async handleAdd(){
+        async handleAdd() {
             try {
                 const response = await ApiService.postByToken(this.url, this.userData, this.token);
                 this.$router.push('/group')
@@ -155,7 +151,7 @@ export default {
                 this.isSubmiting = false;
             }
         },
-        async handleUpdate(){
+        async handleUpdate() {
             try {
                 const response = await ApiService.updateByIdToken(`${this.url}/${this.currentId}`, this.userData, this.token);
                 this.$router.push('/group')
@@ -168,14 +164,12 @@ export default {
         },
 
     },
-    
+
     async mounted() {
-        if(this.currentId){
+        if (this.currentId) {
             this.getDataById();
         }
-    },  
+    },
 }
 </script>
-<style>
-    
-</style>
+<style></style>

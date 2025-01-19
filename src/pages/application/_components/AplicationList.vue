@@ -77,7 +77,7 @@ const fetchOrders = async () => {
                         </PopoverTrigger>
                         <PopoverContent class="max-w-[210px] bg-slate-100 dark:bg-gray-900 px-1 py-2">
                             <div class="flex gap-4 items-center justify-center">
-                            
+
                                 <button type="button"
                                     class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg">Qo'shish</button>
                                 <template v-if="!isLoading">
@@ -93,7 +93,12 @@ const fetchOrders = async () => {
                         </PopoverContent>
                     </Popover>
                 </div>
-
+                <div><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </div>
                 <div class="flex max-sm:hidden gap-4 items-center min-w-max">
                     <template v-if="!isLoading">
                         <button type="button" @click="handleDelete(props.item._id)"
