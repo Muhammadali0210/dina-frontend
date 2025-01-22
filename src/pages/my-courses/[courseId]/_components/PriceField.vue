@@ -13,7 +13,7 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { useUpdateCourseInfo } from "../service";
 import { Skeleton } from "@/components/ui/skeleton";
 import SubmitButton from "@/ui/SubmitButton.vue";
-import {defineProps} from "vue"
+import {defineProps, watch} from "vue"
 
 const { isLoading, data, updateCourseInfo } = useUpdateCourseInfo();
 const props = defineProps({
@@ -28,13 +28,20 @@ const formSchema = toTypedSchema(
   })
 );
 
-const { handleSubmit, resetForm } = useForm({
+const { handleSubmit, resetForm, setValues } = useForm({
   validationSchema: formSchema,
   initialValues: {
     oldPrice: props.course?.oldPrice,
     currentPrice: props.course?.currentPrice,
   },
 });
+
+watch(() => props.state, () => {
+  setValues({
+    oldPrice: props.course?.oldPrice,
+    currentPrice: props.course?.currentPrice,
+  });
+})
 
 const emit = defineEmits<{
   (e: "onUpdated", data: any): void;
