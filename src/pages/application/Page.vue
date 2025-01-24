@@ -42,7 +42,8 @@ onMounted(async () => {
                 <ListSeleton v-if="isLoading" />
 
                 <div v-else>
-                    <AplicationList v-for="(item, index) in data" :key="index" :item="item" :isLoading="isLoading" />
+                    <AplicationList v-for="(item, index) in data" :key="index" :item="item" :isLoading="isLoading"
+                        :customFunction="() => getOrder('/order-video')" />
                 </div>
             </TabsContent>
 
@@ -50,7 +51,8 @@ onMounted(async () => {
             <TabsContent value="password">
                 <ListSeleton v-if="isLoading" />
                 <div v-else>
-                    <AplicationList v-for="(item, index) in data" :key="index" :item="item" :isLoading="isLoading" />
+                    <AplicationList v-for="(item, index) in data" :key="index" :item="item" :isLoading="isLoading"
+                        :customFunction="() => getOrder('/order-lesson')" />
                 </div>
             </TabsContent>
         </Tabs>

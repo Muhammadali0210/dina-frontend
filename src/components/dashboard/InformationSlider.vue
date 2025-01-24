@@ -1,6 +1,6 @@
 <template>
     <div class="h-full p-[0px]">
-        <div class="flex card justify-between mb-[15px]">
+        <div class="flex card justify-between mb-[10px]">
             <h1 class="text-[30px] text-gray-800 font-bold dark:text-white">Continue Watching</h1>
             <div class="gap-3 flex justify-end">
                 <!-- Oldingi slayd tugmasi -->
@@ -16,19 +16,19 @@
             </div>
         </div>
 
-        <div class="bg-white shadow-lg p-[20px] overflow-hidden rounded-[25px] dark:bg-gray-800">
+        <div class="bg-white shadow-lg p-[15px] overflow-hidden rounded-[10px] dark:bg-gray-800">
 
-            <swiper ref="swiperRef" :onSwiper="onSwiperInit" :spaceBetween="10" :slidesPerView="1" :loop="true"
+            <swiper ref="swiperRef" :onSwiper="onSwiperInit" :spaceBetween="10" :slidesPerView="2" :loop="true"
                 :autoplay="{ delay: 2500, disableOnInteraction: false }" :breakpoints="{
                     400: { slidesPerView: 1, spaceBetween: 5 },
                     480: { slidesPerView: 2, spaceBetween: 10 },
-                    768: { slidesPerView: 3, spaceBetween: 15 },
-                    1024: { slidesPerView: 3, spaceBetween: 20 }
+                    768: { slidesPerView: 2, spaceBetween: 15 },
+                    1024: { slidesPerView: 2, spaceBetween: 20 }
                 }" :modules="modules" class="mySwiper">
 
                 <swiper-slide @click="goToPage(index)" v-for="(slideData, index) in informationSlideData" :key="index">
                     <div class="card">
-                        <img class="rounded-[15px] h-[150px] md:h-[180px] lg:h-[200px] w-full object-cover"
+                        <img class="rounded-[15px] h-[150px] md:h-[160px] lg:h-[150px] w-full object-cover"
                             :src="slideData.url" alt="Image" />
                         <p
                             class="text-gray-800 dark:text-white text-sm md:text-base lg:text-lg font-bold leading-[23px] break-words pt-[10px]">

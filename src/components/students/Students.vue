@@ -174,7 +174,7 @@ export default {
         filteredItems() {
             if (this.searchQuery) {
                 return this.users.filter((item) =>
-                    item.first_name.toLowerCase().includes(this.searchQuery.toLowerCase())
+                    item.first_name.toLowerCase().includes(this.searchQuery.toLowerCase())     
                 );
             }
             return this.users;

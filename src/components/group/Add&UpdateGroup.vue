@@ -8,7 +8,7 @@
             </template> -->
             <template v-else>
                 <form @submit.prevent="handleSubmit()">
-                    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                    <div class="grid gap-4 sm:grid-cols-1 ">
                         <div class="w-full">
                             <label for="brand"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Guruh nomi</label>

@@ -52,11 +52,11 @@ const logOut = () => {
       </Avatar>
     </DropdownMenuTrigger>
 
-    <Button v-else class="ml-3 rounded-[100px] cursor-pointer bg-transparent dark:bg-transparent border-gray-300 dark:border-gray-600" @click="router.push('/login')" variant="outline">
+    <Button v-else class="ml-3 rounded-[100px] cursor-pointer bg-transparent dark:bg-transparent border-gray-300  dark:border-gray-600" @click="router.push('/login')" variant="outline">
       <span class="mr-2">Kirish</span>
     </Button>
 
-    <DropdownMenuContent class="w-56 mr-3">
+    <DropdownMenuContent class="w-56 mr-3 bg-white dark:bg-slate-900">
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
