@@ -73,7 +73,7 @@
                                     </span>
                                 </AlertDialogTrigger>
 
-                                <AlertDialogContent class="max-w-4xl w-full bg-white dark:bg-gray-800">
+                                <AlertDialogContent class=" bg-white dark:bg-gray-800">
                                     <AddUpdateGroup :item-id="selectedItemId" />
                                     <AlertDialogAction @click="refreshData"
                                         class="ml-2 text-white absolute bottom-2 right-2">Saqlash
@@ -169,9 +169,6 @@ export default {
 
         },
 
-
-
-
     },
     methods: {
         async refreshData() {
@@ -179,10 +176,9 @@ export default {
                 this.isLoading = true;
                 const response = await ApiService.getByIdToken(this.url);
                 this.users = response;
-
-
+               
             } catch (error) {
-                console.error("Bazadan ma'lumot olishda xatolik:", error);
+                console.log("Bazadan ma'lumot olishda xatolik:", error);
             } finally {
                 this.isLoading = false;
             }

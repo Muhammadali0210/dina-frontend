@@ -1,34 +1,110 @@
 <script setup lang="ts">
-import AplicationModal from '../_components/AplicationModal.vue'
 import {
     AlertDialog,
+    AlertDialogContent,
     AlertDialogTrigger,
-    AlertDialogContent
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogFooter,
+    AlertDialogHeader,
 } from '@/components/ui/alert-dialog'
-</script>
-<template>
-    <div class="flex gap-4 p-0">
-        <AlertDialog class="">
-            <AlertDialogTrigger>
-                <button type="button"
-                    class="px-4 sm:hidden block max-w-full py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-red-700">
-                    Qo'shish
-                </button>
-                <button type="button" class="p-2 sm:block hidden  text-white">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                </button>
-            </AlertDialogTrigger>
-            <AlertDialogContent class="dark:bg-gray-800 bg-white">
-                <AplicationModal />
-            </AlertDialogContent>
-        </AlertDialog>
-        <button type="button" class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
-            O'chirish
-        </button>
-    </div>
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover'
+import { useGroupStore } from '@/stores/groupStore'
+interface IGroup {
+    id?: number,
+    name: string,
+    degree: string
+}
 
+const groupStore = useGroupStore();
+const groups: IGroup[] = groupStore.groups;
+</script>
+
+<template>
+    <AlertDialog>
+        <AlertDialogTrigger class="flex  ">
+            <svg class="w-6 h-6 mr-2 mt-0.5 text-gray-800 dark:text-white" aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <span class="block sm:hidden">Qo'shish</span>
+        </AlertDialogTrigger>
+        <AlertDialogContent class="rounded-[10px]">
+            <AlertDialogHeader class="dark:bg-gray-800 bg-white p-8 m-0 ">
+                <form class="grid w-full gap-4 mt-4">
+                    <div>
+                        <label for="name"
+                            class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Login</label>
+                        <input id="name" type="text" value="Abubakir"
+                            class="block w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                    </div>
+                    <div>
+                        <label for="name"
+                            class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Parol</label>
+                        <input id="name" type="password" value="Sobitov"
+                            class="block w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                    </div>
+                    <!-- Telefon raqam -->
+                    <div>
+                        <label for="phone"
+                            class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Telegram ID
+                            </label>
+                        <input id="phone" type="text" value="+998933708598"
+                            class="block w-full px-3 py-2 mt-1 text-sm border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                    </div>
+                    <!-- Ta'rif turi -->
+                    <div>
+                        <label for="tariff"
+                            class="block text-start text-sm font-medium text-gray-700 dark:text-gray-300">Ta'rif
+                            turi</label>
+                        <Popover class="dropdown dropdown-bottom w-full">
+                            <PopoverTrigger tabindex="0" role="button"
+                                class="w-full text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-between items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 border-0">
+                                Guruhni tanlang
+                                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </PopoverTrigger>
+
+                            <PopoverContent class="min-w-80 w-full rounded-lg">
+                                <ul class="space-y-2">
+                                    <div v-if="groups.length" v-for="(group, index) in groups" :key="index"
+                                        class="flex items-center p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-200 ease-in-out">
+                                        <a class="flex items-center gap-3 w-full cursor-pointer">
+                                            <input type="checkbox"
+                                                class="w-5 h-5 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2 transition duration-200 ease-in-out" />
+                                            <label class="text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                {{ group?.name }}
+                                            </label>
+                                        </a>
+                                    </div>
+
+                                    <li v-if="!groups.length" class="flex justify-center items-center h-10">
+                                        <p class="text-gray-500 dark:text-gray-400">Yuklanmoqda...</p>
+                                    </li>
+                                </ul>
+                            </PopoverContent>
+                        </Popover>
+                    </div>
+                </form>
+            </AlertDialogHeader>
+            <AlertDialogFooter class="mt-6 flex justify-end gap-4">
+                <AlertDialogCancel
+                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
+                    Bekor qilish
+                </AlertDialogCancel>
+                <AlertDialogAction
+                    class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700">
+                    Saqlash
+                </AlertDialogAction>
+            </AlertDialogFooter>
+        </AlertDialogContent>
+    </AlertDialog>
 </template>
