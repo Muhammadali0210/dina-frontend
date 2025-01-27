@@ -36,7 +36,7 @@ onMounted(async() => {
         <template v-if="isLoading"><Loading/></template>
         <template v-else>
             <template v-if="course">
-                <div class="px-2 py-1 space-y-1  border-b border-gray-300 dark:border-gray-600">
+                <div class="px-2 py-1 space-y-1   border-b border-gray-300 dark:border-gray-600">
                     <h1 class="font-bold">{{ course?.course?.title || 'Kurs nomi' }}</h1>
                     <Progress class=" bg-gray-200 dark:bg-gray-700" :model-value="course?.progressPercentage" /> 
                     <h1 class=" text-sm font-medium">{{course?.progressPercentage}}% Tugadi</h1>

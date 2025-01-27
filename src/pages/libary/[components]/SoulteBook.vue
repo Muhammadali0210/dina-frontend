@@ -73,7 +73,8 @@ const downloadFile = (downloadLink: string, index: number) => {
                                 </button>
 
                             </AlertDialogTrigger>
-                            <AlertDialogContent class="m-auto h-[90%] w-[80%] max-w-[1200px] bg-white">
+                            <AlertDialogContent
+                                class="m-auto h-[90%] w-[80%] max-w-[1200px] bg-white dark:bg-slate-800">
                                 <AlertDialogCancel class="flex justify-end ">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
