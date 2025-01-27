@@ -106,7 +106,7 @@ const logOut = () => {
         <LifeBuoy class="mr-2 h-4 w-4" />
         <span>Support</span>
       </DropdownMenuItem>
-
+      
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="logOut">
         <LogOut class="mr-2 h-4 w-4" />
