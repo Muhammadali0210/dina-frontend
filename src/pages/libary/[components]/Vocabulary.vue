@@ -50,7 +50,7 @@ const downloadFile = (downloadLink: string, index: number) => {
             1380: { slidesPerView: 5, spaceBetween: 20 },
         }">
             <swiper-slide class="w-full" v-for="(book, index) in vocobularyBook" :key="index">
-                <div class="p-4 bg-slate-900 text-white rounded-2xl shadow-lg h-[375px]">
+                <div class="p-4 bg-slate-900 text-white rounded-2xl shadow-lg ">
                     <img :src="book.imageUrl" :alt="book.title"
                         class="rounded-lg w-full sm:h-[250px] h-[300px] object-cover mx-auto" />
                     <h2 class="mt-4 text-lg font-semibold text-center">{{ book.title }}</h2>
