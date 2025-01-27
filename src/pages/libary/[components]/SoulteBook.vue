@@ -38,7 +38,7 @@ const downloadFile = (downloadLink: string, index: number) => {
 <template>
     <div>
         <swiper :slides-per-view="5" :space-between="30" :free-mode="true" :loop="true" :autoplay="{
-            delay: 2500,
+            delay: 2000,
             disableOnInteraction: false,
         }" :modules="[FreeMode, Pagination, Autoplay]" class="mySwiper w-full overflow-hidden" :breakpoints="{
             300: { slidesPerView: 1, spaceBetween: 10 },
@@ -50,16 +50,16 @@ const downloadFile = (downloadLink: string, index: number) => {
             1380: { slidesPerView: 5, spaceBetween: 20 },
         }">
             <swiper-slide class="w-full" v-for="(book, index) in bookData" :key="index">
-                <div class="p-4 bg-slate-900 text-white rounded-2xl shadow-lg ">
+                <div class="p-4 dark:bg-slate-900 bg-slate-200 text-white rounded-2xl shadow-lg ">
                     <img :src="book.imageUrl" :alt="book.title"
                         class="rounded-lg w-full sm:h-[250px] h-[300px] object-cover mx-auto" />
-                    <h2 class="mt-4 text-lg font-semibold text-center">{{ book.title }}</h2>
-                    <div class="grid grid-cols-2 gap-2 mt-2">
-
+                    <h2 class="mt-4 text-lg font-semibold text-center  dark:text-white text-slate-900">{{
+                        book.title }}</h2>
+                    <div class="grid grid-cols-2 gap-2 mt-4">
                         <AlertDialog>
                             <AlertDialogTrigger as-child>
                                 <button
-                                    class="bg-blue-600 flex justify-center hover:bg-blue-700 text-white px-2 py-2 rounded-md">
+                                    class="dark:bg-blue-600 bg-slate-200 flex justify-center hover:bg-blue-700 text-white px-2 py-2 rounded-md">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
@@ -69,12 +69,12 @@ const downloadFile = (downloadLink: string, index: number) => {
                                             d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     </svg>
 
-                                    <span> Ko'rish</span>
+                                    <span class="dark:text-white text-slate-900"> Ko'rish</span>
                                 </button>
 
                             </AlertDialogTrigger>
-                            <AlertDialogContent class="m-auto h-[90%] w-[80%] max-w-[1200px]">
-                                <AlertDialogCancel class="flex justify-end">
+                            <AlertDialogContent class="m-auto h-[90%] w-[80%] max-w-[1200px] bg-white">
+                                <AlertDialogCancel class="flex justify-end ">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
@@ -90,7 +90,7 @@ const downloadFile = (downloadLink: string, index: number) => {
 
 
                         <button @click="downloadFile(book.downloadLink, index)"
-                            class="bg-green-600 hover:bg-green-700 text-white px-1 flex py-2 rounded-md">
+                            class="dark:bg-blue-600 bg-slate-200 text-white px-1 flex py-2 rounded-md">
                             <div v-if="!loadingStates[index]" class="flex justify-center m-auto">
                                 <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -99,7 +99,7 @@ const downloadFile = (downloadLink: string, index: number) => {
                                         stroke-width="2"
                                         d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4" />
                                 </svg>
-                                <span v-if="!loadingStates[index]">
+                                <span class="dark:text-white text-slate-900" v-if="!loadingStates[index]">
                                     Yuklash</span>
                             </div>
                             <span v-else class="flex items-center space-x-2">
