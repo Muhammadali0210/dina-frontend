@@ -50,7 +50,7 @@ const downloadFile = (downloadLink: string, index: number) => {
             1380: { slidesPerView: 5, spaceBetween: 20 },
         }">
             <swiper-slide class="w-full" v-for="(book, index) in vocobularyBook" :key="index">
-                <div class="p-4 dark:bg-slate-900 bg-slate-200 text-white rounded-2xl shadow-lg ">
+                <div class="p-4 dark:bg-slate-900 bg-slate-100 text-white rounded-2xl shadow-lg ">
                     <img :src="book.imageUrl" :alt="book.title"
                         class="rounded-lg w-full sm:h-[250px] h-[300px] object-cover mx-auto" />
                     <h2 class="mt-4 text-lg font-semibold text-center  dark:text-white text-slate-900">{{
@@ -59,7 +59,7 @@ const downloadFile = (downloadLink: string, index: number) => {
                         <AlertDialog>
                             <AlertDialogTrigger as-child>
                                 <button
-                                    class="dark:bg-blue-600 bg-slate-200 flex justify-center hover:bg-blue-700 text-white px-2 py-2 rounded-md">
+                                    class="dark:bg-blue-600 bg-slate-200 flex justify-center  text-white px-2 py-2 rounded-md">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
@@ -73,7 +73,7 @@ const downloadFile = (downloadLink: string, index: number) => {
                                 </button>
 
                             </AlertDialogTrigger>
-                            <AlertDialogContent class="m-auto h-[90%] w-[80%] max-w-[1200px]">
+                            <AlertDialogContent class="m-auto h-[90%] w-[80%] max-w-[1200px] bg-white">
                                 <AlertDialogCancel class="flex justify-end">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
