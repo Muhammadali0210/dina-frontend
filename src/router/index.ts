@@ -9,13 +9,12 @@ import AddUpdateStudentView from '@/views/students/Add&UpdateStudentView.vue';
 import TeachersView from '@/views/teachers/TeachersView.vue';
 import AddUpdateTeacherView from '@/views/teachers/Add&UpdateTeacherView.vue';
 import ProfileView from '@/views/profile/ProfileView.vue';
-import BooksView from '@/views/books/BooksView.vue';
 import AdminView from '@/views/admin/AdminView.vue';
 import AddUpdateAdminView from '@/views/admin/Add&UpdateAdminView.vue';
 import PaymentView from '@/views/payment/PaymentView.vue';
 import PaymentGroupView from '@/views/payment/PaymentGroupView.vue';
 import GroupView from '@/views/group/GroupView.vue';
-import viewLayout from '@/views/books/viewLayout.vue'
+import viewLayout from '@/pages/libary/Page.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
 import UserProfileView from '@/views/userprofile/UserProfileView.vue';
 
@@ -109,7 +108,7 @@ const router = createRouter({
     {
       path: '/books',
       name: 'books',
-      component: BooksView,
+      component: viewLayout,
       meta: { layout: MainLayout }
     },
     {
@@ -162,12 +161,7 @@ const router = createRouter({
       meta: { layout: MainLayout }
     },
     // books - kitoblar
-    {
-      path: '/booksview',
-      name: 'viewLayout',
-      component: viewLayout,
-      meta: {layout : MainLayout}
-    },
+   
     // create course - kurs yaratuvchi bo'lim
     {
       path: '/create-course',
