@@ -61,6 +61,7 @@ function useDeleteLesson() {
       isDeleting.value = true;
       const res: any = await ApiService.deleteByToken(`/lesson/${id}`);
       lessonStore.setLesson(res);
+      
     } catch (error) {
       console.log(error);
     } finally {

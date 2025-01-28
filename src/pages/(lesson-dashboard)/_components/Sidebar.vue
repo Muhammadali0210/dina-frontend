@@ -10,10 +10,12 @@ import { Button } from "@/components/ui/button";
 import { Download } from 'lucide-vue-next';
 import { useDashboardCourseStore } from '../store';
 import { ref, watch } from 'vue';
+import router from '../../../router/index';
 
 const sidebarStore = useSidebarStore();
 const route = useRoute();
 const { isLoading, getDashboardCourse } = useGetDashboardCourse();
+const lessonId = ref<number>();
 
 const courseStore = useDashboardCourseStore();
 const course = ref<any>();
@@ -28,7 +30,18 @@ const reload = async() => {
 onMounted(async() => {
     await getDashboardCourse(Number(route.params.id));
     course.value = courseStore.getAll
+    lessonId.value = course.value.course._id;
 })
+
+
+
+const oldPage = () => {
+    if (lessonId.value) {
+        router.push(`/online-courses/${lessonId.value}`);
+    } else {
+        console.error('Lesson ID xatolik bor !');
+    }
+};
 </script>
 <template>
     <main :class="{ 'translate-x-0': sidebarStore.isOpen }"
@@ -42,6 +55,9 @@ onMounted(async() => {
                     <h1 class=" text-sm font-medium">{{course?.progressPercentage}}% Tugadi</h1>
                 </div>
                 <Section :sections="course?.sections" />
+                <button class=" rounded-[10px] lg:hidden flex bg-slate-300 justify-center absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 dark:bg-slate-700" @click="oldPage">
+                    Orqaga..
+                </button>
             </template>
             <div v-else class="flex flex-col h-full items-center justify-center">
                 <h1 class="text-center mb-3">Internet bilan bog'liq muommo mavjud. Malumotlar yuklanmadi!</h1>

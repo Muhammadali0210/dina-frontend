@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useForm } from "vee-validate";
+import { Textarea } from '@/components/ui/textarea'
 import {
   FormControl,
   FormField,
@@ -28,6 +29,9 @@ const { state, onToggle } = useToggleEdit();
 const { createLoading, createLesson } = useCreateLesson();
 const { getLoading, getLessonInfo } = useGetLessonInfo();
 const { updateLoading, updateLesson } = useUpdateLesson();
+
+const questions = ref<{ image: string; question: string; answer: string }[]>([]);
+const newQuestion = ref({ image: "", question: "", answer: "" });
 
 const props = defineProps({
   course: Object,
@@ -110,9 +114,24 @@ const closeEdit = () => {
   updateId.value =  0;
 }
 
+//
+const addQuestion = () => {
+  if (newQuestion.value.image && newQuestion.value.question && newQuestion.value.answer) {
+    questions.value.push({ ...newQuestion.value });
+    console.log(questions.value);
+    
+    newQuestion.value = { image: "", question: "", answer: "" }; 
+  }
+};
+const removeQuestion = (index: number) => {
+  questions.value.splice(index, 1);
+};
+
 
 onMounted(async () => {
   lessons.value = await lessonStore.getLesson;
+  
+  
   if (lessons.value.length > 0 && String(route.params.sectionId) !== String(lessons.value[0].sectionId)) {
     await getLessonInfo(Number(route.params.sectionId));
   } else if (lessons.value.length === 0) {
@@ -145,12 +164,7 @@ onMounted(async () => {
             <FormField v-slot="{ field }" name="title">
               <FormItem>
                 <FormControl>
-                  <Input
-                    type="text"
-                    v-model="field.value"
-                    v-bind="field"
-                    placeholder="Nomi"
-                  />
+                  <Input type="text" v-model="field.value" v-bind="field" placeholder="Nomi" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -159,12 +173,7 @@ onMounted(async () => {
             <FormField v-slot="{ field }" name="videoUrl">
               <FormItem>
                 <FormControl>
-                  <Input
-                    type="text"
-                    v-model="field.value"
-                    v-bind="field"
-                    placeholder="Video Id"
-                  />
+                  <Input type="text" v-model="field.value" v-bind="field" placeholder="Video Id" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -174,12 +183,7 @@ onMounted(async () => {
               <FormField v-slot="{ field }" name="hours">
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="number"
-                      v-model="field.value"
-                      v-bind="field"
-                      placeholder="Soat"
-                    />
+                    <Input type="number" v-model="field.value" v-bind="field" placeholder="Soat" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -188,12 +192,7 @@ onMounted(async () => {
               <FormField v-slot="{ field }" name="minutes">
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="number"
-                      v-model="field.value"
-                      v-bind="field"
-                      placeholder="Minut"
-                    />
+                    <Input type="number" v-model="field.value" v-bind="field" placeholder="Minut" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -202,14 +201,42 @@ onMounted(async () => {
               <FormField v-slot="{ field }" name="seconds">
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="number"
-                      v-model="field.value"
-                      v-bind="field"
-                      placeholder="Sekund"
-                    />
+                    <Input type="number" v-model="field.value" v-bind="field" placeholder="Sekund" />
                   </FormControl>
                   <FormMessage />
+                </FormItem>
+              </FormField>
+            </div>
+
+            <Textarea class="bg-slate-700" />
+
+            <div>
+              <CardTitle>Savollar</CardTitle>
+              <Separator class="mt-2 mb-2" />
+              <FormField name="">
+                <FormItem>
+                  <div class="space-y-2">
+                    <div v-for="(q, index) in questions" :key="index" class="flex items-center gap-2">
+                      <div class="w-6 text-center font-bold">{{ index + 1 }}</div>
+                      <Input v-model="q.image" placeholder="Rasm uchun havola" disabled />
+                      <Input v-model="q.question" placeholder="Savol UZ/KR" disabled />
+                      <Input v-model="q.answer" placeholder="Javob UZ/KR" disabled />
+                      <Button variant="destructive" @click="removeQuestion(index)">
+                        <X />
+                      </Button>
+                    </div>
+                  </div>
+                  <div class=" mt-2">
+                    <Input class="mt-2" v-model="newQuestion.image" placeholder="Rasm uchun havola" />
+                    <Input class="mt-2" v-model="newQuestion.question" placeholder="Savol UZ/KR" />
+                    <Input class="mt-2" v-model="newQuestion.answer" placeholder="Javob UZ/KR" />
+                    <div class="flex justify-end mt-2">
+                      <div @click="addQuestion"
+                        class="cursor-pointer flex items-center justify-center  gap-2 px-1.5 py-1.5 text-slate-900 w-[100px] bg-blue-500 border rounded-md  hover:bg-blue-600">
+                        <span>Qo'shish</span>
+                      </div>
+                    </div>
+                  </div>
                 </FormItem>
               </FormField>
             </div>
@@ -225,7 +252,8 @@ onMounted(async () => {
                     <Loader class="animate-spin" /> Tahrirlanmoqda...
                   </template>
                 </Button>
-                <Button type="button" @click="closeEdit" variant="outline" class="ml-2 bg-slate-100 dark:bg-gray-800">Bekor qilish</Button>
+                <Button type="button" @click="closeEdit" variant="outline"
+                  class="ml-2 bg-slate-100 dark:bg-gray-800">Bekor qilish</Button>
               </div>
             </div>
           </div>
