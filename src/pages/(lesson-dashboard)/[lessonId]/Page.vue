@@ -7,6 +7,7 @@ import { useGetLesson } from "./service";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2 } from "lucide-vue-next";
 import Dictionary from "./_components/Dictionary.vue";
+import Task from "./_components/Task.vue";
 
 const route = useRoute();
 const lessonStore = useLessonStore();
@@ -27,7 +28,7 @@ watch(
 
 onMounted(async () => {
   await getLesson(Number(route.query.lessonid));
-  lesson.value = lessonStore.getLesson;
+  lesson.value = lessonStore.getLesson; 
   lessonStore.lessonLoading = false;
 });
 </script>
@@ -38,5 +39,6 @@ onMounted(async () => {
     />
     
     <Dictionary :lesson="lesson" />
+    <Task :lesson="lesson" />
   </div>
 </template>
