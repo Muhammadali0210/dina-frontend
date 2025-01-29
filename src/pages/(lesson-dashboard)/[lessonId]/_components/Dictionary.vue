@@ -15,7 +15,8 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="mt-4 shadow-md rounded-md bg-gradient-to-b from-slate-100 to-white dark:from-[#0b0f1a] dark:to-secondary p-4 lg:p-6">
+    <div
+        class="mt-4 shadow-md rounded-md bg-gradient-to-b from-slate-100 to-white dark:from-[#0b0f1a] dark:to-secondary p-4 lg:p-6">
         <Skeleton v-if="courseStore.lessonLoading" class="w-[200px] h-6" />
         <h1 v-else class="text-xl font-bold">{{ props.lesson?.title }}</h1>
         <Separator class="my-2" />
@@ -35,6 +36,12 @@ const props = defineProps({
                 <!-- <p class='flex-1'>{{item}}</p> -->
                 <p class='flex-1'>apple - olma</p>
             </div>
+        </div>
+        <div>
+            <iframe width="711" height="144" frameborder="0"
+                src="https://mega.nz/embed/nxclUAYA#Gd_Cjfk2T_uBL6-4oY4x0kKwXjsrY5SAE_qNOvvk-hY!1v"
+                allowfullscreen></iframe>
+
         </div>
     </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <div class="h-full p-[0px]">
         <div class="flex card justify-between mb-[10px]">
-            <h1 class="text-[30px] text-gray-800 font-bold dark:text-white">Continue Watching</h1>
+            <h1 class="max-lg:text-[30px] text-[30px] text-gray-800 font-bold dark:text-white">Yangiliklar</h1>
             <div class="gap-3 flex justify-end">
                 <!-- Oldingi slayd tugmasi -->
                 <button @click="slidePrev" class="bg-white h-[40px] w-[40px] rounded-[50%] relative hover:bg-green-500">
@@ -23,12 +23,12 @@
                     400: { slidesPerView: 1, spaceBetween: 5 },
                     480: { slidesPerView: 2, spaceBetween: 10 },
                     768: { slidesPerView: 2, spaceBetween: 15 },
-                    1024: { slidesPerView: 2, spaceBetween: 20 }
+                    1024: { slidesPerView: 1, spaceBetween: 40 }
                 }" :modules="modules" class="mySwiper">
 
                 <swiper-slide @click="goToPage(index)" v-for="(slideData, index) in informationSlideData" :key="index">
                     <div class="card">
-                        <img class="rounded-[15px] h-[150px] md:h-[160px] lg:h-[150px] w-full object-cover"
+                        <img class="rounded-[15px] h-[150px] md:h-[160px] lg:h-[190px] w-full object-cover"
                             :src="slideData.url" alt="Image" />
                         <p
                             class="text-gray-800 dark:text-white text-sm md:text-base lg:text-lg font-bold leading-[23px] break-words pt-[10px]">

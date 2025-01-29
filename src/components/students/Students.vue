@@ -112,10 +112,11 @@
                                         </td>
                                         <td class="px-2 py-4 relative">
                                             <div class="flex gap-3 h-[18px]">
-                                                <span class="cursor-pointer" @click="updateItem(item._id)">
+                                                <span class="cursor-pointer" @click="updateItem(item.id)">
                                                     <img src="../../assets/icons/edit.svg" alt="E">
                                                 </span>
-                                                <span class="cursor-pointer" @click="openDeleteModal(item._id)">
+                                                
+                                                <span class="cursor-pointer" @click="openDeleteModal(item.id)">
                                                     <img src="../../assets/icons/trash.svg" alt="E">
                                                 </span>
                                             </div>
@@ -131,7 +132,7 @@
 
 
         </div>
-        
+
     </div>
     <DeleteModal v-if="isModalOpen" :modal="isModalOpen" :url="url" :id="selectedItemId" @close="closeDeleteModal"
         @deleted="handleDelete" />
@@ -186,8 +187,8 @@ export default {
             currentIdStore.setCurrentId(null);
             this.$router.push('/student/add');
         },
-        openDeleteModal(_id) {
-            this.selectedItemId = item._id
+        openDeleteModal(id) {
+            this.selectedItemId = id
             this.isModalOpen = true;
         },
         closeDeleteModal() {
@@ -199,10 +200,12 @@ export default {
             this.closeDeleteModal();
         },
         updateItem(id) {
+            console.log("Updating student with ID:", id); // To‘g‘ri ID ni tekshiramiz
             const currentIdStore = useCurrentIdStore();
-            currentIdStore.setCurrentId(id);
+            currentIdStore.setCurrentId(id); // _id ni saqlaymiz
             this.$router.push('/student/add');
         },
+
         async getUser() {
             try {
                 this.isLoading = true;
