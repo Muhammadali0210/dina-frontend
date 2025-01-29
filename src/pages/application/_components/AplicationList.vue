@@ -85,7 +85,7 @@ const handleDelete = async (id: number) => {
                             </PopoverTrigger>
                             <PopoverContent class="w-[130px] bg-slate-900 p-2 mr-7 ">
                                 <div class="flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded">
-                                    <AplicationAdd />
+                                    <!-- <AplicationAdd /> -->
                                 </div>
                                 <div class="flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded mt-1">
                                     <DeleteModal :handleDelete="handleDelete" :itemId="props.item._id" />
@@ -95,7 +95,7 @@ const handleDelete = async (id: number) => {
                     </div>
                 </div>
                 <div class="hidden sm:flex items-center   justify-end w-[50%]">
-                    <AplicationAdd />
+                    <!-- <AplicationAdd /> -->
                     <DeleteModal :handleDelete="handleDelete" :itemId="props.item._id" />
                 </div>
 

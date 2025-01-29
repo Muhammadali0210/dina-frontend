@@ -139,7 +139,7 @@ export default {
         },
         closeDeleteModal() {
             this.isModalOpen = false;
-            this.selectedItemId = null; // O'chirilayotgan IDni tozalash
+            this.selectedItemId = null; 
         },
         handleDelete() {
             this.getUser();
