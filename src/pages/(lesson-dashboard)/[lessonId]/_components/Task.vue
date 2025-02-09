@@ -1,50 +1,46 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 import { Input } from "@/components/ui/input";
 import { Separator } from '@/components/ui/separator';
+import { useCompleteLesson } from '../service';
+import { useRoute } from 'vue-router';
 
-// Define the type for exercise result
-interface ExerciseResult {
-    question: string;
-    userAnswer: string;
-    isCorrect: boolean;
-}
+const props = defineProps({
+    lesson: {
+        type: Object,
+        required: false
+    }
+})
 
-
-const exercises = ref([
-    { question: "Maktabga boraman", answer: "학교에 가요", userAnswer: "", isCorrect: false, checked: false, errorMessage: "" },
-    { question: "Maktabdan kelaman", answer: "학교에서 와요", userAnswer: "", isCorrect: false, checked: false, errorMessage: "" },
-    { question: "Men talabaman (Rasmiy)", answer: "저는 학생입니다", userAnswer: "", isCorrect: false, checked: false, errorMessage: "" },
-    { question: "Bu kitob (Rasmiy)", answer: "이것은 책입니다", userAnswer: "", isCorrect: false, checked: false, errorMessage: "" }
-]);
-
+const { isLoading, completeLesson } = useCompleteLesson()
 const isCompleted = ref(false);
-
-const results = ref<ExerciseResult[]>([]);
+const route  = useRoute();
 
 const checkAnswer = (index: number) => {
-    const exercise = exercises.value[index];
-    if (!exercise.userAnswer.trim()) {
+    const exercise = props.lesson?.tasks[index];    
+    if (!exercise?.userAnswer.trim()) {
         exercise.errorMessage = "Javob yozing";
         return;
     }
     exercise.errorMessage = "";
-    exercise.isCorrect = exercise.userAnswer.trim() === exercise.answer;
+    exercise.isCorrect = exercise.userAnswer.trim() === exercise.textUz;
     exercise.checked = true;
     if (!exercise.isCorrect) {
         exercise.errorMessage = "Noto‘g‘ri, qayta urinib ko‘ring.";
     }
 
-    isCompleted.value = exercises.value.every(ex => ex.isCorrect);
+    // @ts-ignore
+    isCompleted.value = props.lesson?.tasks.every(ex => ex.isCorrect);
 };
 
-const saveResults = () => {
-    results.value = exercises.value.map(ex => ({
-        question: ex.question,
-        userAnswer: ex.userAnswer,
-        isCorrect: ex.isCorrect
-    }));
-    console.log("Barcha natijalar saqlandi", results.value);
+const saveResults = async() => {
+    console.log(props.lesson);
+    try {
+        await completeLesson(Number(route.query.lessonid), { courseId: Number(route.params.id)});
+        isCompleted.value = false     
+    } catch (error) {
+        console.error(error);   
+    }
 };
 </script>
 
@@ -56,7 +52,34 @@ const saveResults = () => {
         <Separator class="my-2" />
         <h2 class='text-lg font-semibold'>Darsga oid mashqlar</h2>
         <div class="grid md:grid-cols-2 grid-cols-1 p-4 w-[90%] m-auto gap-20">
-            <div v-for="(item, index) in exercises" :key="index">
+            <div v-for="(item, index) in props.lesson?.tasks" :key="index">
+                <!-- <p>{{ item }}</p> -->
+                <img v-if="item.image" :src="item.image" class="w-[200px] h-[200px]" alt="task img">
+                <h1>{{ index + 1 }}-Savol: {{ item.text }}</h1>
+
+                <Input 
+                    v-if="!item.isCorrect && !props.lesson?.isCompleted"
+                    v-model="item.userAnswer" 
+                    class="mt-2"
+                    :class="{ 'border-red-500': item.errorMessage || (!item.isCorrect && item.checked) }"
+                    placeholder="Javob UZ/KR" 
+                />
+                <span v-if="item.errorMessage" class="text-red-500 block mt-1">{{ item.errorMessage }}</span>
+               
+                <button
+                    v-if="!item.isCorrect && !props.lesson?.isCompleted"
+                    @click="checkAnswer(index)"
+                    class="px-2 bg-blue-600 py-1 mt-2 rounded-[7px]"
+                >
+                    Tekshirish
+                </button>
+                
+                <span v-if="item.checked && item.isCorrect || props.lesson?.isCompleted" class="text-green-500 block mt-1">
+                    Javob: {{ item.textUz }}
+                </span>
+            </div>
+
+            <!-- <div v-for="(item, index) in exercises" :key="index">
                 <img class="w-[200px] h-[200px]"
                     src="https://ik.imagekit.io/vtroph5l9/Product/Book%20image/SB%201B.jpeg?updatedAt=1737963612871"
                     alt="">
@@ -65,16 +88,24 @@ const saveResults = () => {
                     :class="{ 'border-red-500': item.errorMessage || (!item.isCorrect && item.checked) }"
                     placeholder="Javob UZ/KR" />
                 <span v-if="item.errorMessage" class="text-red-500 block mt-1">{{ item.errorMessage }}</span>
-                <!-- Tekshirish tugmasi faqat javob noto'g'ri bo'lsa ko'rinadi -->
+               
                 <button v-if="!item.isCorrect" @click="checkAnswer(index)"
                     class="px-2 bg-blue-600 py-1 mt-2 rounded-[7px]">Tekshirish</button>
                 <span v-if="item.checked && item.isCorrect" class="text-green-500 block mt-1">
                     To‘g‘ri! Haqiqiy javob: {{ item.answer }}
                 </span>
                
-            </div>
+            </div> -->
         </div>
-        <button v-if="isCompleted" @click="saveResults"
-            class="flex justify-end px-2 bg-blue-600 py-1 rounded-[7px]">Saqlash</button>
+
+        <button 
+            v-if="isCompleted && !props.lesson?.isCompleted" 
+            @click="saveResults"
+            class="flex justify-end px-2 bg-blue-600 py-1 rounded-[7px]"
+            :disabled="isLoading"
+        >   
+            <template v-if="isLoading">Saqlanmoqda...</template>
+            <template v-else>Saqlash</template>
+        </button>
     </div>
 </template>

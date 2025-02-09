@@ -46,6 +46,7 @@ const formSchema = toTypedSchema(
     hours: z.number(),
     minutes: z.number(),
     seconds: z.number(),
+    dictionary: z.string(),
   }),
 );
 
@@ -64,6 +65,7 @@ const onSubmit = handleSubmit(async (values) => {
         seconds: values.seconds,
       },
       sectionId: Number(route.params.sectionId),
+      dictionary: values.dictionary
     },
     tasks: questions.value
   };
@@ -222,7 +224,7 @@ onMounted(async () => {
             <FormField v-slot="{ field }" name="dictionary">
               <FormItem>
                 <FormControl>
-                  <Textarea class="bg-slate-700" v-bind="field" placeholder="So'zlar" />
+                  <Textarea class="bg-slate-700" v-model="field.value" v-bind="field" placeholder="So'zlar" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

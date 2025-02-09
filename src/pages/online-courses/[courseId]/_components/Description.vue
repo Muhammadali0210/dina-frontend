@@ -23,8 +23,11 @@ const route = useRoute();
 const isLoading = ref(false);
 
 const onCart = () => {
+  window.open('https://dinakoreanmasterclass.uz/', '_blank');
   console.log("Savatchaga qo'shish");
 }
+
+const token = localStorage.getItem('token');
 
 const goToDashboard = () => {
   router.push(`/lesson-dashboard/${route.params.id}`);
@@ -51,6 +54,7 @@ const goToDashboard = () => {
     </div>
 
     <Button
+      v-if="!token"
       size="lg"
       class="relative mt-2 w-full font-bold"
       @click="onCart"
@@ -59,6 +63,7 @@ const goToDashboard = () => {
       Ariza qoldirish
     </Button>
     <Button
+      v-if="token"
       size="lg"
       class="relative mt-2 w-full font-bold"
       @click="goToDashboard"
@@ -67,7 +72,7 @@ const goToDashboard = () => {
       Kursni ko'rish
     </Button>
 
-    <p class="my-3 text-center text-sm text-muted-foreground">
+    <p v-if="!token" class="my-3 text-center text-sm text-muted-foreground">
       Kursni sotib olish istagingiz bo'lsa arizaz qoldiring. Sizga qo'ng'roq qilamiz
     </p>
 

@@ -18,7 +18,7 @@ const props = defineProps({
     <div
         class="mt-4 shadow-md rounded-md bg-gradient-to-b from-slate-100 to-white dark:from-[#0b0f1a] dark:to-secondary p-4 lg:p-6">
         <Skeleton v-if="courseStore.lessonLoading" class="w-[200px] h-6" />
-        <h1 v-else class="text-xl font-bold">{{ props.lesson?.title }}</h1>
+        <h1 v-else class="text-xl font-bold">{{ props.lesson?.lesson.title }}</h1>
         <Separator class="my-2" />
         <h2 class='text-lg font-semibold'>
             Darsga oid lug'atlar
@@ -31,10 +31,9 @@ const props = defineProps({
             </div>
         </div>
         <div v-else class='mt-5 grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
-            <div v-for="item in 9" class="flex gap-2" :key="item">
+            <div v-for="(item, index) in props.lesson?.lesson.dictionary.split(', ')" class="flex gap-2" :key="item">
                 <BadgeCheck class='size-5 text-blue-500' />
-                <!-- <p class='flex-1'>{{item}}</p> -->
-                <p class='flex-1'>한국 - koreyya</p>
+                <p class='flex-1'>{{ item }}</p>
             </div>
         </div>
     </div>
