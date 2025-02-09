@@ -70,7 +70,7 @@ const onSubmit = handleSubmit(async (values) => {
   if (!isUpdate.value) {
     console.log(newData);
     
-    // await createLesson(`/lesson`, newData);
+    await createLesson(`/lesson`, newData);
   } else {
     await editHandler(newData);
   }

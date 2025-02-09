@@ -31,17 +31,11 @@ const props = defineProps({
             </div>
         </div>
         <div v-else class='mt-5 grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
-            <div v-for="item in 10" class="flex gap-2" :key="item">
+            <div v-for="item in 9" class="flex gap-2" :key="item">
                 <BadgeCheck class='size-5 text-blue-500' />
                 <!-- <p class='flex-1'>{{item}}</p> -->
-                <p class='flex-1'>apple - olma</p>
+                <p class='flex-1'>한국 - koreyya</p>
             </div>
-        </div>
-        <div>
-            <iframe width="711" height="144" frameborder="0"
-                src="https://mega.nz/embed/nxclUAYA#Gd_Cjfk2T_uBL6-4oY4x0kKwXjsrY5SAE_qNOvvk-hY!1v"
-                allowfullscreen></iframe>
-
         </div>
     </div>
 </template>
