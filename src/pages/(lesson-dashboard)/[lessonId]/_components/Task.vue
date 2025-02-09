@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Separator } from '@/components/ui/separator';
 import { useCompleteLesson } from '../service';
 import { useRoute } from 'vue-router';
+import { useLessonStore } from '../store';
+const courseStore = useLessonStore();
 
 const props = defineProps({
     lesson: {
@@ -52,7 +54,10 @@ const saveResults = async() => {
         <Separator class="my-2" />
         <h2 class='text-lg font-semibold'>Darsga oid mashqlar</h2>
         <div class="grid md:grid-cols-2 grid-cols-1 p-4 w-[90%] m-auto gap-20">
-            <div v-for="(item, index) in props.lesson?.tasks" :key="index">
+            <div v-if="courseStore.lessonLoading">
+                Loading...
+            </div>
+            <div v-else v-for="(item, index) in props.lesson?.tasks" :key="index">
                 <!-- <p>{{ item }}</p> -->
                 <img v-if="item.image" :src="item.image" class="w-[200px] h-[200px]" alt="task img">
                 <h1>{{ index + 1 }}-Savol: {{ item.text }}</h1>

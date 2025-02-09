@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import { vueVimeoPlayer } from "vue-vimeo-player";
+import { vueVimeoPlayer } from "vue-vimeo-player";
 import { ref, defineProps, watch } from "vue";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2 } from "lucide-vue-next";
@@ -24,7 +24,7 @@ const playerOptions = {
 };
 
 watch(
-  () => props.lesson?.videoUrl,
+  () => props.lesson?.lesson?.videoUrl,
   (newVideoUrl) => {
     if (newVideoUrl) {
       videoId.value = newVideoUrl;
@@ -40,7 +40,7 @@ watch(
 
 <template>
   <div class="w-full min-h-[20vh] sm:min-h-[36vh] md:min-h-[50vh] lg:min-h-[50vh]">
-    <!-- <div
+    <div
       v-if="lessonStore.lessonLoading || !videoId"
       class="relative w-full rounded-md bg-secondary h-[30vh] sm:h-[36vh] md:h-[50vh] lg:h-[75vh]"
     >
@@ -59,7 +59,7 @@ watch(
       :options="playerOptions"
       @ready="lessonStore.lessonLoading = false"
       class="w-full h-full"
-    /> -->
-    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1052517119?h=cef0ad2726&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="1-Dars"></iframe></div>
+    />
+    <!-- <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1052517119?h=cef0ad2726&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="1-Dars"></iframe></div> -->
   </div>
 </template>
