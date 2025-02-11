@@ -83,22 +83,24 @@
         </div>
     </div>
 
-    <DeleteModal
+    <!-- <DeleteModal
       v-if="isModalOpen"
       :modal="isModalOpen"
       :url="url"
       :id="selectedItemId"
       @close="closeDeleteModal"
       @deleted="handleDelete"
-    />
+    /> -->
+    <DeleteModal :isLoading="isDeleting" :isOpen="isOpen" @onOpenChange="isOpen = $event" @onConfirm="onDelete"  />
 </template>
 <script>
-import DeleteModal from '@/ui/DeleteModal.vue';
+// import DeleteModal from '@/ui/DeleteModal.vue';
 import UserInfo from '@/ui/UserInfo.vue';
 import NoDataFound from '@/ui/NoDataFound.vue';
 import { ApiService } from '@/services/apiServices';
 import Loader from '@/ui/Loader.vue';
 import { useCurrentIdStore } from '@/stores/currentId';
+import DeleteModal from '@/components/modals/DeleteModal.vue';
 export default {
     components: {
         DeleteModal,
@@ -114,7 +116,10 @@ export default {
             url: '/teacher',
             users: null,
             token: localStorage.getItem("token"),
-            isLoading: false
+            isLoading: false,
+            isOpen: false,
+            userId: 0,
+            isDeleting: false
         }
     },
     computed: {
@@ -134,16 +139,23 @@ export default {
             this.$router.push('/teachers/add');
         },
         openDeleteModal(id) {
-            this.selectedItemId = id;
-            this.isModalOpen = true;
+            this.isOpen = true;
+            this.userId = id
         },
-        closeDeleteModal() {
-            this.isModalOpen = false;
-            this.selectedItemId = null; 
-        },
-        handleDelete() {
-            this.getUser();
-            this.closeDeleteModal();
+        async onDelete() {
+            try {
+                this.isDeleting = true
+                this.isOpen = true
+                await ApiService.deleteByToken(`/teacher/${this.userId}`)
+                console.log("ochirildi");
+                this.isOpen = false
+                this.isDeleting = false
+                await this.getUser()
+            } catch (error) {
+                console.log(error);
+            } finally {
+                this.isDeleting = false
+            }
         },
         updateItem(id) {
             const currentIdStore = useCurrentIdStore();

@@ -134,12 +134,11 @@
         </div>
 
     </div>
-    <DeleteModal v-if="isModalOpen" :modal="isModalOpen" :url="url" :id="selectedItemId" @close="closeDeleteModal"
-        @deleted="handleDelete" />
+    <DeleteModal :isLoading="isDeleting" :isOpen="isOpen" @onOpenChange="isOpen = $event" @onConfirm="onDelete"  />
 
 </template>
 <script>
-import DeleteModal from '@/ui/DeleteModal.vue';
+import DeleteModal from '@/components/modals/DeleteModal.vue';
 import UserInfo from '@/ui/UserInfo.vue';
 import NoDataFound from '@/ui/NoDataFound.vue';
 import { ApiService } from '@/services/apiServices';
@@ -169,6 +168,9 @@ export default {
             token: localStorage.getItem("token"),
             isLoading: false,
             id: null, // ID uchun o'zgaruvchi
+            isOpen: false,
+            userId: 0,
+            isDeleting: false
         }
     },
     computed: {
@@ -188,16 +190,23 @@ export default {
             this.$router.push('/student/add');
         },
         openDeleteModal(id) {
-            this.selectedItemId = id
-            this.isModalOpen = true;
+            this.isOpen = true;
+            this.userId = id
         },
-        closeDeleteModal() {
-            this.isModalOpen = false;
-            this.selectedItemId = null; 
-        },
-        handleDelete() {
-            this.getUser();
-            this.closeDeleteModal();
+        async onDelete() {
+            try {
+                this.isDeleting = true
+                this.isOpen = true
+                await ApiService.deleteByToken(`/student/${this.userId}`)
+                console.log("ochirildi");
+                this.isOpen = false
+                this.isDeleting = false
+                await this.getUser()
+            } catch (error) {
+                console.log(error);
+            } finally {
+                this.isDeleting = false
+            }
         },
         updateItem(id) {
             console.log("Updating student with ID:", id); // To‘g‘ri ID ni tekshiramiz
