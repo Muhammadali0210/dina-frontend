@@ -1,3 +1,34 @@
+<script setup lang="ts">
+import { defineProps } from 'vue'
+import { useRouter } from 'vue-router';
+const props = defineProps({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    img: {
+        type: String,
+        required: true
+    },
+    login: {
+        type: String,
+        required: true
+    },
+    id: {
+        type: Number,
+        required: true
+    }
+})
+const router = useRouter();
+
+const gotoProfile = () => {
+    router.push(`/user-profile/${props.id}`);
+}
+</script>
 <template>
     <div class="flex items-center text-gray-900  dark:text-white">
         <img class="shadow-[0_0_10px_5px] shadow-gray-300 dark:shadow-gray-700 w-10 h-10 rounded-full border-[2px] border-green-500 bg-white" :src="img" alt="Jese image">
@@ -7,38 +38,3 @@
         </div>  
     </div>
 </template>
-<script>
-export default {
-    props:{
-        firstName: {
-            type: String,
-            required: true
-        },
-        lastName: {
-            type: String,
-            required: true
-        },
-        img: {
-            type: String,
-            required: true
-        },
-        login: {
-            type: String,
-            required: true
-        },
-        id: {
-            type: Number,
-            required: true
-        }
-    },
-    methods: {
-        gotoProfile() {
-            localStorage.setItem('userId', this.id);     
-            this.$router.push('/userprofile');
-        }
-    }
-}
-</script>
-<style lang="">
-    
-</style>

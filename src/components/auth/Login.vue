@@ -82,9 +82,10 @@ export default {
                     const userStore = useUserStore();
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('role', response.role);
-                    localStorage.setItem('profileId', response.id);
-                    localStorage.setItem('userId', response.id);
+                    localStorage.setItem('Id', response.id);
                     userStore.currentRole = response.role;
+                    console.log(localStorage.getItem('Id'));
+                    
                 }
             } catch (error) {
                     this.message = error.response.data.message
