@@ -1,7 +1,7 @@
 <template>
     <div class="w-full flex flex-col justify-center items-center custom-container">
         <UserInfo/>
-        <UserHistory/>
+        <!-- <UserHistory/> -->
     </div>
 </template>
 <script>

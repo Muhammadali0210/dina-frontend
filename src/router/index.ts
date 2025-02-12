@@ -8,7 +8,6 @@ import StudentsView from '@/views/students/StudentsView.vue';
 import AddUpdateStudentView from '@/views/students/Add&UpdateStudentView.vue';
 import TeachersView from '@/views/teachers/TeachersView.vue';
 import AddUpdateTeacherView from '@/views/teachers/Add&UpdateTeacherView.vue';
-import ProfileView from '@/views/profile/ProfileView.vue';
 import AdminView from '@/views/admin/AdminView.vue';
 import AddUpdateAdminView from '@/views/admin/Add&UpdateAdminView.vue';
 import PaymentView from '@/views/payment/PaymentView.vue';
@@ -16,7 +15,7 @@ import PaymentGroupView from '@/views/payment/PaymentGroupView.vue';
 import GroupView from '@/views/group/GroupView.vue';
 import viewLayout from '@/pages/libary/Page.vue'
 import EditProfileView from '@/views/profile/EditProfileView.vue'
-import UserProfileView from '@/views/userprofile/UserProfileView.vue';
+import ProfileView from '@/views/profile/ProfileView.vue';
 
 
 // result
@@ -94,16 +93,16 @@ const router = createRouter({
       meta: { layout: MainLayout }
     },
     {
+      path: '/user-profile/:id',
+      name: 'userprofile',
+      component: ProfileView,
+      meta: { layout: MainLayout }    
+    },
+    {
       path: '/profile/edit',
       name: 'edit-profile',
       component: EditProfileView,
       meta: { layout: MainLayout }
-    },
-    {
-      path: '/userprofile',
-      name: 'userprofile',
-      component: UserProfileView,
-      meta: { layout: MainLayout }    
     },
     {
       path: '/books',

@@ -10,6 +10,7 @@ import { Check, Circle, Dot } from 'lucide-vue-next'
 import { h, ref } from 'vue'
 import * as z from 'zod'
 import { CardContent } from '@/components/ui/card';
+import { Label } from '@/components/ui/label'
 
 
 
@@ -18,25 +19,27 @@ import { CardContent } from '@/components/ui/card';
 
 const formSchema = [
     z.object({
-        fullName: z.string(),
-        email: z.string().email(),
+        login: z.string(),
+        password: z.string(),
     }),
     z.object({
-        password: z.string().min(2).max(50),
+        newPassword: z.string().min(6).max(50),
         confirmPassword: z.string(),
     }).refine(
         (values) => {
-            return values.password === values.confirmPassword
+            return values.newPassword === values.confirmPassword
         },
         {
             message: 'Passwords must match!',
             path: ['confirmPassword'],
         },
-    ),
-    z.object({
-        favoriteDrink: z.union([z.literal('coffee'), z.literal('tea'), z.literal('soda')]),
-    }),
+    )
 ]
+
+const loginData = ref({
+    login: '',
+    password: '',
+})
 
 const stepIndex = ref(1)
 const setStateIndex = () => {
@@ -59,12 +62,20 @@ const steps = [
         description: 'Yangilagan Parolingiz',
     },
 ]
+const isAuthorisation = ref(false)
 
 function onSubmit(values: any) {
-    toast({
-        title: 'Parol mufaqiyatli almashtrildi !',
-        description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2))),
-    })
+    // toast({
+    //     title: 'Parol mufaqiyatli almashtrildi !',
+    //     description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2))),
+    // })
+    console.log(values);
+}
+
+const onLogin = () => {
+    console.log("login", loginData.value);
+    isAuthorisation.value = true
+    stepIndex.value = 1;
 }
 </script>
 
@@ -72,20 +83,12 @@ function onSubmit(values: any) {
     <Card class="w-[100%] sm:w-[70%] ">
         <CardContent class="pt-5 min-h-[40vh] relative">
             <div class=" h-12 right-0 w-[100%]  absolute z-40">
-
             </div>
             <Form v-slot="{ meta, values, validate }" as="" keep-values
                 :validation-schema="toTypedSchema(formSchema[stepIndex - 1])">
                 <Stepper v-slot="{ isNextDisabled, isPrevDisabled, nextStep, prevStep }" v-model="stepIndex"
                     class="block w-full">
-                    <form @submit="(e) => {
-                        e.preventDefault()
-                        validate()
-
-                        if (stepIndex === steps.length && meta.valid) {
-                            onSubmit(values)
-                        }
-                    }">
+                    
                         <div class="flex w-full flex-start  gap-2">
                             <StepperItem v-for="step in steps" :key="step.step" v-slot="{ state }"
                                 class="relative flex w-full flex-col items-center justify-center" :step="step.step">
@@ -119,29 +122,17 @@ function onSubmit(values: any) {
 
                         <div class="flex flex-col gap-4 mt-4">
                             <template v-if="stepIndex === 1">
-                                <FormField v-slot="{ componentField }" name="fullName">
-                                    <FormItem>
-                                        <FormLabel>Login</FormLabel>
-                                        <FormControl>
-                                            <Input type="text" v-bind="componentField" />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                </FormField>
+                                <form @submit.prevent="onLogin">
+                                    <Label>Login</Label>
+                                    <Input type="text" v-model="loginData.login" />
 
-                                <FormField v-slot="{ componentField }" name="email">
-                                    <FormItem>
-                                        <FormLabel>Parol</FormLabel>
-                                        <FormControl>
-                                            <Input type="password " v-bind="componentField" />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                </FormField>
+                                    <Label>Parol</Label>
+                                    <Input type="password" v-model="loginData.password" />
+                                </form>
                             </template>
 
                             <template v-if="stepIndex === 2">
-                                <FormField v-slot="{ componentField }" name="password">
+                                <FormField v-slot="{ componentField }" name="newPassword">
                                     <FormItem>
                                         <FormLabel>Yangi parol</FormLabel>
                                         <FormControl>
@@ -172,25 +163,28 @@ function onSubmit(values: any) {
                                         <span class="font-semibold text-lg">123456</span>
                                     </div>
                                 </div>
-                                <Button class="w-20 right-0" onSubmit() @click="setStateIndex">Saqlash</Button>
+                                <Button class="w-20 right-0" @click="setStateIndex">Saqlash</Button>
                             </template>
                         </div>
 
                         <div class="flex items-center justify-between mt-4" v-if="stepIndex !== 3">
                             <Button :disabled=" isPrevDisabled" variant="outline" size="sm" @click="prevStep()">
-                                Back
+                                Qaytish
                             </Button>
                             <div class="flex items-center gap-3">
-                                <Button v-if="stepIndex !== 3" :type="meta.valid ? 'button' : 'submit'"
+                                <Button v-if="stepIndex == 1" type="button"
+                                    :disabled="isNextDisabled" size="sm" @click="onLogin">
+                                    Tasdiqlash
+                                </Button>
+                                <Button v-if="stepIndex == 2" :type="meta.valid ? 'button' : 'submit'"
                                     :disabled="isNextDisabled" size="sm" @click="meta.valid && nextStep()">
-                                    Next
+                                    Yangilash
                                 </Button>
                                 <Button v-if="stepIndex === 3" size="sm" type="submit">
-                                    Submit
+                                    Bosh oynaga qaytish
                                 </Button>
                             </div>
                         </div>
-                    </form>
                 </Stepper>
             </Form>
         </CardContent>

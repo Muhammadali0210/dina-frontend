@@ -10,8 +10,8 @@
             <div class="flex gap-2">
                 <img class="w-[45px] h-[45px]" src="@/assets/icons/user-avatar.png" alt="">
                 <h1 class="grid grid-cols-1">
-                    <span class="">Abubakir Sobitov</span>
-                    <span>Guruh: A1</span>
+                    <span class="">Mohinur</span>
+                    <span>D-team</span>
                 </h1>
             </div>
             <div class="flex items-center space-x-2">
@@ -45,8 +45,8 @@
             <div class="flex gap-2">
                 <img class="w-[45px] h-[45px]" src="@/assets/icons/user-avatar.png" alt="">
                 <h1 class="grid grid-cols-1">
-                    <span>Abubakir Sobitov</span>
-                    <span>Guruh: A1</span>
+                    <span>Akbar</span>
+                    <span>C-team</span>
                 </h1>
             </div>
             <div class="flex items-center space-x-2">
@@ -74,8 +74,8 @@
             <div class="flex gap-2">
                 <img class="w-[45px] h-[45px]" src="@/assets/icons/user-avatar.png" alt="">
                 <h1 class="grid grid-cols-1">
-                    <span>Abubakir Sobitov</span>
-                    <span>Guruh: A1</span>
+                    <span>Nodira</span>
+                    <span>E-team</span>
                 </h1>
             </div>
             <div class="flex items-center space-x-2">

@@ -24,7 +24,7 @@
             </div>
             <div class="">
                 <p class="font-bold dark:text-gray-300 text-gray-500 ">Guruhlar</p>
-                <h1 class="text-[35px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">26
+                <h1 class="text-[35px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">17
                 </h1>
             </div>
         </div>

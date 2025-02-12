@@ -52,7 +52,7 @@ const oldPage = () => {
                 <div class="px-2 py-1 space-y-1   border-b border-gray-300 dark:border-gray-600">
                     <h1 class="font-bold">{{ course?.course?.title || 'Kurs nomi' }}</h1>
                     <Progress class=" bg-gray-200 dark:bg-gray-700" :model-value="course?.progressPercentage" /> 
-                    <h1 class=" text-sm font-medium">{{course?.progressPercentage}}% Tugadi</h1>
+                    <h1 class=" text-sm font-medium">{{ course?.progressPercentage.toFixed(0) }}% Tugadi</h1>
                 </div>
                 <Section :sections="course?.sections" />
                 <button class=" rounded-[10px] lg:hidden flex bg-slate-300 justify-center absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 dark:bg-slate-700" @click="oldPage">

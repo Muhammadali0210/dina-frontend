@@ -21,6 +21,8 @@ const updateHandler = (newData: any) => {
 onMounted(async() => {
     await getSectionInfo(Number(router.params.sectionId))
     sectionData.value = data.value;
+    console.log(sectionData.value);
+    
 })
 </script>
 <template>

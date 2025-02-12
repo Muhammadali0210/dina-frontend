@@ -1,3 +1,53 @@
+<script setup lang="ts">
+import { useUserStore } from "@/stores/userStore";
+import { ApiService } from "@/services/apiServices";
+import Loader from "@/ui/Loader.vue";
+import NoDataFound from "@/ui/NoDataFound.vue";
+import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
+import { onMounted, ref, watch } from "vue";
+
+const userStore = useUserStore();
+const route = useRoute();
+
+const userData = ref<any>(null);
+const isLoading = ref(false);
+const currentUserId = ref(localStorage.getItem('userId'));
+const userRole = ref(localStorage.getItem('role'));
+
+async function getUserInfo() {
+    try {
+        isLoading.value = true;
+        if (route.params.id) {
+            const res = await ApiService.getByIdToken(`/profile/${route.params.id}`);
+            userData.value = res;
+        } else {
+            const Id = localStorage.getItem('Id');
+            const res = await ApiService.getByIdToken(`/profile/${Id}`);
+            userData.value = res;
+        }
+    } catch (error) {
+        console.log(error);
+    } finally {
+        isLoading.value = false;
+    }
+}
+
+watch(
+    () => route.params.id,      
+    () => {
+        getUserInfo();
+    }
+)
+
+function editProfile() {
+    useRouter().push('/profile/edit');
+}
+
+onMounted(() => {
+    getUserInfo();
+});
+</script>
 <template>
     <template v-if="isLoading">
         <Loader />
@@ -28,8 +78,8 @@
             </div>
 
             <div class="info mt-[100px]  mb-2 pl-[30px] text-left max-sm:text-center ">
-                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ userData.data.first_name }} {{
-                    userData.data.last_name }}</h1>
+                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ userData.data?.first_name }} {{
+                    userData.data?.last_name }}</h1>
                 <h3 class="text-sm text-gray-500  font-bold mt-1 dark:text-white">{{ userRole }}</h3>
             </div>
 
@@ -79,55 +129,3 @@
     </template>
 </template>
 
-<script>
-import { useUserStore } from "@/stores/userStore";
-import { ApiService } from "@/services/apiServices";
-import Loader from "@/ui/Loader.vue";
-import NoDataFound from "@/ui/NoDataFound.vue";
-export default {
-    data() {
-        return {
-            userData: null,
-            userRole: localStorage.getItem('role'),
-            isLoading: false,
-            currentUserId: localStorage.getItem('userId')
-        }
-    },
-    components: {
-        Loader,
-        NoDataFound
-    },
-    methods: {
-        async getUserInfo() {
-            try {
-                this.isLoading = true
-                if(localStorage.getItem('userId') == '') {
-                    const res = await ApiService.getByIdToken(`/profile/${localStorage.getItem('profileId')}`);
-                    this.userData = res
-                } else {
-                    const res = await ApiService.getByIdToken(`/profile/${localStorage.getItem('userId')}`);
-                    this.userData = res
-                }
-            } catch (error) {
-                console.log(error);
-            }   finally {
-                this.isLoading = false
-            }
-        },
-        editProfile(){
-            this.$router.push('/profile/edit');
-        }
-    },
-    mounted(){
-        this.getUserInfo();
-    }
-};
-</script>
-
-<style scoped>
-.profil-image {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-</style>
