@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import { defineProps } from 'vue';
+
+const props = defineProps({
+    data: Object
+})
+</script>
 <template>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
 
@@ -10,7 +17,7 @@
             </div>
             <div class="">
                 <p class="font-bold dark:text-gray-300 text-gray-500">O'quvchilar</p>
-                <h1 class="text-[35px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">148
+                <h1 class="text-[35px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">{{ props.data?.students }}
                 </h1>
             </div>
         </div>
@@ -24,7 +31,7 @@
             </div>
             <div class="">
                 <p class="font-bold dark:text-gray-300 text-gray-500 ">Guruhlar</p>
-                <h1 class="text-[35px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">17
+                <h1 class="text-[35px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">{{ props.data?.groups }}
                 </h1>
             </div>
         </div>
@@ -39,7 +46,7 @@
             </div>
             <div class="">
                 <p class="font-bold dark:text-gray-300 text-gray-500">Natijalar</p>
-                <h1 class="text-[35px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">97
+                <h1 class="text-[35px] max-md:text-[30px] text-gray-700 dark:text-white leading-none font-extrabold">{{ props.data?.results }}
                 </h1>
             </div>
         </div>
@@ -61,13 +68,3 @@
         </div>
     </div>
 </template>
-<script>
-export default {
-    
-}
-</script>
-<style>
-.box{
-    color: #99d69c5c;
-}
-</style>
