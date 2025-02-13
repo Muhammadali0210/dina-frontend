@@ -9,6 +9,7 @@ import { onMounted, ref, watch } from "vue";
 
 const userStore = useUserStore();
 const route = useRoute();
+const router = useRouter();
 
 const userData = ref<any>(null);
 const isLoading = ref(false);
@@ -41,7 +42,7 @@ watch(
 )
 
 function editProfile() {
-    useRouter().push('/profile/edit');
+    router.push('/profile/edit');
 }
 
 onMounted(() => {
@@ -64,7 +65,7 @@ onMounted(() => {
                     loading="lazy">
                 <img class="absolute w-[164px] h-[164px] rounded-full border-4 border-white bg-gray-700 dark:border-gray-800 bottom-[-82px]"
                     src="../../assets/image/useer-avatar.png" alt="Profile image" loading="lazy">
-                <button v-if="currentUserId == ''" @click="editProfile" type="button"
+                <button v-if="!route.params.id" @click="editProfile" type="button"
                     class="flex gap-1 items-center absolute right-2 top-3 z-50  text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600">
                     Tahrirlash
                     <span>

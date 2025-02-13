@@ -93,7 +93,7 @@
                                     <tr v-for="(item, index) in filteredItems" :key="index"
                                         class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white">
                                         <th class="px-2 py-2 md:px-6">
-                                            <UserInfo :id="item._id" :firstName="item.first_name"
+                                            <UserInfo :id="item.id" :firstName="item.first_name"
                                                 :lastName="item.last_name"
                                                 img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH87TKQrWcl19xly2VNs0CjBzy8eaKNM-ZpA&s"
                                                 :login="item.login" />

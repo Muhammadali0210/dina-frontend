@@ -47,6 +47,7 @@ const formSchema = toTypedSchema(
     minutes: z.number(),
     seconds: z.number(),
     dictionary: z.string(),
+    audioUrl: z.string(),
   }),
 );
 
@@ -65,7 +66,8 @@ const onSubmit = handleSubmit(async (values) => {
         seconds: values.seconds,
       },
       sectionId: Number(route.params.sectionId),
-      dictionary: values.dictionary
+      dictionary: values.dictionary,
+      audioUrl: values.audioUrl
     },
     tasks: questions.value
   };
@@ -91,6 +93,7 @@ interface ILesson {
   };
   sectionId: number;
   dictionary: string;
+  audioUrl: string;
 }
 
 const lessons = ref<ILesson[]>([]);
@@ -217,8 +220,17 @@ onMounted(async () => {
                   <FormMessage />
                 </FormItem>
               </FormField>
+
             </div>
 
+            <FormField v-slot="{ field }" name="audioUrl">
+              <FormItem>
+                <FormControl>
+                  <Input type="text" v-model="field.value" v-bind="field" placeholder="Audio url" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
 
             <!-- lug'tlar -->
             <FormField v-slot="{ field }" name="dictionary">

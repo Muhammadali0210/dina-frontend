@@ -36,5 +36,6 @@ const props = defineProps({
                 <p class='flex-1'>{{ item }}</p>
             </div>
         </div>
+        
     </div>
 </template>

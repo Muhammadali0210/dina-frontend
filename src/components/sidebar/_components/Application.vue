@@ -21,12 +21,19 @@ const createHandler = async (values: any) => {
       <h2 class="text-center font-semibold">
         Onlide darslarimizga qo'shilish istagingiz bo'lsa bizga murojaat qiling
       </h2>
-      <Button
-        @click="isOpen = true"
-        class="w-full relative px-5 py-2 font-bold text-white bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg shadow-lg shadow-blue-500/50 hover:from-blue-500 hover:to-purple-500 hover:scale-105 transform transition duration-500 ease-in-out focus:ring-4 focus:ring-blue-300 focus:outline-none animate-bounce"
-      >
-        Ariza qoldirish
-      </Button>
+      <a href="https://dinakoreanmasterclass.uz" target="_blank">
+        <Button
+          class="w-full relative px-5 py-2 mt-4 font-bold text-white bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg shadow-lg shadow-blue-500/50 hover:from-blue-500 hover:to-purple-500 hover:scale-105 transform transition duration-500 ease-in-out focus:ring-4 focus:ring-blue-300 focus:outline-none animate-bounce"
+        >
+          Ariza qoldirish
+        </Button>
+      </a>
+      <!-- <Button
+          @click="isOpen = true"
+          class="w-full relative px-5 py-2 font-bold text-white bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg shadow-lg shadow-blue-500/50 hover:from-blue-500 hover:to-purple-500 hover:scale-105 transform transition duration-500 ease-in-out focus:ring-4 focus:ring-blue-300 focus:outline-none animate-bounce"
+        >
+          Ariza qoldirish
+        </Button> -->
     </div>
   </div>
 

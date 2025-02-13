@@ -16,6 +16,8 @@ const data = ref();
 onMounted( async () => {
     await getAllCourse();
     data.value = courseStore.getAll
+    console.log(data.value);
+    
     
 })
 </script>
