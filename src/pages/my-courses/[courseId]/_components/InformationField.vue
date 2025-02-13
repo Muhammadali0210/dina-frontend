@@ -59,8 +59,6 @@ const onSubmit = handleSubmit(async (values) => {
         <p class="font-normal dark:text-gray-400 max-h-[400px] overflow-y-auto mb-2">{{ props.course?.learning }}</p>
         <h1 class="font-semibold">Talablar:</h1>
         <p class="font-normal dark:text-gray-400 max-h-[400px] overflow-y-auto">{{ props.course?.requirements }}</p>
-        <h1 class="font-semibold">Teglar:</h1>
-        <p class="font-normal dark:text-gray-400 max-h-[400px] overflow-y-auto">{{ props.course?.tags }}</p>
       </div>
     </div>
     <div v-else>

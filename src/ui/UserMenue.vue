@@ -42,13 +42,18 @@ const logOut = () => {
   userStore.currentRole = "general";
   console.log("Loged out");
 };
+
+const openTelegram = () => {
+      window.open('https://t.me/bigbosdev', '_blank');
+}
 </script>
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child class="ml-3" v-if="token.length > 0" >
       <Avatar>
-        <AvatarImage src="https://github.com/radix-vue.png" alt="@radix-vue" />
-        <AvatarFallback>CN</AvatarFallback>
+        <img src="@/assets/icons/avatar.png" alt="avatar" />
+        <!-- <AvatarImage src="@/assets/icons/avatar.png" alt="avatar" />
+        <AvatarFallback>CN</AvatarFallback> -->
       </Avatar>
     </DropdownMenuTrigger>
 
@@ -60,19 +65,19 @@ const logOut = () => {
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem>
+        <DropdownMenuItem @click="router.push('/profile')">
           <User class="mr-2 h-4 w-4" />
           <span>Profil</span>
           <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <!-- <DropdownMenuItem>
           <Settings class="mr-2 h-4 w-4" />
           <span>Sozlamalar</span>
           <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        </DropdownMenuItem> -->
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <DropdownMenuGroup>
+      <!-- <DropdownMenuGroup>
         <DropdownMenuItem>
           <Users class="mr-2 h-4 w-4" />
           <span>Guruh</span>
@@ -101,8 +106,8 @@ const logOut = () => {
           </DropdownMenuPortal>
         </DropdownMenuSub>
       </DropdownMenuGroup>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>
+      <DropdownMenuSeparator /> -->
+      <DropdownMenuItem @click="openTelegram">
         <LifeBuoy class="mr-2 h-4 w-4" />
         <span>Support</span>
       </DropdownMenuItem>

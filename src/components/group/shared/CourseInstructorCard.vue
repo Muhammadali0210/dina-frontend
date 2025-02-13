@@ -9,7 +9,7 @@ import {
 import { useRouter } from "vue-router";
 </script>
 <template>
-    <Card v-if="data" class="p-2">
+    <!-- <Card v-if="data" class="p-2">
        
-    </Card>
+    </Card> -->
 </template>

@@ -6,11 +6,11 @@ import { useRoute, useRouter } from "vue-router"
 import { Checkbox } from '@/components/ui/checkbox';
 import { PlayCircle } from 'lucide-vue-next';
 import type { ISection } from '@/types';
-import { useCheckboxClick } from '../service';
+// import { useCheckboxClick } from '../service';
 import { useLessonStore } from '../[lessonId]/store';
 
 
-const { isLoading, completeLesson, unCompeteLesson } = useCheckboxClick();
+// const { isLoading, completeLesson, unCompeteLesson } = useCheckboxClick();
 const props = defineProps<{
     sections: ISection[]
 }>();
@@ -32,13 +32,13 @@ const onPressed = (l: number, s: number) => {
     SId.value = s;
 }
 
-const onCheck = async (checked: boolean, id: number) => {
-    if(checked){
-        await completeLesson(id, { courseId: Number(route.params.id)});
-    } else {
-        await unCompeteLesson(id, { courseId: Number(route.params.id)});
-    }
-}
+// const onCheck = async (checked: boolean, id: number) => {
+//     if(checked){
+//         await completeLesson(id, { courseId: Number(route.params.id)});
+//     } else {
+//         await unCompeteLesson(id, { courseId: Number(route.params.id)});
+//     }
+// }
 </script>
 <template>
     <Accordion v-if="props.sections" type="single" :collapsible="true">
@@ -66,11 +66,15 @@ const onCheck = async (checked: boolean, id: number) => {
                         </div>
                     </div>
                     <div class='w-[10%]'>
-                        <Checkbox 
+                        <!-- <Checkbox 
                             :checked="lesson?.userProgress.map(item => item.lessonId).includes(lesson._id as number)"
                             @update:checked="onCheck($event, lesson._id as number)" 
-                            :disabled="isLoading" 
+                            :disabled="true" 
                             :class="[{'cursor-not-allowed opacity-15': isLoading}, {'cursor-pointer': !isLoading}]" 
+                        /> -->
+                        <Checkbox 
+                            :checked="lesson?.userProgress.map(item => item.lessonId).includes(lesson._id as number)"
+                            :disabled="true" 
                         />
                     </div>
                 </Button>

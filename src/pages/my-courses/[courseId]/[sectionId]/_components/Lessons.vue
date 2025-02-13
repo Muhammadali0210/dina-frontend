@@ -30,8 +30,8 @@ const { createLoading, createLesson } = useCreateLesson();
 const { getLoading, getLessonInfo } = useGetLessonInfo();
 const { updateLoading, updateLesson } = useUpdateLesson();
 
-const questions = ref<{ image: string; question: string; answer: string }[]>([]);
-const newQuestion = ref({ image: "", question: "", answer: "" });
+const questions = ref<{ image: string; text: string; textUz: string }[]>([]);
+const newQuestion = ref({ image: "", text: "", textUz: "" });
 
 const props = defineProps({
   course: Object,
@@ -46,6 +46,8 @@ const formSchema = toTypedSchema(
     hours: z.number(),
     minutes: z.number(),
     seconds: z.number(),
+    dictionary: z.string(),
+    audioUrl: z.string(),
   }),
 );
 
@@ -55,16 +57,23 @@ const { handleSubmit, resetForm, setValues } = useForm({
 
 const onSubmit = handleSubmit(async (values) => {
   const newData = {
-    title: values.title,
-    videoUrl: values.videoUrl,
-    duration: {
-      hours: values.hours,
-      minutes: values.minutes,
-      seconds: values.seconds,
+    lesson: {
+      title: values.title,
+      videoUrl: values.videoUrl,
+      duration: {
+        hours: values.hours,
+        minutes: values.minutes,
+        seconds: values.seconds,
+      },
+      sectionId: Number(route.params.sectionId),
+      dictionary: values.dictionary,
+      audioUrl: values.audioUrl
     },
-    sectionId: Number(route.params.sectionId),
+    tasks: questions.value
   };
   if (!isUpdate.value) {
+    console.log(newData);
+    
     await createLesson(`/lesson`, newData);
   } else {
     await editHandler(newData);
@@ -83,6 +92,8 @@ interface ILesson {
     seconds: number;
   };
   sectionId: number;
+  dictionary: string;
+  audioUrl: string;
 }
 
 const lessons = ref<ILesson[]>([]);
@@ -116,11 +127,11 @@ const closeEdit = () => {
 
 //
 const addQuestion = () => {
-  if (newQuestion.value.image && newQuestion.value.question && newQuestion.value.answer) {
+  if (newQuestion.value.image && newQuestion.value.text && newQuestion.value.textUz) {
     questions.value.push({ ...newQuestion.value });
     console.log(questions.value);
     
-    newQuestion.value = { image: "", question: "", answer: "" }; 
+    newQuestion.value = { image: "", text: "", textUz: "" }; 
   }
 };
 const removeQuestion = (index: number) => {
@@ -139,6 +150,9 @@ onMounted(async () => {
   } else if(lessons.value.length > 0 && String(route.params.sectionId) === String(lessons.value[0].sectionId)) {
     return;
   }
+  lessons.value = await lessonStore.getLesson;
+  console.log(lessons.value);
+  
 });
 </script>
 <template>
@@ -206,12 +220,30 @@ onMounted(async () => {
                   <FormMessage />
                 </FormItem>
               </FormField>
+
             </div>
 
-            <Textarea class="bg-slate-700" />
+            <FormField v-slot="{ field }" name="audioUrl">
+              <FormItem>
+                <FormControl>
+                  <Input type="text" v-model="field.value" v-bind="field" placeholder="Audio url" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+
+            <!-- lug'tlar -->
+            <FormField v-slot="{ field }" name="dictionary">
+              <FormItem>
+                <FormControl>
+                  <Textarea class="bg-slate-700" v-model="field.value" v-bind="field" placeholder="So'zlar" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
 
             <div>
-              <CardTitle>Savollar</CardTitle>
+              <CardTitle>Mashqlar</CardTitle>
               <Separator class="mt-2 mb-2" />
               <FormField name="">
                 <FormItem>
@@ -219,8 +251,8 @@ onMounted(async () => {
                     <div v-for="(q, index) in questions" :key="index" class="flex items-center gap-2">
                       <div class="w-6 text-center font-bold">{{ index + 1 }}</div>
                       <Input v-model="q.image" placeholder="Rasm uchun havola" disabled />
-                      <Input v-model="q.question" placeholder="Savol UZ/KR" disabled />
-                      <Input v-model="q.answer" placeholder="Javob UZ/KR" disabled />
+                      <Input v-model="q.text" placeholder="Savol UZ/KR" disabled />
+                      <Input v-model="q.textUz" placeholder="Javob UZ/KR" disabled />
                       <Button variant="destructive" @click="removeQuestion(index)">
                         <X />
                       </Button>
@@ -228,8 +260,8 @@ onMounted(async () => {
                   </div>
                   <div class=" mt-2">
                     <Input class="mt-2" v-model="newQuestion.image" placeholder="Rasm uchun havola" />
-                    <Input class="mt-2" v-model="newQuestion.question" placeholder="Savol UZ/KR" />
-                    <Input class="mt-2" v-model="newQuestion.answer" placeholder="Javob UZ/KR" />
+                    <Input class="mt-2" v-model="newQuestion.text" placeholder="Savol UZ/KR" />
+                    <Input class="mt-2" v-model="newQuestion.textUz" placeholder="Javob UZ/KR" />
                     <div class="flex justify-end mt-2">
                       <div @click="addQuestion"
                         class="cursor-pointer flex items-center justify-center  gap-2 px-1.5 py-1.5 text-slate-900 w-[100px] bg-blue-500 border rounded-md  hover:bg-blue-600">

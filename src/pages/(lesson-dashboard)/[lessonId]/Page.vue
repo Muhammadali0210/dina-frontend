@@ -29,6 +29,7 @@ watch(
 onMounted(async () => {
   await getLesson(Number(route.query.lessonid));
   lesson.value = lessonStore.getLesson; 
+  console.log(route.query.lessonid);
   lessonStore.lessonLoading = false;
 });
 </script>

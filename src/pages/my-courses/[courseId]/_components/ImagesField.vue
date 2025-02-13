@@ -58,7 +58,7 @@ const onSubmit = async() => {
     loading.value = true;
     await uploadFile();
     await updateCourseInfo(Number(props.course?._id), {
-      previewImage: uploadedUrl.value
+      previewImage: imagekitUrl.value
     });
     emit("onUpdated", data.value);
   } catch (error) {

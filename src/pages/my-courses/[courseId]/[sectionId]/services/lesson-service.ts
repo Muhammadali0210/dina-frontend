@@ -26,6 +26,7 @@ function useCreateLesson() {
     try {
       createLoading.value = true;
       const res: any = await ApiService.postByToken(url, data);
+      console.log("lesson o'chirildi", res);
       lessonStore.setLesson(res);
     } catch (error) {
       console.log(error);
@@ -60,6 +61,7 @@ function useDeleteLesson() {
     try {
       isDeleting.value = true;
       const res: any = await ApiService.deleteByToken(`/lesson/${id}`);
+      console.log("lesson o'chirildi", res);
       lessonStore.setLesson(res);
       
     } catch (error) {

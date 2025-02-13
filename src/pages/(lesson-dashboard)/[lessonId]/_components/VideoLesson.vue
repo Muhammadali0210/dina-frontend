@@ -24,7 +24,7 @@ const playerOptions = {
 };
 
 watch(
-  () => props.lesson?.videoUrl,
+  () => props.lesson?.lesson?.videoUrl,
   (newVideoUrl) => {
     if (newVideoUrl) {
       videoId.value = newVideoUrl;

@@ -47,6 +47,7 @@ watch(
 
 onMounted(async () => {
   lessons.value = lessonStore.getLesson;
+  console.log("store ", lessons.value);
 });
 </script>
 
@@ -74,12 +75,12 @@ onMounted(async () => {
               <div class="bg-slate-100 dark:bg-gray-700 p-2">
                 <Grip class="size-5" />
               </div>
-              <h1 class="dark:text-white text-gray-700">{{ element.title }}</h1>
+              <h1 class="dark:text-white text-gray-700">{{ element?.lesson.title }}</h1>
             </div>
 
             <div class="flex gap-3 p-2">
               <Pencil class="size-4 cursor-pointer" @click="emit('onEdit', element)" />
-              <Trash2 class="size-4 cursor-pointer" @click="deleteHandler(element._id)" />
+              <Trash2 class="size-4 cursor-pointer" @click="deleteHandler(element?.lesson._id)" />
             </div>
           </div>
         </template>
