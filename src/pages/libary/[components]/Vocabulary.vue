@@ -37,8 +37,8 @@ const downloadFile = (downloadLink: string, index: number) => {
 
 <template>
     <div>
-        <swiper :slides-per-view="5" :space-between="30" :free-mode="true" :loop="true" :autoplay="{
-            delay: 2000,
+        <swiper :slides-per-view="5" :space-between="30" :free-mode="true" :loop="true" :speed="5500" :autoplay="{
+            delay: 0,
             disableOnInteraction: false,
         }" :modules="[FreeMode, Pagination, Autoplay]" class="mySwiper w-full overflow-hidden" :breakpoints="{
             300: { slidesPerView: 1, spaceBetween: 10 },

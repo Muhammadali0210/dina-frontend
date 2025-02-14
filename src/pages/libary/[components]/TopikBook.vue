@@ -22,7 +22,7 @@ import { FreeMode, Pagination, Autoplay } from 'swiper/modules'
 
 const loadingStates = ref<{ [key: number]: boolean }>({})
 
-// Function to handle file download
+
 const downloadFile = (downloadLink: string, index: number) => {
     loadingStates.value[index] = true
     setTimeout(() => {
@@ -37,8 +37,8 @@ const downloadFile = (downloadLink: string, index: number) => {
 
 <template>
     <div>
-        <swiper :slides-per-view="5" :space-between="30" :free-mode="true" :loop="true" :autoplay="{
-            delay: 2000,
+        <swiper :slides-per-view="5" :space-between="30" :free-mode="true" :loop="true" :speed="4000" :autoplay="{
+            delay: 0,
             disableOnInteraction: false,
         }" :modules="[FreeMode, Pagination, Autoplay]" class="mySwiper w-full overflow-hidden" :breakpoints="{
             300: { slidesPerView: 1, spaceBetween: 10 },
@@ -73,7 +73,8 @@ const downloadFile = (downloadLink: string, index: number) => {
                                 </button>
 
                             </AlertDialogTrigger>
-                            <AlertDialogContent class="m-auto h-[90%] w-[80%] max-w-[1200px] bg-white dark:bg-slate-800">
+                            <AlertDialogContent
+                                class="m-auto h-[90%] w-[80%] max-w-[1200px] bg-white dark:bg-slate-800">
                                 <AlertDialogCancel class="flex justify-end">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
