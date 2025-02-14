@@ -87,22 +87,22 @@ export const topikBook =[
 
       {
         title: '합격 레시비 ',
-        bookUrl: 'https://drive.google.com/file/d/1SuiLg8kpvAglmrvPRM2zHvlkGism5YoV/preview',
-        downloadLink: 'https://drive.google.com/uc?export=download&id=1SuiLg8kpvAglmrvPRM2zHvlkGism5YoV',
+        bookUrl: 'https://drive.google.com/file/d/18PI3D-Sb29BydFNYcLB4i4RjQhpgfsKE/preview',
+        downloadLink: 'https://drive.google.com/uc?export=download&id=18PI3D-Sb29BydFNYcLB4i4RjQhpgfsKE',
         imageUrl: 'https://ik.imagekit.io/vtroph5l9/Product/Book%20image/Rasm/%ED%95%A9%EA%B2%A9%20%EB%A0%88%EC%8B%9C%ED%94%BC.jpeg?updatedAt=1737978877741',
     },
 
       {
         title: 'Topik 쓰기의 모든 것',
-        bookUrl: 'https://drive.google.com/file/d/1SuiLg8kpvAglmrvPRM2zHvlkGism5YoV/preview',
-        downloadLink: 'https://drive.google.com/uc?export=download&id=1SuiLg8kpvAglmrvPRM2zHvlkGism5YoV',
+        bookUrl: 'https://drive.google.com/file/d/1eYd8EUirL6FvC6ZmRlnR_ub4ZYofw-D_/preview',
+        downloadLink: 'https://drive.google.com/uc?export=download&id=1eYd8EUirL6FvC6ZmRlnR_ub4ZYofw-D_',
         imageUrl: 'https://ik.imagekit.io/vtroph5l9/Product/Book%20image/Rasm/%EC%93%B0%EA%B8%B0%EC%9D%98%20%EB%AA%A8%EB%93%A0%20%EA%B2%83.jpeg?updatedAt=1737978877545',
     },
 
       {
         title: '합격 레시비 정답',
-        bookUrl: 'https://drive.google.com/file/d/1SuiLg8kpvAglmrvPRM2zHvlkGism5YoV/preview',
-        downloadLink: 'https://drive.google.com/uc?export=download&id=1SuiLg8kpvAglmrvPRM2zHvlkGism5YoV',
+        bookUrl: 'https://drive.google.com/file/d/1dSVcpJTeGrYa6vAKkzcffe-vHS81Ocd-/preview',
+        downloadLink: 'https://drive.google.com/uc?export=download&id=1dSVcpJTeGrYa6vAKkzcffe-vHS81Ocd-',
         imageUrl: 'https://ik.imagekit.io/vtroph5l9/Product/Book%20image/Rasm/%EC%A0%95%EB%8B%B5.jpeg?updatedAt=1737978877479',
     },
 
@@ -170,4 +170,122 @@ export const vocobularyBook = [
     },
     
 
+]
+
+export const doroma =[
+        {
+            title:'Doramy-Online',
+            imageUrl:'https://i.pinimg.com/474x/18/c0/bc/18c0bc06f619bab051294c87085a5d15.jpg',
+            nextUrl:'https://doramy-online.ru/'
+        },
+        {
+            title:'Men robot emasman',
+            imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/i'am%20not%20robot.jpg?updatedAt=1739513100796",
+            nextUrl:'https://doramy-online.ru/ya-ne-robot-lord/'
+        },
+        {
+            title:"Kalmar o'yini 2",
+            imageUrl:'https://ik.imagekit.io/vtroph5l9/Product/squid%20game%202.jpg?updatedAt=1739513096730',
+            nextUrl:'https://doramy-online.ru/igra-v-kalmara-2021-2/'
+        },
+        {
+            title:'Goblin',
+            imageUrl:'https://ik.imagekit.io/vtroph5l9/Product/goblin.jpg?updatedAt=1739513101275',
+            nextUrl:'https://doramy-online.ru/demon-2016-1/'
+        },
+        {
+            title:'Vinchenzo',
+            imageUrl:'https://ik.imagekit.io/vtroph5l9/Product/vinchenzo.jpg?updatedAt=1739513100207',
+            nextUrl:'https://doramy-online.ru/vinchentso-lordf/'
+        },
+        {
+            title:"Albatta siz bilan bo'ladi",
+            imageUrl:'https://ik.imagekit.io/vtroph5l9/Product/%EC%97%B0%EC%95%A0%EB%8A%94.jpg?updatedAt=1739513101737',
+            nextUrl:'https://doramy-online.ru/suzhdeno-byt-s-toboy-lord/'
+        },
+        {
+            title:"Biz hammamiz o'likmiz!",
+            imageUrl:'https://ik.imagekit.io/vtroph5l9/Product/%EC%A7%80%EA%B8%88.jpg?updatedAt=1739513101324',
+            nextUrl:'https://doramy-online.ru/my-vse-mertvy-lordf/'
+        },
+        {
+            title:'Shakarli tarvuz ',
+            imageUrl:'https://ik.imagekit.io/vtroph5l9/Product/tarvuz.jpg?updatedAt=1739513101155',
+            nextUrl:'https://doramy-online.ru/iskryaschiysya-arbuz/'
+        },
+        {
+            title:"Asl go'zallik",
+            imageUrl:'https://ik.imagekit.io/vtroph5l9/Product/Asl.jpg?updatedAt=1739513100801',
+            nextUrl:'https://doramy-online.ru/istinnaya-krasota/'
+        },
+        {
+            title:'K2',
+            imageUrl:'https://ik.imagekit.io/vtroph5l9/Product/k2.jpg?updatedAt=1739513101393',
+            nextUrl:'https://doramy-online.ru/k2/'
+        },
+]
+
+export const chanelUrl = [
+    {
+        title:"Talk to me in Korea",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/talk%20to%20men%20korean.webp?updatedAt=1739529369886",
+        nextUrl:"https://youtube.com/@talktomeinkorean?si=w8rixsdLjxeJC8yv"
+    },
+     {
+        title:"Dina Korea",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/mqdefault_6s%20(2).webp?updatedAt=1739514836674",
+        nextUrl:"https://youtube.com/@dinakorean?si=uL7NgK7oqGEwq7Sj"
+    },
+     {
+        title:"Didi Podcast",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/mqdefault_6s.webp?updatedAt=1739514596923",
+        nextUrl:"https://youtube.com/@didikoreanpodcast?si=0FvIsxpxzm3bMmP1"
+    },
+     {
+        title:"Real Korean with Morning",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/mqdefault_6s%20(3).webp?updatedAt=1739514836616",
+        nextUrl:"https://youtube.com/@koreanmorning?si=Km9v1RcqbBiFdGzC"
+    },
+     {
+        title:"OnlyForYouKorea",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/online.webp?updatedAt=1739515016724",
+        nextUrl:"https://youtube.com/@onlyforyoukorea?si=mP0gLgS0FCTIEQ-J"
+    },
+     {
+        title:"KTS KOREA 국적",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/mqdefault_6s%20(1).webp?updatedAt=1739514836668",
+        nextUrl:"https://youtube.com/@ktskorea?si=hfsyPcYVY9D9CKwn"
+    },
+    {
+        title:"Hailey _Your Korean Friend",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/your%20korean%20frend.webp?updatedAt=1739529369699",
+        nextUrl:"https://youtu.be/RzQQAs_PuZw?si=NtKy0ckvDrSU78bb"
+    },
+    {
+        title:"Multfilimlar",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/cartoon.webp?updatedAt=1739529370077",
+        nextUrl:"https://youtu.be/Gixr7pRMEU8?si=_Hd0Bg100WwB20gF"
+    },
+    {
+        title:"뽀로로(Pororo)",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/pororo.webp?updatedAt=1739529369556",
+        nextUrl:"https://youtu.be/4USeNE9kiB0?si=Y9X7rnsCmYNN447h"
+    },
+    {
+        title:"Pixid",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/Pixid.webp?updatedAt=1739529370079",
+        nextUrl:"https://youtu.be/ooUNz_zQK8A?si=FRtsZd0kuRT2Oob-"
+    },
+    {
+        title:"ODG drama",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/odg.webp?updatedAt=1739529369036",
+        nextUrl:"https://youtu.be/IUT9Q_RuOPI?si=drjT73R8F4q8_qje"
+    },
+    {
+        title:"Mini Drama",
+        imageUrl:"https://ik.imagekit.io/vtroph5l9/Product/mini%20drama.webp?updatedAt=1739529369986",
+        nextUrl:"https://youtu.be/EmU8fyvw8EQ?si=Snk2BF6CC9i47Qol"
+    },
+    
+    
 ]

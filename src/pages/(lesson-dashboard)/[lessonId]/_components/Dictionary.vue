@@ -4,6 +4,7 @@ import { BadgeCheck } from "lucide-vue-next"
 import { Separator } from '@/components/ui/separator';
 import { useLessonStore } from '../store';
 import { defineProps } from 'vue';
+import { ITEM_NAME } from 'node_modules/radix-vue/dist/Menu/utils';
 const courseStore = useLessonStore();
 
 const props = defineProps({
@@ -11,7 +12,11 @@ const props = defineProps({
         type: Object,
         required: false,
     },
+    
 })
+console.log(props.lesson?.lesson.audioUrl);
+
+
 </script>
 
 <template>
@@ -36,6 +41,8 @@ const props = defineProps({
                 <p class='flex-1'>{{ item }}</p>
             </div>
         </div>
-        
+        <iframe class="w-full mt-4" height="144" frameborder="0"
+            :src="props.lesson?.lesson.audioUrl"
+            allowfullscreen></iframe>
     </div>
 </template>
