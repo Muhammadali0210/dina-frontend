@@ -89,7 +89,7 @@ const getSvgIcon = (icon: string, isActive: boolean) => {
       >
         <Application />
       </div>
-          <!-- bottom 3 buttons  -->
+          
     </aside>
 
 </template>

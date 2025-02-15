@@ -19,7 +19,7 @@ const createHandler = async (values: any) => {
   >
     <div class="w-full h-full space-y-3">
       <h2 class="text-center font-semibold">
-        Onlide darslarimizga qo'shilish istagingiz bo'lsa bizga murojaat qiling
+        Online darslarimizga qo'shilish istagingiz bo'lsa bizga murojaat qiling
       </h2>
       <a href="https://dinakoreanmasterclass.uz" target="_blank">
         <Button

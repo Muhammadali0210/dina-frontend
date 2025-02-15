@@ -28,7 +28,7 @@
 
                 <swiper-slide @click="goToPage(index)" v-for="(slideData, index) in informationSlideData" :key="index">
                     <div class="card">
-                        <img class="rounded-[15px] h-[150px] md:h-[160px] lg:h-[190px] w-full object-cover"
+                        <img class="rounded-[15px] h-[150px] md:h-[160px] lg:h-[210px] w-full object-cover"
                             :src="slideData.url" alt="Image" />
                         <p
                             class="text-gray-800 dark:text-white text-sm md:text-base lg:text-lg font-bold leading-[23px] break-words pt-[10px]">
@@ -93,10 +93,10 @@ export default {
             slideNext,
             modules: [Autoplay, Pagination, Navigation],
             informationSlideData: [
-                { url: 'https://ik.imagekit.io/njtthrpue/han1.jpg?updatedAt=1735069983803', description: 'Beginner\'s Guide to Becoming a Front-End Developer' },
-                { url: 'https://ik.imagekit.io/njtthrpue/han1.jpg?updatedAt=1735069983803', description: 'Optimizing User Experience' },
-                { url: 'https://ik.imagekit.io/njtthrpue/han1.jpg?updatedAt=1735069983803', description: 'Mastering Front-End Skills' },
-                { url: 'https://ik.imagekit.io/njtthrpue/han1.jpg?updatedAt=1735069983803', description: 'Perfecting the User Journey' },
+                { url: 'https://ik.imagekit.io/vtroph5l9/Product/Dina_1.png?updatedAt=1739557936755', description: 'Topik.Di Standart' },
+                { url: 'https://ik.imagekit.io/vtroph5l9/Product/Dina_2.png?updatedAt=1739557936647', description: 'Topik.Di Premium' },
+                { url: 'https://ik.imagekit.io/vtroph5l9/Product/Dina_3.png?updatedAt=1739557937512', description: 'Topik.Di VIP' },
+                
             ],
             goToPage,
         };

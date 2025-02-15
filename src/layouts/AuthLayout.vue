@@ -1,5 +1,5 @@
 <template>
-    <div class="antialiased  flex items-center justify-center min-h-screen bg-slate-900 login-bg">
+    <div class="antialiased  flex items-center justify-center min-h-screen login-bg">
         <RouterView />
     </div>
 </template>
@@ -10,7 +10,7 @@ export default {
 </script>
 <style scoped>
 .login-bg{
-    background-image: url(https://ik.imagekit.io/vtroph5l9/Product/Group%201%204.png?tr=cmpr,q-80,w-800);
+    background-image: url(https://ik.imagekit.io/vtroph5l9/Product/Dina_5.png?updatedAt=1739558302118);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
