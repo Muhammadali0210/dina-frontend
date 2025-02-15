@@ -44,7 +44,7 @@ const logOut = () => {
 };
 
 const openTelegram = () => {
-      window.open('https://t.me/bigbosdev', '_blank');
+  window.open('https://t.me/TopikDi_Support', '_blank');
 }
 </script>
 <template>
