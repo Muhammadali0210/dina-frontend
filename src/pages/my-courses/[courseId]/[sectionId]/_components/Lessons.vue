@@ -125,7 +125,7 @@ const closeEdit = () => {
   updateId.value =  0;
 }
 
-//
+
 const addQuestion = () => {
   if (newQuestion.value.image && newQuestion.value.text && newQuestion.value.textUz) {
     questions.value.push({ ...newQuestion.value });
@@ -170,14 +170,14 @@ onMounted(async () => {
     <CardContent>
       <Separator class="mb-2" />
       <div v-if="!state">
-        <LessonList :is-loading="getLoading" @onEdit="onEditStart" />
+        <LessonList :is-loading="getLoading"  @onEdit="onEditStart" />
       </div>
       <div v-else>
         <form @submit.prevent="onSubmit">
           <div class="space-y-3">
             <FormField v-slot="{ field }" name="title">
               <FormItem>
-                <FormControl>
+                <FormControl class="flex justify-center items-start texdnjfnjdfnjdfnjd ">
                   <Input type="text" v-model="field.value" v-bind="field" placeholder="Nomi" />
                 </FormControl>
                 <FormMessage />

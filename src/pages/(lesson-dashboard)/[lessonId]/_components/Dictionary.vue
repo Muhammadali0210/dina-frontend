@@ -4,7 +4,7 @@ import { BadgeCheck } from "lucide-vue-next"
 import { Separator } from '@/components/ui/separator';
 import { useLessonStore } from '../store';
 import { defineProps } from 'vue';
-import { ITEM_NAME } from 'node_modules/radix-vue/dist/Menu/utils';
+
 const courseStore = useLessonStore();
 
 const props = defineProps({

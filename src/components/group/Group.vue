@@ -92,7 +92,7 @@
                 </div>
                 <div class="absolute bottom-2 right-2">
                     <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ item.degree }}</p>
-                </div>
+                </div>  
 
             </Card>
         </div>

@@ -28,7 +28,7 @@ const callDelete = () => {
 <template>
     <AlertDialog>
         <AlertDialogTrigger class="flex ">
-            <img class="w-6 h-6" src="@/assets/icons/trash.svg" alt="E" />
+            <img class="w-6 h-6" src="" alt="E" />
             <span class="ml-2 block sm:hidden">O'chirish</span>
         </AlertDialogTrigger>
         <AlertDialogContent class="w-[350px]">
