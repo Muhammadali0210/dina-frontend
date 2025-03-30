@@ -33,7 +33,7 @@ const deleteHandler = async (id: number) => {
 }
 
 const emit = defineEmits<{
-  (e: 'onEdit', element: any): void;
+  (e: 'onEditStart', element: any): void;
 }>();
 
 watch(
@@ -52,25 +52,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <DeleteModal @onOpenChange="isOpenModal = false" @on-confirm="onDelete" :is-open="isOpenModal" :is-loading="isDeleting"  />
+  <DeleteModal @onOpenChange="isOpenModal = false" @on-confirm="onDelete" :is-open="isOpenModal"
+    :is-loading="isDeleting" />
 
   <Skeleton v-if="isLoading" class="w-full h-[30px]" />
   <template v-else>
-    <ScrollArea
-      v-if="lessons.length !== 0"
-      :class="lessons.length <= 6 ? 'h-auto' : 'h-[300px] pr-3'"
-    >
-      <draggable
-        v-model="lessons"
-        group="people"
-        @start="drag = true"
-        @end="drag = false"
-        item-key="index"
-      >
+    <ScrollArea v-if="lessons.length !== 0" :class="lessons.length <= 6 ? 'h-auto' : 'h-[300px] pr-3'">
+      <draggable v-model="lessons" group="people" @start="drag = true" @end="drag = false" item-key="index">
         <template #item="{ element }">
           <div
-            class="w-full bg-white dark:bg-gray-800 mb-2 shadow-sm flex items-center overflow-hidden justify-between rounded-md border border-border dark:border-gray-600"
-          >
+            class="w-full bg-white dark:bg-gray-800 mb-2 shadow-sm flex items-center overflow-hidden justify-between rounded-md border border-border dark:border-gray-600">
             <div class="flex items-center gap-3">
               <div class="bg-slate-100 dark:bg-gray-700 p-2">
                 <Grip class="size-5" />
@@ -79,7 +70,7 @@ onMounted(async () => {
             </div>
 
             <div class="flex gap-3 p-2">
-              <Pencil class="size-4 cursor-pointer" @click="emit('onEdit', element)" />
+              <Pencil class="size-4 cursor-pointer" @click="emit('onEditStart', element)" />
               <Trash2 class="size-4 cursor-pointer" @click="deleteHandler(element?.lesson._id)" />
             </div>
           </div>

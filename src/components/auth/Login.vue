@@ -86,7 +86,7 @@ export default {
                     localStorage.setItem('role', response.role);
                     localStorage.setItem('Id', response.id);
                     userStore.currentRole = response.role;
-                    console.log(localStorage.getItem('Id'));
+                    console.log();
                     
                 }
             } catch (error) {
