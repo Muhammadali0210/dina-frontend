@@ -7,6 +7,7 @@ const props = defineProps({
 })
 
 
+
 </script>
 
 <template>
@@ -21,7 +22,7 @@ const props = defineProps({
                     <img class="w-[45px] h-[45px] rounded-full overflow-hidden" src="@/assets/icons/avatar.png" alt="">
                     <h1 class="grid grid-cols-1">
                         <span class="">{{ item.first_name + ' ' + item.last_name }}</span>
-                        <span></span>
+                        <span>{{ item.group_name }}</span>
                     </h1>
                 </div>
                 <div class="flex items-center space-x-2">

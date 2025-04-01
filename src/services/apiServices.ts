@@ -21,6 +21,7 @@ export  class ApiService {
     static async get<T>(url: string) {
         try {
             const response = await axios.get(BaseUrl + url)
+            
             return response.data
         } catch (error) {
             handleError(error);
