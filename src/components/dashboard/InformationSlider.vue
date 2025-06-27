@@ -34,7 +34,14 @@
                             class="text-gray-800 dark:text-white text-sm md:text-base lg:text-lg font-bold leading-[23px] break-words pt-[10px]">
                             {{ slideData.description }}
                         </p>
+                        <a v-if="slideData.link && slideData.LinkName" :href="slideData.link" download>
+                            <button class="p-2 bg-blue-700 text-white dark:text-white rounded-lg">
+                         {{ slideData.LinkName }}
+                            </button>
+                        </a>
                     </div>
+                       
+
                 </swiper-slide>
             </swiper>
         </div>
@@ -93,9 +100,21 @@ export default {
             slideNext,
             modules: [Autoplay, Pagination, Navigation],
             informationSlideData: [
-                { url: 'https://ik.imagekit.io/vtroph5l9/Product/Dina_1.png?updatedAt=1739557936755', description: 'Topik.Di Standart' },
-                { url: 'https://ik.imagekit.io/vtroph5l9/Product/Dina_2.png?updatedAt=1739557936647', description: 'Topik.Di Premium' },
-                { url: 'https://ik.imagekit.io/vtroph5l9/Product/Dina_3.png?updatedAt=1739557937512', description: 'Topik.Di VIP' },
+                { url: 'https://ik.imagekit.io/vtroph5l9/Product/Mobiless.png?updatedAt=1750673168895', 
+                  description: 'Dinakorean Mobile app', 
+                  link:'/public/dina_app.apk',
+                  LinkName:'Dasturni yuklash'
+                },
+                { url: 'https://ik.imagekit.io/vtroph5l9/Product/photo_2025-06-23_15-04-47.jpg?updatedAt=1750673186223',
+                  description: 'Topik.Di Premium', 
+                  link:'https://topikibt.netlify.app',
+                  LinkName:'Topik IBT'
+                },
+                { url: 'https://ik.imagekit.io/vtroph5l9/Product/Dina_3.png?updatedAt=1739557937512', 
+                  description: 'Topik.Di VIP' , 
+                  link:'',
+                  LinkName:''
+                 },
                 
             ],
             goToPage,
